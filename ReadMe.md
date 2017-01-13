@@ -1,0 +1,1 @@
+Right now I just have the Interrogator solution in here.  This solution should be able to read a file, and figure out what the metadata should be based on the data in each column.
