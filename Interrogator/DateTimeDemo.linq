@@ -15,7 +15,7 @@ void Main()
 	//all test 1 (datetime2) pass
 	//all test 2 (date) pass
 	//all test 3 (time) PASS!
-	//test 4(datetimeoffset)
+	//test 4(datetimeoffset)PASS!
 
 	//now, let's test a lot more data!
 	SqlConnection connection = new SqlConnection("Data Source=localhost;Initial Catalog=BimlDemo;Trusted_Connection=True;");
@@ -77,22 +77,18 @@ SqlDbType DateTimeGuess(string input, bool debug = false) {
 		Console.WriteLine("input: " + input);
 
 	//first see if we can cast it to any kind of datetime
-	try {
-		if(debug) 
-			Console.WriteLine("testing if we can cast input to datetime.");	
-		DateTime.TryParse(input, out givenDateTime);
+	if(debug) 
+		Console.WriteLine("testing if we can cast input to datetime.");	
+	
+	if(DateTime.TryParse(input, out givenDateTime)) {
 		if(debug) 
 			Console.WriteLine(givenDateTime);	
-		//we have a datetime at least
-		output = SqlDbType.DateTime2;
-	} catch (Exception e) {
-		//our default (aka, try something else)
-		Console.WriteLine("caught in exception to datetime.");
-		Console.WriteLine("{0} Exception caught.", e);
-		//default to binary... cause it's something all right!
+		output = SqlDbType.DateTime2;		
+	} else {
+		Console.WriteLine("cannot convert" + input + " to a datetime.");
 		output = SqlDbType.Binary;
-		return output;
 	}
+	
 	
 	//since we now know we have some kind of date time the rest of the tests are safe
 	//do we have a time?
