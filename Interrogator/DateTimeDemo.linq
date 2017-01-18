@@ -87,6 +87,8 @@ SqlDbType DateTimeGuess(string input, bool debug = false) {
 	} else {
 		Console.WriteLine("cannot convert" + input + " to a datetime.");
 		output = SqlDbType.Binary;
+		//exit early!
+		return output;
 	}
 	
 	
