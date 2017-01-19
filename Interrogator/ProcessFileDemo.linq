@@ -16,7 +16,7 @@ void Main()
 	string demoFile = @"C:\Repositories\Biml\Interrogator\testdata\Numerics.csv";
 	string demoDelimiter = ",";
 	
-	Console.WriteLine(ProcessFile(demoFile, demoDelimiter));
+	Console.WriteLine(ProcessFile(demoFile, demoDelimiter, true));
 }
 
 // Define other methods and classes here
@@ -50,7 +50,7 @@ public class DestinationColumn {
 }
 
 //process a file, return a list of columns
-List<DestinationColumn> ProcessFile(string FileName, string delimiter) {
+List<DestinationColumn> ProcessFile(string FileName, string delimiter, bool FirstRowHeader = true) {
 	List<DestinationColumn> output = new List<DestinationColumn>();
 	
 	using (TextFieldParser parser = new TextFieldParser(FileName))
@@ -60,51 +60,133 @@ List<DestinationColumn> ProcessFile(string FileName, string delimiter) {
 		
 		while (!parser.EndOfData) 
 		{
+
 			//Processing row
 			string[] fields = parser.ReadFields();
+			
 			
 			for(int i=0; i < fields.Count(); i++) {
 				//if you get a new column (in first or 101st line) add it's name to output
 				if(i + 1 > output.Count ) {
 					output.Add(new DestinationColumn(fields[i]));
 				}else {
-					//now get the data type
-					output[i].DataType = DataTypeGuess(fields[i], false).ToString();
-					//!!!!!handle datatype changing!!!!!
+					if(!FirstRowHeader || parser.LineNumber > 1) {
+						//if the field value is blank/null, don't guess
+						if(fields[i].Trim().Length > 0) {
+							//now get the data type
+							output[i].DataType = DataTypeGuess(fields[i], output[i].DataType, false);
+							
+							//get the Maxlength
+							if(output[i].DataType == "VarChar" || output[i].DataType == "NVarChar" || output[i].DataType == "VarBinary") {
+								if(fields[i].Length > output[i].MaxLength)
+									output[i].MaxLength = fields[i].Length;
+							}
+							
+							//get precision
+							if(output[i].DataType == "Decimal" || output[i].DataType == "Float") {
+								if(fields[i].Replace(".","").Length > output[i].Precision)
+									output[i].Precision = fields[i].Replace(".","").Length;
+							}
+							
+							//get scale
+							if(output[i].DataType == "Decimal") {
+							//remember Indexof will "leave the "." in it's length (+1 to ignore the .)
+								int Scale = fields[i].Substring(fields[i].IndexOf(".")+1).Length;
+								if(Scale > output[i].Scale)
+									output[i].Scale = Scale;
+							}
+							
+						}else {
+							//if the value is black/null the column can be nullable
+							output[i].Nullable = true;
+						
+						}
+					}
 				}
 			}
 			
-			Console.WriteLine(output);
-			Console.WriteLine(fields);
-			
+			//Console.WriteLine(output);
 		}
 	}
 	return output;
 }
 
-SqlDbType DataTypeGuess(string input, bool debug = false) {
-	SqlDbType output;
-	//first try datetimes
-	output = DateTimeGuess(input, debug);
+//this version of the guess functions now accept a "current datatype" to handle changes
+string DataTypeGuess(string input, string currentDatatype, bool debug = false) {
+	string output;
 	
-	if(output != SqlDbType.Binary)
-		return output;
+	//first try datetimes
+	//CurrentDataType must be compatible
+	string[] DateTimeCompatibleDataTypes = {null, "Date","Time","DateTimeOffset","DateTime2"};
+	if( DateTimeCompatibleDataTypes.Contains(currentDatatype) ) {
+		output = DateTimeGuess(input, currentDatatype, debug).ToString();
+		
+		//if you have a mixed column and the new value isn't null only DateTime2 can hold all
+		if( currentDatatype != output && output != "VarBinary" )
+			output = "DateTime2";
+			
+		if(output != "VarBinary")
+			return output;
+	}
 	
 	//then numerics
-	output = NumericGuess(input, debug);
+	string[] NumericCompatibleDateTypes = {null, "Bit", "TinyInt", "SmallInt", "Int", "BigInt","Decimal","Float"};
+	if( NumericCompatibleDateTypes.Contains(currentDatatype)) {
+		output = NumericGuess(input, currentDatatype, debug).ToString();
+		
+		//if changed
+		if(currentDatatype != output) {
+			switch(currentDatatype) {
+				case "TinyInt":
+					//if it was a TinyInt, it cannot be an bit
+					if(output == "Bit")
+						output = currentDatatype;
+					break;
+				case "SmallInt":
+					//SmallInt can't get smaller
+					if(output == "Bit" || output == "TinyInt")
+						output = currentDatatype;
+					break;
+				case "Int":
+					//Int can't get smaller
+					if(output == "Bit" || output == "TinyInt" || output == "SmallInt")
+						output = currentDatatype;
+					break;
+				case "BigInt":
+					//BitInt can't get smaller
+					if(output == "Bit" || output == "TinyInt"|| output == "SmallInt" || output == "Int")
+						output = currentDatatype;
+					break;
+				case "Decimal":
+					//Decimal can't convert to int, precision would be lost
+					if(output == "Bit" || output == "TinyInt"|| output == "SmallInt" || output == "Int" || output == "BigInt")
+						output = currentDatatype;
+					break;
+				case "Float":
+					//float's stay floats
+					output = currentDatatype;
+					break;
+				//case "bit": 
+					//any datatype is ok
+				//default:
+					//any datatype is ok
+			}
+		}
 	
-	if(output != SqlDbType.Binary)
+		if(output != "VarBinary")
+			return output;
+	}
+	//then character strings, the only compatibility check is ! Binary
+	if(currentDatatype != "VarBinary") {
+		output = CharGuess(input, currentDatatype, debug).ToString();
 		return output;
-	
-	//then character strings
-	output = CharGuess(input, debug);
-	
+	}
 	//if all else fails, then resort to binary
-	return output;
+	return "VarBinary";
 }
 
-SqlDbType DateTimeGuess(string input, bool debug = false) {
-	
+SqlDbType DateTimeGuess(string input, string currentDatatype, bool debug = false) {
+		
 	DateTime givenDateTime = new DateTime();
 	SqlDbType output;
 	
@@ -122,11 +204,10 @@ SqlDbType DateTimeGuess(string input, bool debug = false) {
 	} else {
 		if(debug)
 			Console.WriteLine("cannot convert" + input + " to a datetime.");
-		output = SqlDbType.Binary;
+		output = SqlDbType.VarBinary;
 		//exit early!
 		return output;
 	}
-	
 	
 	//since we now know we have some kind of date time the rest of the tests are safe
 	//do we have a time?
@@ -184,7 +265,7 @@ SqlDbType DateTimeGuess(string input, bool debug = false) {
 	return output;
 }
 
-SqlDbType NumericGuess(string input, bool debug = false) {
+SqlDbType NumericGuess(string input, string currentDatatype, bool debug = false) {
 	Boolean givenBoolean;
 	Byte givenByte;
 	Int16 givenInt16;
@@ -268,17 +349,17 @@ SqlDbType NumericGuess(string input, bool debug = false) {
 		Console.WriteLine("cannot convert " + input + " to a float.");
 		
 	//if we can't determine the type by the end, default to binary.
-	return SqlDbType.Binary;
+	return SqlDbType.VarBinary;
 
 }
 
-SqlDbType CharGuess(string input, bool debug = false) {
+SqlDbType CharGuess(string input, string currentDatatype, bool debug = false) {
 	//since the source is already a string, our job is to just return char or nchar
 	//the calling function can see all the values in a column to make the (variable) length guess
 	
 	if(input.Any(c => c > 255)) 
-		return SqlDbType.NChar;
+		return SqlDbType.NVarChar;
 	else
-		return SqlDbType.Char;
+		return SqlDbType.VarChar;
 
 }
