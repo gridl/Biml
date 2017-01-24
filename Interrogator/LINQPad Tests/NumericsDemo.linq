@@ -1,8 +1,7 @@
 <Query Kind="Program">
-  <Reference Relative="..\..\PinTrader\WebScraper\packages\HtmlAgilityPack.1.4.6\Net45\HtmlAgilityPack.dll">C:\Repositories\PinTrader\WebScraper\packages\HtmlAgilityPack.1.4.6\Net45\HtmlAgilityPack.dll</Reference>
+  <Reference Relative="..\..\..\PinTrader\WebScraper\packages\HtmlAgilityPack.1.4.6\Net45\HtmlAgilityPack.dll">C:\Repositories\PinTrader\WebScraper\packages\HtmlAgilityPack.1.4.6\Net45\HtmlAgilityPack.dll</Reference>
   <Reference>&lt;RuntimeDirectory&gt;\Microsoft.VisualBasic.dll</Reference>
   <Reference>&lt;RuntimeDirectory&gt;\System.Net.dll</Reference>
-  <NuGetReference>WindowsAzure.Storage</NuGetReference>
   <Namespace>HtmlAgilityPack</Namespace>
   <Namespace>Microsoft.VisualBasic.FileIO</Namespace>
   <Namespace>Microsoft.WindowsAzure.Storage</Namespace>

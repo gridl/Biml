@@ -1,5 +1,5 @@
 <Query Kind="Program">
-  <Reference Relative="..\..\PinTrader\WebScraper\packages\HtmlAgilityPack.1.4.6\Net45\HtmlAgilityPack.dll">C:\Repositories\PinTrader\WebScraper\packages\HtmlAgilityPack.1.4.6\Net45\HtmlAgilityPack.dll</Reference>
+  <Reference Relative="..\..\..\PinTrader\WebScraper\packages\HtmlAgilityPack.1.4.6\Net45\HtmlAgilityPack.dll">C:\Repositories\PinTrader\WebScraper\packages\HtmlAgilityPack.1.4.6\Net45\HtmlAgilityPack.dll</Reference>
   <Reference>&lt;RuntimeDirectory&gt;\Microsoft.VisualBasic.dll</Reference>
   <Reference>&lt;RuntimeDirectory&gt;\System.Net.dll</Reference>
   <NuGetReference>WindowsAzure.Storage</NuGetReference>
@@ -354,12 +354,19 @@ SqlDbType NumericGuess(string input, string currentDatatype, bool debug = false)
 }
 
 SqlDbType CharGuess(string input, string currentDatatype, bool debug = false) {
-	//since the source is already a string, our job is to just return char or nchar
-	//the calling function can see all the values in a column to make the (variable) length guess
-	
-	if(input.Any(c => c > 255)) 
-		return SqlDbType.NVarChar;
-	else
-		return SqlDbType.VarChar;
+	//function to guess which character type the input is
+	//This function can handle changes to data type too.
+	SqlDbType CharGuess(string input, string currentDatatype, bool debug = false) {
+		//if any character is "after" the 255th character it's in the unicode space
+		if(input.Any(c => c > 255)) 
+			return SqlDbType.NVarChar;
+		else {
+			//if the current data type is NVarChar, we can't go back to VarChar
+			if(currentDatatype != "NVarChar")
+				return SqlDbType.VarChar;
+			else
+				return SqlDbType.NVarChar;
+		}
 
+	}
 }
