@@ -1,11 +1,6 @@
 <Query Kind="Program">
   <Reference>&lt;RuntimeDirectory&gt;\Microsoft.VisualBasic.dll</Reference>
   <Reference>&lt;RuntimeDirectory&gt;\System.Net.dll</Reference>
-  <Namespace>HtmlAgilityPack</Namespace>
-  <Namespace>Microsoft.VisualBasic.FileIO</Namespace>
-  <Namespace>Microsoft.WindowsAzure.Storage</Namespace>
-  <Namespace>Microsoft.WindowsAzure.Storage.Auth</Namespace>
-  <Namespace>Microsoft.WindowsAzure.Storage.Blob</Namespace>
   <Namespace>System.Net</Namespace>
 </Query>
 
@@ -14,7 +9,7 @@
 void Main()
 {
 	//run test x
-	int test = 7;
+	int test = 1;
 	//test 1:bit All pass!
 	//test 2:tinyint all pass!
 	//test 3:smallint pass
@@ -24,17 +19,31 @@ void Main()
 	//test 7: defaults to decimal.
 	
 	//yes, the test file is hardcoded
-	using (TextFieldParser parser = new TextFieldParser(@"C:\Repositories\Biml\Interrogator\testdata\Numerics.csv"))
+	//using (TextFieldParser parser = new TextFieldParser(@"C:\Repositories\Biml\Interrogator\testdata\Numerics.csv"))
+	String FileName = @"C:\Repositories\Biml\Interrogator\testdata\Numerics.csv";
+	
+	using (StreamReader reader = new StreamReader(FileName))
 	{
-		parser.TextFieldType = FieldType.Delimited;
-		parser.SetDelimiters(",");
-		
-		while (!parser.EndOfData) 
+		//initialize the rownumber
+		int rownumber = 0;
+		while (!reader.EndOfStream) 
 		{
 			//Processing row
-			string[] fields = parser.ReadFields();
+			string[] fields = reader.ReadLine().Split(',');
+			rownumber++;
+			//quick spin through the fields to trim the " and spaces
+			for(int i=0; i < fields.Count(); i++) {
+				//get rid of leading "
+				if(fields[i].Trim().StartsWith("\""))
+					fields[i] = fields[i].Trim().Substring(1);
+				
+				//get rid of trailing "
+				if(fields[i].Trim().EndsWith("\""))
+					fields[i] = fields[i].Trim().Substring(0, fields[i].Trim().Length -1);
+			}
+			
 			//skip the header row for this test
-			if(parser.LineNumber > 2) {
+			if(rownumber > 2) {
 				switch(test) {
 					case 1:
 					//test1:bit //test case ignores "" now
@@ -177,6 +186,6 @@ SqlDbType NumericGuess(string input, bool debug = false) {
 		Console.WriteLine("cannot convert " + input + " to a float.");
 		
 	//if we can't determine the type by the end, default to binary.
-	return SqlDbType.Binary;
+	return SqlDbType.VarBinary;
 
 }
