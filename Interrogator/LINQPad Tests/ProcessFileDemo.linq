@@ -49,20 +49,16 @@ public class DestinationColumn {
 //process a file, return a list of columns
 List<DestinationColumn> ProcessFile(string FileName, char[] delimiter, bool FirstRowHeader = true) {
 	List<DestinationColumn> output = new List<DestinationColumn>();
-	
-	
-	//using (TextFieldParser parser = new TextFieldParser(FileName))
+
 	using (StreamReader reader = new StreamReader(FileName))
 	{
-		//parser.TextFieldType = FieldType.Delimited;
-		//parser.SetDelimiters(delimiter);
-		
+		//initialize the rownumber
+		int rownumber = 0;
 		while (!reader.EndOfStream) 
 		{
-
 			//Processing row
-			//string[] fields = parser.ReadFields();
 			string[] fields = reader.ReadLine().Split(delimiter);
+			rownumber++;
 			
 			for(int i=0; i < fields.Count(); i++) {
 				//get rid of leading "
@@ -77,7 +73,7 @@ List<DestinationColumn> ProcessFile(string FileName, char[] delimiter, bool Firs
 				if(i + 1 > output.Count ) {
 					output.Add(new DestinationColumn(fields[i]));
 				}else {
-					if(!FirstRowHeader /*|| parser.LineNumber > 1*/) {
+					if(!FirstRowHeader || rownumber > 1) {
 						//if the field value is blank/null, don't guess
 						if(fields[i].Trim().Length > 0) {
 							//now get the data type
