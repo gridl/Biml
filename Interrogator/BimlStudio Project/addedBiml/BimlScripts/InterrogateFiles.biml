@@ -1,0 +1,6 @@
+﻿<#@ code file="Interrogator.cs" #>
+<# string sourceFolder = "C:\Repositories\Biml\Interrogator\testdata";#>
+
+<Biml xmlns="http://schemas.varigence.com/biml.xsd">
+	
+</Biml>
