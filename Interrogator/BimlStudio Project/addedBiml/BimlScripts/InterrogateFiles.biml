@@ -1,5 +1,9 @@
 ﻿<#@ code file="Interrogator.cs" #>
-<# string sourceFolder = "C:\Repositories\Biml\Interrogator\testdata";#>
+
+<# 	
+	//in the furure these would be parameters
+	string sourceFolder = @"C:\Repositories\Biml\Interrogator\testdata";
+	string[] acceptedFilePatterns = new string[]{".csv",".txt"}; #>
 
 <Biml xmlns="http://schemas.varigence.com/biml.xsd">
 	

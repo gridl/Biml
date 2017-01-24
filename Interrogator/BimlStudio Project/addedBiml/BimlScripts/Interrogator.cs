@@ -1,4 +1,5 @@
-﻿using Varigence.DynamicObjects;
+﻿
+using Varigence.DynamicObjects;
 using Varigence.Biml.CoreLowerer.SchemaManagement;
 using Varigence.Biml.Extensions;
 using Varigence.Biml.Extensions.SchemaManagement;
@@ -27,6 +28,12 @@ using Varigence.Languages.Biml.Task;
 using Varigence.Languages.Biml.Transformation;
 using Varigence.Languages.Biml.Transformation.Destination;
 
+using Microsoft.VisualBasic.FileIO;
+
+using System.Collections.Generic;
+using System.Data;
+using System.Data.SqlTypes;
+using System.Net;
 
 public class Interrogator
 {
