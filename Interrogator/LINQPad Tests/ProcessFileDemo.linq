@@ -5,16 +5,13 @@
   <NuGetReference>WindowsAzure.Storage</NuGetReference>
   <Namespace>HtmlAgilityPack</Namespace>
   <Namespace>Microsoft.VisualBasic.FileIO</Namespace>
-  <Namespace>Microsoft.WindowsAzure.Storage</Namespace>
-  <Namespace>Microsoft.WindowsAzure.Storage.Auth</Namespace>
-  <Namespace>Microsoft.WindowsAzure.Storage.Blob</Namespace>
   <Namespace>System.Net</Namespace>
 </Query>
 
 void Main()
 {
 	string demoFile = @"C:\Repositories\Biml\Interrogator\testdata\Numerics.csv";
-	string demoDelimiter = ",";
+	char[] demoDelimiter = new char[] {','};
 	
 	Console.WriteLine(ProcessFile(demoFile, demoDelimiter, true));
 }
@@ -50,27 +47,37 @@ public class DestinationColumn {
 }
 
 //process a file, return a list of columns
-List<DestinationColumn> ProcessFile(string FileName, string delimiter, bool FirstRowHeader = true) {
+List<DestinationColumn> ProcessFile(string FileName, char[] delimiter, bool FirstRowHeader = true) {
 	List<DestinationColumn> output = new List<DestinationColumn>();
 	
-	using (TextFieldParser parser = new TextFieldParser(FileName))
+	
+	//using (TextFieldParser parser = new TextFieldParser(FileName))
+	using (StreamReader reader = new StreamReader(FileName))
 	{
-		parser.TextFieldType = FieldType.Delimited;
-		parser.SetDelimiters(delimiter);
+		//parser.TextFieldType = FieldType.Delimited;
+		//parser.SetDelimiters(delimiter);
 		
-		while (!parser.EndOfData) 
+		while (!reader.EndOfStream) 
 		{
 
 			//Processing row
-			string[] fields = parser.ReadFields();
-			
+			//string[] fields = parser.ReadFields();
+			string[] fields = reader.ReadLine().Split(delimiter);
 			
 			for(int i=0; i < fields.Count(); i++) {
+				//get rid of leading "
+				if(fields[i].Trim().StartsWith("\""))
+					fields[i] = fields[i].Trim().Substring(1);
+				
+				//get rid of trailing "
+				if(fields[i].Trim().EndsWith("\""))
+					fields[i] = fields[i].Trim().Substring(0, fields[i].Trim().Length -1);
+				
 				//if you get a new column (in first or 101st line) add it's name to output
 				if(i + 1 > output.Count ) {
 					output.Add(new DestinationColumn(fields[i]));
 				}else {
-					if(!FirstRowHeader || parser.LineNumber > 1) {
+					if(!FirstRowHeader /*|| parser.LineNumber > 1*/) {
 						//if the field value is blank/null, don't guess
 						if(fields[i].Trim().Length > 0) {
 							//now get the data type
@@ -103,7 +110,7 @@ List<DestinationColumn> ProcessFile(string FileName, string delimiter, bool Firs
 						}
 					}
 				}
-			}
+		}
 			
 			//Console.WriteLine(output);
 		}
@@ -353,20 +360,18 @@ SqlDbType NumericGuess(string input, string currentDatatype, bool debug = false)
 
 }
 
+//function to guess which character type the input is
+//This function can handle changes to data type too.
 SqlDbType CharGuess(string input, string currentDatatype, bool debug = false) {
-	//function to guess which character type the input is
-	//This function can handle changes to data type too.
-	SqlDbType CharGuess(string input, string currentDatatype, bool debug = false) {
-		//if any character is "after" the 255th character it's in the unicode space
-		if(input.Any(c => c > 255)) 
+	//if any character is "after" the 255th character it's in the unicode space
+	if(input.Any(c => c > 255)) 
+		return SqlDbType.NVarChar;
+	else {
+		//if the current data type is NVarChar, we can't go back to VarChar
+		if(currentDatatype != "NVarChar")
+			return SqlDbType.VarChar;
+		else
 			return SqlDbType.NVarChar;
-		else {
-			//if the current data type is NVarChar, we can't go back to VarChar
-			if(currentDatatype != "NVarChar")
-				return SqlDbType.VarChar;
-			else
-				return SqlDbType.NVarChar;
-		}
-
 	}
+
 }
