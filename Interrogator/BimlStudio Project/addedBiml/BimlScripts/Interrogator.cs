@@ -28,11 +28,14 @@ using Varigence.Languages.Biml.Task;
 using Varigence.Languages.Biml.Transformation;
 using Varigence.Languages.Biml.Transformation.Destination;
 
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlTypes;
-using System.Linq.Enumerable;
+using System.IO;
+using System.Linq;
 using System.Net;
+using System.Text.RegularExpressions;
 
 public class Interrogator
 {
