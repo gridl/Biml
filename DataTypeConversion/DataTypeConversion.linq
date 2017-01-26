@@ -12,17 +12,20 @@
 
 void Main()
 {
+	ConversionUtility cu = new ConversionUtility();
 	
+	Console.WriteLine(cu.Convert(SourceSystem.SqlServer, SourceSystem.SSIS, "bigint"));
+	Console.WriteLine(cu.Convert(SourceSystem.SqlServer,SourceSystem.SqlServer, "bigint"));
 	
-	Console.WriteLine(Convert("SqlServer","SSIS", "bigint"));
-	Console.WriteLine(Convert("SqlServer","Sqlserver", "bigint"));
-	
-	List<Conversion> map = BuildMap();
-	Console.WriteLine(map);
-	
-	
+	//i may need a debug function to see the map that has been built
+	//List<Conversion> map = BuildMap();
+	//Console.WriteLine(map);
+
 }
 
+public enum SourceSystem {
+	SqlServer, SSIS, Biml
+}
 // Define other methods and classes here
 public class Conversion {
 	public string SqlServer;
@@ -35,13 +38,20 @@ public class Conversion {
 		Biml = null;
 	}
 	public Conversion( string sqlServer, string ssis, string biml) {
-		SqlServer = sqlserver;
+		SqlServer = sqlServer;
 		SSIS = ssis;
 		Biml = biml;
 	}
 }
 
-private List<Conversion> BuildMap() {
+public class ConversionUtility {
+	private List<Conversion> _privateMap = new List<Conversion>();
+	
+	public ConversionUtility() {
+		_privateMap = BuildMap();
+	}
+	
+	private List<Conversion> BuildMap() {
 	List<Conversion> output = new List<Conversion>();
 
 	//Conversion test = new Conversion("bigint","DT_I8","Int64");
@@ -89,23 +99,22 @@ private List<Conversion> BuildMap() {
 	return output;	
 }
 
-public string Convert(string fromType, string toType, string input) {
-	List<Conversion> map = BuildMap();
-	Conversion c = new Conversion();
+public string Convert(SourceSystem fromType, SourceSystem toType, string input) {
 	
-	//comparing lower to lower to prevent miskeying
-	switch(FromType.ToLower()) {
-		case "sqlserver":
-			c = map.FirstOrDefault (m => m.SqlServer == input);
+	Conversion c = null;
+	
+	switch(fromType) {
+		case SourceSystem.SqlServer:
+			c = _privateMap.FirstOrDefault (m => m.SqlServer == input);
 			break;
-		case "ssis":
-			c = map.FirstOrDefault (m => m.SSIS == input);
+		case SourceSystem.SSIS:
+			c = _privateMap.FirstOrDefault (m => m.SSIS == input);
 			break;
-		case "biml":
-			c = map.FirstOrDefault (m => m.Biml == input);
+		case SourceSystem.Biml:
+			c = _privateMap.FirstOrDefault (m => m.Biml == input);
 			break;
 		default:
-			Console.WriteLine("Unknown FromType: " + FromType);
+			Console.WriteLine("Unknown FromType: " + fromType);
 			break;
 	}
 	
@@ -115,16 +124,18 @@ public string Convert(string fromType, string toType, string input) {
 		return null;
 	}
 	
-	//comparing lower to lower to prevent miskeying
-	switch(ToType.ToLower()) {
-		case "sqlserver":
+	switch(toType) {
+		case SourceSystem.SqlServer:
 			return c.SqlServer;
-		case "ssis":
+		case SourceSystem.SSIS:
 			return c.SSIS;
-		case "biml":
+		case SourceSystem.Biml:
 			return c.Biml;
 		default:
-			Console.WriteLine("Unknown ToType: " + FromType);
+			Console.WriteLine("Unknown ToType: " + toType);
 			return null;
 	}
 }
+	
+}
+
