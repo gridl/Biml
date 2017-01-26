@@ -28,18 +28,17 @@ using Varigence.Languages.Biml.Task;
 using Varigence.Languages.Biml.Transformation;
 using Varigence.Languages.Biml.Transformation.Destination;
 
-using Microsoft.VisualBasic.FileIO;
-
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlTypes;
+using System.Linq.Enumerable;
 using System.Net;
 
 public class Interrogator
 {
 
-	//function to guess which character type the input is:
-	//VarChar, NVarChar
+	//function to guess which character type the input is
+	//This function can handle changes to data type too.
 	SqlDbType CharGuess(string input, string currentDatatype, bool debug = false) {
 		//if any character is "after" the 255th character it's in the unicode space
 		if(input.Any(c => c > 255)) 
@@ -59,16 +58,24 @@ public class Interrogator
 	string DataTypeGuess(string input, string currentDatatype, bool debug = false) {
 	string output;
 	
+	//exclude blanks
+	if (input.Length < 1)
+		return "";
+		
 	//first try datetimes
 	//CurrentDataType must be compatible
 	string[] DateTimeCompatibleDataTypes = {null, "Date","Time","DateTimeOffset","DateTime2"};
 	if( DateTimeCompatibleDataTypes.Contains(currentDatatype) ) {
+		
 		output = DateTimeGuess(input, currentDatatype, debug).ToString();
 		
+		if(debug) {
+			Console.WriteLine("CurrentDataType: " + currentDatatype + " output: " + output);
+		}
 		//if you have a mixed column and the new value isn't null only DateTime2 can hold all
-		if( currentDatatype != output && output != "VarBinary" )
+		if(currentDatatype != null && currentDatatype != output && output != "VarBinary" ){
 			output = "DateTime2";
-			
+		}
 		if(output != "VarBinary")
 			return output;
 	}
@@ -132,7 +139,7 @@ public class Interrogator
 	//function to guess what kind of datetime we're dealing with:
 	//Date, Time, Datetimeoffset, Datetime2
 	SqlDbType DateTimeGuess(string input, string currentDatatype, bool debug = false) {
-		
+
 	DateTime givenDateTime = new DateTime();
 	SqlDbType output;
 	
@@ -148,6 +155,30 @@ public class Interrogator
 			Console.WriteLine(givenDateTime);	
 		output = SqlDbType.DateTime2;		
 	} else {
+		//durations do not cast to datetime in C#, but are valid times...test for duration/time here
+		try{
+			if(debug) 
+				Console.WriteLine("regex check for time.");	
+			//this pattern should match time and not datetime
+			string pattern = @"^([0-9]{1,2}:[0-9]{1,2}.{0,1}[0-9]{0,7})";
+			//^([0-9]{1,2}:[0-9]{1,2}.{0,1}[0-9]{0,7})
+			Regex r = new Regex(pattern);
+			if(debug)
+				Console.WriteLine(pattern);
+				
+			if (r.IsMatch(input)) {
+				if(debug)	
+					Console.WriteLine("you have a time.");	
+				//return early, you found a time!
+				return SqlDbType.Time;
+			}
+		} catch (Exception e) {
+			//our default (aka, try something else)
+			Console.WriteLine("{0} Exception caught.", e);
+			//on exception return varbinary (default)
+			return SqlDbType.VarBinary;
+		}
+	
 		if(debug)
 			Console.WriteLine("cannot convert" + input + " to a datetime.");
 		output = SqlDbType.VarBinary;
@@ -156,29 +187,6 @@ public class Interrogator
 	}
 	
 	//since we now know we have some kind of date time the rest of the tests are safe
-	//do we have a time?
-	try{
-		if(debug) 
-			Console.WriteLine("regex check for time.");	
-		//this pattern should match time and not datetime
-		string pattern = @"^([0-9]{1,2}:[0-9]{1,2}.{0,1}[0-9]{0,7})";
-		//^([0-9]{1,2}:[0-9]{1,2}.{0,1}[0-9]{0,7})
-		Regex r = new Regex(pattern);
-		if(debug)
-			Console.WriteLine(pattern);
-			
-		if (r.IsMatch(input))
-			output = SqlDbType.Time;
-		if(debug)	
-			Console.WriteLine("you have a time.");	
-		
-	} catch (Exception e) {
-		//our default (aka, try something else)
-		Console.WriteLine("{0} Exception caught.", e);
-		//return whatever we discovered before
-		return output;
-	}
-	
 	//is it just a date?	
 	try {	
 		if(debug) 
@@ -302,31 +310,39 @@ public class Interrogator
 }
 
 	//process a file, return a list of columns
-	List<DestinationColumn> ProcessFile(string FileName, string delimiter, bool FirstRowHeader = true) {
+	List<DestinationColumn> ProcessFile(string FileName, char[] delimiter, bool FirstRowHeader = true, bool debug = false) {
 	List<DestinationColumn> output = new List<DestinationColumn>();
-	
-	using (TextFieldParser parser = new TextFieldParser(FileName))
-	{
-		parser.TextFieldType = FieldType.Delimited;
-		parser.SetDelimiters(delimiter);
-		
-		while (!parser.EndOfData) 
-		{
 
+	using (StreamReader reader = new StreamReader(FileName))
+	{
+		//initialize the rownumber
+		int rownumber = 0;
+		while (!reader.EndOfStream) 
+		{
 			//Processing row
-			string[] fields = parser.ReadFields();
-			
+			string[] fields = reader.ReadLine().Split(delimiter);
+			rownumber++;
 			
 			for(int i=0; i < fields.Count(); i++) {
+				//get rid of leading "
+				if(fields[i].Trim().StartsWith("\""))
+					fields[i] = fields[i].Trim().Substring(1);
+				
+				//get rid of trailing "
+				if(fields[i].Trim().EndsWith("\""))
+					fields[i] = fields[i].Trim().Substring(0, fields[i].Trim().Length -1);
+				
 				//if you get a new column (in first or 101st line) add it's name to output
 				if(i + 1 > output.Count ) {
 					output.Add(new DestinationColumn(fields[i]));
 				}else {
-					if(!FirstRowHeader || parser.LineNumber > 1) {
+					if(!FirstRowHeader || rownumber > 1) {
 						//if the field value is blank/null, don't guess
 						if(fields[i].Trim().Length > 0) {
 							//now get the data type
-							output[i].DataType = DataTypeGuess(fields[i], output[i].DataType, false);
+							output[i].DataType = DataTypeGuess(fields[i], output[i].DataType, debug);
+							if(debug)
+								Console.WriteLine("DataTypeGuess returned: " + output[i].DataType);
 							
 							//get the Maxlength
 							if(output[i].DataType == "VarChar" || output[i].DataType == "NVarChar" || output[i].DataType == "VarBinary") {
@@ -355,7 +371,7 @@ public class Interrogator
 						}
 					}
 				}
-			}
+		}
 			
 			//Console.WriteLine(output);
 		}
