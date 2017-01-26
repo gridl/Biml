@@ -5,12 +5,13 @@
 
 void Main()
 {
-	string demoFile = @"C:\Repositories\Biml\Interrogator\testdata\Numerics.csv";
+	//string demoFile = @"C:\Repositories\Biml\Interrogator\testdata\Numerics.csv";
 	//string demoFile = @"C:\Repositories\Biml\Interrogator\testdata\DateAndTime.csv";
+	string demoFile = @"C:\Repositories\Biml\Interrogator\testdata\DateOnly.csv";
 	
 	char[] demoDelimiter = new char[] {','};
 	
-	Console.WriteLine(ProcessFile(demoFile, demoDelimiter, true));
+	Console.WriteLine(ProcessFile(demoFile, demoDelimiter, true, true));
 }
 
 // Define other methods and classes here
@@ -44,7 +45,7 @@ public class DestinationColumn {
 }
 
 //process a file, return a list of columns
-List<DestinationColumn> ProcessFile(string FileName, char[] delimiter, bool FirstRowHeader = true) {
+List<DestinationColumn> ProcessFile(string FileName, char[] delimiter, bool FirstRowHeader = true, bool debug = false) {
 	List<DestinationColumn> output = new List<DestinationColumn>();
 
 	using (StreamReader reader = new StreamReader(FileName))
@@ -74,7 +75,9 @@ List<DestinationColumn> ProcessFile(string FileName, char[] delimiter, bool Firs
 						//if the field value is blank/null, don't guess
 						if(fields[i].Trim().Length > 0) {
 							//now get the data type
-							output[i].DataType = DataTypeGuess(fields[i], output[i].DataType, false);
+							output[i].DataType = DataTypeGuess(fields[i], output[i].DataType, debug);
+							if(debug)
+								Console.WriteLine("DataTypeGuess returned: " + output[i].DataType);
 							
 							//get the Maxlength
 							if(output[i].DataType == "VarChar" || output[i].DataType == "NVarChar" || output[i].DataType == "VarBinary") {
@@ -115,16 +118,24 @@ List<DestinationColumn> ProcessFile(string FileName, char[] delimiter, bool Firs
 string DataTypeGuess(string input, string currentDatatype, bool debug = false) {
 	string output;
 	
+	//exclude blanks
+	if (input.Length < 1)
+		return "";
+		
 	//first try datetimes
 	//CurrentDataType must be compatible
 	string[] DateTimeCompatibleDataTypes = {null, "Date","Time","DateTimeOffset","DateTime2"};
 	if( DateTimeCompatibleDataTypes.Contains(currentDatatype) ) {
+		
 		output = DateTimeGuess(input, currentDatatype, debug).ToString();
 		
+		if(debug) {
+			Console.WriteLine("CurrentDataType: " + currentDatatype + " output: " + output);
+		}
 		//if you have a mixed column and the new value isn't null only DateTime2 can hold all
-		if( currentDatatype != output && output != "VarBinary" )
+		if(currentDatatype != null && currentDatatype != output && output != "VarBinary" ){
 			output = "DateTime2";
-			
+		}
 		if(output != "VarBinary")
 			return output;
 	}
@@ -186,7 +197,7 @@ string DataTypeGuess(string input, string currentDatatype, bool debug = false) {
 }
 
 SqlDbType DateTimeGuess(string input, string currentDatatype, bool debug = false) {
-		
+
 	DateTime givenDateTime = new DateTime();
 	SqlDbType output;
 	
@@ -202,6 +213,30 @@ SqlDbType DateTimeGuess(string input, string currentDatatype, bool debug = false
 			Console.WriteLine(givenDateTime);	
 		output = SqlDbType.DateTime2;		
 	} else {
+		//durations do not cast to datetime in C#, but are valid times...test for duration/time here
+		try{
+			if(debug) 
+				Console.WriteLine("regex check for time.");	
+			//this pattern should match time and not datetime
+			string pattern = @"^([0-9]{1,2}:[0-9]{1,2}.{0,1}[0-9]{0,7})";
+			//^([0-9]{1,2}:[0-9]{1,2}.{0,1}[0-9]{0,7})
+			Regex r = new Regex(pattern);
+			if(debug)
+				Console.WriteLine(pattern);
+				
+			if (r.IsMatch(input)) {
+				if(debug)	
+					Console.WriteLine("you have a time.");	
+				//return early, you found a time!
+				return SqlDbType.Time;
+			}
+		} catch (Exception e) {
+			//our default (aka, try something else)
+			Console.WriteLine("{0} Exception caught.", e);
+			//on exception return varbinary (default)
+			return SqlDbType.VarBinary;
+		}
+	
 		if(debug)
 			Console.WriteLine("cannot convert" + input + " to a datetime.");
 		output = SqlDbType.VarBinary;
@@ -210,29 +245,6 @@ SqlDbType DateTimeGuess(string input, string currentDatatype, bool debug = false
 	}
 	
 	//since we now know we have some kind of date time the rest of the tests are safe
-	//do we have a time?
-	try{
-		if(debug) 
-			Console.WriteLine("regex check for time.");	
-		//this pattern should match time and not datetime
-		string pattern = @"^([0-9]{1,2}:[0-9]{1,2}.{0,1}[0-9]{0,7})";
-		//^([0-9]{1,2}:[0-9]{1,2}.{0,1}[0-9]{0,7})
-		Regex r = new Regex(pattern);
-		if(debug)
-			Console.WriteLine(pattern);
-			
-		if (r.IsMatch(input))
-			output = SqlDbType.Time;
-		if(debug)	
-			Console.WriteLine("you have a time.");	
-		
-	} catch (Exception e) {
-		//our default (aka, try something else)
-		Console.WriteLine("{0} Exception caught.", e);
-		//return whatever we discovered before
-		return output;
-	}
-	
 	//is it just a date?	
 	try {	
 		if(debug) 
