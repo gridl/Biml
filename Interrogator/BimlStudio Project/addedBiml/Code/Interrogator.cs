@@ -42,7 +42,7 @@ public class Interrogator
 
 	//function to guess which character type the input is
 	//This function can handle changes to data type too.
-	SqlDbType CharGuess(string input, string currentDatatype, bool debug = false) {
+	public SqlDbType CharGuess(string input, string currentDatatype, bool debug = false) {
 		//if any character is "after" the 255th character it's in the unicode space
 		if(input.Any(c => c > 255)) 
 			return SqlDbType.NVarChar;
@@ -58,7 +58,7 @@ public class Interrogator
 	
 	//"main" guess function -- this one calls the guess functions in order
 	// 1. DateTime, 2. Numerics, 3. Character, if none of the above, then VarBinary
-	string DataTypeGuess(string input, string currentDatatype, bool debug = false) {
+	public string DataTypeGuess(string input, string currentDatatype, bool debug = false) {
 	string output;
 	
 	//exclude blanks
@@ -141,7 +141,7 @@ public class Interrogator
 
 	//function to guess what kind of datetime we're dealing with:
 	//Date, Time, Datetimeoffset, Datetime2
-	SqlDbType DateTimeGuess(string input, string currentDatatype, bool debug = false) {
+	public SqlDbType DateTimeGuess(string input, string currentDatatype, bool debug = false) {
 
 	DateTime givenDateTime = new DateTime();
 	SqlDbType output;
@@ -224,7 +224,7 @@ public class Interrogator
 
 	//function to guess what kind of numeric we're dealing with:
 	//TinyInt, SmallInt, Int, BigInt, Decimal, Float
-	SqlDbType NumericGuess(string input, string currentDatatype, bool debug = false) {
+	public SqlDbType NumericGuess(string input, string currentDatatype, bool debug = false) {
 	Boolean givenBoolean;
 	Byte givenByte;
 	Int16 givenInt16;
@@ -313,7 +313,7 @@ public class Interrogator
 }
 
 	//process a file, return a list of columns
-	List<DestinationColumn> ProcessFile(string FileName, char[] delimiter, bool FirstRowHeader = true, bool debug = false) {
+	public List<DestinationColumn> ProcessFile(string FileName, char[] delimiter, bool FirstRowHeader = true, bool debug = false) {
 	List<DestinationColumn> output = new List<DestinationColumn>();
 
 	using (StreamReader reader = new StreamReader(FileName))

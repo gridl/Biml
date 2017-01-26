@@ -12,9 +12,12 @@
 
 void Main()
 {
+	//DataType="<#= col.DataType #>"
+	//cu.Convert(SourceSystem.SqlServer, SourceSystem.Biml, col.DataType) 
+	
 	ConversionUtility cu = new ConversionUtility();
 	
-	Console.WriteLine(cu.Convert(SourceSystem.SqlServer, SourceSystem.SSIS, "bigint"));
+	Console.WriteLine(cu.Convert(SourceSystem.SqlServer, SourceSystem.SSIS, "BIGINT"));
 	Console.WriteLine(cu.Convert(SourceSystem.SqlServer,SourceSystem.SqlServer, "bigint"));
 	
 	//i may need a debug function to see the map that has been built
@@ -26,7 +29,7 @@ void Main()
 public enum SourceSystem {
 	SqlServer, SSIS, Biml
 }
-// Define other methods and classes here
+// Define other methods and classes hereConv
 public class Conversion {
 	public string SqlServer;
 	public string SSIS;
@@ -105,13 +108,13 @@ public string Convert(SourceSystem fromType, SourceSystem toType, string input) 
 	
 	switch(fromType) {
 		case SourceSystem.SqlServer:
-			c = _privateMap.FirstOrDefault (m => m.SqlServer == input);
+			c = _privateMap.FirstOrDefault (m => m.SqlServer.ToLower() == input.ToLower());
 			break;
 		case SourceSystem.SSIS:
-			c = _privateMap.FirstOrDefault (m => m.SSIS == input);
+			c = _privateMap.FirstOrDefault (m => m.SSIS.ToLower() == input.ToLower());
 			break;
 		case SourceSystem.Biml:
-			c = _privateMap.FirstOrDefault (m => m.Biml == input);
+			c = _privateMap.FirstOrDefault (m => m.Biml.ToLower() == input.ToLower());
 			break;
 		default:
 			Console.WriteLine("Unknown FromType: " + fromType);

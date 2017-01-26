@@ -2,7 +2,7 @@
 <Project ToolsVersion="3.5" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <IsPackageEditorCompactDisplayModeEnabled>False</IsPackageEditorCompactDisplayModeEnabled>
-    <IsTemplateAutoUpdatePreviewEnabled>True</IsTemplateAutoUpdatePreviewEnabled>
+    <IsTemplateAutoUpdatePreviewEnabled>False</IsTemplateAutoUpdatePreviewEnabled>
     <IsTemplateCheckBimlSyntaxEnabled>True</IsTemplateCheckBimlSyntaxEnabled>
     <IsTemplateAutoFormatXmlEnabled>True</IsTemplateAutoFormatXmlEnabled>
     <AddedXmlFilesPath>addedBiml</AddedXmlFilesPath>
@@ -38,7 +38,10 @@
     <Live Include="addedBiml\FileFormats\FlatFileFormat1.biml">
       <RootFolderId>0</RootFolderId>
     </Live>
-    <None Include="addedBiml\BimlScripts\Interrogator.cs">
+    <None Include="addedBiml\Code\ConversionUtility.cs">
+      <RootFolderId>0</RootFolderId>
+    </None>
+    <None Include="addedBiml\Code\Interrogator.cs">
       <RootFolderId>0</RootFolderId>
     </None>
     <None Include="Interrogator.bimlproj">

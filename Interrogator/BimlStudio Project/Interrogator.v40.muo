@@ -1,6 +1,6 @@
 <Configuration xmlns="http://schemas.varigence.com/Settings.xsd">
     <Settings>
-        <StringSetting Name="OpenDocumentWindows">FP:addedBiml\BimlScripts\Interrogator.cs|TV:addedBiml\BimlScripts\InterrogateFiles.biml|</StringSetting>
+        <StringSetting Name="OpenDocumentWindows">TV:addedBiml\BimlScripts\InterrogateFiles.biml|FP:addedBiml\BimlScripts\Interrogator.cs|</StringSetting>
         <StringSetting Name="NotificationStatus">[]</StringSetting>
     </Settings>
 </Configuration>
