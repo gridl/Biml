@@ -34,7 +34,7 @@ public class Conversion {
 		SSIS = null;
 		Biml = null;
 	}
-	public Conversion( string sqlserver, string ssis, string biml) {
+	public Conversion( string sqlServer, string ssis, string biml) {
 		SqlServer = sqlserver;
 		SSIS = ssis;
 		Biml = biml;
@@ -89,24 +89,30 @@ private List<Conversion> BuildMap() {
 	return output;	
 }
 
-public string Convert(string FromType, string ToType, string Input) {
+public string Convert(string fromType, string toType, string input) {
 	List<Conversion> map = BuildMap();
 	Conversion c = new Conversion();
 	
 	//comparing lower to lower to prevent miskeying
 	switch(FromType.ToLower()) {
 		case "sqlserver":
-			c = map.FirstOrDefault (m => m.SqlServer == Input);
+			c = map.FirstOrDefault (m => m.SqlServer == input);
 			break;
 		case "ssis":
-			c = map.FirstOrDefault (m => m.SSIS == Input);
+			c = map.FirstOrDefault (m => m.SSIS == input);
 			break;
 		case "biml":
-			c = map.FirstOrDefault (m => m.Biml == Input);
+			c = map.FirstOrDefault (m => m.Biml == input);
 			break;
 		default:
 			Console.WriteLine("Unknown FromType: " + FromType);
 			break;
+	}
+	
+	//check for no c found!
+	if(c == null) {
+		Console.WriteLine("No mapping found for " + fromType + " " + input);
+		return null;
 	}
 	
 	//comparing lower to lower to prevent miskeying
