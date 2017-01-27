@@ -1,0 +1,28 @@
+﻿<#@ include file="00_Configuration.biml"#>
+<#@ template tier="6" #>
+
+<!-- included file, no need for Biml tag-->
+	<Packages>
+	<#
+		foreach (var table in RootNode.Tables.Where(t => t.GetTag("TableGroup") == "FlatFile")) { 
+	#>	
+		<Package Name="Extract_FF_<#= table.Name #>" ConstraintMode="Linear" DelayValidation="true">
+			<Annotations>
+				<Annotation AnnotationType="CodeComment">
+					All flat file extracts are truncate and load.
+					They follow the following pattern:
+						for now, Biml only supports drop/create so we'll go with that for our trunc and load
+						load the destination table
+				</Annotation>
+            </Annotations>
+			<Tasks>
+				<ExecuteSQL Name ="EST_Create<#=table.Name#>" ConnectionName ="ADONET_Extract">
+					<DirectInput><#=table.GetTableSql()#></DirectInput>
+				</ExecuteSQL>
+            </Tasks>
+        </Package>
+	<#
+		}
+	#>
+    </Packages>
+

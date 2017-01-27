@@ -1,5 +1,0 @@
-﻿<Biml xmlns="http://schemas.varigence.com/biml.xsd">
-    <FileFormats>
-        <FlatFileFormat Name="FlatFileFormat1" />
-    </FileFormats>
-</Biml>

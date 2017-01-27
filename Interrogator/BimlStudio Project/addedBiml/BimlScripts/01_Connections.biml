@@ -1,0 +1,35 @@
+﻿<#@ include file="00_Configuration.biml"#>
+<#@ template tier="1" #>
+<Biml xmlns="http://schemas.varigence.com/biml.xsd"> 
+	<Connections>
+		<AdoNetConnection Name="ADONET_Extract" ConnectionString="Data Source=<#=extractServer #>;Initial Catalog=<#= extractDatabase#>;Integrated Security=true" CreateInProject="true" Provider="System.Data.SqlClient.SqlConnection, System.Data, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+			<Expressions>
+				<Expression PropertyName="ConnectionString">
+					"Data Source=" + @[$Project::ExtractServer]+ ";Initial Catalog=" + @[$Project::ExtractDatabase] + ";Integrated Security=true"
+					
+                </Expression>
+            </Expressions>
+        </AdoNetConnection>
+		<AdoNetConnection Name="ADONET_Transform" ConnectionString="Data Source=<#=transformServer #>;Initial Catalog=<#= transformDatabase#>;Integrated Security=true" CreateInProject="true" Provider="System.Data.SqlClient.SqlConnection, System.Data, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+			<Expressions>
+				<Expression PropertyName="ConnectionString">
+					"Data Source=" + @[$Project::TransformServer] + ";Initial Catalog=" + @[$Project::TransformDatabase] + ";Integrated Security=true"
+                </Expression>
+            </Expressions>
+        </AdoNetConnection>
+		<AdoNetConnection Name="ADONET_PDS" ConnectionString="Data Source=<#=pdsServer #>;Initial Catalog=<#= pdsDatabase#>;Integrated Security=true" CreateInProject="true" Provider="System.Data.SqlClient.SqlConnection, System.Data, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+			<Expressions>
+				<Expression PropertyName="ConnectionString">
+					"Data Source=" + @[$Project::PDSServer] + ";Initial Catalog=" + @[$Project::PDSDatabase] + ";Integrated Security=true"
+                </Expression>
+            </Expressions>
+        </AdoNetConnection>
+		<AdoNetConnection Name="ADONET_DW" ConnectionString="Data Source=<#=dwServer #>;Initial Catalog=<#= dwDatabase#>;Integrated Security=true" CreateInProject="true" Provider="System.Data.SqlClient.SqlConnection, System.Data, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+			<Expressions>
+				<Expression PropertyName="ConnectionString">
+					"Data Source=" + @[$Project::DWServer] + ";Initial Catalog=" + @[$Project::DWDatabase] + ";Integrated Security=true"
+                </Expression>
+            </Expressions>
+        </AdoNetConnection>
+    </Connections>
+</Biml>

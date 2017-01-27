@@ -1,0 +1,9 @@
+﻿<Biml xmlns="http://schemas.varigence.com/biml.xsd">
+    <FileFormats>
+        <FlatFileFormat Name="DateOnly" RowDelimiter="LF" ColumnNamesInFirstDataRow="true" IsUnicode="true" FlatFileType="Delimited">
+			<Columns>
+							<Column Name="2_date" DataType="Date" Delimiter="," Length="0" Precision="0" Scale="0"></Column>
+						</Columns>
+		</FlatFileFormat>
+    </FileFormats>
+</Biml>

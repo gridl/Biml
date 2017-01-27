@@ -1,0 +1,25 @@
+﻿<Biml xmlns="http://schemas.varigence.com/biml.xsd">
+    <Projects>
+        <PackageProject Name="ETL Project">
+			<Connections>
+							<Connection ConnectionName="ADONET_DW" Id="87ff2840-77cb-4e1f-95d5-6338b5a1dc8c" />
+							<Connection ConnectionName="ADONET_Extract" Id="53bdcd43-5bbc-4d54-86ee-984eee1b63a4" />
+							<Connection ConnectionName="ADONET_PDS" Id="43025821-1f4e-4027-8737-4f29176970e2" />
+							<Connection ConnectionName="ADONET_Transform" Id="04032f7f-f637-4e50-a8af-0a7e7e10eab2" />
+			            </Connections>
+			<Packages>
+							<Package PackageName="CreateObjects" />
+			            </Packages>
+            <Parameters>
+                <Parameter Name="ExtractServer" DataType="String">localhost</Parameter>
+                <Parameter Name="TransformServer" DataType="String">localhost</Parameter>
+                <Parameter Name="PDSServer" DataType="String">localhost</Parameter>
+                <Parameter Name="DWServer" DataType="String">localhost</Parameter>
+                <Parameter Name="ExtractDatabase" DataType="String">BimlDemo</Parameter>
+                <Parameter Name="TransformDatabase" DataType="String">BimlDemo</Parameter>
+                <Parameter Name="PDSDatabase" DataType="String">BimlDemo</Parameter>
+                <Parameter Name="DWDatabase" DataType="String">BimlDemo</Parameter>
+            </Parameters>
+        </PackageProject>
+    </Projects>
+</Biml>

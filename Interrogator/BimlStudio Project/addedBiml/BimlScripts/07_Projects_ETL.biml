@@ -1,0 +1,37 @@
+﻿<#@ include file="00_Configuration.biml"#>
+<#@ template tier="7" #>
+<Biml xmlns="http://schemas.varigence.com/biml.xsd">
+	<Projects>
+		<PackageProject Name="ETL Project">
+			<Parameters>
+				<Parameter Name="ExtractServer" DataType="String"><#=extractServer #></Parameter>
+				<Parameter Name="TransformServer" DataType="String"><#=transformServer #></Parameter>
+				<Parameter Name="PDSServer" DataType="String"><#=pdsServer #></Parameter>
+				<Parameter Name="DWServer" DataType="String"><#=dwServer #></Parameter>
+				
+				<Parameter Name="ExtractDatabase" DataType="String"><#= extractDatabase #></Parameter>
+				<Parameter Name="TransformDatabase" DataType="String"><#= transformDatabase #></Parameter>
+				<Parameter Name="PDSDatabase" DataType="String"><#= pdsDatabase #></Parameter>
+				<Parameter Name="DWDatabase" DataType="String"><#= dwDatabase #></Parameter>
+            </Parameters>
+			<Connections>
+			<#
+				foreach (var connection in RootNode.Connections ) {
+					Guid connectionId = Guid.NewGuid();
+					connectionGuids.Add(connectionId);
+			#>
+				<Connection ConnectionName="<#= connection.Name #>" Id="<#= connectionId #>" />
+			<#
+				}
+			#>
+            </Connections>
+			<Packages>
+			<# foreach (var package in RootNode.Packages) { #>
+				<Package PackageName="<#= package.Name #>" />
+			<# 
+				}
+			#>
+            </Packages>
+        </PackageProject>
+    </Projects>
+</Biml>

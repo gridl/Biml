@@ -1,0 +1,266 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="1/27/2017 2:13:17 PM"
+  DTS:CreationName="SSIS.Package.3"
+  DTS:CreatorComputerName="SLOWDERALPHA"
+  DTS:CreatorName="slowd"
+  DTS:DTSID="{ACEF0EE4-A5C6-4083-A619-43C55E0D536A}"
+  DTS:ExecutableType="SSIS.Package.3"
+  DTS:LastModifiedProductVersion="13.0.2165.0"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="CreateObjects"
+  DTS:ProtectionLevel="0"
+  DTS:VersionBuild="1"
+  DTS:VersionGUID="{5709C524-349B-4822-BEF1-269E6855DB9E}"
+  DTS:VersionMajor="0">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">6</DTS:Property>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Create Schemas"
+      DTS:CreationName="STOCK:SEQUENCE"
+      DTS:DTSID="{C135FD45-24C0-47DF-89B0-821C01385672}"
+      DTS:ExecutableType="STOCK:SEQUENCE"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Create Schemas">
+      <DTS:Variables />
+      <DTS:Executables>
+        <DTS:Executable
+          DTS:refId="Package\Create Schemas\EST_Create Schema DW"
+          DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+          DTS:DTSID="{1552E2B2-39CE-4EAC-88C1-09A03863175E}"
+          DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="EST_Create Schema DW"
+          DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2014; © 2014 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{87FF2840-77CB-4E1F-95D5-6338B5A1DC8C}"
+              SQLTask:SqlStatementSource="&#xA;        IF NOT EXISTS(SELECT schema_id FROM sys.schemas WHERE name = 'DW') &#xA;        BEGIN&#xA;         EXEC sp_executesql  N'CREATE SCHEMA DW;'&#xA;        END&#xA;                         " xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Create Schemas\EST_Create Schema Extract"
+          DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+          DTS:DTSID="{7FA22A4C-0740-41DF-B1F8-0C47DAEC3223}"
+          DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="EST_Create Schema Extract"
+          DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2014; © 2014 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="1">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{53BDCD43-5BBC-4D54-86EE-984EEE1B63A4}"
+              SQLTask:SqlStatementSource="&#xA;        IF NOT EXISTS(SELECT schema_id FROM sys.schemas WHERE name = 'Extract') &#xA;        BEGIN&#xA;         EXEC sp_executesql  N'CREATE SCHEMA Extract;'&#xA;        END&#xA;                         " xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Create Schemas\EST_Create Schema PDS"
+          DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+          DTS:DTSID="{272E348A-A1CB-4CDB-9422-100FB2CE8363}"
+          DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="EST_Create Schema PDS"
+          DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2014; © 2014 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="2">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{43025821-1F4E-4027-8737-4F29176970E2}"
+              SQLTask:SqlStatementSource="&#xA;        IF NOT EXISTS(SELECT schema_id FROM sys.schemas WHERE name = 'PDS') &#xA;        BEGIN&#xA;         EXEC sp_executesql  N'CREATE SCHEMA PDS;'&#xA;        END&#xA;                         " xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Create Schemas\EST_Create Schema Transform"
+          DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+          DTS:DTSID="{BF94305B-5525-458F-84ED-168B9967B962}"
+          DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="EST_Create Schema Transform"
+          DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2014; © 2014 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="3">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{04032F7F-F637-4E50-A8AF-0A7E7E10EAB2}"
+              SQLTask:SqlStatementSource="&#xA;        IF NOT EXISTS(SELECT schema_id FROM sys.schemas WHERE name = 'Transform') &#xA;        BEGIN&#xA;         EXEC sp_executesql  N'CREATE SCHEMA Transform;'&#xA;        END&#xA;                         " xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+      </DTS:Executables>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Create Tables"
+      DTS:CreationName="STOCK:SEQUENCE"
+      DTS:DTSID="{A9092012-529C-4202-953F-FC1218356FA9}"
+      DTS:ExecutableType="STOCK:SEQUENCE"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Create Tables">
+      <DTS:Variables />
+      <DTS:Executables>
+        <DTS:Executable
+          DTS:refId="Package\Create Tables\EST_Create Table Character"
+          DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+          DTS:DTSID="{45F2F735-4449-44A1-901B-5D37F6B1B16D}"
+          DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="EST_Create Table Character"
+          DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2014; © 2014 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="3">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{53BDCD43-5BBC-4D54-86EE-984EEE1B63A4}"
+              SQLTask:SqlStatementSource="SET ANSI_NULLS ON&#xA;SET QUOTED_IDENTIFIER ON&#xA;GO&#xA;&#xA;-------------------------------------------------------------------&#xA;IF EXISTS (SELECT * from sys.objects WHERE object_id = OBJECT_ID(N'[Extract].[Character]') AND type IN (N'U'))&#xA;DROP TABLE [Extract].[Character]&#xA;GO&#xA;&#xA;CREATE TABLE [Extract].[Character]&#xA;(&#xA;-- Columns Definition&#xA; [1_varchar] varchar(11) NOT NULL &#xA;, [2_nvarchar] nvarchar(2) NOT NULL &#xA;, [ExecutionID] varchar(50) NOT NULL &#xA;, [InsertedDateTime] datetime2(7) NOT NULL &#xA;&#xA;-- Constraints&#xA;&#xA;)&#xA;ON &quot;default&quot;&#xA;WITH (DATA_COMPRESSION = PAGE)&#xA;GO&#xA;&#xA;-------------------------------------------------------------------&#xA;&#xA;&#xA;ALTER TABLE [Extract].[Character] ADD CONSTRAINT [DF_Character_InsertedDateTime] DEFAULT (GETUTCDATE()) FOR [InsertedDateTime]&#xA;      GO&#xA;&#xA;&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Create Tables\EST_Create Table DateAndTime"
+          DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+          DTS:DTSID="{F9798CD0-1B9C-4FD7-ABDD-10861A414BA3}"
+          DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="EST_Create Table DateAndTime"
+          DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2014; © 2014 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{53BDCD43-5BBC-4D54-86EE-984EEE1B63A4}"
+              SQLTask:SqlStatementSource="SET ANSI_NULLS ON&#xA;SET QUOTED_IDENTIFIER ON&#xA;GO&#xA;&#xA;-------------------------------------------------------------------&#xA;IF EXISTS (SELECT * from sys.objects WHERE object_id = OBJECT_ID(N'[Extract].[DateAndTime]') AND type IN (N'U'))&#xA;DROP TABLE [Extract].[DateAndTime]&#xA;GO&#xA;&#xA;CREATE TABLE [Extract].[DateAndTime]&#xA;(&#xA;-- Columns Definition&#xA; [1_SmallDateTime] datetime2(0) NOT NULL &#xA;, [2_date] date NOT NULL &#xA;, [3_Time] time(0) NOT NULL &#xA;, [4_DateTimeOffset] datetimeoffset(0) NOT NULL &#xA;, [5_DateTime2] datetime2(0) NOT NULL &#xA;, [6_DateTime] datetime2(0) NOT NULL &#xA;, [ExecutionID] varchar(50) NOT NULL &#xA;, [InsertedDateTime] datetime2(7) NOT NULL &#xA;&#xA;-- Constraints&#xA;&#xA;)&#xA;ON &quot;default&quot;&#xA;WITH (DATA_COMPRESSION = PAGE)&#xA;GO&#xA;&#xA;-------------------------------------------------------------------&#xA;&#xA;&#xA;ALTER TABLE [Extract].[DateAndTime] ADD CONSTRAINT [DF_DateAndTime_InsertedDateTime] DEFAULT (GETUTCDATE()) FOR [InsertedDateTime]&#xA;      GO&#xA;&#xA;&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Create Tables\EST_Create Table DateOnly"
+          DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+          DTS:DTSID="{A8C45684-C889-4EE2-8B4F-B5897C34EDF6}"
+          DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="EST_Create Table DateOnly"
+          DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2014; © 2014 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="1">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{53BDCD43-5BBC-4D54-86EE-984EEE1B63A4}"
+              SQLTask:SqlStatementSource="SET ANSI_NULLS ON&#xA;SET QUOTED_IDENTIFIER ON&#xA;GO&#xA;&#xA;-------------------------------------------------------------------&#xA;IF EXISTS (SELECT * from sys.objects WHERE object_id = OBJECT_ID(N'[Extract].[DateOnly]') AND type IN (N'U'))&#xA;DROP TABLE [Extract].[DateOnly]&#xA;GO&#xA;&#xA;CREATE TABLE [Extract].[DateOnly]&#xA;(&#xA;-- Columns Definition&#xA; [2_date] date NOT NULL &#xA;, [ExecutionID] varchar(50) NOT NULL &#xA;, [InsertedDateTime] datetime2(7) NOT NULL &#xA;&#xA;-- Constraints&#xA;&#xA;)&#xA;ON &quot;default&quot;&#xA;WITH (DATA_COMPRESSION = PAGE)&#xA;GO&#xA;&#xA;-------------------------------------------------------------------&#xA;&#xA;&#xA;ALTER TABLE [Extract].[DateOnly] ADD CONSTRAINT [DF_DateOnly_InsertedDateTime] DEFAULT (GETUTCDATE()) FOR [InsertedDateTime]&#xA;      GO&#xA;&#xA;&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Create Tables\EST_Create Table Numerics"
+          DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+          DTS:DTSID="{AD01DB28-2B4C-4E72-AC6E-F17508F19AE3}"
+          DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="EST_Create Table Numerics"
+          DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2014; © 2014 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="2">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{53BDCD43-5BBC-4D54-86EE-984EEE1B63A4}"
+              SQLTask:SqlStatementSource="SET ANSI_NULLS ON&#xA;SET QUOTED_IDENTIFIER ON&#xA;GO&#xA;&#xA;-------------------------------------------------------------------&#xA;IF EXISTS (SELECT * from sys.objects WHERE object_id = OBJECT_ID(N'[Extract].[Numerics]') AND type IN (N'U'))&#xA;DROP TABLE [Extract].[Numerics]&#xA;GO&#xA;&#xA;CREATE TABLE [Extract].[Numerics]&#xA;(&#xA;-- Columns Definition&#xA; [1_Bit] bit NOT NULL &#xA;, [2_TinyInt] tinyint NOT NULL &#xA;, [3_SmallInt] smallint NOT NULL &#xA;, [4_Int] int NOT NULL &#xA;, [5_Bigint] bigint NOT NULL &#xA;, [6_Decimal] decimal(38,38) NOT NULL &#xA;, [7_Float] float(20) NOT NULL &#xA;, [ExecutionID] varchar(50) NOT NULL &#xA;, [InsertedDateTime] datetime2(7) NOT NULL &#xA;&#xA;-- Constraints&#xA;&#xA;)&#xA;ON &quot;default&quot;&#xA;WITH (DATA_COMPRESSION = PAGE)&#xA;GO&#xA;&#xA;-------------------------------------------------------------------&#xA;&#xA;&#xA;ALTER TABLE [Extract].[Numerics] ADD CONSTRAINT [DF_Numerics_InsertedDateTime] DEFAULT (GETUTCDATE()) FOR [InsertedDateTime]&#xA;      GO&#xA;&#xA;&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+      </DTS:Executables>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint_Create Schemas_To_Create Tables]"
+      DTS:CreationName=""
+      DTS:DTSID="{1C800F6B-CC49-4F84-9381-3FE96CA83D66}"
+      DTS:From="Package\Create Schemas"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint_Create Schemas_To_Create Tables"
+      DTS:To="Package\Create Tables" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="sql11">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="194,42"
+          Id="Package\Create Schemas\EST_Create Schema DW"
+          TopLeft="5.5,5.5" />
+        <NodeLayout
+          Size="210,42"
+          Id="Package\Create Schemas\EST_Create Schema Extract"
+          TopLeft="260.5,5.5" />
+        <NodeLayout
+          Size="196,42"
+          Id="Package\Create Schemas\EST_Create Schema PDS"
+          TopLeft="531.5,5.49999999999989" />
+        <NodeLayout
+          Size="226,42"
+          Id="Package\Create Schemas\EST_Create Schema Transform"
+          TopLeft="788.5,5.49999999999989" />
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="1020,102"
+          Size="1020,146"
+          Id="Package\Create Schemas"
+          TopLeft="21.5,5.49999999999989" />
+        <NodeLayout
+          Size="211,42"
+          Id="Package\Create Tables\EST_Create Table Character"
+          TopLeft="5.5,5.5" />
+        <NodeLayout
+          Size="230,42"
+          Id="Package\Create Tables\EST_Create Table DateAndTime"
+          TopLeft="277,5.5" />
+        <NodeLayout
+          Size="209,42"
+          Id="Package\Create Tables\EST_Create Table DateOnly"
+          TopLeft="567.5,5.49999999999989" />
+        <NodeLayout
+          Size="210,42"
+          Id="Package\Create Tables\EST_Create Table Numerics"
+          TopLeft="837,5.49999999999989" />
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="1052,102"
+          Size="1052,146"
+          Id="Package\Create Tables"
+          TopLeft="5.5,211.5" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint_Create Schemas_To_Create Tables]"
+          TopLeft="531.5,151.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,60.0000000000001"
+              Start="0,0"
+              End="0,52.5000000000001">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.5000000000001" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

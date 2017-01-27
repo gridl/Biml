@@ -1,0 +1,5 @@
+﻿<Biml xmlns="http://schemas.varigence.com/biml.xsd">
+    <Databases>
+        <Database Name="DW" ConnectionName="ADONET_DW" />
+    </Databases>
+</Biml>

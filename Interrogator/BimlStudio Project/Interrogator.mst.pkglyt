@@ -1,3 +1,13 @@
+CreateObjects	CreateObjects.EST_CreateCharacter	5	5	300	100
+CreateObjects	CreateObjects.EST_CreateDateAndTime	5	155	300	100
+CreateObjects	CreateObjects.EST_CreateDateOnly	5	305	300	100
+CreateObjects	CreateObjects.EST_CreateNumerics	5	455	300	100
 **********Compact Node Bounds
 **********Source Anchors
+CreateObjects	CreateObjects.EST_CreateCharacter	CreateObjects.EST_CreateCharacter.Output
+CreateObjects	CreateObjects.EST_CreateDateAndTime	CreateObjects.EST_CreateDateAndTime.Output
+CreateObjects	CreateObjects.EST_CreateDateOnly	CreateObjects.EST_CreateDateOnly.Output
 **********Sink Anchors
+CreateObjects	CreateObjects.EST_CreateDateAndTime	CreateObjects.EST_CreateCharacter.Output
+CreateObjects	CreateObjects.EST_CreateDateOnly	CreateObjects.EST_CreateDateAndTime.Output
+CreateObjects	CreateObjects.EST_CreateNumerics	CreateObjects.EST_CreateDateOnly.Output

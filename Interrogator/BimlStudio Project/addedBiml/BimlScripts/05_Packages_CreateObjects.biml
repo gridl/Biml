@@ -1,0 +1,55 @@
+﻿<#@ template tier="5" #>
+<Biml xmlns="http://schemas.varigence.com/biml.xsd">
+	<Packages>
+		<Package Name="CreateObjects" ConstraintMode="Linear">
+			<Annotations>
+				<Annotation AnnotationType="CodeComment">
+					This package creates all the database objects needed by the other packages.
+				</Annotation>
+            </Annotations>
+			<Tasks>
+				<Container Name="Create Schemas">
+					<Tasks>
+					<#
+						foreach (var schema in RootNode.Schemas) { 
+					#>
+						<ExecuteSQL Name="EST_Create Schema <#= schema.Name #>" ConnectionName="ADONET_<#= schema.Name #>">
+							<DirectInput>
+								IF NOT EXISTS(SELECT schema_id FROM sys.schemas WHERE name = '<#= schema.Name #>') 
+								BEGIN
+									EXEC sp_executesql  N'CREATE SCHEMA <#= schema.Name #>;'
+								END
+	                        </DirectInput>
+	                    </ExecuteSQL>
+					<#
+						}
+					#>	
+					</Tasks>
+                </Container>
+				<Container Name="Create Tables">
+					<Tasks>
+					<#
+						foreach (var table in RootNode.Tables) { 
+					#>	
+						<ExecuteSQL Name ="EST_Create Table <#=table.Name#>" ConnectionName="ADONET_<#= table.SchemaName #>">
+							<DirectInput><#=table.GetTableSql()#></DirectInput>
+						</ExecuteSQL>
+		            <#
+						}
+					#>
+					</Tasks>
+				</Container>
+			</Tasks>
+			<Connections>
+			<#
+			    foreach(var connection in RootNode.Projects.SelectMany(x => x.AllDefinedSuccessors()).OfType<AstConnectionReferenceBaseNode>()) {
+			#>
+				<Connection ConnectionName="<#= connection.Connection #>" Id="<#= connection.Id #>" />
+			<#
+			    }
+			#>
+				
+			</Connections>
+		</Package>
+	</Packages>
+</Biml>
