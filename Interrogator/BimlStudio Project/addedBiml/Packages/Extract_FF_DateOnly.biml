@@ -1,0 +1,55 @@
+﻿<Biml xmlns="http://schemas.varigence.com/biml.xsd">
+    <Packages>
+        <Package Name="Extract_FF_DateOnly" DelayValidation="true">
+			<Annotations>
+				<Annotation AnnotationType="CodeComment">
+					All flat file extracts are truncate and load.
+				</Annotation>
+            </Annotations>
+			<Tasks>
+				<ExecuteSQL Name="EST-Truncate ExtractDateOnly" ConnectionName="ADONET_Extract">
+					<DirectInput>TRUNCATE TABLE Extract.DateOnly;</DirectInput>
+				</ExecuteSQL>
+				<Dataflow Name="DFT-Load ExtractDateOnly">
+					<PrecedenceConstraints>
+						<Inputs>
+							<Input OutputPathName="EST-Truncate ExtractDateOnly.Output" />
+                        </Inputs>
+                    </PrecedenceConstraints>
+					<Transformations>
+						<FlatFileSource Name="FF_SRC-DateOnly" ConnectionName="FF_DateOnly" ValidateExternalMetadata="false">
+							
+						</FlatFileSource>
+						<DerivedColumns Name="DER-Audit Columns">
+							<InputPath OutputPathName="FF_SRC-DateOnly.Output" />
+							<Columns>
+								<Column Name="ExecutionID" DataType="AnsiString" Length="50">
+									@[System::ExecutionInstanceGUID]
+                                </Column>
+								<Column Name="InsertedDateTime" DataType="DateTime2">
+									GETDATE()
+                                </Column>
+                            </Columns>
+                        </DerivedColumns>
+						<OleDbDestination Name="OLE_DEST-ExtractDateOnly" ConnectionName="OLEDB_Extract" UseFastLoadIfAvailable="true" ValidateExternalMetadata="false">
+							<InputPath OutputPathName="DER-Audit Columns.Output" />
+							<ExternalTableOutput Table="Extract.DateOnly" />
+							
+                        </OleDbDestination>
+                    </Transformations>
+                </Dataflow>
+            </Tasks>
+			<Connections><Connection ConnectionName="OLEDB_DW" Id="b68c70af-cefb-43f3-aaad-f14b4c7c15bc" />
+							<Connection ConnectionName="OLEDB_PDS" Id="cdc7f686-19c7-419e-805b-3717d73f997e" />
+							<Connection ConnectionName="OLEDB_Transform" Id="bdbb46fe-2d74-4de6-a4ea-834646f590d7" />
+							<Connection ConnectionName="OLEDB_Extract" Id="1008a1f0-a552-408d-a159-0c5f1b7fdbb9" />
+							<Connection ConnectionName="ADONET_Transform" Id="a208008c-5f26-4869-890b-4ff27118e62b" />
+							<Connection ConnectionName="ADONET_PDS" Id="886073b2-5244-41d3-8c8a-79d8abaadded" />
+							<Connection ConnectionName="ADONET_Extract" Id="24a06783-3e41-452e-a2d1-0a627fd0572d" />
+							<Connection ConnectionName="ADONET_DW" Id="f6368961-70cd-4f80-9aa8-abd3d345a40b" />
+							<Connection ConnectionName="FF_DateOnly" />
+				<Connection ConnectionName="OLEDB_Extract" />
+			</Connections>
+        </Package>
+    </Packages>
+</Biml>

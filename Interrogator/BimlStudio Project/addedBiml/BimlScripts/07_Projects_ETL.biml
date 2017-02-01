@@ -17,11 +17,13 @@
 			<Connections>
 			<#
 				foreach (var connection in RootNode.Connections ) {
-					Guid connectionId = Guid.NewGuid();
-					connectionGuids.Add(connectionId);
+					if(connection.FriendlyTypeName != "FlatFileConnection") {
+						Guid connectionId = Guid.NewGuid();
+						connectionGuids.Add(connectionId);
 			#>
 				<Connection ConnectionName="<#= connection.Name #>" Id="<#= connectionId #>" />
 			<#
+					}
 				}
 			#>
             </Connections>

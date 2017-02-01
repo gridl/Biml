@@ -1,28 +1,74 @@
-﻿<#@ include file="00_Configuration.biml"#>
-<#@ template tier="6" #>
-
-<!-- included file, no need for Biml tag-->
+﻿<#@ template tier="6" #>
+<Biml xmlns="http://schemas.varigence.com/biml.xsd">
 	<Packages>
 	<#
 		foreach (var table in RootNode.Tables.Where(t => t.GetTag("TableGroup") == "FlatFile")) { 
 	#>	
-		<Package Name="Extract_FF_<#= table.Name #>" ConstraintMode="Linear" DelayValidation="true">
+		<Package Name="Extract_FF_<#= table.Name #>"  DelayValidation="true">
 			<Annotations>
 				<Annotation AnnotationType="CodeComment">
 					All flat file extracts are truncate and load.
-					They follow the following pattern:
-						for now, Biml only supports drop/create so we'll go with that for our trunc and load
-						load the destination table
 				</Annotation>
             </Annotations>
 			<Tasks>
-				<ExecuteSQL Name ="EST_Create<#=table.Name#>" ConnectionName ="ADONET_Extract">
-					<DirectInput><#=table.GetTableSql()#></DirectInput>
+				<ExecuteSQL Name="EST-Truncate <#= table.Schema #><#=table.Name#>" ConnectionName="ADONET_Extract">
+					<DirectInput>TRUNCATE TABLE <#= table.Schema #>.<#=table.Name#>;</DirectInput>
 				</ExecuteSQL>
+				<Dataflow Name="DFT-Load <#= table.Schema #><#=table.Name#>">
+					<PrecedenceConstraints>
+						<Inputs>
+							<Input OutputPathName="EST-Truncate <#= table.Schema #><#=table.Name#>.Output" />
+                        </Inputs>
+                    </PrecedenceConstraints>
+					<Transformations>
+						<FlatFileSource Name="FF_SRC-<#=table.Name#>" ConnectionName="FF_<#=table.Name#>" ValidateExternalMetadata="false" />
+						<DerivedColumns Name="DER-Audit Columns" >
+							<InputPath OutputPathName="FF_SRC-<#=table.Name#>.Output" />
+							<Columns>
+								<Column Name="ExecutionID" DataType="AnsiString" Length="50">
+									@[System::ExecutionInstanceGUID]
+                                </Column>
+								<Column Name="InsertedDateTime" DataType="DateTime2">
+									GETDATE()
+                                </Column>
+                            </Columns>
+                        </DerivedColumns>
+						<OleDbDestination Name="OLE_DEST-<#= table.Schema #><#=table.Name#>" ConnectionName="OLEDB_Extract" UseFastLoadIfAvailable="true" ValidateExternalMetadata="false">
+							<InputPath OutputPathName="DER-Audit Columns.Output" />
+							<ExternalTableOutput Table="<#= table.Schema #>.<#=table.Name#>" />
+							
+                        </OleDbDestination>
+                    </Transformations>
+                </Dataflow>
             </Tasks>
+			<Connections>
+			<#
+			    foreach(var connection in RootNode.Projects.SelectMany(x => x.AllDefinedSuccessors()).OfType<AstConnectionReferenceBaseNode>()) {
+			#>
+				<Connection ConnectionName="<#= connection.Connection #>" Id="<#= connection.Id #>" />
+			<#
+			    }
+			#>
+				<Connection ConnectionName="FlatFileConnection"  />
+			</Connections>
+			<Variables>
+				<Variable Name="SourceFilePath" DataType="String" Namespace="User">
+					C:\Repositories\Biml\Interrogator\testdata\<#=table.Name#>.csv
+                </Variable>
+            </Variables>
+			
         </Package>
 	<#
 		}
 	#>
     </Packages>
-
+	<Connections>
+		<FlatFileConnection Name="FlatFileConnection" FilePath="C:\Repositories\Biml\Interrogator\testdata\placeholder.csv" DelayValidation="true" CreateInProject="false" >
+			<Expressions>
+				<Expression PropertyName="ConnectionString">
+					@[User::SourceFilePath]
+                </Expression>
+            </Expressions>
+		</FlatFileConnection>
+    </Connections>
+</Biml>

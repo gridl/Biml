@@ -1,0 +1,56 @@
+﻿<Biml xmlns="http://schemas.varigence.com/biml.xsd">
+    <Packages>
+        <Package Name="Extract_FF_Character" DelayValidation="true">
+			<Annotations>
+				<Annotation AnnotationType="CodeComment">
+					All flat file extracts are truncate and load.
+				</Annotation>
+            </Annotations>
+			<Tasks>
+				<ExecuteSQL Name="EST-Truncate ExtractCharacter" ConnectionName="ADONET_Extract">
+					<DirectInput>TRUNCATE TABLE Extract.Character;</DirectInput>
+				</ExecuteSQL>
+				<Dataflow Name="DFT-Load ExtractCharacter">
+					<PrecedenceConstraints>
+						<Inputs>
+							<Input OutputPathName="EST-Truncate ExtractCharacter.Output" />
+                        </Inputs>
+                    </PrecedenceConstraints>
+					<Transformations>
+						<FlatFileSource Name="FF_SRC Character" ConnectionName="FF_Character">
+							
+						</FlatFileSource>
+						<DerivedColumns Name="DER Audit Columns">
+							<InputPath OutputPathName="FF_SRC Character.Output" />
+							<Columns>
+								<Column Name="ExecutionID" DataType="AnsiString" Length="50">
+									@[System::ExecutionInstanceGUID]
+                                </Column>
+								<Column Name="InsertedDateTime" DataType="DateTime2">
+									GETDATE()
+                                </Column>
+                            </Columns>
+                        </DerivedColumns>
+						<OleDbDestination Name="OLE_DEST ExtractCharacter" ConnectionName="OLEDB_Extract" UseFastLoadIfAvailable="true">
+							<InputPath OutputPathName="DER Audit Columns.Output" />
+							<ExternalTableOutput Table="Extract.Character" />
+							
+                        </OleDbDestination>
+                    </Transformations>
+                </Dataflow>
+            </Tasks>
+			<Connections>
+							<Connection Id="84687d56-df5e-4353-a3bd-ba73bfebaa29" ConnectionName="OLEDB_Extract" /><Connection ConnectionName="FF_Numerics" Id="fcf203da-888f-4b2c-921d-cd0630967a58" />
+							<Connection ConnectionName="FF_DateOnly" Id="6566ac78-f048-4ff6-a443-f7704224b41a" />
+							<Connection ConnectionName="FF_DateAndTime" Id="cd9ed1b8-3b2b-4b1a-aea1-988ed5f03313" />
+							<Connection ConnectionName="FF_Character" Id="7708a569-720c-49fe-987d-a0849f2550f7" />
+							<Connection ConnectionName="ADONET_Transform" Id="bddd03b4-a318-49b7-b03d-e8740bef68d0" />
+							<Connection ConnectionName="ADONET_PDS" Id="3ed3a0d1-d3e1-4517-8d22-c83ee6a5f7b8" />
+							<Connection ConnectionName="ADONET_Extract" Id="107f6b46-7e24-4c95-9e7a-da535240e450" />
+							<Connection ConnectionName="ADONET_DW" Id="7f960ea3-fe48-4762-8e72-3fb2cd69979d" />
+							<Connection ConnectionName="FF_Character" />
+				<Connection ConnectionName="OLEDB_Extract" />
+			</Connections>
+        </Package>
+    </Packages>
+</Biml>

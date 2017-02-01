@@ -1,5 +1,0 @@
-<ConnectionManager p1:ObjectName="ADONET_Transform" p1:DTSID="{04032F7F-F637-4E50-A8AF-0A7E7E10EAB2}" p1:refId="ADONET_Transform" p1:CreationName="ADO.NET:System.Data.SqlClient.SqlConnection, System.Data, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" xmlns:p1="www.microsoft.com/SqlServer/Dts" xmlns="www.microsoft.com/SqlServer/Dts">
-    <p1:ObjectData><DTS:ConnectionManager xmlns:DTS="www.microsoft.com/SqlServer/Dts" DTS:ConnectionString="Data Source=localhost;Initial Catalog=BimlDemo;Integrated Security=true"></DTS:ConnectionManager></p1:ObjectData>
-<p1:PropertyExpression p1:Name="ConnectionString">
-					"Data Source=" + @[$Project::TransformServer] + ";Initial Catalog=" + @[$Project::TransformDatabase] + ";Integrated Security=true"
-                </p1:PropertyExpression></ConnectionManager>

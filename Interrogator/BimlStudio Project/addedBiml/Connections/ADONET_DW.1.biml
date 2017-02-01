@@ -1,6 +1,6 @@
 ﻿<Biml xmlns="http://schemas.varigence.com/biml.xsd">
     <Connections>
-        <AdoNetConnection Name="ADONET_DW" ConnectionString="Data Source=localhost;Initial Catalog=BimlDemo;Integrated Security=true" CreateInProject="true" Provider="System.Data.SqlClient.SqlConnection, System.Data, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+        <AdoNetConnection Name="ADONET_DW" ConnectionString="data source=localhost;initial catalog=BimlDemo" CreateInProject="true" Provider="System.Data.SqlClient.SqlConnection, System.Data, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
 			<Expressions>
 				<Expression PropertyName="ConnectionString">
 					"Data Source=" + @[$Project::DWServer] + ";Initial Catalog=" + @[$Project::DWDatabase] + ";Integrated Security=true"

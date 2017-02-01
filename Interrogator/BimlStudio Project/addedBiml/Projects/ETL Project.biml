@@ -1,25 +1,33 @@
 ﻿<Biml xmlns="http://schemas.varigence.com/biml.xsd">
     <Projects>
         <PackageProject Name="ETL Project">
-			<Connections>
-							<Connection ConnectionName="ADONET_DW" Id="87ff2840-77cb-4e1f-95d5-6338b5a1dc8c" />
-							<Connection ConnectionName="ADONET_Extract" Id="53bdcd43-5bbc-4d54-86ee-984eee1b63a4" />
-							<Connection ConnectionName="ADONET_PDS" Id="43025821-1f4e-4027-8737-4f29176970e2" />
-							<Connection ConnectionName="ADONET_Transform" Id="04032f7f-f637-4e50-a8af-0a7e7e10eab2" />
+			<Parameters>
+				<Parameter Name="ExtractServer" DataType="String">localhost</Parameter>
+				<Parameter Name="TransformServer" DataType="String">localhost</Parameter>
+				<Parameter Name="PDSServer" DataType="String">localhost</Parameter>
+				<Parameter Name="DWServer" DataType="String">localhost</Parameter>
+				
+				<Parameter Name="ExtractDatabase" DataType="String">BimlDemo</Parameter>
+				<Parameter Name="TransformDatabase" DataType="String">BimlDemo</Parameter>
+				<Parameter Name="PDSDatabase" DataType="String">BimlDemo</Parameter>
+				<Parameter Name="DWDatabase" DataType="String">BimlDemo</Parameter>
+            </Parameters>
+			<Connections><Connection ConnectionName="ADONET_DW" Id="f6368961-70cd-4f80-9aa8-abd3d345a40b" />
+							<Connection ConnectionName="ADONET_Extract" Id="24a06783-3e41-452e-a2d1-0a627fd0572d" />
+							<Connection ConnectionName="ADONET_PDS" Id="886073b2-5244-41d3-8c8a-79d8abaadded" />
+							<Connection ConnectionName="ADONET_Transform" Id="a208008c-5f26-4869-890b-4ff27118e62b" />
+							<Connection ConnectionName="OLEDB_Extract" Id="1008a1f0-a552-408d-a159-0c5f1b7fdbb9" />
+							<Connection ConnectionName="OLEDB_Transform" Id="bdbb46fe-2d74-4de6-a4ea-834646f590d7" />
+							<Connection ConnectionName="OLEDB_PDS" Id="cdc7f686-19c7-419e-805b-3717d73f997e" />
+							<Connection ConnectionName="OLEDB_DW" Id="b68c70af-cefb-43f3-aaad-f14b4c7c15bc" />
 			            </Connections>
 			<Packages>
 							<Package PackageName="CreateObjects" />
+							<Package PackageName="Extract_FF_Character" />
+							<Package PackageName="Extract_FF_DateAndTime" />
+							<Package PackageName="Extract_FF_DateOnly" />
+							<Package PackageName="Extract_FF_Numerics" />
 			            </Packages>
-            <Parameters>
-                <Parameter Name="ExtractServer" DataType="String">localhost</Parameter>
-                <Parameter Name="TransformServer" DataType="String">localhost</Parameter>
-                <Parameter Name="PDSServer" DataType="String">localhost</Parameter>
-                <Parameter Name="DWServer" DataType="String">localhost</Parameter>
-                <Parameter Name="ExtractDatabase" DataType="String">BimlDemo</Parameter>
-                <Parameter Name="TransformDatabase" DataType="String">BimlDemo</Parameter>
-                <Parameter Name="PDSDatabase" DataType="String">BimlDemo</Parameter>
-                <Parameter Name="DWDatabase" DataType="String">BimlDemo</Parameter>
-            </Parameters>
         </PackageProject>
     </Projects>
 </Biml>

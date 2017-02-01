@@ -1,0 +1,11 @@
+﻿<Biml xmlns="http://schemas.varigence.com/biml.xsd">
+    <Connections>
+        <Connection Name="OLEDB_Transform" ConnectionString="Provider=SQLNCLI11;Data Source=localhost;Initial Catalog=BimlDemo;Integrated Security=true" CreateInProject="true">
+			<Expressions>
+				<Expression PropertyName="ConnectionString">
+					"Provider=SQLNCLI11;Data Source=" + @[$Project::TransformServer] + ";Initial Catalog=" + @[$Project::TransformDatabase] + ";Integrated Security=true"
+                </Expression>
+            </Expressions>
+        </Connection>
+    </Connections>
+</Biml>

@@ -2,12 +2,21 @@ CreateObjects	CreateObjects.EST_CreateCharacter	5	5	300	100
 CreateObjects	CreateObjects.EST_CreateDateAndTime	5	155	300	100
 CreateObjects	CreateObjects.EST_CreateDateOnly	5	305	300	100
 CreateObjects	CreateObjects.EST_CreateNumerics	5	455	300	100
+Extract_FF_Character	Extract_FF_Character.EST-Truncate ExtractCharacter	59	5	300	100
+Extract_FF_Character	Extract_FF_Character.DFT-Load Extract.Character	5	155	587	610.62
+Extract_FF_Character	Extract_FF_Character.DFT-Load Extract.Character.FF_SRC-Character	48	5	300	100
+Extract_FF_Character	Extract_FF_Character.DFT-Load Extract.Character.ADONET_DEST-ExtractCharacter	132	358	300	100
+Extract_FF_Character	Extract_FF_Character.DFT-Load Extract.Character.DER-Audit Columns	92	187	300	100
 **********Compact Node Bounds
 **********Source Anchors
-CreateObjects	CreateObjects.EST_CreateCharacter	CreateObjects.EST_CreateCharacter.Output
-CreateObjects	CreateObjects.EST_CreateDateAndTime	CreateObjects.EST_CreateDateAndTime.Output
-CreateObjects	CreateObjects.EST_CreateDateOnly	CreateObjects.EST_CreateDateOnly.Output
+Extract_FF_Character	Extract_FF_Character.EST-Truncate ExtractCharacter	Extract_FF_Character.EST-Truncate ExtractCharacter.Output
+Extract_FF_Character	Extract_FF_Character.DFT-Load Extract.Character	Extract_FF_Character.DFT-Load Extract.Character.Output
+Extract_FF_Character	Extract_FF_Character.DFT-Load Extract.Character.FF_SRC-Character	Extract_FF_Character.DFT-Load Extract.Character.FF_SRC-Character.Output
+Extract_FF_Character	Extract_FF_Character.DFT-Load Extract.Character.FF_SRC-Character	Extract_FF_Character.DFT-Load Extract.Character.FF_SRC-Character.Error
+Extract_FF_Character	Extract_FF_Character.DFT-Load Extract.Character.ADONET_DEST-ExtractCharacter	Extract_FF_Character.DFT-Load Extract.Character.ADONET_DEST-ExtractCharacter.Error
+Extract_FF_Character	Extract_FF_Character.DFT-Load Extract.Character.DER-Audit Columns	Extract_FF_Character.DFT-Load Extract.Character.DER-Audit Columns.Output
+Extract_FF_Character	Extract_FF_Character.DFT-Load Extract.Character.DER-Audit Columns	Extract_FF_Character.DFT-Load Extract.Character.DER-Audit Columns.Error
 **********Sink Anchors
-CreateObjects	CreateObjects.EST_CreateDateAndTime	CreateObjects.EST_CreateCharacter.Output
-CreateObjects	CreateObjects.EST_CreateDateOnly	CreateObjects.EST_CreateDateAndTime.Output
-CreateObjects	CreateObjects.EST_CreateNumerics	CreateObjects.EST_CreateDateOnly.Output
+Extract_FF_Character	Extract_FF_Character.DFT-Load Extract.Character	Extract_FF_Character.EST-Truncate ExtractCharacter.Output
+Extract_FF_Character	Extract_FF_Character.DFT-Load Extract.Character.ADONET_DEST-ExtractCharacter	Extract_FF_Character.DFT-Load Extract.Character.DER-Audit Columns.Output
+Extract_FF_Character	Extract_FF_Character.DFT-Load Extract.Character.DER-Audit Columns	Extract_FF_Character.DFT-Load Extract.Character.FF_SRC-Character.Output
