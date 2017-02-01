@@ -28,6 +28,7 @@
 			#>
             </Connections>
 			<Packages>
+				
 			<# foreach (var package in RootNode.Packages) { #>
 				<Package PackageName="<#= package.Name #>" />
 			<# 

@@ -14,12 +14,14 @@
 	<#
 		foreach (var file in d.GetFiles())	{
 			if(acceptedFilePatterns.Contains(file.Extension)) {
-	#>
-		<FlatFileFormat Name="<#= file.Name.Replace(file.Extension,"") #>" RowDelimiter="<#= RowDelimiter #>" ColumnNamesInFirstDataRow="<#= ColumnNamesInFirstDataRow.ToString().ToLower() #>" IsUnicode="<#= IsUnicode.ToString().ToLower() #>" FlatFileType="Delimited" >
-			<Columns>
-			<#
 				Interrogator i = new Interrogator();
 				List<DestinationColumn> DestinationObject = i.ProcessFile(file.FullName, ColumnDelimiter, true, false);
+	#>
+
+		<FlatFileFormat Name="<#= file.Name.Replace(file.Extension,"") #>" RowDelimiter="<#= RowDelimiter #>" ColumnNamesInFirstDataRow="<#= ColumnNamesInFirstDataRow.ToString().ToLower() #>" FlatFileType="Delimited" 
+			<#= DestinationObject.Any(col => col.DataType == "NVarChar") ? "CodePage=\"65001\"" : "" #> IsUnicode="false">
+			<Columns>
+			<#
 				
 				int columnOrdinal = 1;
 				foreach(DestinationColumn col in DestinationObject) {

@@ -28,4 +28,9 @@
 		here's the work around:
 	*/
 	List<Guid> connectionGuids = new List<Guid>();
+	
+	//in a later version we'll have to set up a parameter for file encodings (Unicode and UTF-8)
+	//basically we can NOT guess at encoding.
+	//we can assume 1252, but as soon as we hit something outside of that, we will need to prompt the user for 
+	//the encoding
 #>

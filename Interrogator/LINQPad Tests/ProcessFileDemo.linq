@@ -12,7 +12,8 @@ void Main()
 	
 	char[] demoDelimiter = new char[] {','};
 	
-	Console.WriteLine(ProcessFile(demoFile, demoDelimiter, true, false));
+	List<DestinationColumn> DestinationObject = ProcessFile(demoFile, demoDelimiter, true, false);
+	Console.WriteLine(DestinationObject);
 }
 
 // Define other methods and classes here
