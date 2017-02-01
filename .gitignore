@@ -22,4 +22,8 @@ bld/
 **/bin/Release/
 
 *.ispac
-**/addedBiml/
+**/addedBiml/Connections/
+**/addedBiml/FileFormats/
+**/addedBiml/Packages/
+**/addedBiml/Projects/
+

@@ -400,7 +400,7 @@ public class DestinationColumn {
 		DataType = null;
 		MaxLength = 0;
 		Precision = 0;
-		Scale = 0;
+		Scale = -1; //default should be -1 per biml warnings
 		Nullable = false;
 	}
 	//full init

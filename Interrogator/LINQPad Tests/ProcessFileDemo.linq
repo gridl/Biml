@@ -31,7 +31,7 @@ public class DestinationColumn {
 		DataType = null;
 		MaxLength = 0;
 		Precision = 0;
-		Scale = 0;
+		Scale = -1;
 		Nullable = false;
 	}
 	//full init
