@@ -22,8 +22,12 @@ bld/
 **/bin/Release/
 
 *.ispac
-**/addedBiml/Connections/
-**/addedBiml/FileFormats/
-**/addedBiml/Packages/
-**/addedBiml/Projects/
+/Interrogator/BimlStudio Project/documentation/
+/Interrogator/BimlStudio Project/addedBiml/Connections/
+/Interrogator/BimlStudio Project/addedBiml/Databases
+/Interrogator/BimlStudio Project/addedBiml/FileFormats/
+/Interrogator/BimlStudio Project/addedBiml/Packages/
+/Interrogator/BimlStudio Project/addedBiml/Projects/
+/Interrogator/BimlStudio Project/addedBiml/Schemas/
+/Interrogator/BimlStudio Project/addedBiml/Tables/
 
