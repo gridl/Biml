@@ -5,10 +5,10 @@
 
 void Main()
 {
-	//string demoFile = @"C:\Repositories\Biml\Interrogator\testdata\Numerics.csv";
+	string demoFile = @"C:\Repositories\Biml\Interrogator\testdata\Numerics.csv";
 	//string demoFile = @"C:\Repositories\Biml\Interrogator\testdata\DateAndTime.csv";
 	//string demoFile = @"C:\Repositories\Biml\Interrogator\testdata\DateOnly.csv";
-	string demoFile = @"C:\Repositories\Biml\Interrogator\testdata\Character.csv";
+	//string demoFile = @"C:\Repositories\Biml\Interrogator\testdata\Character.csv";
 	
 	char[] demoDelimiter = new char[] {','};
 	
