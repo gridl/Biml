@@ -5,14 +5,15 @@
 
 void Main()
 {
-	//string demoFile = @"C:\Repositories\Biml\Interrogator\testdata\Numerics.csv";
+	string demoFile = @"C:\Repositories\Biml\Interrogator\testdata\Numerics.csv";
 	//string demoFile = @"C:\Repositories\Biml\Interrogator\testdata\DateAndTime.csv";
 	//string demoFile = @"C:\Repositories\Biml\Interrogator\testdata\DateOnly.csv";
-	string demoFile = @"C:\Repositories\Biml\Interrogator\testdata\Character.csv";
+	//string demoFile = @"C:\Repositories\Biml\Interrogator\testdata\Character.csv";
 	
 	char[] demoDelimiter = new char[] {','};
 	
 	List<DestinationColumn> DestinationObject = ProcessFile(demoFile, demoDelimiter, true, false);
+	Console.WriteLine(DestinationObject.Any (d => d.DataType == "NVarChar"));
 	Console.WriteLine(DestinationObject);
 }
 
@@ -92,17 +93,58 @@ List<DestinationColumn> ProcessFile(string FileName, char[] delimiter, bool Firs
 							}
 							
 							//get precision
-							if(output[i].DataType == "Decimal" || output[i].DataType == "Float") {
-								if(fields[i].Replace(".","").Length > output[i].Precision)
-									output[i].Precision = fields[i].Replace(".","").Length;
+							switch(output[i].DataType) {
+								case "BigInt":
+									output[i].Precision = 19;
+									break;
+								case "Bit":
+									output[i].Precision = 1;
+									break;							
+								case "Date":
+								case "Int":
+									output[i].Precision = 10;
+									break;
+								case "DateTime2":
+									output[i].Precision = 27;
+									break;	
+								case "DateTimeOffset":
+									output[i].Precision = 34;
+									break;
+									
+								case "Decimal": //could max at 38
+								case "Float":
+									if(fields[i].Replace(".","").Length > output[i].Precision)
+										output[i].Precision = fields[i].Replace(".","").Length;
+									break;
+								case "SmallInt":
+									output[i].Precision = 5;
+									break;
+								case "Time":
+									output[i].Precision = 16;
+									break;
+								case "TinyInt":
+									output[i].Precision = 3;
+									break;
+								default:
+									output[i].Precision = 0;
+									break;
 							}
 							
 							//get scale
-							if(output[i].DataType == "Decimal") {
-							//remember Indexof will "leave the "." in it's length (+1 to ignore the .)
-								int Scale = fields[i].Substring(fields[i].IndexOf(".")+1).Length;
-								if(Scale > output[i].Scale)
-									output[i].Scale = Scale;
+							switch(output[i].DataType) {
+								case "DateTime2":
+								case "DateTimeOffset":
+									output[i].Scale = 7;
+									break;
+								case "Decimal":
+									//remember Indexof will "leave the "." in it's length (+1 to ignore the .)
+									int Scale = fields[i].Substring(fields[i].IndexOf(".")+1).Length;
+									if(Scale > output[i].Scale)
+										output[i].Scale = Scale;
+									break;
+								default:
+									output[i].Scale = 0;
+									break;
 							}
 							
 						}else {

@@ -28,7 +28,7 @@
 								<Column Name="ExecutionID" DataType="AnsiString" Length="50">
 									@[System::ExecutionInstanceGUID]
                                 </Column>
-								<Column Name="InsertedDateTime" DataType="DateTime2">
+								<Column Name="InsertedDateTime" DataType="DateTime">
 									GETDATE()
                                 </Column>
                             </Columns>

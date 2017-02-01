@@ -1,0 +1,35 @@
+﻿<Biml xmlns="http://schemas.varigence.com/biml.xsd">
+    <Projects>
+        <PackageProject Name="ETL Project">
+			<Parameters>
+				<Parameter Name="ExtractServer" DataType="String">localhost</Parameter>
+				<Parameter Name="TransformServer" DataType="String">localhost</Parameter>
+				<Parameter Name="PDSServer" DataType="String">localhost</Parameter>
+				<Parameter Name="DWServer" DataType="String">localhost</Parameter>
+				
+				<Parameter Name="ExtractDatabase" DataType="String">BimlDemo</Parameter>
+				<Parameter Name="TransformDatabase" DataType="String">BimlDemo</Parameter>
+				<Parameter Name="PDSDatabase" DataType="String">BimlDemo</Parameter>
+				<Parameter Name="DWDatabase" DataType="String">BimlDemo</Parameter>
+            </Parameters>
+			<Connections>
+							<Connection ConnectionName="ADONET_DW" Id="83994721-5b0a-43b3-9372-c055a0b3408e" />
+							<Connection ConnectionName="ADONET_Extract" Id="ac52ad76-6b5a-4fe5-a07a-e97c20691b9b" />
+							<Connection ConnectionName="ADONET_PDS" Id="b29dfab3-cd3a-4f18-8a93-c6cae5f1d31c" />
+							<Connection ConnectionName="ADONET_Transform" Id="ddd737d3-2367-416e-a4dc-f80499dc0129" />
+							<Connection ConnectionName="OLEDB_DW" Id="bfb00291-213b-4a91-94ea-d3bee6957566" />
+							<Connection ConnectionName="OLEDB_Extract" Id="90f12bf7-3a9e-4c40-b894-173baa9d451a" />
+							<Connection ConnectionName="OLEDB_PDS" Id="2a0ce47d-da84-4b50-890c-5f6e5d824af2" />
+							<Connection ConnectionName="OLEDB_Transform" Id="488c20cb-dcd0-48da-a15e-84eb88c05149" />
+			            </Connections>
+			<Packages>
+				
+							<Package PackageName="CreateObjects" />
+							<Package PackageName="Extract_FF_Character" />
+							<Package PackageName="Extract_FF_DateAndTime" />
+							<Package PackageName="Extract_FF_DateOnly" />
+							<Package PackageName="Extract_FF_Numerics" />
+			            </Packages>
+        </PackageProject>
+    </Projects>
+</Biml>

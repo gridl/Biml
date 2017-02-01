@@ -1,0 +1,12 @@
+﻿<Biml xmlns="http://schemas.varigence.com/biml.xsd">
+    <FileFormats>
+        <FlatFileFormat Name="Character" RowDelimiter="CRLF" ColumnNamesInFirstDataRow="true" FlatFileType="Delimited" CodePage="65001" IsUnicode="false">
+			<Columns>
+			
+				<Column Name="1_varchar" DataType="String" Delimiter="," Length="11" Precision="0" Scale="-1"></Column>
+			
+				<Column Name="2_nvarchar" DataType="String" Delimiter="CRLF" Length="2" Precision="0" Scale="-1"></Column>
+						</Columns>
+		</FlatFileFormat>
+    </FileFormats>
+</Biml>
