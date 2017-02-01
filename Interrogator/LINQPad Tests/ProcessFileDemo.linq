@@ -5,10 +5,10 @@
 
 void Main()
 {
-	string demoFile = @"C:\Repositories\Biml\Interrogator\testdata\Numerics.csv";
+	//string demoFile = @"C:\Repositories\Biml\Interrogator\testdata\Numerics.csv";
 	//string demoFile = @"C:\Repositories\Biml\Interrogator\testdata\DateAndTime.csv";
 	//string demoFile = @"C:\Repositories\Biml\Interrogator\testdata\DateOnly.csv";
-	//string demoFile = @"C:\Repositories\Biml\Interrogator\testdata\Character.csv";
+	string demoFile = @"C:\Repositories\Biml\Interrogator\testdata\Character.csv";
 	
 	char[] demoDelimiter = new char[] {','};
 	
@@ -48,7 +48,8 @@ public class DestinationColumn {
 //process a file, return a list of columns
 List<DestinationColumn> ProcessFile(string FileName, char[] delimiter, bool FirstRowHeader = true, bool debug = false) {
 	List<DestinationColumn> output = new List<DestinationColumn>();
-
+	//by default do not treat the whole file as unicode
+	bool treatWholeFileAsUnicode = false;
 	using (StreamReader reader = new StreamReader(FileName))
 	{
 		//initialize the rownumber
@@ -77,6 +78,9 @@ List<DestinationColumn> ProcessFile(string FileName, char[] delimiter, bool Firs
 						if(fields[i].Trim().Length > 0) {
 							//now get the data type
 							output[i].DataType = DataTypeGuess(fields[i], output[i].DataType, debug);
+							//did we just get a unicode column?
+							if(output[i].DataType == "NVarChar")
+								treatWholeFileAsUnicode = true;
 							if(debug)
 								Console.WriteLine("DataTypeGuess returned: " + output[i].DataType);
 							
@@ -108,7 +112,13 @@ List<DestinationColumn> ProcessFile(string FileName, char[] delimiter, bool Firs
 					}
 				}
 		}
-			
+			//for SSIS, if any column is unicode (nvarchar), then all text has to be read as unicode.
+			if(treatWholeFileAsUnicode) {
+				foreach( DestinationColumn col in output) {
+					if(col.DataType == "VarChar")
+						col.DataType = "NVarChar";
+				}
+			}
 			//Console.WriteLine(output);
 		}
 	}
