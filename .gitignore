@@ -22,4 +22,4 @@ bld/
 **/bin/Release/
 
 *.ispac
-
+**/addedBiml/
