@@ -1,5 +1,0 @@
-﻿<Biml xmlns="http://schemas.varigence.com/biml.xsd">
-    <Schemas>
-        <Schema Name="Transform" DatabaseName="Transform" />
-    </Schemas>
-</Biml>

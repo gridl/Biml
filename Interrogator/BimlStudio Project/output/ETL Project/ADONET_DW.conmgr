@@ -1,0 +1,5 @@
+<ConnectionManager p1:ObjectName="ADONET_DW" p1:DTSID="{5776A75A-DB23-44F7-9EF9-88D21B5197A1}" p1:refId="ADONET_DW" p1:CreationName="ADO.NET:System.Data.SqlClient.SqlConnection, System.Data, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" xmlns:p1="www.microsoft.com/SqlServer/Dts" xmlns="www.microsoft.com/SqlServer/Dts">
+    <p1:ObjectData><DTS:ConnectionManager xmlns:DTS="www.microsoft.com/SqlServer/Dts" DTS:ConnectionString="Data Source=localhost;Initial Catalog=BimlDemo;Integrated Security=true"></DTS:ConnectionManager></p1:ObjectData>
+<p1:PropertyExpression p1:Name="ConnectionString">
+					"Data Source=" + @[$Project::DWServer] + ";Initial Catalog=" + @[$Project::DWDatabase] + ";Integrated Security=true"
+                </p1:PropertyExpression></ConnectionManager>

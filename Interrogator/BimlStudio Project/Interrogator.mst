@@ -47,6 +47,18 @@
     <Live Include="addedBiml\Connections\ADONET_Transform.1.biml">
       <RootFolderId>0</RootFolderId>
     </Live>
+    <Live Include="addedBiml\Connections\FF_Character.biml">
+      <RootFolderId>0</RootFolderId>
+    </Live>
+    <Live Include="addedBiml\Connections\FF_DateAndTime.biml">
+      <RootFolderId>0</RootFolderId>
+    </Live>
+    <Live Include="addedBiml\Connections\FF_DateOnly.biml">
+      <RootFolderId>0</RootFolderId>
+    </Live>
+    <Live Include="addedBiml\Connections\FF_Numerics.biml">
+      <RootFolderId>0</RootFolderId>
+    </Live>
     <Live Include="addedBiml\Connections\OLEDB_DW.biml">
       <RootFolderId>0</RootFolderId>
     </Live>

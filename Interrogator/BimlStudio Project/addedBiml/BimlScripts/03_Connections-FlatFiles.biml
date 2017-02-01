@@ -11,9 +11,17 @@
 		<#
 			foreach (var FileFormat in RootNode.FileFormats) { 
 		#>
-			<FlatFileConnection Name="FF_<#= FileFormat.Name#>" FilePath="C:\Repositories\Biml\Interrogator\testdata\<#= FileFormat.Name#>.csv" FileFormat="<#= FileFormat.Name#>" />
+			<FlatFileConnection Name="FF_<#= FileFormat.Name#>" FilePath="C:\Repositories\Biml\Interrogator\testdata\<#= FileFormat.Name#>.csv" FileFormat="<#= FileFormat.Name#>">
+				<Expressions>
+					<Expression PropertyName="ConnectionString">
+						@[User::SourceFilePath]
+	                </Expression>
+	            </Expressions>	
+			</FlatFileConnection>
 		<#
 			}
 		#>
     </Connections>
 </Biml>
+
+

@@ -7,31 +7,31 @@
         </Annotation>
     </Annotations>
 	<Connections>
-		<OleDbConnection Name="OLEDB_Extract" ConnectionString="Provider=SQLNCLI11;Data Source=<#=extractServer #>;Initial Catalog=<#= extractDatabase#>;Integrated Security=true" CreateInProject="true" >
+		<OleDbConnection Name="OLEDB_Extract" ConnectionString="Provider=SQLNCLI11.1;Data Source=<#=extractServer #>;Initial Catalog=<#= extractDatabase#>;Integrated Security=SSPI" CreateInProject="true" >
 			<Expressions>
 				<Expression PropertyName="ConnectionString">
-					"Provider=SQLNCLI11;Data Source=" + @[$Project::ExtractServer]+ ";Initial Catalog=" + @[$Project::ExtractDatabase] + ";Integrated Security=true"
+					"Provider=SQLNCLI11.1;Data Source=" + @[$Project::ExtractServer]+ ";Initial Catalog=" + @[$Project::ExtractDatabase] + ";Integrated Security=SSPI"
                 </Expression>
             </Expressions>
         </OleDbConnection>
-		<OleDbConnection Name="OLEDB_Transform" ConnectionString="Provider=SQLNCLI11;Data Source=<#=transformServer #>;Initial Catalog=<#= transformDatabase#>;Integrated Security=true" CreateInProject="true" >
+		<OleDbConnection Name="OLEDB_Transform" ConnectionString="Provider=SQLNCLI11.1;Data Source=<#=transformServer #>;Initial Catalog=<#= transformDatabase#>;Integrated Security=SSPI" CreateInProject="true" >
 			<Expressions>
 				<Expression PropertyName="ConnectionString">
-					"Provider=SQLNCLI11;Data Source=" + @[$Project::TransformServer] + ";Initial Catalog=" + @[$Project::TransformDatabase] + ";Integrated Security=true"
+					"Provider=SQLNCLI11.1;Data Source=" + @[$Project::TransformServer] + ";Initial Catalog=" + @[$Project::TransformDatabase] + ";Integrated Security=SSPI"
                 </Expression>
             </Expressions>
         </OleDbConnection>
-		<OleDbConnection Name="OLEDB_PDS" ConnectionString="Provider=SQLNCLI11;Data Source=<#=pdsServer #>;Initial Catalog=<#= pdsDatabase#>;Integrated Security=true" CreateInProject="true" >
+		<OleDbConnection Name="OLEDB_PDS" ConnectionString="Provider=SQLNCLI11.1;Data Source=<#=pdsServer #>;Initial Catalog=<#= pdsDatabase#>;Integrated Security=SSPI" CreateInProject="true" >
 			<Expressions>
 				<Expression PropertyName="ConnectionString">
-					"Provider=SQLNCLI11;Data Source=" + @[$Project::PDSServer] + ";Initial Catalog=" + @[$Project::PDSDatabase] + ";Integrated Security=true"
+					"Provider=SQLNCLI11.1;Data Source=" + @[$Project::PDSServer] + ";Initial Catalog=" + @[$Project::PDSDatabase] + ";Integrated Security=SSPI"
                 </Expression>
             </Expressions>
         </OleDbConnection>
-		<OleDbConnection Name="OLEDB_DW" ConnectionString="Provider=SQLNCLI11;Data Source=<#=dwServer #>;Initial Catalog=<#= dwDatabase#>;Integrated Security=true" CreateInProject="true" >
+		<OleDbConnection Name="OLEDB_DW" ConnectionString="Provider=SQLNCLI11.1;Data Source=<#=dwServer #>;Initial Catalog=<#= dwDatabase#>;Integrated Security=SSPI" CreateInProject="true" >
 			<Expressions>
 				<Expression PropertyName="ConnectionString">
-					"Provider=SQLNCLI11;Data Source=" + @[$Project::DWServer] + ";Initial Catalog=" + @[$Project::DWDatabase] + ";Integrated Security=true"
+					"Provider=SQLNCLI11.1;Data Source=" + @[$Project::DWServer] + ";Initial Catalog=" + @[$Project::DWDatabase] + ";Integrated Security=SSPI"
                 </Expression>
             </Expressions>
         </OleDbConnection>

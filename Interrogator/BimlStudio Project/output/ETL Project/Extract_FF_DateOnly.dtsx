@@ -1,0 +1,437 @@
+<?xml version="1.0" encoding="utf-8"?>
+<DTS:Executable
+  DTS:CreationDate="02/01/2017 07:45:01"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="SLOWDERALPHA"
+  DTS:CreatorName="slowd"
+  DTS:DelayValidation="True"
+  DTS:DTSID="{8C75471C-FEB5-43F5-92AD-96A961B7E549}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion=""
+  DTS:LocaleID="1033"
+  DTS:ObjectName="Extract_FF_DateOnly"
+  DTS:ProtectionLevel="0"
+  DTS:refId="Package"
+  DTS:VersionBuild="0"
+  DTS:VersionGUID="{941D6992-176B-4D65-8BC3-213840E5E31B}"
+  DTS:VersionMajor="0" xmlns:DTS="www.microsoft.com/SqlServer/Dts">
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:CreationName="FLATFILE"
+      DTS:DTSID="{8C5E35D6-1386-4707-8290-0D53859EA95D}"
+      DTS:ObjectName="FF_DateOnly"
+      DTS:refId="Package.ConnectionManagers[FF_DateOnly]">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:CodePage="1252"
+          DTS:ColumnNamesInFirstDataRow="True"
+          DTS:ConnectionString="C:\Repositories\Biml\Interrogator\testdata\DateOnly.csv"
+          DTS:Format="Delimited"
+          DTS:HeaderRowDelimiter="_x000D__x000A_"
+          DTS:LocaleID="1033"
+          DTS:RowDelimiter="_x000D__x000A_"
+          DTS:TextQualifier="_x003C_none_x003E_"
+          DTS:Unicode="True">
+          <DTS:FlatFileColumns>
+            <DTS:FlatFileColumn
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:ColumnType="Delimited"
+              DTS:CreationName=""
+              DTS:DataType="133"
+              DTS:DTSID="{54AA426A-EDB7-4180-B12F-2EF9AD689EFE}"
+              DTS:ObjectName="2_date"
+              DTS:TextQualified="True"></DTS:FlatFileColumn>
+          </DTS:FlatFileColumns>
+        </DTS:ConnectionManager>
+      </DTS:ObjectData>
+      <DTS:PropertyExpression
+        DTS:Name="ConnectionString">
+						@[User::SourceFilePath]
+	                </DTS:PropertyExpression>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:DTSID="{C856477E-B725-44A5-87BC-682E0D95105C}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="EST-Truncate ExtractDateOnly"
+      DTS:refId="Package\EST-Truncate ExtractDateOnly"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2014; © 2014 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="ADONET_Extract"
+          SQLTask:SqlStatementSource="TRUNCATE TABLE Extract.DateOnly;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask"></SQLTask:SqlTaskData>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:DTSID="{DD5DF2AC-BDDA-4970-BBEA-104C4C00A1DC}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="DFT-Load ExtractDateOnly"
+      DTS:refId="Package\DFT-Load ExtractDateOnly"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:ObjectData>
+        <pipeline
+          BLOBTempStoragePath=""
+          bufferTempStoragePath=""
+          version="1">
+          <components>
+            <component
+              componentClassID="Microsoft.FlatFileSource"
+              contactInfo="Flat File Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;1"
+              localeId="1033"
+              name="FF_SRC-DateOnly"
+              refId="Package\DFT-Load ExtractDateOnly\FF_SRC-DateOnly"
+              usesDispositions="true"
+              validateExternalMetadata="False"
+              version="1">
+              <connections>
+                <connection
+                  connectionManagerID="{8C5E35D6-1386-4707-8290-0D53859EA95D}:external"
+                  connectionManagerRefId="Package.ConnectionManagers[FF_DateOnly]"
+                  name="FlatFileConnection"
+                  refId="Package\DFT-Load ExtractDateOnly\FF_SRC-DateOnly.Connections[FlatFileConnection]"></connection>
+              </connections>
+              <outputs>
+                <output
+                  name="Output"
+                  refId="Package\DFT-Load ExtractDateOnly\FF_SRC-DateOnly.Outputs[Output]">
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      dataType="dbDate"
+                      name="2_date"
+                      refId="Package\DFT-Load ExtractDateOnly\FF_SRC-DateOnly.Outputs[Output].ExternalColumns[2_date]"></externalMetadataColumn>
+                  </externalMetadataColumns>
+                  <outputColumns>
+                    <outputColumn
+                      dataType="dbDate"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT-Load ExtractDateOnly\FF_SRC-DateOnly.Outputs[Output].ExternalColumns[2_date]"
+                      lineageId="Package\DFT-Load ExtractDateOnly\FF_SRC-DateOnly.Outputs[Output].Columns[2_date]"
+                      name="2_date"
+                      refId="Package\DFT-Load ExtractDateOnly\FF_SRC-DateOnly.Outputs[Output].Columns[2_date]"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the data is in binary format."
+                          name="UseBinaryFormat">false</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                </output>
+                <output
+                  isErrorOut="true"
+                  name="Error"
+                  refId="Package\DFT-Load ExtractDateOnly\FF_SRC-DateOnly.Outputs[Error]">
+                  <externalMetadataColumns></externalMetadataColumns>
+                  <outputColumns>
+                    <outputColumn
+                      codePage="1252"
+                      dataType="text"
+                      description="Flat File Source Error Output Column"
+                      lineageId="Package\DFT-Load ExtractDateOnly\FF_SRC-DateOnly.Outputs[Error].Columns[Flat File Source Error Output Column]"
+                      name="Flat File Source Error Output Column"
+                      refId="Package\DFT-Load ExtractDateOnly\FF_SRC-DateOnly.Outputs[Error].Columns[Flat File Source Error Output Column]"></outputColumn>
+                    <outputColumn
+                      dataType="i4"
+                      lineageId="Package\DFT-Load ExtractDateOnly\FF_SRC-DateOnly.Outputs[Error].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      refId="Package\DFT-Load ExtractDateOnly\FF_SRC-DateOnly.Outputs[Error].Columns[ErrorCode]"
+                      specialFlags="1"></outputColumn>
+                    <outputColumn
+                      dataType="i4"
+                      lineageId="Package\DFT-Load ExtractDateOnly\FF_SRC-DateOnly.Outputs[Error].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      refId="Package\DFT-Load ExtractDateOnly\FF_SRC-DateOnly.Outputs[Error].Columns[ErrorColumn]"
+                      specialFlags="2"></outputColumn>
+                  </outputColumns>
+                </output>
+              </outputs>
+              <properties>
+                <property
+                  dataType="System.Boolean"
+                  description="Specifies whether zero-length columns are treated as null."
+                  name="RetainNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of an output column containing the file name. If no name is specified, no output column containing the file name will be generated."
+                  name="FileNameColumnName"></property>
+              </properties>
+            </component>
+            <component
+              componentClassID="Microsoft.DerivedColumn"
+              contactInfo="Derived Column;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              name="DER-Audit Columns"
+              refId="Package\DFT-Load ExtractDateOnly\DER-Audit Columns"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  name="FF_SRC-DateOnly_Output_DER-Audit Columns"
+                  refId="Package\DFT-Load ExtractDateOnly\DER-Audit Columns.Inputs[FF_SRC-DateOnly_Output_DER-Audit Columns]">
+                  <externalMetadataColumns></externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  exclusionGroup="1"
+                  name="Output"
+                  refId="Package\DFT-Load ExtractDateOnly\DER-Audit Columns.Outputs[Output]"
+                  synchronousInputId="Package\DFT-Load ExtractDateOnly\DER-Audit Columns.Inputs[FF_SRC-DateOnly_Output_DER-Audit Columns]">
+                  <externalMetadataColumns></externalMetadataColumns>
+                  <outputColumns>
+                    <outputColumn
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      length="50"
+                      lineageId="Package\DFT-Load ExtractDateOnly\DER-Audit Columns.Outputs[Output].Columns[ExecutionID]"
+                      name="ExecutionID"
+                      refId="Package\DFT-Load ExtractDateOnly\DER-Audit Columns.Outputs[Output].Columns[ExecutionID]"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">@[System::ExecutionInstanceGUID]</property>
+                        <property
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">@[System::ExecutionInstanceGUID]</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      dataType="dbTimeStamp2"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\DFT-Load ExtractDateOnly\DER-Audit Columns.Outputs[Output].Columns[InsertedDateTime]"
+                      name="InsertedDateTime"
+                      refId="Package\DFT-Load ExtractDateOnly\DER-Audit Columns.Outputs[Output].Columns[InsertedDateTime]"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">GETDATE()</property>
+                        <property
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">GETDATE()</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                </output>
+                <output
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Error"
+                  refId="Package\DFT-Load ExtractDateOnly\DER-Audit Columns.Outputs[Error]"
+                  synchronousInputId="Package\DFT-Load ExtractDateOnly\DER-Audit Columns.Inputs[FF_SRC-DateOnly_Output_DER-Audit Columns]">
+                  <externalMetadataColumns></externalMetadataColumns>
+                  <outputColumns>
+                    <outputColumn
+                      dataType="i4"
+                      lineageId="Package\DFT-Load ExtractDateOnly\DER-Audit Columns.Outputs[Error].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      refId="Package\DFT-Load ExtractDateOnly\DER-Audit Columns.Outputs[Error].Columns[ErrorCode]"
+                      specialFlags="1"></outputColumn>
+                    <outputColumn
+                      dataType="i4"
+                      lineageId="Package\DFT-Load ExtractDateOnly\DER-Audit Columns.Outputs[Error].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      refId="Package\DFT-Load ExtractDateOnly\DER-Audit Columns.Outputs[Error].Columns[ErrorColumn]"
+                      specialFlags="2"></outputColumn>
+                  </outputColumns>
+                </output>
+              </outputs>
+            </component>
+            <component
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              name="OLE_DEST-ExtractDateOnly"
+              refId="Package\DFT-Load ExtractDateOnly\OLE_DEST-ExtractDateOnly"
+              usesDispositions="true"
+              validateExternalMetadata="False"
+              version="4">
+              <connections>
+                <connection
+                  connectionManagerID="{E8555238-BE16-4296-B4E8-475C759E58BD}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[OLEDB_Extract]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection"
+                  refId="Package\DFT-Load ExtractDateOnly\OLE_DEST-ExtractDateOnly.Connections[OleDbConnection]"></connection>
+              </connections>
+              <inputs>
+                <input
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="DER-Audit Columns_Output_OLE_DEST-ExtractDateOnly"
+                  refId="Package\DFT-Load ExtractDateOnly\OLE_DEST-ExtractDateOnly.Inputs[DER-Audit Columns_Output_OLE_DEST-ExtractDateOnly]">
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      dataType="dbDate"
+                      name="2_date"
+                      refId="Package\DFT-Load ExtractDateOnly\OLE_DEST-ExtractDateOnly.Inputs[DER-Audit Columns_Output_OLE_DEST-ExtractDateOnly].ExternalColumns[2_date]"></externalMetadataColumn>
+                    <externalMetadataColumn
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="ExecutionID"
+                      refId="Package\DFT-Load ExtractDateOnly\OLE_DEST-ExtractDateOnly.Inputs[DER-Audit Columns_Output_OLE_DEST-ExtractDateOnly].ExternalColumns[ExecutionID]"></externalMetadataColumn>
+                    <externalMetadataColumn
+                      dataType="dbTimeStamp2"
+                      name="InsertedDateTime"
+                      refId="Package\DFT-Load ExtractDateOnly\OLE_DEST-ExtractDateOnly.Inputs[DER-Audit Columns_Output_OLE_DEST-ExtractDateOnly].ExternalColumns[InsertedDateTime]"
+                      scale="7"></externalMetadataColumn>
+                  </externalMetadataColumns>
+                  <inputColumns>
+                    <inputColumn
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="ExecutionID"
+                      externalMetadataColumnId="Package\DFT-Load ExtractDateOnly\OLE_DEST-ExtractDateOnly.Inputs[DER-Audit Columns_Output_OLE_DEST-ExtractDateOnly].ExternalColumns[ExecutionID]"
+                      lineageId="Package\DFT-Load ExtractDateOnly\DER-Audit Columns.Outputs[Output].Columns[ExecutionID]"
+                      refId="Package\DFT-Load ExtractDateOnly\OLE_DEST-ExtractDateOnly.Inputs[DER-Audit Columns_Output_OLE_DEST-ExtractDateOnly].Columns[ExecutionID]"></inputColumn>
+                    <inputColumn
+                      cachedDataType="dbTimeStamp2"
+                      cachedName="InsertedDateTime"
+                      externalMetadataColumnId="Package\DFT-Load ExtractDateOnly\OLE_DEST-ExtractDateOnly.Inputs[DER-Audit Columns_Output_OLE_DEST-ExtractDateOnly].ExternalColumns[InsertedDateTime]"
+                      lineageId="Package\DFT-Load ExtractDateOnly\DER-Audit Columns.Outputs[Output].Columns[InsertedDateTime]"
+                      refId="Package\DFT-Load ExtractDateOnly\OLE_DEST-ExtractDateOnly.Inputs[DER-Audit Columns_Output_OLE_DEST-ExtractDateOnly].Columns[InsertedDateTime]"></inputColumn>
+                    <inputColumn
+                      cachedDataType="dbDate"
+                      cachedName="2_date"
+                      externalMetadataColumnId="Package\DFT-Load ExtractDateOnly\OLE_DEST-ExtractDateOnly.Inputs[DER-Audit Columns_Output_OLE_DEST-ExtractDateOnly].ExternalColumns[2_date]"
+                      lineageId="Package\DFT-Load ExtractDateOnly\FF_SRC-DateOnly.Outputs[Output].Columns[2_date]"
+                      refId="Package\DFT-Load ExtractDateOnly\OLE_DEST-ExtractDateOnly.Inputs[DER-Audit Columns_Output_OLE_DEST-ExtractDateOnly].Columns[2_date]"></inputColumn>
+                  </inputColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Error"
+                  refId="Package\DFT-Load ExtractDateOnly\OLE_DEST-ExtractDateOnly.Outputs[Error]"
+                  synchronousInputId="Package\DFT-Load ExtractDateOnly\OLE_DEST-ExtractDateOnly.Inputs[DER-Audit Columns_Output_OLE_DEST-ExtractDateOnly]">
+                  <externalMetadataColumns></externalMetadataColumns>
+                  <outputColumns>
+                    <outputColumn
+                      dataType="i4"
+                      lineageId="Package\DFT-Load ExtractDateOnly\OLE_DEST-ExtractDateOnly.Outputs[Error].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      refId="Package\DFT-Load ExtractDateOnly\OLE_DEST-ExtractDateOnly.Outputs[Error].Columns[ErrorCode]"
+                      specialFlags="1"></outputColumn>
+                    <outputColumn
+                      dataType="i4"
+                      lineageId="Package\DFT-Load ExtractDateOnly\OLE_DEST-ExtractDateOnly.Outputs[Error].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      refId="Package\DFT-Load ExtractDateOnly\OLE_DEST-ExtractDateOnly.Outputs[Error].Columns[ErrorColumn]"
+                      specialFlags="2"></outputColumn>
+                  </outputColumns>
+                </output>
+              </outputs>
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">Extract.DateOnly</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+            </component>
+          </components>
+          <paths>
+            <path
+              endId="Package\DFT-Load ExtractDateOnly\DER-Audit Columns.Inputs[FF_SRC-DateOnly_Output_DER-Audit Columns]"
+              name="FF_SRC-DateOnly_Output_DER-Audit Columns"
+              refId="Package\DFT-Load ExtractDateOnly.Paths[FF_SRC-DateOnly_Output_DER-Audit Columns]"
+              startId="Package\DFT-Load ExtractDateOnly\FF_SRC-DateOnly.Outputs[Output]"></path>
+            <path
+              endId="Package\DFT-Load ExtractDateOnly\OLE_DEST-ExtractDateOnly.Inputs[DER-Audit Columns_Output_OLE_DEST-ExtractDateOnly]"
+              name="DER-Audit Columns_Output_OLE_DEST-ExtractDateOnly"
+              refId="Package\DFT-Load ExtractDateOnly.Paths[DER-Audit Columns_Output_OLE_DEST-ExtractDateOnly]"
+              startId="Package\DFT-Load ExtractDateOnly\DER-Audit Columns.Outputs[Output]"></path>
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:CreationName=""
+      DTS:DTSID="{4B062D80-1AC8-4F14-B0F3-F8E9934ED058}"
+      DTS:From="Package\EST-Truncate ExtractDateOnly"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint_EST-Truncate ExtractDateOnly_To_DFT-Load ExtractDateOnly"
+      DTS:refId="Package.PrecedenceConstraints[Constraint_EST-Truncate ExtractDateOnly_To_DFT-Load ExtractDateOnly]"
+      DTS:To="Package\DFT-Load ExtractDateOnly"></DTS:PrecedenceConstraint>
+  </DTS:PrecedenceConstraints>
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:Variables>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{D4F25BED-9B0D-42DA-A85D-2A4E9BE552EF}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="SourceFilePath">
+      <DTS:VariableValue
+        DTS:DataType="8">C:\Repositories\Biml\Interrogator\testdata\DateOnly.csv</DTS:VariableValue>
+    </DTS:Variable>
+  </DTS:Variables>
+</DTS:Executable>

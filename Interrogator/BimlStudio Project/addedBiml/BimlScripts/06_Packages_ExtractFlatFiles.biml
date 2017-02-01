@@ -49,26 +49,14 @@
 			<#
 			    }
 			#>
-				<Connection ConnectionName="FlatFileConnection"  />
+				<Connection ConnectionName="FF_<#= table.Name #>"  />
 			</Connections>
 			<Variables>
-				<Variable Name="SourceFilePath" DataType="String" Namespace="User">
-					C:\Repositories\Biml\Interrogator\testdata\<#=table.Name#>.csv
-                </Variable>
+				<Variable Name="SourceFilePath" DataType="String" Namespace="User">C:\Repositories\Biml\Interrogator\testdata\<#=table.Name#>.csv</Variable>
             </Variables>
-			
         </Package>
 	<#
 		}
 	#>
     </Packages>
-	<Connections>
-		<FlatFileConnection Name="FlatFileConnection" FilePath="C:\Repositories\Biml\Interrogator\testdata\placeholder.csv" DelayValidation="true" CreateInProject="false" >
-			<Expressions>
-				<Expression PropertyName="ConnectionString">
-					@[User::SourceFilePath]
-                </Expression>
-            </Expressions>
-		</FlatFileConnection>
-    </Connections>
 </Biml>

@@ -17,7 +17,7 @@
 	
 	string[] acceptedFilePatterns = new string[]{".csv",".txt"}; 
 	char[] ColumnDelimiter = new char[] {','};
-	string RowDelimiteter = "LF"; //may detect this on the next version
+	string RowDelimiteter = "CRLF"; //may detect this on the next version
 	bool ColumnNamesInFirstDataRow = true;
 	bool IsUnicode = true; //may also detect this on the next version
 	

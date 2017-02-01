@@ -1,0 +1,5 @@
+<ConnectionManager p1:ObjectName="OLEDB_Extract" p1:DTSID="{E8555238-BE16-4296-B4E8-475C759E58BD}" p1:refId="OLEDB_Extract" p1:CreationName="OLEDB" xmlns:p1="www.microsoft.com/SqlServer/Dts" xmlns="www.microsoft.com/SqlServer/Dts">
+    <p1:ObjectData><DTS:ConnectionManager xmlns:DTS="www.microsoft.com/SqlServer/Dts" DTS:ConnectionString="Provider=SQLNCLI11.1;Data Source=localhost;Initial Catalog=BimlDemo;Integrated Security=SSPI"></DTS:ConnectionManager></p1:ObjectData>
+<p1:PropertyExpression p1:Name="ConnectionString">
+					"Provider=SQLNCLI11.1;Data Source=" + @[$Project::ExtractServer]+ ";Initial Catalog=" + @[$Project::ExtractDatabase] + ";Integrated Security=SSPI"
+                </p1:PropertyExpression></ConnectionManager>

@@ -1,5 +1,0 @@
-﻿<Biml xmlns="http://schemas.varigence.com/biml.xsd">
-    <Databases>
-        <Database Name="Transform" ConnectionName="ADONET_Transform" />
-    </Databases>
-</Biml>

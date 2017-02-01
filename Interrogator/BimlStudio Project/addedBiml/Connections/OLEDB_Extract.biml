@@ -1,5 +1,0 @@
-﻿<Biml xmlns="http://schemas.varigence.com/biml.xsd">
-    <Connections>
-        <Connection Name="OLEDB_Extract" ConnectionString="Provider=SQLNCLI11;Data Source=localhost;Integrated Security=SSPI;Initial Catalog=BimlDemo" CreateInProject="true" />
-    </Connections>
-</Biml>
