@@ -1,0 +1,15 @@
+﻿<Biml xmlns="http://schemas.varigence.com/biml.xsd">
+    <FileFormats>
+        <FlatFileFormat Name="Numerics" RowDelimiter="CRLF" ColumnNamesInFirstDataRow="true" IsUnicode="true" FlatFileType="Delimited">
+			<Columns>
+							<Column Name="1_Bit" DataType="Boolean" Delimiter="," Length="0" Precision="0" Scale="-1"></Column>
+							<Column Name="2_TinyInt" DataType="Byte" Delimiter="," Length="0" Precision="0" Scale="-1"></Column>
+							<Column Name="3_SmallInt" DataType="Int16" Delimiter="," Length="0" Precision="0" Scale="-1"></Column>
+							<Column Name="4_Int" DataType="Int32" Delimiter="," Length="0" Precision="0" Scale="-1"></Column>
+							<Column Name="5_Bigint" DataType="Int64" Delimiter="," Length="0" Precision="0" Scale="-1"></Column>
+							<Column Name="6_Decimal" DataType="Decimal" Delimiter="," Length="0" Precision="38" Scale="38"></Column>
+							<Column Name="7_Float" DataType="Double" Delimiter="CRLF" Length="0" Precision="20" Scale="17"></Column>
+						</Columns>
+		</FlatFileFormat>
+    </FileFormats>
+</Biml>

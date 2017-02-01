@@ -1,0 +1,48 @@
+﻿<Biml xmlns="http://schemas.varigence.com/biml.xsd">
+    <Packages>
+        <Package Name="Extract_FF_Numerics" DelayValidation="true">
+			<Annotations>
+				<Annotation AnnotationType="CodeComment">
+					All flat file extracts are truncate and load.
+				</Annotation>
+            </Annotations>
+			<Tasks>
+				<ExecuteSQL Name="EST-Truncate ExtractNumerics" ConnectionName="ADONET_Extract">
+					<DirectInput>TRUNCATE TABLE Extract.Numerics;</DirectInput>
+				</ExecuteSQL>
+				<Dataflow Name="DFT-Load ExtractNumerics">
+					<PrecedenceConstraints>
+						<Inputs>
+							<Input OutputPathName="EST-Truncate ExtractNumerics.Output" />
+                        </Inputs>
+                    </PrecedenceConstraints>
+					<Transformations>
+						<FlatFileSource Name="FF_SRC-Numerics" ConnectionName="FF_Numerics" ValidateExternalMetadata="false" />
+						<DerivedColumns Name="DER-Audit Columns">
+							<InputPath OutputPathName="FF_SRC-Numerics.Output" />
+							<Columns>
+								<Column Name="ExecutionID" DataType="AnsiString" Length="50">
+									@[System::ExecutionInstanceGUID]
+                                </Column>
+								<Column Name="InsertedDateTime" DataType="DateTime2">
+									GETDATE()
+                                </Column>
+                            </Columns>
+                        </DerivedColumns>
+						<OleDbDestination Name="OLE_DEST-ExtractNumerics" ConnectionName="OLEDB_Extract" UseFastLoadIfAvailable="true" ValidateExternalMetadata="false">
+							<InputPath OutputPathName="DER-Audit Columns.Output" />
+							<ExternalTableOutput Table="Extract.Numerics" />
+							
+                        </OleDbDestination>
+                    </Transformations>
+                </Dataflow>
+            </Tasks>
+			<Connections>
+							<Connection ConnectionName="FF_Numerics" />
+			</Connections>
+			<Variables>
+				<Variable Name="SourceFilePath" DataType="String" Namespace="User">C:\Repositories\Biml\Interrogator\testdata\Numerics.csv</Variable>
+            </Variables>
+        </Package>
+    </Packages>
+</Biml>

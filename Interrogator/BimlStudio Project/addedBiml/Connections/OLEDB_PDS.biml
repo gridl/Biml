@@ -1,0 +1,11 @@
+﻿<Biml xmlns="http://schemas.varigence.com/biml.xsd">
+    <Connections>
+        <Connection Name="OLEDB_PDS" ConnectionString="Provider=SQLNCLI11.1;Data Source=localhost;Initial Catalog=BimlDemo;Integrated Security=SSPI" CreateInProject="true">
+			<Expressions>
+				<Expression PropertyName="ConnectionString">
+					"Provider=SQLNCLI11.1;Data Source=" + @[$Project::PDSServer] + ";Initial Catalog=" + @[$Project::PDSDatabase] + ";Integrated Security=SSPI"
+                </Expression>
+            </Expressions>
+        </Connection>
+    </Connections>
+</Biml>

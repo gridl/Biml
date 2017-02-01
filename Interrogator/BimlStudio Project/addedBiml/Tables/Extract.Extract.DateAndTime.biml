@@ -1,0 +1,25 @@
+﻿<Biml xmlns="http://schemas.varigence.com/biml.xsd">
+    <Tables>
+        <Table SchemaName="Extract.Extract" Name="DateAndTime" CompressionType="Page">
+			<Annotations>
+				<Annotation AnnotationType="CodeComment">
+					Page compression on by default.
+					ExecutionID and InsertedDateTime are the auditcolumns.
+					ExecutionID is the GUID for the package execution.
+					InsertedDateTime defaults to UTC rather than local.
+                </Annotation>
+				<Annotation AnnotationType="Tag" Tag="TableGroup">FlatFile</Annotation>
+            </Annotations>
+			<Columns>
+							<Column Name="1_SmallDateTime" DataType="DateTime2" Length="0" Precision="0" Scale="-1"></Column>
+							<Column Name="2_date" DataType="Date" Length="0" Precision="0" Scale="-1"></Column>
+							<Column Name="3_Time" DataType="Time" Length="0" Precision="0" Scale="-1"></Column>
+							<Column Name="4_DateTimeOffset" DataType="DateTimeOffset" Length="0" Precision="0" Scale="-1"></Column>
+							<Column Name="5_DateTime2" DataType="DateTime2" Length="0" Precision="0" Scale="-1"></Column>
+							<Column Name="6_DateTime" DataType="DateTime2" Length="0" Precision="0" Scale="-1"></Column>
+							<Column Name="ExecutionID" DataType="AnsiString" Length="50" />
+				<Column Name="InsertedDateTime" DataType="DateTime2" IsNullable="false" Default="GETUTCDATE()" />
+			</Columns>
+		</Table>
+    </Tables>
+</Biml>

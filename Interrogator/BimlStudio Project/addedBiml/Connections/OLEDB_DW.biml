@@ -1,0 +1,11 @@
+﻿<Biml xmlns="http://schemas.varigence.com/biml.xsd">
+    <Connections>
+        <Connection Name="OLEDB_DW" ConnectionString="Provider=SQLNCLI11.1;Data Source=localhost;Initial Catalog=BimlDemo;Integrated Security=SSPI" CreateInProject="true">
+			<Expressions>
+				<Expression PropertyName="ConnectionString">
+					"Provider=SQLNCLI11.1;Data Source=" + @[$Project::DWServer] + ";Initial Catalog=" + @[$Project::DWDatabase] + ";Integrated Security=SSPI"
+                </Expression>
+            </Expressions>
+        </Connection>
+    </Connections>
+</Biml>

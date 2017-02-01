@@ -1,0 +1,11 @@
+﻿<Biml xmlns="http://schemas.varigence.com/biml.xsd">
+    <Connections>
+        <FlatFileConnection Name="FF_Character" FilePath="C:\Repositories\Biml\Interrogator\testdata\Character.csv" FileFormat="Character">
+				<Expressions>
+					<Expression PropertyName="ConnectionString">
+						@[User::SourceFilePath]
+	                </Expression>
+	            </Expressions>	
+			</FlatFileConnection>
+    </Connections>
+</Biml>

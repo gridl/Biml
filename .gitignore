@@ -1,4 +1,4 @@
-# User-specific files
+#User-specificfiles
 *.suo
 *.user
 *.userosscache
@@ -22,12 +22,12 @@ bld/
 **/bin/Release/
 
 *.ispac
-/Interrogator/BimlStudio Project/documentation/
-/Interrogator/BimlStudio Project/addedBiml/Connections/
-/Interrogator/BimlStudio Project/addedBiml/Databases
-/Interrogator/BimlStudio Project/addedBiml/FileFormats/
-/Interrogator/BimlStudio Project/addedBiml/Packages/
-/Interrogator/BimlStudio Project/addedBiml/Projects/
-/Interrogator/BimlStudio Project/addedBiml/Schemas/
-/Interrogator/BimlStudio Project/addedBiml/Tables/
-
+/Interrogator/BimlStudioProject/documentation/
+/Interrogator/BimlStudioProject/addedBiml/Connections/
+/Interrogator/BimlStudioProject/addedBiml/Databases
+/Interrogator/BimlStudioProject/addedBiml/FileFormats/
+/Interrogator/BimlStudioProject/addedBiml/Packages/
+/Interrogator/BimlStudioProject/addedBiml/Projects/
+/Interrogator/BimlStudioProject/addedBiml/Schemas/
+/Interrogator/BimlStudioProject/addedBiml/Tables/
+**/[Oo]utput/

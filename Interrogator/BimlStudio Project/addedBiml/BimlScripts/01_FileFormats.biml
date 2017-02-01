@@ -15,17 +15,25 @@
 		foreach (var file in d.GetFiles())	{
 			if(acceptedFilePatterns.Contains(file.Extension)) {
 	#>
-		<FlatFileFormat Name="<#= file.Name.Replace(file.Extension,"") #>" RowDelimiter="<#= RowDelimiteter #>" ColumnNamesInFirstDataRow="<#= ColumnNamesInFirstDataRow.ToString().ToLower() #>" IsUnicode="<#= IsUnicode.ToString().ToLower() #>" FlatFileType="Delimited" >
+		<FlatFileFormat Name="<#= file.Name.Replace(file.Extension,"") #>" RowDelimiter="<#= RowDelimiter #>" ColumnNamesInFirstDataRow="<#= ColumnNamesInFirstDataRow.ToString().ToLower() #>" IsUnicode="<#= IsUnicode.ToString().ToLower() #>" FlatFileType="Delimited" >
 			<Columns>
 			<#
 				Interrogator i = new Interrogator();
 				List<DestinationColumn> DestinationObject = i.ProcessFile(file.FullName, ColumnDelimiter, true, false);
-					
+				
+				int columnOrdinal = 1;
 				foreach(DestinationColumn col in DestinationObject) {
 			#>
-				<Column Name="<#= col.Name #>" DataType="<#= cu.Convert(SourceSystem.SqlServer, SourceSystem.Biml, col.DataType) #>" Delimiter="<#= ColumnDelimiter[0] #>" Length="<#=col.MaxLength #>" Precision="<#= col.Precision #>" Scale="<#= col.Scale #>"></Column>
+
+				<Column Name="<#= col.Name #>" 
+					DataType="<#= cu.Convert(SourceSystem.SqlServer, SourceSystem.Biml, col.DataType) #>"  
+					Delimiter="<#= (columnOrdinal ==  DestinationObject.Count()) ? RowDelimiter : ColumnDelimiter[0].ToString()  #>" 
+					Length="<#=col.MaxLength #>" 
+					Precision="<#= col.Precision #>" 
+					Scale="<#= col.Scale #>"></Column>
 			<#
-					}
+					columnOrdinal++;
+				}
 			#>		
 			</Columns>
 		</FlatFileFormat>

@@ -1,0 +1,55 @@
+﻿<Biml xmlns="http://schemas.varigence.com/biml.xsd">
+    <Packages>
+        <Package Name="Extract_FF_Character" DelayValidation="true">
+			<Annotations>
+				<Annotation AnnotationType="CodeComment">
+					All flat file extracts are truncate and load.
+				</Annotation>
+            </Annotations>
+			<Tasks>
+				<ExecuteSQL Name="EST-Truncate ExtractCharacter" ConnectionName="ADONET_Extract">
+					<DirectInput>TRUNCATE TABLE Extract.Character;</DirectInput>
+				</ExecuteSQL>
+				<Dataflow Name="DFT-Load ExtractCharacter">
+					<PrecedenceConstraints>
+						<Inputs>
+							<Input OutputPathName="EST-Truncate ExtractCharacter.Output" />
+                        </Inputs>
+                    </PrecedenceConstraints>
+					<Transformations>
+						<FlatFileSource Name="FF_SRC-Character" ConnectionName="FF_Character" ValidateExternalMetadata="false" />
+						<DerivedColumns Name="DER-Audit Columns">
+							<InputPath OutputPathName="FF_SRC-Character.Output" />
+							<Columns>
+								<Column Name="ExecutionID" DataType="AnsiString" Length="50">
+									@[System::ExecutionInstanceGUID]
+                                </Column>
+								<Column Name="InsertedDateTime" DataType="DateTime2">
+									GETDATE()
+                                </Column>
+                            </Columns>
+                        </DerivedColumns>
+						<OleDbDestination Name="OLE_DEST-ExtractCharacter" ConnectionName="OLEDB_Extract" UseFastLoadIfAvailable="true" ValidateExternalMetadata="false">
+							<InputPath OutputPathName="DER-Audit Columns.Output" />
+							<ExternalTableOutput Table="Extract.Character" />
+							
+                        </OleDbDestination>
+                    </Transformations>
+                </Dataflow>
+            </Tasks>
+			<Connections>
+							<Connection Id="75259484-8563-461e-8cf7-a77987d79ed3" ConnectionName="ADONET_DW" />
+							<Connection Id="fdd274e5-c5f9-4b77-989c-21a181473bf3" ConnectionName="ADONET_PDS" />
+							<Connection Id="1f8c6f01-ed89-432d-b0a7-7bbf7aa3e76b" ConnectionName="ADONET_Transform" />
+							<Connection Id="35091f8a-0b30-4a9e-b3ac-8a39aa46afb4" ConnectionName="ADONET_Extract" />
+							<Connection Id="66e11f6a-cfb1-4536-adc1-7d95236b16ab" ConnectionName="OLEDB_Transform" />
+							<Connection Id="7d62531b-9682-49ad-a229-e87d30d4d4e8" ConnectionName="OLEDB_PDS" />
+							<Connection Id="73eba9cd-3f40-449b-9ea7-f9f50cd0a2f5" ConnectionName="OLEDB_Extract" />
+							<Connection Id="2bc99379-6810-4471-a3c9-27ad56ae5b94" ConnectionName="OLEDB_DW" /><Connection ConnectionName="FF_Character" />
+			</Connections>
+			<Variables>
+				<Variable Name="SourceFilePath" DataType="String" Namespace="User">C:\Repositories\Biml\Interrogator\testdata\Character.csv</Variable>
+            </Variables>
+        </Package>
+    </Packages>
+</Biml>

@@ -1,6 +1,0 @@
-<ConnectionManager p1:ObjectName="ADONET_Extract" p1:DTSID="{492E0F43-A895-4B7C-9CB7-9E5A6D4E3D1E}" p1:refId="ADONET_Extract" p1:CreationName="ADO.NET:System.Data.SqlClient.SqlConnection, System.Data, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" xmlns:p1="www.microsoft.com/SqlServer/Dts" xmlns="www.microsoft.com/SqlServer/Dts">
-    <p1:ObjectData><DTS:ConnectionManager xmlns:DTS="www.microsoft.com/SqlServer/Dts" DTS:ConnectionString="Data Source=localhost;Initial Catalog=BimlDemo;Integrated Security=true"></DTS:ConnectionManager></p1:ObjectData>
-<p1:PropertyExpression p1:Name="ConnectionString">
-					"Data Source=" + @[$Project::ExtractServer]+ ";Initial Catalog=" + @[$Project::ExtractDatabase] + ";Integrated Security=true"
-					
-                </p1:PropertyExpression></ConnectionManager>
