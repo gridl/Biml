@@ -141,7 +141,7 @@ public class Interrogator
 
 	//function to guess what kind of datetime we're dealing with:
 	//Date, Time, Datetimeoffset, Datetime2
-	public SqlDbType DateTimeGuess(string input, string currentDatatype, bool debug = false) {
+	SqlDbType DateTimeGuess(string input, string currentDatatype, bool debug = false) {
 
 	DateTime givenDateTime = new DateTime();
 	SqlDbType output;
@@ -157,9 +157,17 @@ public class Interrogator
 		if(debug) 
 			Console.WriteLine(givenDateTime);	
 		output = SqlDbType.DateTime2;		
-	} else {
-		//durations do not cast to datetime in C#, but are valid times...test for duration/time here
-		try{
+	} else {	
+		if(debug)
+			Console.WriteLine("cannot convert" + input + " to a datetime.");
+		output = SqlDbType.VarBinary;
+		//exit early!
+		return output;
+	}
+	
+	//since we now know we have some kind of date time the rest of the tests are safe
+	//is it just a time?
+	try{
 			if(debug) 
 				Console.WriteLine("regex check for time.");	
 			//this pattern should match time and not datetime
@@ -179,17 +187,9 @@ public class Interrogator
 			//our default (aka, try something else)
 			Console.WriteLine("{0} Exception caught.", e);
 			//on exception return varbinary (default)
-			return SqlDbType.VarBinary;
+			//return SqlDbType.VarBinary;
 		}
 	
-		if(debug)
-			Console.WriteLine("cannot convert" + input + " to a datetime.");
-		output = SqlDbType.VarBinary;
-		//exit early!
-		return output;
-	}
-	
-	//since we now know we have some kind of date time the rest of the tests are safe
 	//is it just a date?	
 	try {	
 		if(debug) 
@@ -221,6 +221,7 @@ public class Interrogator
 		
 	return output;
 }
+
 
 	//function to guess what kind of numeric we're dealing with:
 	//TinyInt, SmallInt, Int, BigInt, Decimal, Float

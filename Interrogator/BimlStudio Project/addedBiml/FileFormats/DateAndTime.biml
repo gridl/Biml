@@ -7,7 +7,7 @@
 			
 				<Column Name="2_date" DataType="Date" Delimiter="," Length="10" Precision="10" Scale="0"></Column>
 			
-				<Column Name="3_Time" DataType="Time" Delimiter="," Length="7" Precision="16" Scale="7"></Column>
+				<Column Name="3_Time" DataType="Time" Delimiter="," Length="16" Precision="16" Scale="7"></Column>
 			
 				<Column Name="4_DateTimeOffset" DataType="DateTimeOffset" Delimiter="," Length="34" Precision="34" Scale="7"></Column>
 			

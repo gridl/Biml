@@ -101,8 +101,8 @@ SqlDbType DateTimeGuess(string input, string currentDatatype, bool debug = false
 			Console.WriteLine(givenDateTime);	
 		output = SqlDbType.DateTime2;		
 	} else {
-		//durations do not cast to datetime in C#, but are valid times...test for duration/time here
-		try{
+		
+		/*try{
 			if(debug) 
 				Console.WriteLine("regex check for time.");	
 			//this pattern should match time and not datetime
@@ -123,7 +123,7 @@ SqlDbType DateTimeGuess(string input, string currentDatatype, bool debug = false
 			Console.WriteLine("{0} Exception caught.", e);
 			//on exception return varbinary (default)
 			return SqlDbType.VarBinary;
-		}
+		}*/
 	
 		if(debug)
 			Console.WriteLine("cannot convert" + input + " to a datetime.");
@@ -133,6 +133,30 @@ SqlDbType DateTimeGuess(string input, string currentDatatype, bool debug = false
 	}
 	
 	//since we now know we have some kind of date time the rest of the tests are safe
+	//try time only
+	try{
+			if(debug) 
+				Console.WriteLine("regex check for time.");	
+			//this pattern should match time and not datetime
+			string pattern = @"^([0-9]{1,2}:[0-9]{1,2})$|^([0-9]{1,2}:[0-9]{1,2}:[0-9]{1,2})$|^([0-9]{1,2}:[0-9]{1,2}:[0-9]{1,2}\.[0-9]{0,7})$";
+			//^([0-9]{1,2}:[0-9]{1,2}.{0,1}[0-9]{0,7})
+			Regex r = new Regex(pattern);
+			if(debug)
+				Console.WriteLine(pattern);
+				
+			if (r.IsMatch(input)) {
+				if(debug)	
+					Console.WriteLine("you have a time.");	
+				//return early, you found a time!
+				return SqlDbType.Time;
+			}
+		} catch (Exception e) {
+			//our default (aka, try something else)
+			Console.WriteLine("{0} Exception caught.", e);
+			//on exception return varbinary (default)
+			//return SqlDbType.VarBinary;
+		}
+		
 	//is it just a date?	
 	try {	
 		if(debug) 
