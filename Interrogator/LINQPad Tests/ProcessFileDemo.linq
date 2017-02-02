@@ -33,7 +33,7 @@ public class DestinationColumn {
 		DataType = null;
 		MaxLength = 0;
 		Precision = 0;
-		Scale = -1;
+		Scale = 0;
 		Nullable = false;
 	}
 	//full init
@@ -134,6 +134,7 @@ List<DestinationColumn> ProcessFile(string FileName, char[] delimiter, bool Firs
 							switch(output[i].DataType) {
 								case "DateTime2":
 								case "DateTimeOffset":
+								case "Time":
 									output[i].Scale = 7;
 									break;
 								case "Decimal":
@@ -272,7 +273,7 @@ SqlDbType DateTimeGuess(string input, string currentDatatype, bool debug = false
 			if(debug) 
 				Console.WriteLine("regex check for time.");	
 			//this pattern should match time and not datetime
-			string pattern = @"^([0-9]{1,2}:[0-9]{1,2}.{0,1}[0-9]{0,7})";
+			string pattern = @"^([0-9]{1,2}:[0-9]{1,2})$|^([0-9]{1,2}:[0-9]{1,2}:[0-9]{1,2})$|^([0-9]{1,2}:[0-9]{1,2}:[0-9]{1,2}\.[0-9]{0,7})$";
 			//^([0-9]{1,2}:[0-9]{1,2}.{0,1}[0-9]{0,7})
 			Regex r = new Regex(pattern);
 			if(debug)

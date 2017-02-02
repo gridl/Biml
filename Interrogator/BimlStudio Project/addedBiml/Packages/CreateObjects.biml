@@ -193,7 +193,15 @@ ALTER TABLE [Extract].[Numerics] ADD CONSTRAINT [DF_Numerics_InsertedDateTime] D
 				</Container>
 			</Tasks>
 			<Connections>
-						</Connections>
+							<Connection Id="488c20cb-dcd0-48da-a15e-84eb88c05149" ConnectionName="OLEDB_Transform" />
+							<Connection Id="2a0ce47d-da84-4b50-890c-5f6e5d824af2" ConnectionName="OLEDB_PDS" />
+							<Connection Id="90f12bf7-3a9e-4c40-b894-173baa9d451a" ConnectionName="OLEDB_Extract" />
+							<Connection Id="bfb00291-213b-4a91-94ea-d3bee6957566" ConnectionName="OLEDB_DW" />
+							<Connection Id="ddd737d3-2367-416e-a4dc-f80499dc0129" ConnectionName="ADONET_Transform" />
+							<Connection Id="b29dfab3-cd3a-4f18-8a93-c6cae5f1d31c" ConnectionName="ADONET_PDS" />
+							<Connection Id="ac52ad76-6b5a-4fe5-a07a-e97c20691b9b" ConnectionName="ADONET_Extract" />
+							<Connection Id="83994721-5b0a-43b3-9372-c055a0b3408e" ConnectionName="ADONET_DW" />
+			</Connections>
 		</Package>
     </Packages>
 </Biml>

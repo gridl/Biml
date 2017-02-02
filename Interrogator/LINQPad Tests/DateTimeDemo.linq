@@ -10,7 +10,7 @@ Datetime2 *new work preferred
 */
 void Main() {
 	//run test x
-	int test = 1;
+	int test = 3;
 	//all test 1 (datetime2) pass
 	//all test 2 (date) pass
 	//all test 3 (time) PASS!
@@ -59,9 +59,9 @@ void Main() {
 					
 					case 3: 
 					//test 3: time --> time
-					if( DateTimeGuess(fields[2], null) != SqlDbType.Time) {
+					if( DateTimeGuess(fields[2], null, true) != SqlDbType.Time) {
 						DateTimeGuess(fields[2], null);
-						Console.WriteLine("Testing " + fields[2] + " " + DateTimeGuess(fields[2], null));
+						Console.WriteLine("Testing " + fields[2] + " " + DateTimeGuess(fields[2], null,false));
 					}
 					//regex FTW! Only the blanks don't return time
 					break;
@@ -106,7 +106,7 @@ SqlDbType DateTimeGuess(string input, string currentDatatype, bool debug = false
 			if(debug) 
 				Console.WriteLine("regex check for time.");	
 			//this pattern should match time and not datetime
-			string pattern = @"^([0-9]{1,2}:[0-9]{1,2}.{0,1}[0-9]{0,7})";
+			string pattern = @"^([0-9]{1,2}:[0-9]{1,2})$|^([0-9]{1,2}:[0-9]{1,2}:[0-9]{1,2})$|^([0-9]{1,2}:[0-9]{1,2}:[0-9]{1,2}\.[0-9]{0,7})$";
 			//^([0-9]{1,2}:[0-9]{1,2}.{0,1}[0-9]{0,7})
 			Regex r = new Regex(pattern);
 			if(debug)

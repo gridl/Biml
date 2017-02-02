@@ -163,7 +163,7 @@ public class Interrogator
 			if(debug) 
 				Console.WriteLine("regex check for time.");	
 			//this pattern should match time and not datetime
-			string pattern = @"^([0-9]{1,2}:[0-9]{1,2}.{0,1}[0-9]{0,7})";
+			string pattern = @"^([0-9]{1,2}:[0-9]{1,2})$|^([0-9]{1,2}:[0-9]{1,2}:[0-9]{1,2})$|^([0-9]{1,2}:[0-9]{1,2}:[0-9]{1,2}\.[0-9]{0,7})$";
 			//^([0-9]{1,2}:[0-9]{1,2}.{0,1}[0-9]{0,7})
 			Regex r = new Regex(pattern);
 			if(debug)
@@ -351,24 +351,66 @@ public class Interrogator
 							if(debug)
 								Console.WriteLine("DataTypeGuess returned: " + output[i].DataType);
 							
-							//get the Maxlength
-							if(output[i].DataType == "VarChar" || output[i].DataType == "NVarChar" || output[i].DataType == "VarBinary") {
+							//get the Maxlength //trying it for all data types
+							//if(output[i].DataType == "VarChar" || output[i].DataType == "NVarChar" || output[i].DataType == "VarBinary") {
 								if(fields[i].Length > output[i].MaxLength)
 									output[i].MaxLength = fields[i].Length;
-							}
+							//}
 							
 							//get precision
-							if(output[i].DataType == "Decimal" || output[i].DataType == "Float") {
-								if(fields[i].Replace(".","").Length > output[i].Precision)
-									output[i].Precision = fields[i].Replace(".","").Length;
+							switch(output[i].DataType) {
+								case "BigInt":
+									output[i].Precision = 19;
+									break;
+								case "Bit":
+									output[i].Precision = 1;
+									break;							
+								case "Date":
+								case "Int":
+									output[i].Precision = 10;
+									break;
+								case "DateTime2":
+									output[i].Precision = 27;
+									break;	
+								case "DateTimeOffset":
+									output[i].Precision = 34;
+									break;
+									
+								case "Decimal": //could max at 38
+								case "Float":
+									if(fields[i].Replace(".","").Length > output[i].Precision)
+										output[i].Precision = fields[i].Replace(".","").Length;
+									break;
+								case "SmallInt":
+									output[i].Precision = 5;
+									break;
+								case "Time":
+									output[i].Precision = 16;
+									break;
+								case "TinyInt":
+									output[i].Precision = 3;
+									break;
+								default:
+									output[i].Precision = 0;
+									break;
 							}
 							
 							//get scale
-							if(output[i].DataType == "Decimal") {
-							//remember Indexof will "leave the "." in it's length (+1 to ignore the .)
-								int Scale = fields[i].Substring(fields[i].IndexOf(".")+1).Length;
-								if(Scale > output[i].Scale)
-									output[i].Scale = Scale;
+							switch(output[i].DataType) {
+								case "DateTime2":
+								case "DateTimeOffset":
+								case "Time":
+									output[i].Scale = 7;
+									break;
+								case "Decimal":
+									//remember Indexof will "leave the "." in it's length (+1 to ignore the .)
+									int Scale = fields[i].Substring(fields[i].IndexOf(".")+1).Length;
+									if(Scale > output[i].Scale)
+										output[i].Scale = Scale;
+									break;
+								default:
+									output[i].Scale = 0;
+									break;
 							}
 							
 						}else {
@@ -410,7 +452,7 @@ public class DestinationColumn {
 		DataType = null;
 		MaxLength = 0;
 		Precision = 0;
-		Scale = -1; //default should be -1 per biml warnings
+		Scale = 0;
 		Nullable = false;
 	}
 	//full init
