@@ -13,14 +13,14 @@
 				<Parameter Name="DWDatabase" DataType="String">BimlDemo</Parameter>
             </Parameters>
 			<Connections>
-							<Connection ConnectionName="ADONET_DW" Id="83994721-5b0a-43b3-9372-c055a0b3408e" />
-							<Connection ConnectionName="ADONET_Extract" Id="ac52ad76-6b5a-4fe5-a07a-e97c20691b9b" />
-							<Connection ConnectionName="ADONET_PDS" Id="b29dfab3-cd3a-4f18-8a93-c6cae5f1d31c" />
-							<Connection ConnectionName="ADONET_Transform" Id="ddd737d3-2367-416e-a4dc-f80499dc0129" />
-							<Connection ConnectionName="OLEDB_DW" Id="bfb00291-213b-4a91-94ea-d3bee6957566" />
-							<Connection ConnectionName="OLEDB_Extract" Id="90f12bf7-3a9e-4c40-b894-173baa9d451a" />
-							<Connection ConnectionName="OLEDB_PDS" Id="2a0ce47d-da84-4b50-890c-5f6e5d824af2" />
-							<Connection ConnectionName="OLEDB_Transform" Id="488c20cb-dcd0-48da-a15e-84eb88c05149" />
+							<Connection ConnectionName="ADONET_DW" Id="2616f4dd-697e-414b-a122-af16797df197" />
+							<Connection ConnectionName="ADONET_Extract" Id="3eea7857-f3e2-42ca-a4b0-1d921eed99b5" />
+							<Connection ConnectionName="ADONET_PDS" Id="edde060f-0977-4971-a5ca-5734e2952ec3" />
+							<Connection ConnectionName="ADONET_Transform" Id="8dfa145e-9b86-4be2-aec1-ee84ab16414f" />
+							<Connection ConnectionName="OLEDB_DW" Id="51e65008-62a6-4e39-90ac-a1a83fbdc3b1" />
+							<Connection ConnectionName="OLEDB_Extract" Id="15c2f52f-27b5-4e1c-8d5b-db1a75e2f039" />
+							<Connection ConnectionName="OLEDB_PDS" Id="c3af8b34-3aeb-49ba-9702-614d4986b391" />
+							<Connection ConnectionName="OLEDB_Transform" Id="66bbfa9b-c5f7-4fdc-b470-bc194eda8090" />
 			            </Connections>
 			<Packages>
 				

@@ -11,8 +11,8 @@
 				<Annotation AnnotationType="Tag" Tag="TableGroup">FlatFile</Annotation>
             </Annotations>
 			<Columns>
-							<Column Name="1_varchar" DataType="String" Length="11" Precision="0" Scale="0"></Column>
-							<Column Name="2_nvarchar" DataType="String" Length="2" Precision="0" Scale="0"></Column>
+							<Column Name="1_varchar" DataType="String" Length="11" Precision="0" Scale="0" IsNullable="false"></Column>
+							<Column Name="2_nvarchar" DataType="String" Length="2" Precision="0" Scale="0" IsNullable="false"></Column>
 							<Column Name="ExecutionID" DataType="AnsiString" Length="50" />
 				<Column Name="InsertedDateTime" DataType="DateTime2" IsNullable="false" Default="GETUTCDATE()" />
 			</Columns>

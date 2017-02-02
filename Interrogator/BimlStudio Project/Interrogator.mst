@@ -35,16 +35,16 @@
     </RootFolder>
   </ItemGroup>
   <ItemGroup>
-    <Live Include="addedBiml\Connections\ADONET_DW.1.biml">
+    <Live Include="addedBiml\Connections\ADONET_DW.biml">
       <RootFolderId>0</RootFolderId>
     </Live>
-    <Live Include="addedBiml\Connections\ADONET_Extract.1.biml">
+    <Live Include="addedBiml\Connections\ADONET_Extract.biml">
       <RootFolderId>0</RootFolderId>
     </Live>
-    <Live Include="addedBiml\Connections\ADONET_PDS.1.biml">
+    <Live Include="addedBiml\Connections\ADONET_PDS.biml">
       <RootFolderId>0</RootFolderId>
     </Live>
-    <Live Include="addedBiml\Connections\ADONET_Transform.1.biml">
+    <Live Include="addedBiml\Connections\ADONET_Transform.biml">
       <RootFolderId>0</RootFolderId>
     </Live>
     <Live Include="addedBiml\Connections\FF_Character.biml">

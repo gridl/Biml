@@ -9,19 +9,19 @@
 			<Tasks>
 				<Container Name="Create Schemas">
 					<Tasks>
-											<ExecuteSQL Name="EST-Create Schema DW" ConnectionName="ADONET_DW">
-							<DirectInput>
-								IF NOT EXISTS(SELECT schema_id FROM sys.schemas WHERE name = 'DW') 
-								BEGIN
-									EXEC sp_executesql  N'CREATE SCHEMA DW;'
-								END
-	                        </DirectInput>
-	                    </ExecuteSQL>
 											<ExecuteSQL Name="EST-Create Schema Extract" ConnectionName="ADONET_Extract">
 							<DirectInput>
 								IF NOT EXISTS(SELECT schema_id FROM sys.schemas WHERE name = 'Extract') 
 								BEGIN
 									EXEC sp_executesql  N'CREATE SCHEMA Extract;'
+								END
+	                        </DirectInput>
+	                    </ExecuteSQL>
+											<ExecuteSQL Name="EST-Create Schema Transform" ConnectionName="ADONET_Transform">
+							<DirectInput>
+								IF NOT EXISTS(SELECT schema_id FROM sys.schemas WHERE name = 'Transform') 
+								BEGIN
+									EXEC sp_executesql  N'CREATE SCHEMA Transform;'
 								END
 	                        </DirectInput>
 	                    </ExecuteSQL>
@@ -33,11 +33,11 @@
 								END
 	                        </DirectInput>
 	                    </ExecuteSQL>
-											<ExecuteSQL Name="EST-Create Schema Transform" ConnectionName="ADONET_Transform">
+											<ExecuteSQL Name="EST-Create Schema DW" ConnectionName="ADONET_DW">
 							<DirectInput>
-								IF NOT EXISTS(SELECT schema_id FROM sys.schemas WHERE name = 'Transform') 
+								IF NOT EXISTS(SELECT schema_id FROM sys.schemas WHERE name = 'DW') 
 								BEGIN
-									EXEC sp_executesql  N'CREATE SCHEMA Transform;'
+									EXEC sp_executesql  N'CREATE SCHEMA DW;'
 								END
 	                        </DirectInput>
 	                    </ExecuteSQL>
@@ -92,12 +92,12 @@ GO
 CREATE TABLE [Extract].[DateAndTime]
 (
 -- Columns Definition
-	[1_SmallDateTime] datetime2(7) NOT NULL 
-,	[2_date] date NOT NULL 
+	[1_SmallDateTime] datetime 
+,	[2_date] date 
 ,	[3_Time] time(7) NOT NULL 
-,	[4_DateTimeOffset] datetimeoffset(7) NOT NULL 
-,	[5_DateTime2] datetime2(7) NOT NULL 
-,	[6_DateTime] datetime2(7) NOT NULL 
+,	[4_DateTimeOffset] datetimeoffset(7) 
+,	[5_DateTime2] datetime 
+,	[6_DateTime] datetime 
 ,	[ExecutionID] varchar(50) NOT NULL 
 ,	[InsertedDateTime] datetime2(7) NOT NULL 
 
@@ -130,7 +130,7 @@ GO
 CREATE TABLE [Extract].[DateOnly]
 (
 -- Columns Definition
-	[2_date] date NOT NULL 
+	[2_date] date 
 ,	[ExecutionID] varchar(50) NOT NULL 
 ,	[InsertedDateTime] datetime2(7) NOT NULL 
 
@@ -163,13 +163,13 @@ GO
 CREATE TABLE [Extract].[Numerics]
 (
 -- Columns Definition
-	[1_Bit] bit NOT NULL 
-,	[2_TinyInt] tinyint NOT NULL 
-,	[3_SmallInt] smallint NOT NULL 
-,	[4_Int] int NOT NULL 
-,	[5_Bigint] bigint NOT NULL 
-,	[6_Decimal] decimal(38,38) NOT NULL 
-,	[7_Float] float(20) NOT NULL 
+	[1_Bit] bit 
+,	[2_TinyInt] tinyint 
+,	[3_SmallInt] smallint 
+,	[4_Int] int 
+,	[5_Bigint] bigint 
+,	[6_Decimal] decimal(38,38) 
+,	[7_Float] float(20) 
 ,	[ExecutionID] varchar(50) NOT NULL 
 ,	[InsertedDateTime] datetime2(7) NOT NULL 
 
@@ -193,15 +193,7 @@ ALTER TABLE [Extract].[Numerics] ADD CONSTRAINT [DF_Numerics_InsertedDateTime] D
 				</Container>
 			</Tasks>
 			<Connections>
-							<Connection Id="488c20cb-dcd0-48da-a15e-84eb88c05149" ConnectionName="OLEDB_Transform" />
-							<Connection Id="2a0ce47d-da84-4b50-890c-5f6e5d824af2" ConnectionName="OLEDB_PDS" />
-							<Connection Id="90f12bf7-3a9e-4c40-b894-173baa9d451a" ConnectionName="OLEDB_Extract" />
-							<Connection Id="bfb00291-213b-4a91-94ea-d3bee6957566" ConnectionName="OLEDB_DW" />
-							<Connection Id="ddd737d3-2367-416e-a4dc-f80499dc0129" ConnectionName="ADONET_Transform" />
-							<Connection Id="b29dfab3-cd3a-4f18-8a93-c6cae5f1d31c" ConnectionName="ADONET_PDS" />
-							<Connection Id="ac52ad76-6b5a-4fe5-a07a-e97c20691b9b" ConnectionName="ADONET_Extract" />
-							<Connection Id="83994721-5b0a-43b3-9372-c055a0b3408e" ConnectionName="ADONET_DW" />
-			</Connections>
+						</Connections>
 		</Package>
     </Packages>
 </Biml>

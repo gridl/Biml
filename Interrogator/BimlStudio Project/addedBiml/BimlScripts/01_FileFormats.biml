@@ -30,9 +30,11 @@
 				<Column Name="<#= col.Name #>" 
 					DataType="<#= cu.Convert(SourceSystem.SqlServer, SourceSystem.Biml, col.DataType) #>"  
 					Delimiter="<#= (columnOrdinal ==  DestinationObject.Count()) ? RowDelimiter : ColumnDelimiter[0].ToString()  #>" 
-					Length="<#=col.MaxLength #>" 
-					Precision="<#= col.Precision #>" 
-					Scale="<#= col.Scale #>"></Column>
+					Length="<#=col.MaxLength #>"
+					<#= col.Precision > 0 ? "Precision=\"" + col.Precision.ToString() + "\"" : ""#>
+					<#= col.Scale > 0 ? "Scale=\"" + col.Scale.ToString() + "\"" : ""#> >
+					
+				</Column>
 			<#
 					columnOrdinal++;
 				}

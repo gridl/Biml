@@ -71,8 +71,8 @@ public class ConversionUtility {
 	output.Add( new Conversion("datetime","DT_DBTIMESTAMP","DateTime") );
 	//SSIS behaives oddly when using DT_DBTIMESTAMP2
 	//output.Add( new Conversion("datetime2","DT_DBTIMESTAMP2","DateTime2") );
-	//but treating it as DT_DBTIMESTAMP fixes the issue
-	output.Add( new Conversion("datetime2","DT_DBTIMESTAMP","DateTime2") );
+	//but treating it in Biml as a DateTime, should get it to emit packages with DT_DBTIMESTAMP 
+	output.Add( new Conversion("datetime2","DT_DBTIMESTAMP","DateTime") );
 	output.Add( new Conversion("datetimeoffset","DT_DBTIMESTAMPOFFSET","DateTimeOffset") );
 	output.Add( new Conversion("decimal","DT_NUMERIC","Decimal") );
 	output.Add( new Conversion("float","DT_R8","Double") );

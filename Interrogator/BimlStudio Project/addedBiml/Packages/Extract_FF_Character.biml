@@ -17,7 +17,7 @@
                         </Inputs>
                     </PrecedenceConstraints>
 					<Transformations>
-						<FlatFileSource Name="FF_SRC-Character" ConnectionName="FF_Character" ValidateExternalMetadata="false" />
+						<FlatFileSource Name="FF_SRC-Character" ConnectionName="FF_Character" ValidateExternalMetadata="false" RetainNulls="true" />
 						<DerivedColumns Name="DER-Audit Columns">
 							<InputPath OutputPathName="FF_SRC-Character.Output" />
 							<Columns>
@@ -38,7 +38,14 @@
                 </Dataflow>
             </Tasks>
 			<Connections>
-							<Connection ConnectionName="FF_Character" />
+							<Connection Id="f4864754-4b56-453b-b110-a53c70d0f20d" ConnectionName="OLEDB_DW" />
+							<Connection Id="0afb0a8f-8037-446d-b60a-6f245f50791d" ConnectionName="OLEDB_PDS" />
+							<Connection Id="683cfac8-6e7d-41a1-876c-606579a447cf" ConnectionName="OLEDB_Transform" />
+							<Connection Id="b798d8c1-ba5f-4fd1-b343-8402a11976af" ConnectionName="OLEDB_Extract" />
+							<Connection Id="26581fab-8584-4dea-b214-fa4b009b9bd0" ConnectionName="ADONET_DW" />
+							<Connection Id="1da84ced-4d99-43d4-92a6-6ef499a64b09" ConnectionName="ADONET_PDS" />
+							<Connection Id="0a33906d-b00b-4ff5-ac8c-49aad3c5ca44" ConnectionName="ADONET_Transform" />
+							<Connection Id="15a3f099-b853-4601-9328-296d9ba028b4" ConnectionName="ADONET_Extract" /><Connection ConnectionName="FF_Character" />
 			</Connections>
 			<Variables>
 				<Variable Name="SourceFilePath" DataType="String" Namespace="User">C:\Repositories\Biml\Interrogator\testdata\Character.csv</Variable>

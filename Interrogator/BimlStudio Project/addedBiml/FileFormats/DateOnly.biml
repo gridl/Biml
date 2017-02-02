@@ -3,7 +3,9 @@
         <FlatFileFormat Name="DateOnly" RowDelimiter="CRLF" ColumnNamesInFirstDataRow="true" FlatFileType="Delimited" IsUnicode="false">
 			<Columns>
 			
-				<Column Name="2_date" DataType="Date" Delimiter="CRLF" Length="10" Precision="10" Scale="0"></Column>
+				<Column Name="2_date" DataType="Date" Delimiter="CRLF" Length="10" Precision="10">
+					
+				</Column>
 						</Columns>
 		</FlatFileFormat>
     </FileFormats>

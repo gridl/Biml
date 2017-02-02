@@ -21,7 +21,7 @@
                         </Inputs>
                     </PrecedenceConstraints>
 					<Transformations>
-						<FlatFileSource Name="FF_SRC-<#=table.Name#>" ConnectionName="FF_<#=table.Name#>" ValidateExternalMetadata="false" />
+						<FlatFileSource Name="FF_SRC-<#=table.Name#>" ConnectionName="FF_<#=table.Name#>" ValidateExternalMetadata="false" RetainNulls="true"/>
 						<DerivedColumns Name="DER-Audit Columns" >
 							<InputPath OutputPathName="FF_SRC-<#=table.Name#>.Output" />
 							<Columns>
@@ -49,7 +49,7 @@
 			<#
 			    }
 			#>
-				<Connection ConnectionName="FF_<#= table.Name #>"  />
+				<Connection ConnectionName="FF_<#= table.Name #>"/>
 			</Connections>
 			<Variables>
 				<Variable Name="SourceFilePath" DataType="String" Namespace="User">C:\Repositories\Biml\Interrogator\testdata\<#=table.Name#>.csv</Variable>

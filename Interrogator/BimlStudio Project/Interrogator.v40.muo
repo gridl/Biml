@@ -1,6 +1,6 @@
 <Configuration xmlns="http://schemas.varigence.com/Settings.xsd">
     <Settings>
-        <StringSetting Name="OpenDocumentWindows">TV:addedBiml\BimlScripts\06_Packages_ExtractFlatFiles.biml|TV:addedBiml\BimlScripts\05_Packages_CreateObjects.biml|TV:addedBiml\BimlScripts\07_Projects_ETL.biml|FP:addedBiml\Packages\CreateObjects.biml|</StringSetting>
+        <StringSetting Name="OpenDocumentWindows">TV:addedBiml\BimlScripts\01_FileFormats.biml|FP:addedBiml\FileFormats\Character.biml|</StringSetting>
         <StringSetting Name="NotificationStatus">[]</StringSetting>
     </Settings>
 </Configuration>

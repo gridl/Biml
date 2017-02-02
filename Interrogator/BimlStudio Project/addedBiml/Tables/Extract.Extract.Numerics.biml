@@ -11,13 +11,13 @@
 				<Annotation AnnotationType="Tag" Tag="TableGroup">FlatFile</Annotation>
             </Annotations>
 			<Columns>
-							<Column Name="1_Bit" DataType="Boolean" Length="5" Precision="1" Scale="0"></Column>
-							<Column Name="2_TinyInt" DataType="Byte" Length="3" Precision="3" Scale="0"></Column>
-							<Column Name="3_SmallInt" DataType="Int16" Length="5" Precision="5" Scale="0"></Column>
-							<Column Name="4_Int" DataType="Int32" Length="11" Precision="10" Scale="0"></Column>
-							<Column Name="5_Bigint" DataType="Int64" Length="20" Precision="19" Scale="0"></Column>
-							<Column Name="6_Decimal" DataType="Decimal" Length="39" Precision="38" Scale="38"></Column>
-							<Column Name="7_Float" DataType="Double" Length="21" Precision="20" Scale="0"></Column>
+							<Column Name="1_Bit" DataType="Boolean" Length="5" Precision="1" Scale="0" IsNullable="true"></Column>
+							<Column Name="2_TinyInt" DataType="Byte" Length="3" Precision="3" Scale="0" IsNullable="true"></Column>
+							<Column Name="3_SmallInt" DataType="Int16" Length="5" Precision="5" Scale="0" IsNullable="true"></Column>
+							<Column Name="4_Int" DataType="Int32" Length="11" Precision="10" Scale="0" IsNullable="true"></Column>
+							<Column Name="5_Bigint" DataType="Int64" Length="20" Precision="19" Scale="0" IsNullable="true"></Column>
+							<Column Name="6_Decimal" DataType="Decimal" Length="39" Precision="38" Scale="38" IsNullable="true"></Column>
+							<Column Name="7_Float" DataType="Double" Length="21" Precision="20" Scale="0" IsNullable="true"></Column>
 							<Column Name="ExecutionID" DataType="AnsiString" Length="50" />
 				<Column Name="InsertedDateTime" DataType="DateTime2" IsNullable="false" Default="GETUTCDATE()" />
 			</Columns>
