@@ -13,7 +13,7 @@
 					<#
 						foreach (var schema in RootNode.Schemas) { 
 					#>
-						<ExecuteSQL Name="EST-Create Schema <#= schema.Name #>" ConnectionName="ADONET_<#= schema.Name #>">
+						<ExecuteSQL Name="SQL-Create Schema <#= schema.Name #>" ConnectionName="ADONET_<#= schema.Name #>">
 							<DirectInput>
 								IF NOT EXISTS(SELECT schema_id FROM sys.schemas WHERE name = '<#= schema.Name #>') 
 								BEGIN
@@ -31,7 +31,7 @@
 					<#
 						foreach (var table in RootNode.Tables) { 
 					#>	
-						<ExecuteSQL Name ="EST-Create Table <#=table.Name#>" ConnectionName="ADONET_<#= table.SchemaName #>">
+						<ExecuteSQL Name ="SQL-Create Table <#=table.Name#>" ConnectionName="ADONET_<#= table.SchemaName #>">
 							<DirectInput><#=table.GetTableSql()#></DirectInput>
 						</ExecuteSQL>
 		            <#

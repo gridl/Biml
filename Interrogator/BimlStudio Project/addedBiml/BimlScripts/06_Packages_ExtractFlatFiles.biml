@@ -11,7 +11,7 @@
 				</Annotation>
             </Annotations>
 			<Tasks>
-				<ExecuteSQL Name="EST-Truncate <#= table.Schema #><#=table.Name#>" ConnectionName="ADONET_Extract">
+				<ExecuteSQL Name="SQL-Truncate <#= table.Schema #><#=table.Name#>" ConnectionName="ADONET_Extract">
 					<DirectInput>TRUNCATE TABLE <#= table.Schema #>.<#=table.Name#>;</DirectInput>
 				</ExecuteSQL>
 				<Dataflow Name="DFT-Load <#= table.Schema #><#=table.Name#>">
