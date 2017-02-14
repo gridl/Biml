@@ -17,7 +17,7 @@
 				<Dataflow Name="DFT-Load <#= table.Schema #><#=table.Name#>">
 					<PrecedenceConstraints>
 						<Inputs>
-							<Input OutputPathName="EST-Truncate <#= table.Schema #><#=table.Name#>.Output" />
+							<Input OutputPathName="SQL-Truncate <#= table.Schema #><#=table.Name#>.Output" />
                         </Inputs>
                     </PrecedenceConstraints>
 					<Transformations>
