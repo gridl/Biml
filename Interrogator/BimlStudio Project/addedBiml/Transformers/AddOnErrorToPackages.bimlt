@@ -1,0 +1,8 @@
+﻿<#@ target type="Package" mergemode="LocalMerge" #>
+<Node>
+	<Events>
+		<Event Name="Handle OnError" EventType="OnError">
+			
+        </Event>
+    </Events>
+</Node>

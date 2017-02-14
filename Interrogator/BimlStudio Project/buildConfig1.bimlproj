@@ -2,7 +2,14 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(AssemblyPath)\Varigence.Biml.targets" Condition="true" />
   <ItemGroup Condition="true">
-    <Sources Include="$(MSBuildProjectDirectory)\\**\*.biml" />
+    <PreConfiguration Include="$(MSBuildProjectDirectory)\ddlConfig1.bimlproj">
+      <Targets>
+      </Targets>
+    </PreConfiguration>
+    <PreConfiguration Include="$(MSBuildProjectDirectory)\etlConfig1.bimlproj">
+      <Targets>
+      </Targets>
+    </PreConfiguration>
   </ItemGroup>
   <!-- 
   Any changes outside of the auto-generated ItemGroup and PropertyGroup tags 

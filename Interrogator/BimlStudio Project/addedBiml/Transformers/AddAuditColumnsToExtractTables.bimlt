@@ -1,0 +1,11 @@
+﻿<#@ target type="Table" mergemode="LocalMerge" #>
+<Node>
+	<# if(TargetNode.Schema.Name == "Extract") { #>
+		<# if( !TargetNode.Columns.Any(c => c.Name == "ExecutionID")) { #>
+			<Column Name="ExecutionID" DataType="AnsiString" Length="50" />
+		<# } #>
+		<# if( !TargetNode.Columns.Any(c => c.Name == "InsertedDateTime")) { #>
+			<Column Name="InsertedDateTime" DataType="DateTime2" IsNullable="false" Default="GETUTCDATE()" />
+		<# } #>
+	<# } #>
+</Node>

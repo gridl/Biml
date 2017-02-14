@@ -37,8 +37,6 @@
 			<#
 					}
 			#>
-				<Column Name="ExecutionID" DataType="AnsiString" Length="50" />
-				<Column Name="InsertedDateTime" DataType="DateTime2" IsNullable="false" Default="GETUTCDATE()" />
 			</Columns>
 		</Table>
 	<#
