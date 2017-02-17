@@ -31,8 +31,9 @@ bld/
 **/addedBiml/FileFormats/
 **/addedBiml/Packages/
 **/addedBiml/Projects/
-**/addedBiml/ScriptProjects
-**/addedBiml/Tables
+**/addedBiml/ScriptProjects/
+**/addedBiml/Tables/
+**/documentation/
 # MSTest test Results
 [Tt]est[Rr]esult*/
 [Bb]uild[Ll]og.*
