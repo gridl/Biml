@@ -4,8 +4,13 @@
 *.userosscache
 *.sln.docstates
 *.jfm
+*.muo
 
 #outputs
+**/[Bb]in/
+**/[Oo]bj/
+**/bin/Release/
+**output/
 [Dd]ebug/
 **/[Dd]ebug/
 [Dd]ebugPublic/
@@ -15,19 +20,19 @@
 [Xx]86/
 [Bb]uild/
 bld/
-[Bb]in/
-**/[Bb]in/
-[Oo]bj/
-**/[Oo]bj/
-**/bin/Release/
-
+*.dbmdl
 *.ispac
-/Interrogator/BimlStudioProject/documentation/
-/Interrogator/BimlStudioProject/addedBiml/Connections/
-/Interrogator/BimlStudioProject/addedBiml/Databases
-/Interrogator/BimlStudioProject/addedBiml/FileFormats/
-/Interrogator/BimlStudioProject/addedBiml/Packages/
-/Interrogator/BimlStudioProject/addedBiml/Projects/
-/Interrogator/BimlStudioProject/addedBiml/Schemas/
-/Interrogator/BimlStudioProject/addedBiml/Tables/
-**/[Oo]utput/
+
+
+#Biml outputs
+**/addedBiml/Connections/
+**/addedBiml/Databases/
+**/addedBiml/Schemas/
+**/addedBiml/FileFormats/
+**/addedBiml/Packages/
+**/addedBiml/Projects/
+**/addedBiml/ScriptProjects
+**/addedBiml/Tables
+# MSTest test Results
+[Tt]est[Rr]esult*/
+[Bb]uild[Ll]og.*
