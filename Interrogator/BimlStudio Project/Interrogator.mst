@@ -40,6 +40,9 @@
     </RootFolder>
   </ItemGroup>
   <ItemGroup>
+    <Live Include="addedBiml\Connections\ADONET_Adventureworks.biml">
+      <RootFolderId>0</RootFolderId>
+    </Live>
     <Live Include="addedBiml\Connections\ADONET_DW.biml">
       <RootFolderId>0</RootFolderId>
     </Live>
@@ -50,6 +53,12 @@
       <RootFolderId>0</RootFolderId>
     </Live>
     <Live Include="addedBiml\Connections\ADONET_Transform.biml">
+      <RootFolderId>0</RootFolderId>
+    </Live>
+    <Live Include="addedBiml\Connections\ExcelOleDbConnection-IMEX.biml">
+      <RootFolderId>0</RootFolderId>
+    </Live>
+    <Live Include="addedBiml\Connections\ExcelOleDbConnection.biml">
       <RootFolderId>0</RootFolderId>
     </Live>
     <Live Include="addedBiml\Connections\FF_Character.biml">
@@ -184,7 +193,13 @@
     <Reference Include="addedBiml\BimlScripts\03_Schemas.biml">
       <RootFolderId>0</RootFolderId>
     </Reference>
+    <Reference Include="addedBiml\BimlScripts\04_Tables_Excel.biml">
+      <RootFolderId>0</RootFolderId>
+    </Reference>
     <Reference Include="addedBiml\BimlScripts\04_Tables_FlatFiles.biml">
+      <RootFolderId>0</RootFolderId>
+    </Reference>
+    <Reference Include="addedBiml\BimlScripts\04_Tables_SQL-ALL.biml">
       <RootFolderId>0</RootFolderId>
     </Reference>
     <Reference Include="addedBiml\BimlScripts\05_Packages_CreateObjects.biml">
