@@ -13,7 +13,7 @@
 	string dwDatabase = extractDatabase;
 
 	//where are the flat file demo files stored?
-	string sourceFolder = @"C:\Repositories\Biml\Interrogator\testdata";
+	string sourceFolder = @"C:\testdata";
 	
 	string[] acceptedFilePatterns = new string[]{".csv",".txt"}; 
 	char[] ColumnDelimiter = new char[] {','};

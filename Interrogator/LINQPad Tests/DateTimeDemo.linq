@@ -10,9 +10,9 @@ Datetime2 *new work preferred
 */
 void Main() {
 	//run test x
-	int test = 3;
+	int test = 2;
 	//all test 1 (datetime2) pass
-	//all test 2 (date) pass
+	//int test 2;-- (date) pass
 	//all test 3 (time) PASS!
 	//test 4(datetimeoffset)PASS!
 

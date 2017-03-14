@@ -1,11 +1,7 @@
 <Query Kind="Program">
   <Reference>&lt;RuntimeDirectory&gt;\Microsoft.VisualBasic.dll</Reference>
   <Reference>&lt;RuntimeDirectory&gt;\System.Net.dll</Reference>
-  <Namespace>HtmlAgilityPack</Namespace>
   <Namespace>Microsoft.VisualBasic.FileIO</Namespace>
-  <Namespace>Microsoft.WindowsAzure.Storage</Namespace>
-  <Namespace>Microsoft.WindowsAzure.Storage.Auth</Namespace>
-  <Namespace>Microsoft.WindowsAzure.Storage.Blob</Namespace>
   <Namespace>System.Net</Namespace>
 </Query>
 
