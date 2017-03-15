@@ -113,26 +113,28 @@ public class ConversionUtility {
 	public string Convert(SourceSystem fromType, SourceSystem toType, string input) {
 		
 		Conversion c = null;
-		
-		switch(fromType) {
-			case SourceSystem.SqlServer:
-				c = _privateMap.FirstOrDefault (m => m.SqlServer.ToLower() == input.ToLower());
-				break;
-			case SourceSystem.SSIS:
-				c = _privateMap.FirstOrDefault (m => m.SSIS.ToLower() == input.ToLower());
-				break;
-			case SourceSystem.Biml:
-				c = _privateMap.FirstOrDefault (m => m.Biml.ToLower() == input.ToLower());
-				break;
-			default:
-				Console.WriteLine("Unknown FromType: " + fromType);
-				break;
-		}
-		
-		//check for no c found!
-		if(c == null) {
-			Console.WriteLine("No mapping found for " + fromType + " " + input);
-			return null;
+		try {
+			switch(fromType) {
+				case SourceSystem.SqlServer:
+					c = _privateMap.FirstOrDefault (m => m.SqlServer.ToLower() == input.ToLower());
+					break;
+				case SourceSystem.SSIS:
+					c = _privateMap.FirstOrDefault (m => m.SSIS.ToLower() == input.ToLower());
+					break;
+				case SourceSystem.Biml:
+					c = _privateMap.FirstOrDefault (m => m.Biml.ToLower() == input.ToLower());
+					break;
+				default:
+					Console.WriteLine("Unknown FromType: " + fromType);
+					break;
+			}
+		} catch (Exception e) {
+			//check for no c found!
+			if(c == null) {
+				Console.WriteLine("No mapping found for " + fromType + " " + input);
+				return null;
+			}
+			Console.WriteLine(e);
 		}
 		
 		switch(toType) {

@@ -13,7 +13,8 @@
 	<FileFormats>
 	<#
 		foreach (var file in d.GetFiles())	{
-			if(acceptedFilePatterns.Contains(file.Extension)) {
+			//changed the extension of the file to lower case so you don't have to include upper and lower variants in your list.
+			if(acceptedFilePatterns.Contains(file.Extension.ToLower())) {
 				Interrogator i = new Interrogator();
 				List<DestinationColumn> DestinationObject = i.ProcessFile(file.FullName, ColumnDelimiter, true, false);
 	#>
@@ -22,7 +23,6 @@
 			<#= DestinationObject.Any(col => col.DataType == "NVarChar") ? "CodePage=\"65001\"" : "" #> IsUnicode="false">
 			<Columns>
 			<#
-				
 				int columnOrdinal = 1;
 				foreach(DestinationColumn col in DestinationObject) {
 			#>
@@ -33,7 +33,6 @@
 					Length="<#=col.MaxLength #>"
 					<#= col.Precision > 0 ? "Precision=\"" + col.Precision.ToString() + "\"" : ""#>
 					<#= col.Scale > 0 ? "Scale=\"" + col.Scale.ToString() + "\"" : ""#> >
-					
 				</Column>
 			<#
 					columnOrdinal++;

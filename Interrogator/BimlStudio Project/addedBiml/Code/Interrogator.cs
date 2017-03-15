@@ -37,8 +37,7 @@ using System.Linq;
 using System.Net;
 using System.Text.RegularExpressions;
 
-public class Interrogator
-{
+public class Interrogator {
 
 	//function to guess which character type the input is
 	//This function can handle changes to data type too.
@@ -222,7 +221,6 @@ public class Interrogator
 	return output;
 }
 
-
 	//function to guess what kind of numeric we're dealing with:
 	//TinyInt, SmallInt, Int, BigInt, Decimal, Float
 	public SqlDbType NumericGuess(string input, string currentDatatype, bool debug = false) {
@@ -315,125 +313,130 @@ public class Interrogator
 
 	//process a file, return a list of columns
 	public List<DestinationColumn> ProcessFile(string FileName, char[] delimiter, bool FirstRowHeader = true, bool debug = false) {
-	List<DestinationColumn> output = new List<DestinationColumn>();
-	//by default do not treat the whole file as unicode
-	bool treatWholeFileAsUnicode = false;
-	using (StreamReader reader = new StreamReader(FileName))
-	{
-		//initialize the rownumber
-		int rownumber = 0;
-		while (!reader.EndOfStream) 
-		{
-			//Processing row
-			string[] fields = reader.ReadLine().Split(delimiter);
-			rownumber++;
-			
-			for(int i=0; i < fields.Count(); i++) {
-				//get rid of leading "
-				if(fields[i].Trim().StartsWith("\""))
-					fields[i] = fields[i].Trim().Substring(1);
+		List<DestinationColumn> output = new List<DestinationColumn>();
+		//by default do not treat the whole file as unicode
+		bool treatWholeFileAsUnicode = false;
+		using (StreamReader reader = new StreamReader(FileName)) {
+			//initialize the rownumber
+			int rownumber = 0;
+			while (!reader.EndOfStream) {
+				//Processing row
+				string[] fields = reader.ReadLine().Split(delimiter);
+				rownumber++;
 				
-				//get rid of trailing "
-				if(fields[i].Trim().EndsWith("\""))
-					fields[i] = fields[i].Trim().Substring(0, fields[i].Trim().Length -1);
-				
-				//if you get a new column (in first or 101st line) add it's name to output
-				if(i + 1 > output.Count ) {
-					output.Add(new DestinationColumn(fields[i]));
-				}else {
-					if(!FirstRowHeader || rownumber > 1) {
-						//if the field value is blank/null, don't guess
-						if(fields[i].Trim().Length > 0) {
-							//now get the data type
-							output[i].DataType = DataTypeGuess(fields[i], output[i].DataType, debug);
-							//did we just get a unicode column?
-							if(output[i].DataType == "NVarChar")
-								treatWholeFileAsUnicode = true;
-							if(debug)
-								Console.WriteLine("DataTypeGuess returned: " + output[i].DataType);
+				for(int i=0; i < fields.Count(); i++) {
+					//get rid of leading "
+					if(fields[i].Trim().StartsWith("\""))
+						fields[i] = fields[i].Trim().Substring(1);
+					
+					//get rid of trailing "
+					if(fields[i].Trim().EndsWith("\""))
+						fields[i] = fields[i].Trim().Substring(0, fields[i].Trim().Length -1);
+					
+					//if you get a new column (in first or 101st line) add it's name to output
+					if(i + 1 > output.Count ) {
+						output.Add(new DestinationColumn(fields[i]));
+					}else {
+						if(!FirstRowHeader || rownumber > 1) {
+							//if the field value is blank/null, don't guess
+							if(fields[i].Trim().Length > 0) {
+								//now get the data type
+								output[i].DataType = DataTypeGuess(fields[i], output[i].DataType, debug);
+								//did we just get a unicode column?
+								if(output[i].DataType == "NVarChar")
+									treatWholeFileAsUnicode = true;
+								if(debug)
+									Console.WriteLine("DataTypeGuess returned: " + output[i].DataType);
+								
+								//get the Maxlength //trying it for all data types
+								//if(output[i].DataType == "VarChar" || output[i].DataType == "NVarChar" || output[i].DataType == "VarBinary") {
+									if(fields[i].Length > output[i].MaxLength)
+										output[i].MaxLength = fields[i].Length;
+								//}
+								
+								//get precision
+								switch(output[i].DataType) {
+									case "BigInt":
+										output[i].Precision = 19;
+										break;
+									case "Bit":
+										output[i].Precision = 1;
+										break;							
+									case "Date":
+									case "Int":
+										output[i].Precision = 10;
+										break;
+									case "DateTime2":
+										output[i].Precision = 27;
+										break;	
+									case "DateTimeOffset":
+										output[i].Precision = 34;
+										break;
+										
+									case "Decimal": //could max at 38
+									case "Float":
+										if(fields[i].Replace(".","").Length > output[i].Precision)
+											output[i].Precision = fields[i].Replace(".","").Length;
+										break;
+									case "SmallInt":
+										output[i].Precision = 5;
+										break;
+									case "Time":
+										output[i].Precision = 16;
+										break;
+									case "TinyInt":
+										output[i].Precision = 3;
+										break;
+									default:
+										output[i].Precision = 0;
+										break;
+								}
+								
+								//get scale
+								switch(output[i].DataType) {
+									case "DateTime2":
+									case "DateTimeOffset":
+									case "Time":
+										output[i].Scale = 7;
+										break;
+									case "Decimal":
+										//remember Indexof will "leave the "." in it's length (+1 to ignore the .)
+										int Scale = fields[i].Substring(fields[i].IndexOf(".")+1).Length;
+										if(Scale > output[i].Scale)
+											output[i].Scale = Scale;
+										break;
+									default:
+										output[i].Scale = 0;
+										break;
+								}
+								
+							}else {
+								//if the value is black/null the column can be nullable
+								output[i].Nullable = true;
 							
-							//get the Maxlength //trying it for all data types
-							//if(output[i].DataType == "VarChar" || output[i].DataType == "NVarChar" || output[i].DataType == "VarBinary") {
-								if(fields[i].Length > output[i].MaxLength)
-									output[i].MaxLength = fields[i].Length;
-							//}
-							
-							//get precision
-							switch(output[i].DataType) {
-								case "BigInt":
-									output[i].Precision = 19;
-									break;
-								case "Bit":
-									output[i].Precision = 1;
-									break;							
-								case "Date":
-								case "Int":
-									output[i].Precision = 10;
-									break;
-								case "DateTime2":
-									output[i].Precision = 27;
-									break;	
-								case "DateTimeOffset":
-									output[i].Precision = 34;
-									break;
-									
-								case "Decimal": //could max at 38
-								case "Float":
-									if(fields[i].Replace(".","").Length > output[i].Precision)
-										output[i].Precision = fields[i].Replace(".","").Length;
-									break;
-								case "SmallInt":
-									output[i].Precision = 5;
-									break;
-								case "Time":
-									output[i].Precision = 16;
-									break;
-								case "TinyInt":
-									output[i].Precision = 3;
-									break;
-								default:
-									output[i].Precision = 0;
-									break;
 							}
-							
-							//get scale
-							switch(output[i].DataType) {
-								case "DateTime2":
-								case "DateTimeOffset":
-								case "Time":
-									output[i].Scale = 7;
-									break;
-								case "Decimal":
-									//remember Indexof will "leave the "." in it's length (+1 to ignore the .)
-									int Scale = fields[i].Substring(fields[i].IndexOf(".")+1).Length;
-									if(Scale > output[i].Scale)
-										output[i].Scale = Scale;
-									break;
-								default:
-									output[i].Scale = 0;
-									break;
-							}
-							
-						}else {
-							//if the value is black/null the column can be nullable
-							output[i].Nullable = true;
-						
 						}
 					}
 				}
-		}
-			//for SSIS, if any column is unicode (nvarchar), then all text has to be read as unicode.
-			if(treatWholeFileAsUnicode) {
-				foreach( DestinationColumn col in output) {
-					if(col.DataType == "VarChar")
-						col.DataType = "NVarChar";
+				//for SSIS, if any column is unicode (nvarchar), then all text has to be read as unicode.
+				if(treatWholeFileAsUnicode) {
+					foreach( DestinationColumn col in output) {
+						if(col.DataType == "VarChar")
+							col.DataType = "NVarChar";
+					}
 				}
+				//Console.WriteLine(output);
 			}
-			//Console.WriteLine(output);
+			//if we don't have a datatype at all, default to varbinary
+			foreach( DestinationColumn col in output) {
+				if( col.DataType == null ) {
+					col.DataType = "VarBinary";
+				}
+			}	
 		}
+	
+		return output;
 	}
-	return output;
-}
 
 }
 
