@@ -12,7 +12,7 @@
             </Annotations>
 			<Tasks>
 				<ExecuteSQL Name="SQL-Truncate <#= table.Schema #><#=table.Name#>" ConnectionName="ADONET_Extract">
-					<DirectInput>TRUNCATE TABLE <#= table.Schema #>.<#=table.Name#>;</DirectInput>
+					<DirectInput>TRUNCATE TABLE [<#= table.Schema #>].[<#=table.Name#>];</DirectInput>
 				</ExecuteSQL>
 				<Dataflow Name="DFT-Load <#= table.Schema #><#=table.Name#>">
 					<PrecedenceConstraints>
@@ -35,7 +35,7 @@
                         </DerivedColumns>
 						<OleDbDestination Name="OLE_DEST-<#= table.Schema #><#=table.Name#>" ConnectionName="OLEDB_Extract" UseFastLoadIfAvailable="true" ValidateExternalMetadata="false">
 							<InputPath OutputPathName="DER-Audit Columns.Output" />
-							<ExternalTableOutput Table="<#= table.Schema #>.<#=table.Name#>" />
+							<ExternalTableOutput Table="[<#= table.Schema #>].[<#=table.Name#>]" />
 							
                         </OleDbDestination>
                     </Transformations>

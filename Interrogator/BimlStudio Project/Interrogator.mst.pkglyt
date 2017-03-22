@@ -7,8 +7,8 @@ Extract_FF_Character	Extract_FF_Character.DFT-Load Extract.Character	5	155	587	6
 Extract_FF_Character	Extract_FF_Character.DFT-Load Extract.Character.FF_SRC-Character	48	5	300	100
 Extract_FF_Character	Extract_FF_Character.DFT-Load Extract.Character.ADONET_DEST-ExtractCharacter	132	358	300	100
 Extract_FF_Character	Extract_FF_Character.DFT-Load Extract.Character.DER-Audit Columns	92	187	300	100
-Extract_FF_Character	Extract_FF_Character.SQL-Truncate ExtractCharacter	450	232.5	300	100
-Extract_FF_Character	Extract_FF_Character.DFT-Load ExtractCharacter	5	5	408	555
+Extract_FF_Character	Extract_FF_Character.SQL-Truncate ExtractCharacter	59	5	300	100
+Extract_FF_Character	Extract_FF_Character.DFT-Load ExtractCharacter	5	155	408	555
 Extract_FF_Character	Extract_FF_Character.DFT-Load ExtractCharacter.FF_SRC-Character	48	5	300	100
 Extract_FF_Character	Extract_FF_Character.DFT-Load ExtractCharacter.DER-Audit Columns	48	155	300	100
 Extract_FF_Character	Extract_FF_Character.DFT-Load ExtractCharacter.OLE_DEST-ExtractCharacter	48	305	300	100
@@ -19,13 +19,14 @@ Extract_FF_Numerics	Extract_FF_Numerics.DFT-Load ExtractNumerics.DER-Audit Colum
 Extract_FF_Numerics	Extract_FF_Numerics.DFT-Load ExtractNumerics.OLE_DEST-ExtractNumerics	48	305	300	100
 **********Compact Node Bounds
 **********Source Anchors
-Extract_FF_Numerics	Extract_FF_Numerics.SQL-Truncate ExtractNumerics	Extract_FF_Numerics.SQL-Truncate ExtractNumerics.Output
-Extract_FF_Numerics	Extract_FF_Numerics.DFT-Load ExtractNumerics	Extract_FF_Numerics.DFT-Load ExtractNumerics.Output
-Extract_FF_Numerics	Extract_FF_Numerics.DFT-Load ExtractNumerics.FF_SRC-Numerics	Extract_FF_Numerics.DFT-Load ExtractNumerics.FF_SRC-Numerics.Output
-Extract_FF_Numerics	Extract_FF_Numerics.DFT-Load ExtractNumerics.FF_SRC-Numerics	Extract_FF_Numerics.DFT-Load ExtractNumerics.FF_SRC-Numerics.Error
-Extract_FF_Numerics	Extract_FF_Numerics.DFT-Load ExtractNumerics.DER-Audit Columns	Extract_FF_Numerics.DFT-Load ExtractNumerics.DER-Audit Columns.Output
-Extract_FF_Numerics	Extract_FF_Numerics.DFT-Load ExtractNumerics.DER-Audit Columns	Extract_FF_Numerics.DFT-Load ExtractNumerics.DER-Audit Columns.Error
-Extract_FF_Numerics	Extract_FF_Numerics.DFT-Load ExtractNumerics.OLE_DEST-ExtractNumerics	Extract_FF_Numerics.DFT-Load ExtractNumerics.OLE_DEST-ExtractNumerics.Error
+Extract_FF_Character	Extract_FF_Character.SQL-Truncate ExtractCharacter	Extract_FF_Character.SQL-Truncate ExtractCharacter.Output
+Extract_FF_Character	Extract_FF_Character.DFT-Load ExtractCharacter	Extract_FF_Character.DFT-Load ExtractCharacter.Output
+Extract_FF_Character	Extract_FF_Character.DFT-Load ExtractCharacter.FF_SRC-Character	Extract_FF_Character.DFT-Load ExtractCharacter.FF_SRC-Character.Output
+Extract_FF_Character	Extract_FF_Character.DFT-Load ExtractCharacter.FF_SRC-Character	Extract_FF_Character.DFT-Load ExtractCharacter.FF_SRC-Character.Error
+Extract_FF_Character	Extract_FF_Character.DFT-Load ExtractCharacter.DER-Audit Columns	Extract_FF_Character.DFT-Load ExtractCharacter.DER-Audit Columns.Output
+Extract_FF_Character	Extract_FF_Character.DFT-Load ExtractCharacter.DER-Audit Columns	Extract_FF_Character.DFT-Load ExtractCharacter.DER-Audit Columns.Error
+Extract_FF_Character	Extract_FF_Character.DFT-Load ExtractCharacter.OLE_DEST-ExtractCharacter	Extract_FF_Character.DFT-Load ExtractCharacter.OLE_DEST-ExtractCharacter.Error
 **********Sink Anchors
-Extract_FF_Numerics	Extract_FF_Numerics.DFT-Load ExtractNumerics.DER-Audit Columns	Extract_FF_Numerics.DFT-Load ExtractNumerics.FF_SRC-Numerics.Output
-Extract_FF_Numerics	Extract_FF_Numerics.DFT-Load ExtractNumerics.OLE_DEST-ExtractNumerics	Extract_FF_Numerics.DFT-Load ExtractNumerics.DER-Audit Columns.Output
+Extract_FF_Character	Extract_FF_Character.DFT-Load ExtractCharacter	Extract_FF_Character.SQL-Truncate ExtractCharacter.Output
+Extract_FF_Character	Extract_FF_Character.DFT-Load ExtractCharacter.DER-Audit Columns	Extract_FF_Character.DFT-Load ExtractCharacter.FF_SRC-Character.Output
+Extract_FF_Character	Extract_FF_Character.DFT-Load ExtractCharacter.OLE_DEST-ExtractCharacter	Extract_FF_Character.DFT-Load ExtractCharacter.DER-Audit Columns.Output
