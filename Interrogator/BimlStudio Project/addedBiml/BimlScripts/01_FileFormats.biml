@@ -12,14 +12,17 @@
 #>
 	<FileFormats>
 	<#
+		string[] acceptedFilePatterns = new string[]{".csv",".txt"}; 
 		foreach (var file in d.GetFiles())	{
 			//changed the extension of the file to lower case so you don't have to include upper and lower variants in your list.
 			if(acceptedFilePatterns.Contains(file.Extension.ToLower())) {
 				Interrogator i = new Interrogator();
-				List<DestinationColumn> DestinationObject = i.ProcessFile(file.FullName, ColumnDelimiter, true, false);
-	#>
+				
+				List<DestinationColumn> DestinationObject = i.ProcessFile(file.FullName, ',', true, 0, "\"");
 
-		<FlatFileFormat Name="<#= file.Name.Replace(file.Extension,"") #>" RowDelimiter="<#= RowDelimiter #>" ColumnNamesInFirstDataRow="<#= ColumnNamesInFirstDataRow.ToString().ToLower() #>" FlatFileType="Delimited" 
+	#>
+		<FlatFileFormat Name="<#= file.Name.Replace(file.Extension,"") #>" RowDelimiter="CRLF" 
+			ColumnNamesInFirstDataRow="true" FlatFileType="Delimited"  
 			<#= DestinationObject.Any(col => col.DataType == "NVarChar") ? "CodePage=\"65001\"" : "" #> IsUnicode="false">
 			<Columns>
 			<#
@@ -28,8 +31,8 @@
 			#>
 
 				<Column Name="<#= col.Name #>" 
-					DataType="<#= cu.Convert(SourceSystem.SqlServer, SourceSystem.Biml, col.DataType) #>"  
-					Delimiter="<#= (columnOrdinal ==  DestinationObject.Count()) ? RowDelimiter : ColumnDelimiter[0].ToString()  #>" 
+					DataType="<#= cu.Convert(SourceSystem.SqlServer, SourceSystem.Biml, col.DataType) #>" 
+					Delimiter="<#= (columnOrdinal ==  DestinationObject.Count()) ? "CRLF" : ","  #>" 
 					Length="<#=col.MaxLength #>"
 					<#= col.Precision > 0 ? "Precision=\"" + col.Precision.ToString() + "\"" : ""#>
 					<#= col.Scale > 0 ? "Scale=\"" + col.Scale.ToString() + "\"" : ""#> >
