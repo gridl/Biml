@@ -7,7 +7,7 @@
         </Annotation>
     </Annotations>
 	<Connections>
-		<OleDbConnection Name="OLEDB_Extract" ConnectionString="Provider=SQLNCLI11.1;Data Source=<#=ExtractServer #>;Initial Catalog=<#= extractDatabase#>;Integrated Security=SSPI" CreateInProject="true" >
+		<OleDbConnection Name="OLEDB_Extract" ConnectionString="Provider=SQLNCLI11.1;Data Source=<#=ExtractServer #>;Initial Catalog=<#= ExtractDatabase#>;Integrated Security=SSPI" CreateInProject="true" >
 			<Expressions>
 				<Expression PropertyName="ConnectionString">
 					"Provider=SQLNCLI11.1;Data Source=" + @[$Project::ExtractServer]+ ";Initial Catalog=" + @[$Project::ExtractDatabase] + ";Integrated Security=SSPI"
@@ -18,7 +18,6 @@
         <ExcelConnection Name="ExcelOleDbConnection" ConnectionString="Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Repositories\Biml\Interrogator\testdata\ExcelSource.xlsx;Extended Properties=&quot;Excel 12.0 Xml;HDR=YES&quot;;" />
 		
 		<ExcelConnection Name="ExcelOleDbConnection-IMEX" ConnectionString="Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Repositories\Biml\Interrogator\testdata\ExcelSource.xlsx;Extended Properties=&quot;Excel 12.0 Xml;HDR=YES;IMEX=1&quot;" />
-
 
     </Connections>
 </Biml>

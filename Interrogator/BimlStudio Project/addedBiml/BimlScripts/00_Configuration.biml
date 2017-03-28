@@ -1,7 +1,5 @@
 ﻿<#@ template tier="0" designerbimlpath="Biml" #>
 <#@ import namespace="System.Data.SqlClient" #>
-<Annotations>
-	<Annotation>
 <#
 	//define the database server
 	string ExtractServer = "localhost";
@@ -14,16 +12,8 @@
 		CREATE DATABASE Interrogator";
 		
 	string ConnectionString = "Server=" + ExtractServer + ";Database=master;Trusted_Connection=True";
-	if (ExecuteDDL(CreateDatabaseDDL, ConnectionString) ) {
-		
-#>
-	<#=ExtractDatabase #> exists!
-<#
-	} else {
+	if (!ExecuteDDL(CreateDatabaseDDL, ConnectionString) ) {
 		ValidationReporter.Report(Severity.Error, "Extract Database " + ExtractDatabase + " could not be created. This demo will not function without it!");
-#>
-	Extract Database <#=ExtractDatabase #> could not be created. This demo will not function without it!
-<#
     }
 	
 	//where are the flat file demo files stored?
@@ -48,10 +38,6 @@
 	//we can assume 1252, but as soon as we hit something outside of that, we will need to prompt the user for 
 	//the encoding
 #>
-	
-
-	</Annotation>
-</Annotations>
 <#+
 	//helper function ExecuteDDL -- runs DDL script against ConnectionString
 	//assume no response back other than success or fail
