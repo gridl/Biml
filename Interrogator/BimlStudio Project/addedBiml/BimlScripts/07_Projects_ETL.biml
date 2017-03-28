@@ -4,15 +4,8 @@
 	<Projects>
 		<PackageProject Name="ETL Project">
 			<Parameters>
-				<Parameter Name="ExtractServer" DataType="String"><#=ExtractServer #></Parameter>
-				<Parameter Name="TransformServer" DataType="String"><#=transformServer #></Parameter>
-				<Parameter Name="PDSServer" DataType="String"><#=pdsServer #></Parameter>
-				<Parameter Name="DWServer" DataType="String"><#=dwServer #></Parameter>
-				
+				<Parameter Name="ExtractServer" DataType="String"><#=ExtractServer #></Parameter>				
 				<Parameter Name="ExtractDatabase" DataType="String"><#= ExtractDatabase #></Parameter>
-				<Parameter Name="TransformDatabase" DataType="String"><#= transformDatabase #></Parameter>
-				<Parameter Name="PDSDatabase" DataType="String"><#= pdsDatabase #></Parameter>
-				<Parameter Name="DWDatabase" DataType="String"><#= dwDatabase #></Parameter>
             </Parameters>
 			<Connections>
 			<#
