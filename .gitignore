@@ -22,7 +22,7 @@
 bld/
 *.dbmdl
 *.ispac
-
+*.log
 
 #Biml outputs
 **/addedBiml/Connections/
@@ -34,6 +34,7 @@ bld/
 **/addedBiml/ScriptProjects/
 **/addedBiml/Tables/
 **/documentation/
+
 # MSTest test Results
 [Tt]est[Rr]esult*/
 [Bb]uild[Ll]og.*
