@@ -2,9 +2,9 @@
 	<Tables>
 	<!-- Get all Schemas, tables and views -->
 	<#
-	var SourceConnection = RootNode.OleDbConnections["ExcelOleDbConnection"];
+	//var SourceConnection = RootNode.OleDbConnections["ExcelOleDbConnection"];
 	//What about the IMEX=1 solution?
-	//var SourceConnection = RootNode.OleDbConnections["ExcelOleDbConnection-IMEX"];
+	var SourceConnection = RootNode.OleDbConnections["ExcelOleDbConnection-IMEX"];
 	var SourceSchema = SourceConnection.GetDatabaseSchema();
 	
 	foreach( var SourceTable in SourceSchema.TableNodes) {        

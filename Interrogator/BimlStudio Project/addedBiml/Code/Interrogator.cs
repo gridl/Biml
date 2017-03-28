@@ -1,4 +1,6 @@
-﻿
+﻿//currently there is a bug in how Biml and DateTime2 work together. Until this is fixed, there is a patch in this code
+//see DateTimeGuess() function
+
 using Varigence.DynamicObjects;
 using Varigence.Biml.CoreLowerer.SchemaManagement;
 using Varigence.Biml.Extensions;
@@ -39,21 +41,20 @@ using System.Text.RegularExpressions;
 
 //class to hold information about the destination column(s)
 public class DestinationColumn {
-
 	public string Name {get; set;}
 	public string DataType {get; set;}
-	public int MaxLength {get; set;}
-	public int Precision {get; set;}
-	public int Scale {get; set;}
+	public int? MaxLength {get; set;}
+	public int? Precision {get; set;}
+	public int? Scale {get; set;}
 	public bool Nullable {get; set;}
 	
 	//name only init
 	public DestinationColumn (string name){
 		Name = name;
 		DataType = null;
-		MaxLength = 0;
-		Precision = 0;
-		Scale = 0;
+		MaxLength = null;
+		Precision = null;
+		Scale = null;
 		Nullable = false;
 	}
 	//full init
@@ -68,7 +69,7 @@ public class DestinationColumn {
 }
 
 public class Interrogator {
-
+	
 	//function to guess which character type the input is
 	//This function can handle changes to data type too.
 	public SqlDbType CharGuess(string input, string currentDatatype) {
@@ -96,7 +97,7 @@ public class Interrogator {
 		
 	//first try datetimes
 	//CurrentDataType must be compatible
-	string[] DateTimeCompatibleDataTypes = {null, "Date","Time","DateTimeOffset","DateTime2"};
+	string[] DateTimeCompatibleDataTypes = {null, "Date","Time","DateTimeOffset","DateTime2","DateTime"};
 	if( DateTimeCompatibleDataTypes.Contains(currentDatatype) ) {
 		
 		output = DateTimeGuess(input, currentDatatype).ToString();
@@ -173,7 +174,7 @@ public class Interrogator {
 	SqlDbType output;
 	
 	if(DateTime.TryParse(input, out givenDateTime)) {
-		output = SqlDbType.DateTime2;		
+		output = SqlDbType.DateTime;		
 	} else {	
 		output = SqlDbType.VarBinary;
 		//exit early!
@@ -192,11 +193,8 @@ public class Interrogator {
 				//return early, you found a time!
 				return SqlDbType.Time;
 			}
-		} catch (Exception e) {
-			//our default (aka, try something else)
-			Console.WriteLine("{0} Exception caught.", e);
-			//on exception return varbinary (default)
-			//return SqlDbType.VarBinary;
+		} catch  {
+			//do nothing
 		}
 	
 	//is it just a date?	
@@ -204,9 +202,8 @@ public class Interrogator {
 		if(givenDateTime == givenDateTime.Date && output != SqlDbType.Time) {
 			output = SqlDbType.Date;
 		}
-	} catch (Exception e) {
+	} catch  {
 		//our default (aka, try something else)
-		Console.WriteLine("{0} Exception caught.", e);
 		return output;
 	}
 	
@@ -215,12 +212,10 @@ public class Interrogator {
 		//if the DateTime.Kind is something other than unspecified, it's offset
 		if(givenDateTime.Kind != System.DateTimeKind.Unspecified && output == SqlDbType.DateTime2) 
 			output = SqlDbType.DateTimeOffset;	
-	} catch (Exception e) {
-		//our default (aka, try something else)
-		Console.WriteLine("{0} Exception caught.", e);
+	} catch  {
 		return SqlDbType.VarBinary;
 	}
-	
+
 	return output;
 }
 
@@ -309,7 +304,6 @@ public class Interrogator {
 						if(TextQualifier != null)
 							fields[i] = fields[i].Replace(TextQualifier,"");
 						
-						///RESUME HERE
 						//if you get a new column (in first or 101st line) add it's name to output
 						if(i + 1 > output.Count ) {
 							if(FirstRowHeader) {
@@ -322,57 +316,65 @@ public class Interrogator {
 								//if the field value is blank/null, don't guess
 								if(fields[i].Trim().Length > 0) {
 									//now get the data type
-									output[i].DataType = DataTypeGuess(fields[i], output[i].DataType);
+									output[i].DataType = DataTypeGuess(fields[i].Trim(), output[i].DataType);
+
 									//did we just get a unicode column?
 									if(output[i].DataType == "NVarChar")
 										treatWholeFileAsUnicode = true;
 									
 									//get the Maxlength //trying it for all data types
-									//if(output[i].DataType == "VarChar" || output[i].DataType == "NVarChar" || output[i].DataType == "VarBinary") {
-										if(fields[i].Length > output[i].MaxLength)
-											output[i].MaxLength = fields[i].Length;
-									//}
+									if(fields[i].Length > (output[i].MaxLength ?? 0) )
+										output[i].MaxLength = fields[i].Length;
 									
+									//fix MaxLengths
+									switch(output[i].DataType) {
+										case "VarChar":
+										case "NVarChar":
+										case "Char":
+										case "NChar":
+											break;
+										default:
+											output[i].MaxLength = null;
+											break;
+											
+									}
+
 									//get precision
 									switch(output[i].DataType) {
-										case "BigInt":
-											output[i].Precision = 19;
-											break;
 										case "Bit":
-											output[i].Precision = 1;
-											break;							
+										case "Boolean":
+										case "Byte":
 										case "Date":
+										case "DateTime":
+										case "BigInt":
 										case "Int":
-											output[i].Precision = 10;
+										case "SmallInt":
+										case "TinyInt":
+											output[i].Precision = null;
 											break;
 										case "DateTime2":
 											output[i].Precision = 27;
-											break;	
+											break;		
 										case "DateTimeOffset":
 											output[i].Precision = 34;
 											break;
-											
 										case "Decimal": //could max at 38
 										case "Float":
 											if(fields[i].Replace(".","").Length > output[i].Precision)
 												output[i].Precision = fields[i].Replace(".","").Length;
 											break;
-										case "SmallInt":
-											output[i].Precision = 5;
-											break;
+										
 										case "Time":
-											output[i].Precision = 16;
-											break;
-										case "TinyInt":
-											output[i].Precision = 3;
-											break;
-										default:
-											output[i].Precision = 0;
+											output[i].Precision = 7;
 											break;
 									}
 									
 									//get scale
 									switch(output[i].DataType) {
+										case "Date":
+										case "DateTime":
+											output[i].Scale = null;
+											break;
 										case "DateTime2":
 										case "DateTimeOffset":
 										case "Time":
@@ -383,9 +385,6 @@ public class Interrogator {
 											int Scale = fields[i].Substring(fields[i].IndexOf(".")+1).Length;
 											if(Scale > output[i].Scale)
 												output[i].Scale = Scale;
-											break;
-										default:
-											output[i].Scale = 0;
 											break;
 									}
 									
@@ -406,7 +405,6 @@ public class Interrogator {
 							col.DataType = "NVarChar";
 					}
 				}
-				//Console.WriteLine(output);
 			}
 			//if we don't have a datatype at all, default to varbinary
 			foreach( DestinationColumn col in output) {

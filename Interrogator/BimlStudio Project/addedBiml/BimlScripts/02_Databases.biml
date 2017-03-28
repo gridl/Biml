@@ -2,8 +2,5 @@
 <Biml xmlns="http://schemas.varigence.com/biml.xsd">
 	<Databases>
 		<Database Name="Extract" ConnectionName="ADONET_Extract" />
-		<Database Name="Transform" ConnectionName="ADONET_Transform" />
-		<Database Name="PDS" ConnectionName="ADONET_PDS" />
-        <Database Name="DW" ConnectionName="ADONET_DW" />
     </Databases>
 </Biml>

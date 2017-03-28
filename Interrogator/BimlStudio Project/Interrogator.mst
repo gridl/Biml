@@ -43,16 +43,7 @@
     <Live Include="addedBiml\Connections\ADONET_Adventureworks.biml">
       <RootFolderId>0</RootFolderId>
     </Live>
-    <Live Include="addedBiml\Connections\ADONET_DW.biml">
-      <RootFolderId>0</RootFolderId>
-    </Live>
     <Live Include="addedBiml\Connections\ADONET_Extract.biml">
-      <RootFolderId>0</RootFolderId>
-    </Live>
-    <Live Include="addedBiml\Connections\ADONET_PDS.biml">
-      <RootFolderId>0</RootFolderId>
-    </Live>
-    <Live Include="addedBiml\Connections\ADONET_Transform.biml">
       <RootFolderId>0</RootFolderId>
     </Live>
     <Live Include="addedBiml\Connections\ExcelOleDbConnection-IMEX.biml">
@@ -64,40 +55,10 @@
     <Live Include="addedBiml\Connections\FF_Character-Quoted.biml">
       <RootFolderId>0</RootFolderId>
     </Live>
-    <Live Include="addedBiml\Connections\FF_Character.biml">
-      <RootFolderId>0</RootFolderId>
-    </Live>
-    <Live Include="addedBiml\Connections\FF_DateAndTime.biml">
-      <RootFolderId>0</RootFolderId>
-    </Live>
-    <Live Include="addedBiml\Connections\FF_DateOnly.biml">
-      <RootFolderId>0</RootFolderId>
-    </Live>
-    <Live Include="addedBiml\Connections\FF_Numerics.biml">
-      <RootFolderId>0</RootFolderId>
-    </Live>
-    <Live Include="addedBiml\Connections\OLEDB_DW.biml">
-      <RootFolderId>0</RootFolderId>
-    </Live>
     <Live Include="addedBiml\Connections\OLEDB_Extract.biml">
       <RootFolderId>0</RootFolderId>
     </Live>
-    <Live Include="addedBiml\Connections\OLEDB_PDS.biml">
-      <RootFolderId>0</RootFolderId>
-    </Live>
-    <Live Include="addedBiml\Connections\OLEDB_Transform.biml">
-      <RootFolderId>0</RootFolderId>
-    </Live>
-    <Live Include="addedBiml\Databases\DW.biml">
-      <RootFolderId>0</RootFolderId>
-    </Live>
-    <Live Include="addedBiml\Databases\Extract.biml">
-      <RootFolderId>0</RootFolderId>
-    </Live>
-    <Live Include="addedBiml\Databases\PDS.biml">
-      <RootFolderId>0</RootFolderId>
-    </Live>
-    <Live Include="addedBiml\Databases\Transform.biml">
+    <Live Include="addedBiml\FileFormats\Character-Quoted.biml">
       <RootFolderId>0</RootFolderId>
     </Live>
     <Live Include="addedBiml\FileFormats\Character.biml">
@@ -112,46 +73,19 @@
     <Live Include="addedBiml\FileFormats\Numerics.biml">
       <RootFolderId>0</RootFolderId>
     </Live>
-    <Live Include="addedBiml\Packages\CreateObjects.biml">
+    <Live Include="addedBiml\Tables\Character-Quoted.biml">
       <RootFolderId>0</RootFolderId>
     </Live>
-    <Live Include="addedBiml\Packages\Extract_FF_Character.biml">
+    <Live Include="addedBiml\Tables\Character.biml">
       <RootFolderId>0</RootFolderId>
     </Live>
-    <Live Include="addedBiml\Packages\Extract_FF_DateAndTime.biml">
+    <Live Include="addedBiml\Tables\DateAndTime.biml">
       <RootFolderId>0</RootFolderId>
     </Live>
-    <Live Include="addedBiml\Packages\Extract_FF_DateOnly.biml">
+    <Live Include="addedBiml\Tables\DateOnly.biml">
       <RootFolderId>0</RootFolderId>
     </Live>
-    <Live Include="addedBiml\Packages\Extract_FF_Numerics.biml">
-      <RootFolderId>0</RootFolderId>
-    </Live>
-    <Live Include="addedBiml\Projects\ETL Project.biml">
-      <RootFolderId>0</RootFolderId>
-    </Live>
-    <Live Include="addedBiml\Schemas\DW.DW.biml">
-      <RootFolderId>0</RootFolderId>
-    </Live>
-    <Live Include="addedBiml\Schemas\Extract.Extract.biml">
-      <RootFolderId>0</RootFolderId>
-    </Live>
-    <Live Include="addedBiml\Schemas\PDS.PDS.biml">
-      <RootFolderId>0</RootFolderId>
-    </Live>
-    <Live Include="addedBiml\Schemas\Transform.Transform.biml">
-      <RootFolderId>0</RootFolderId>
-    </Live>
-    <Live Include="addedBiml\Tables\Extract.Extract.Character.biml">
-      <RootFolderId>0</RootFolderId>
-    </Live>
-    <Live Include="addedBiml\Tables\Extract.Extract.DateAndTime.biml">
-      <RootFolderId>0</RootFolderId>
-    </Live>
-    <Live Include="addedBiml\Tables\Extract.Extract.DateOnly.biml">
-      <RootFolderId>0</RootFolderId>
-    </Live>
-    <Live Include="addedBiml\Tables\Extract.Extract.Numerics.biml">
+    <Live Include="addedBiml\Tables\Numerics.biml">
       <RootFolderId>0</RootFolderId>
     </Live>
     <None Include="addedBiml\Code\ConversionUtility.cs">
@@ -177,6 +111,7 @@
     </None>
     <Reference Include="addedBiml\BimlScripts\00_Configuration.biml">
       <RootFolderId>0</RootFolderId>
+      <LogicalDisplayFolder>includes</LogicalDisplayFolder>
     </Reference>
     <Reference Include="addedBiml\BimlScripts\01_Connections-ADONET.biml">
       <RootFolderId>0</RootFolderId>

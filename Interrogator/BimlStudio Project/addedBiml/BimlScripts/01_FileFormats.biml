@@ -31,11 +31,16 @@
 			#>
 
 				<Column Name="<#= col.Name #>" 
-					DataType="<#= cu.Convert(SourceSystem.SqlServer, SourceSystem.Biml, col.DataType) #>" 
+					DataType="<#= cu.Convert(SourceSystem.SqlServer, SourceSystem.Biml, col.DataType) #>" 				
 					Delimiter="<#= (columnOrdinal ==  DestinationObject.Count()) ? "CRLF" : ","  #>" 
-					Length="<#=col.MaxLength #>"
-					<#= col.Precision > 0 ? "Precision=\"" + col.Precision.ToString() + "\"" : ""#>
-					<#= col.Scale > 0 ? "Scale=\"" + col.Scale.ToString() + "\"" : ""#> >
+					<# if(col.MaxLength != null) { #>Length="<#=col.MaxLength #>" <# } #>
+					<# if(col.Precision != null) { #>Precision="<#=col.Precision #>" <# } #>
+					<# if(col.Scale != null) { #>Scale="<#=col.Scale #>" <# } #> >
+				<Annotations>
+					<Annotation>
+						SQL DataType: <#=col.DataType #>
+                    </Annotation>
+                </Annotations>						
 				</Column>
 			<#
 					columnOrdinal++;
