@@ -1,17 +1,32 @@
-﻿<#@ template tier="0" #>
+﻿<#@ template tier="0" designerbimlpath="Biml" #>
+<#@ import namespace="System.Data.SqlClient" #>
+<Annotations>
+	<Annotation>
 <#
-	//define the database servers
-	string extractServer = "localhost";
-	string transformServer = extractServer;
-	string pdsServer = extractServer;
-	string dwServer = extractServer;
-
-	//define the database names
-	string extractDatabase = "BimlDemo";
-	string transformDatabase = extractDatabase;
-	string pdsDatabase = extractDatabase;
-	string dwDatabase = extractDatabase;
-
+	//define the database server
+	string ExtractServer = "localhost";
+	
+	//define the database name
+	string ExtractDatabase = "Interrogator";
+	
+	//verify the environment is ready to go:
+	string CreateDatabaseDDL = @"IF NOT EXISTS(SELECT database_id FROM sys.databases WHERE Name = '" + ExtractDatabase + @"')
+		CREATE DATABASE Interrogator";
+		
+	string ConnectionString = "Server=" + ExtractServer + ";Database=master;Trusted_Connection=True";
+	if (ExecuteDDL(CreateDatabaseDDL, ConnectionString) ) {
+		
+#>
+	
+	<#=ExtractDatabase #> exists!
+<#
+	} else {
+		ValidationReporter.Report(Severity.Error, "Extract Database " + ExtractDatabase + " could not be created. This demo will not function without it!");
+#>
+	Extract Database <#=ExtractDatabase #> could not be created. This demo will not function without it!
+<#
+    }
+	
 	//where are the flat file demo files stored?
 	string sourceFolder = @"C:\Repositories\Biml\Interrogator\testdata";
 	
@@ -34,3 +49,24 @@
 	//we can assume 1252, but as soon as we hit something outside of that, we will need to prompt the user for 
 	//the encoding
 #>
+	
+<#+
+	//helper function ExecuteDDL -- runs DDL script against ConnectionString
+	//assume no response back other than success or fail
+	 bool ExecuteDDL(string DDLStatement, string ConnectionString) {
+		try {	
+			using ( SqlConnection Connection = new SqlConnection(ConnectionString) )	{
+				SqlCommand DeveloperCmd = new SqlCommand(DDLStatement, Connection);
+				Connection.Open();
+				DeveloperCmd.ExecuteNonQuery();
+				Connection.Close();
+			}
+			return true;
+		} catch {
+			return false;
+        }
+    }
+	
+ #>	
+	</Annotation>
+</Annotations>
