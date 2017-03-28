@@ -4,7 +4,7 @@
 	<Projects>
 		<PackageProject Name="ETL Project">
 			<Parameters>
-				<Parameter Name="ExtractServer" DataType="String"><#=extractServer #></Parameter>
+				<Parameter Name="ExtractServer" DataType="String"><#=ExtractServer #></Parameter>
 				<Parameter Name="TransformServer" DataType="String"><#=transformServer #></Parameter>
 				<Parameter Name="PDSServer" DataType="String"><#=pdsServer #></Parameter>
 				<Parameter Name="DWServer" DataType="String"><#=dwServer #></Parameter>

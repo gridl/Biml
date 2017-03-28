@@ -17,7 +17,6 @@
 	if (ExecuteDDL(CreateDatabaseDDL, ConnectionString) ) {
 		
 #>
-	
 	<#=ExtractDatabase #> exists!
 <#
 	} else {
@@ -50,6 +49,9 @@
 	//the encoding
 #>
 	
+
+	</Annotation>
+</Annotations>
 <#+
 	//helper function ExecuteDDL -- runs DDL script against ConnectionString
 	//assume no response back other than success or fail
@@ -66,7 +68,4 @@
 			return false;
         }
     }
-	
  #>	
-	</Annotation>
-</Annotations>
