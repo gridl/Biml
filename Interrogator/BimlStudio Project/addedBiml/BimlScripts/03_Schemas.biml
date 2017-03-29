@@ -1,4 +1,18 @@
 ﻿<#@ template tier="3" #>
+<#@ include file="00_Configuration.biml"#>
+<#@ code file="..\Code\DevelopmentHelper.cs"#>
+
+<#
+//the destination schema must exist before you can create the packages
+//using my helper, I'll deploy the schema here
+string DestinationConnectionString = "Server=" + ExtractServer + ";Database=" + ExtractDatabase + ";Trusted_Connection=True;";
+DevelopmentHelper h = new DevelopmentHelper(DestinationConnectionString);
+string DeploySchemaSQL = @"IF NOT EXISTS (SELECT * from sys.schemas WHERE name = 'Extract')
+	EXEC sp_executesql  N'CREATE SCHEMA Extract';";
+	
+h.deployDBObject(DeploySchemaSQL);
+#>
+
 <Biml xmlns="http://schemas.varigence.com/biml.xsd">
 	<Schemas>
 		<Schema Name="Extract" DatabaseName="Extract" /> 

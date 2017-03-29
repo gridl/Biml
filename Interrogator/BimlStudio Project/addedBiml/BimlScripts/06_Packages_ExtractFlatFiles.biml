@@ -1,13 +1,29 @@
 ﻿<#@ template tier="6" #>
+<#@ include file="00_Configuration.biml"#>
+<#@ code file="..\Code\DevelopmentHelper.cs"#>
 <Biml xmlns="http://schemas.varigence.com/biml.xsd">
+<#
+//the destination tables must exist before you can create the packages
+//using my helper, I'll deploy each of these tables while building the package Biml
+string DestinationConnectionString = "Server=" + ExtractServer + ";Database=" + ExtractDatabase + ";Trusted_Connection=True;";
+      //string DevConnectionString = "Server=" + DevServer + ";Database=" + DevDatabase + ";Trusted_Connection=True;";
+DevelopmentHelper h = new DevelopmentHelper(DestinationConnectionString);
+
+#>
 	<Packages>
 	<#
 		foreach (var table in RootNode.Tables.Where(t => t.GetTag("TableGroup") == "FlatFile")) { 
+			
 	#>	
 		<Package Name="Extract_FF_<#= table.Name #>"  DelayValidation="true">
 			<Annotations>
 				<Annotation AnnotationType="CodeComment">
 					All flat file extracts are truncate and load.
+					Destination Connection String: <#=DestinationConnectionString #>
+					
+					<#=table.GetDropAndCreateDdl() #>
+					
+					<#=table.Name#> Deployed: <#=h.deployDBObject(table.GetDropAndCreateDdl())#>
 				</Annotation>
             </Annotations>
 			<Tasks>

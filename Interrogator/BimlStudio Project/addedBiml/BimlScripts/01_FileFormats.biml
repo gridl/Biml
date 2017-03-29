@@ -17,13 +17,14 @@
 			//changed the extension of the file to lower case so you don't have to include upper and lower variants in your list.
 			if(acceptedFilePatterns.Contains(file.Extension.ToLower())) {
 				Interrogator i = new Interrogator();
-				
+				//the column delimiter, rows to skip, and text qualifier should be parameterized when you call this method
 				List<DestinationColumn> DestinationObject = i.ProcessFile(file.FullName, ',', true, 0, "\"");
-
+				//those same parameters should get passed in below too
 	#>
 		<FlatFileFormat Name="<#= file.Name.Replace(file.Extension,"") #>" RowDelimiter="CRLF" 
 			ColumnNamesInFirstDataRow="true" FlatFileType="Delimited"  
-			<#= DestinationObject.Any(col => col.DataType == "NVarChar") ? "CodePage=\"65001\"" : "" #> IsUnicode="false">
+			<#= DestinationObject.Any(col => col.DataType == "NVarChar") ? "CodePage=\"65001\"" : "" #> IsUnicode="false"
+			TextQualifer="&quot;">
 			<Columns>
 			<#
 				int columnOrdinal = 1;

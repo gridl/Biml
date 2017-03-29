@@ -360,7 +360,7 @@ public class Interrogator {
 											break;
 										case "Decimal": //could max at 38
 										case "Float":
-											if(fields[i].Replace(".","").Length > output[i].Precision)
+											if(fields[i].Replace(".","").Length > (output[i].Precision ?? 0) )
 												output[i].Precision = fields[i].Replace(".","").Length;
 											break;
 										
@@ -381,9 +381,10 @@ public class Interrogator {
 											output[i].Scale = 7;
 											break;
 										case "Decimal":
+										case "Float":
 											//remember Indexof will "leave the "." in it's length (+1 to ignore the .)
 											int Scale = fields[i].Substring(fields[i].IndexOf(".")+1).Length;
-											if(Scale > output[i].Scale)
+											if(Scale > (output[i].Scale ?? 0) )
 												output[i].Scale = Scale;
 											break;
 									}

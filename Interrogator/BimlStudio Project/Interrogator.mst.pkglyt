@@ -2,6 +2,14 @@ CreateObjects	CreateObjects.EST_CreateCharacter	5	5	300	100
 CreateObjects	CreateObjects.EST_CreateDateAndTime	5	155	300	100
 CreateObjects	CreateObjects.EST_CreateDateOnly	5	305	300	100
 CreateObjects	CreateObjects.EST_CreateNumerics	5	455	300	100
+CreateObjects	CreateObjects.Create Schemas	679	5	365	255
+CreateObjects	CreateObjects.Create Schemas.SQL-Create Schema Extract	5	5	300	100
+CreateObjects	CreateObjects.Create Tables	5	310	1713	255
+CreateObjects	CreateObjects.Create Tables.SQL-Create Table Character-Quoted	1353	5	300	100
+CreateObjects	CreateObjects.Create Tables.SQL-Create Table Character	679	5	300	100
+CreateObjects	CreateObjects.Create Tables.SQL-Create Table DateAndTime	1016	5	300	100
+CreateObjects	CreateObjects.Create Tables.SQL-Create Table DateOnly	342	5	300	100
+CreateObjects	CreateObjects.Create Tables.SQL-Create Table Numerics	5	5	300	100
 Extract_FF_Character	Extract_FF_Character.EST-Truncate ExtractCharacter	59	5	300	100
 Extract_FF_Character	Extract_FF_Character.DFT-Load Extract.Character	5	155	587	610.62
 Extract_FF_Character	Extract_FF_Character.DFT-Load Extract.Character.FF_SRC-Character	48	5	300	100
@@ -19,14 +27,12 @@ Extract_FF_Numerics	Extract_FF_Numerics.DFT-Load ExtractNumerics.DER-Audit Colum
 Extract_FF_Numerics	Extract_FF_Numerics.DFT-Load ExtractNumerics.OLE_DEST-ExtractNumerics	48	305	300	100
 **********Compact Node Bounds
 **********Source Anchors
-Extract_FF_Character	Extract_FF_Character.SQL-Truncate ExtractCharacter	Extract_FF_Character.SQL-Truncate ExtractCharacter.Output
-Extract_FF_Character	Extract_FF_Character.DFT-Load ExtractCharacter	Extract_FF_Character.DFT-Load ExtractCharacter.Output
-Extract_FF_Character	Extract_FF_Character.DFT-Load ExtractCharacter.FF_SRC-Character	Extract_FF_Character.DFT-Load ExtractCharacter.FF_SRC-Character.Output
-Extract_FF_Character	Extract_FF_Character.DFT-Load ExtractCharacter.FF_SRC-Character	Extract_FF_Character.DFT-Load ExtractCharacter.FF_SRC-Character.Error
-Extract_FF_Character	Extract_FF_Character.DFT-Load ExtractCharacter.DER-Audit Columns	Extract_FF_Character.DFT-Load ExtractCharacter.DER-Audit Columns.Output
-Extract_FF_Character	Extract_FF_Character.DFT-Load ExtractCharacter.DER-Audit Columns	Extract_FF_Character.DFT-Load ExtractCharacter.DER-Audit Columns.Error
-Extract_FF_Character	Extract_FF_Character.DFT-Load ExtractCharacter.OLE_DEST-ExtractCharacter	Extract_FF_Character.DFT-Load ExtractCharacter.OLE_DEST-ExtractCharacter.Error
+CreateObjects	CreateObjects.Create Schemas	CreateObjects.Create Schemas.Output
+CreateObjects	CreateObjects.Create Schemas.SQL-Create Schema Extract	CreateObjects.Create Schemas.SQL-Create Schema Extract.Output
+CreateObjects	CreateObjects.Create Tables.SQL-Create Table Character-Quoted	CreateObjects.Create Tables.SQL-Create Table Character-Quoted.Output
+CreateObjects	CreateObjects.Create Tables.SQL-Create Table Character	CreateObjects.Create Tables.SQL-Create Table Character.Output
+CreateObjects	CreateObjects.Create Tables.SQL-Create Table DateAndTime	CreateObjects.Create Tables.SQL-Create Table DateAndTime.Output
+CreateObjects	CreateObjects.Create Tables.SQL-Create Table DateOnly	CreateObjects.Create Tables.SQL-Create Table DateOnly.Output
+CreateObjects	CreateObjects.Create Tables.SQL-Create Table Numerics	CreateObjects.Create Tables.SQL-Create Table Numerics.Output
 **********Sink Anchors
-Extract_FF_Character	Extract_FF_Character.DFT-Load ExtractCharacter	Extract_FF_Character.SQL-Truncate ExtractCharacter.Output
-Extract_FF_Character	Extract_FF_Character.DFT-Load ExtractCharacter.DER-Audit Columns	Extract_FF_Character.DFT-Load ExtractCharacter.FF_SRC-Character.Output
-Extract_FF_Character	Extract_FF_Character.DFT-Load ExtractCharacter.OLE_DEST-ExtractCharacter	Extract_FF_Character.DFT-Load ExtractCharacter.DER-Audit Columns.Output
+CreateObjects	CreateObjects.Create Tables	CreateObjects.Create Schemas.Output

@@ -29,7 +29,7 @@
 				<Container Name="Create Tables">
 					<Tasks>
 					<#
-						foreach (var table in RootNode.Tables) { 
+						foreach (var table in RootNode.Tables.Where(t => t.GetTag("TableGroup") == "FlatFile")) { 
 					#>	
 						<ExecuteSQL Name ="SQL-Create Table <#=table.Name#>" ConnectionName="ADONET_<#= table.SchemaName #>">
 							<DirectInput><#=table.GetTableSql()#></DirectInput>
