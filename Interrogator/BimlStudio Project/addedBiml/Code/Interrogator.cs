@@ -70,6 +70,29 @@ public class DestinationColumn {
 
 public class Interrogator {
 	
+	//based on http://stackoverflow.com/questions/3776458/split-a-comma-separated-string-with-both-quoted-and-unquoted-strings
+	public string[] RegexSplit(string input, string textDelimiter, string columnDelimiter) {
+	//build out this expression so we can get any variation of text and column delimiter
+	string RegexExpression = "(?:^|" + columnDelimiter + ")(" + textDelimiter + "(?:[^" + textDelimiter + "]+|" + textDelimiter + textDelimiter + ")*" + textDelimiter + "|[^" + columnDelimiter + "]*)";
+	//set up the C# regex
+	Regex csvSplit = new Regex(RegexExpression, RegexOptions.Compiled);
+	//set up the output	
+	List<string> list = new List<string>();
+	string curr = null;
+	foreach (Match match in csvSplit.Matches(input))
+	{        
+	curr = match.Value;
+	if (0 == curr.Length)
+	{
+	  list.Add("");
+	}
+
+	list.Add(curr.TrimStart(','));
+	}
+
+	return list.ToArray<string>();
+	}
+	
 	//function to guess which character type the input is
 	//This function can handle changes to data type too.
 	public SqlDbType CharGuess(string input, string currentDatatype) {
@@ -296,7 +319,8 @@ public class Interrogator {
 					rownumber++;
 				} else {
 					//Processing row
-					string[] fields = reader.ReadLine().Split(ColumnDelimiter);
+					//replacing the simple split with a regex split
+					string[] fields = RegexSplit(reader.ReadLine(), TextQualifier.ToString(), ColumnDelimiter.ToString());
 					rownumber++;
 					
 					for(int i=0; i < fields.Count(); i++) {
