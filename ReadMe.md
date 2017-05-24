@@ -4,8 +4,8 @@ This is where you can find the code from any of my current presentations. Feel f
 
 [Interrogator](http://shannonlowder.com/biml-interrogator-demo/) -- extract metadata from your data sources. This is most helpful for dealing with your flat files.  [Read more] (http://shannonlowder.com/biml-interrogator-demo/) on how to use the project.
 
+There are now two projects for Interrogator. One is for BimlStudio, the other is for BimlExpress.  The BimlExpress version uses links to files in the BimlStudio project.  That way, we have a single codebase for both solutions.
+
 [DataTypeConversion](http://toyboxcreations.net/datatype-conversion-utility-for-biml/) -- need to convert back and forth between Biml, SQL Server, and SSIS datatypes?  Get my utility in this repo!
 
 
-Notes:
-20170523 sdl -- learning how to manually edit a .dtproj file so I can reference the existing files from the BimlStudio project.
