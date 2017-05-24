@@ -330,8 +330,9 @@ public class Interrogator {
 						
 						//if you get a new column (in first or 101st line) add it's name to output
 						if(i + 1 > output.Count ) {
-							if(FirstRowHeader) {
-								output.Add( new DestinationColumn(fields[i]) );
+							//handle blank names error
+							if(FirstRowHeader && fields[i].ToString().Length > 0 ) {
+									output.Add( new DestinationColumn(fields[i]) );
 							} else {
 								output.Add( new DestinationColumn( "Column" + i.ToString() ) );
 							}
