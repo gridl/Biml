@@ -1,4 +1,4 @@
-﻿<#@ include file="00_Configuration.biml"#>
+﻿<#@ include file="00_Configuration.biml" #>
 <#@ template tier="1" #>
 <Biml xmlns="http://schemas.varigence.com/biml.xsd"> 
 	<Connections>

@@ -347,17 +347,22 @@ public class Interrogator {
 									if(output[i].DataType == "NVarChar")
 										treatWholeFileAsUnicode = true;
 									
-									//get the Maxlength //trying it for all data types
-									if(fields[i].Length > (output[i].MaxLength ?? 0) )
+									//get the Maxlength
+									//init maxlength to 0
+									output[i].MaxLength = 0;
+									//then, if you have a greater length, update
+									if(fields[i].Length > output[i].MaxLength )
 										output[i].MaxLength = fields[i].Length;
 									
 									//fix MaxLengths
 									switch(output[i].DataType) {
+										//do nothing cases
 										case "VarChar":
 										case "NVarChar":
 										case "Char":
 										case "NChar":
-											break;
+										break;
+										//the rest need null for length	
 										default:
 											output[i].MaxLength = null;
 											break;
@@ -436,6 +441,7 @@ public class Interrogator {
 			foreach( DestinationColumn col in output) {
 				if( col.DataType == null ) {
 					col.DataType = "VarBinary";
+					col.MaxLength = -1; //"MAX"
 				}
 			}	
 		}

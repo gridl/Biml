@@ -40,6 +40,9 @@
 				<Annotations>
 					<Annotation>
 						SQL DataType: <#=col.DataType #>
+						MaxLength: <#=col.MaxLength #>
+						Precision: <#=col.Precision #>
+						Scale: <#=col.Scale #>
                     </Annotation>
                 </Annotations>						
 				</Column>

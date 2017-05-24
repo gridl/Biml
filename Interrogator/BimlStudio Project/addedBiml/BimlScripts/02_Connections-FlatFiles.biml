@@ -1,12 +1,6 @@
 ﻿<#@ include file="00_Configuration.biml"#>
-<#@ template tier="3" #>
+<#@ template tier="2" #>
 <Biml xmlns="http://schemas.varigence.com/biml.xsd">
-	<Annotations>
-		<Annotation AnnotationType="CodeComment">
-			For now, default to C:\Repositories\Biml\Interrogator\testdata -- later we can add that to 00_configuration.
-			Packages will overwrite the file location through a variable passed in from parent packages.
-        </Annotation>
-    </Annotations>
 	<Connections>
 		<#
 			foreach (var FileFormat in RootNode.FileFormats) { 
