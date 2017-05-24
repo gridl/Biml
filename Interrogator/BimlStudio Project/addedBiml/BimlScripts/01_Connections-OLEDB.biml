@@ -10,7 +10,7 @@
 		<OleDbConnection Name="OLEDB_Extract" ConnectionString="Provider=SQLNCLI11.1;Data Source=<#=ExtractServer #>;Initial Catalog=<#= ExtractDatabase#>;Integrated Security=SSPI" CreateInProject="true" >
 			<Expressions>
 				<Expression PropertyName="ConnectionString">
-					"Provider=SQLNCLI11.1;Data Source=" + @[$Project::ExtractServer]+ ";Initial Catalog=" + @[$Project::ExtractDatabase] + ";Integrated Security=SSPI"
+					"Provider=SQLNCLI11.1;Data Source=" + @[User::ExtractServer] + ";Initial Catalog=" + @[User::ExtractDatabase] + ";Integrated Security=SSPI"
                 </Expression>
             </Expressions>
         </OleDbConnection>

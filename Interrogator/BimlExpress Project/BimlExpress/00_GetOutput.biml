@@ -1,0 +1,14 @@
+<Biml xmlns="http://schemas.varigence.com/biml.xsd">  
+  <#  
+      string xBiml = RootNode.GetBiml();  
+      XmlDocument xmlDoc = new XmlDocument();  
+      xmlDoc.LoadXml(xBiml);  
+      string sFile = @"C:\Repositories\Biml\Interrogator\BimlExpress Project\BimlExpress\output.biml";  
+ 
+      xmlDoc.Save(sFile);  
+   #> 
+</Biml>  
+ 
+<#@ template tier="100" #> 
+<#@ import namespace="Varigence.Biml.CoreLowerer.SchemaManagement"  #> 
+<#@ import namespace="System.Xml"  #>

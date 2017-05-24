@@ -7,6 +7,10 @@
 					This package creates all the database objects needed by the other packages.
 				</Annotation>
             </Annotations>
+            <Variables>
+				<Variable Namespace="User" Name="ExtractServer" DataType="String">localhost</Variable>
+				<Variable Namespace="User" Name="ExtractDatabase" DataType="String">Interrogator</Variable>
+            </Variables>
 			<Tasks>
 				<Container Name="Create Schemas">
 					<Tasks>

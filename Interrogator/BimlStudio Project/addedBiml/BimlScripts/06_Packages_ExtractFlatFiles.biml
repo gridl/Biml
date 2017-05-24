@@ -10,10 +10,12 @@ string DestinationConnectionString = "Server=" + ExtractServer + ";Database=" + 
 DevelopmentHelper h = new DevelopmentHelper(DestinationConnectionString);
 
 #>
+<Annotations>
+    <Annotation>I'm here</Annotation>
+</Annotations>
 	<Packages>
 	<#
 		foreach (var table in RootNode.Tables.Where(t => t.GetTag("TableGroup") == "FlatFile")) { 
-			
 	#>	
 		<Package Name="Extract_FF_<#= table.Name #>"  DelayValidation="true">
 			<Annotations>
@@ -68,6 +70,8 @@ DevelopmentHelper h = new DevelopmentHelper(DestinationConnectionString);
 				<Connection ConnectionName="FF_<#= table.Name #>"/>
 			</Connections>
 			<Variables>
+				<Variable Namespace="User" Name="ExtractServer" DataType="String">localhost</Variable>
+				<Variable Namespace="User" Name="ExtractDatabase" DataType="String">Interrogator</Variable>
 				<Variable Name="SourceFilePath" DataType="String" Namespace="User">C:\Repositories\Biml\Interrogator\testdata\<#=table.Name#>.csv</Variable>
             </Variables>
         </Package>
