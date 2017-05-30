@@ -9,7 +9,7 @@
 	
 	//verify the environment is ready to go:
 	string CreateDatabaseDDL = @"IF NOT EXISTS(SELECT database_id FROM sys.databases WHERE Name = '" + ExtractDatabase + @"')
-		CREATE DATABASE Interrogator";
+		CREATE DATABASE " + ExtractDatabase;
 		
 	string ConnectionString = "Server=" + ExtractServer + ";Database=master;Trusted_Connection=True";
 	if (!ExecuteDDL(CreateDatabaseDDL, ConnectionString) ) {
