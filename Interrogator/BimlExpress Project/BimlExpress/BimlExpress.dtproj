@@ -26,7 +26,7 @@
           <SSIS:Property SSIS:Name="CreatorComputerName">SLOWDERALPHA</SSIS:Property>
           <SSIS:Property SSIS:Name="Description">
           </SSIS:Property>
-          <SSIS:Property SSIS:Name="PasswordVerifier" SSIS:Sensitive="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAo/DnKc0XEUmWVPFWoKBa/gAAAAACAAAAAAAQZgAAAAEAACAAAABt6t0NxqaPxyICBjuX68no/XWn5QFGslD9q3ATrm8/XAAAAAAOgAAAAAIAACAAAADG7WOHIBtWJDr7eszN+jNV8U3jnTCAR9sHaO0fT3KKYZAAAACzLYw3UvtephtpSPH+duDY5k3T00r8j6gKFQbvS709pueZRbANpm4JDMRWL1KrtvvlDAmKLrj9OJP9DJ4DjkHBiuPHk85Gn+kd85lT8eFD9PEyu4Bm4CONZFEIQig+8CrrcxRbQwl3u/xVxKdovibBg4CEmwKWPYgEMQz/u6+r2Dsq96HcwRr0DcOD01Q7ZVVAAAAAyDT9BdS2eK78tGzkTdZ2I8g8lGyebVJ2OKH7OcnKVwoz7ZyW0GHoKPaheM1z9uiQW+ymY8LxcUFCJLjI8eyIKQ==</SSIS:Property>
+          <SSIS:Property SSIS:Name="PasswordVerifier" SSIS:Sensitive="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAo/DnKc0XEUmWVPFWoKBa/gAAAAACAAAAAAAQZgAAAAEAACAAAABJSR3PZMIJaOrSKhFHn5KQnje1smStTmHSAho+6nvQYwAAAAAOgAAAAAIAACAAAADXu8KLg7YqoUWIU/H/KISoHHBscQZgIpFAw2otNHuzvJAAAAB83S4fk6I50wozCFDWiGg8nhrprR4Pp+z3IVQp+AQXWYJZyTJ/QpeNS90UQ1zVlkApCrxJAjMqYB8l+igqRLqNT5yLClHZxdY64Yr7/+h54U+WKf1D1QvkekkLzCJp2yYxwewZK25lxxiujLrKYNmkZThwXWTyf2Fgj8N5HV460dAgkOOPSWoIG4UVTp8D1eRAAAAAytMkI5q0Tug9jGhP52jPWeSkqMn++tq3vOiMuipE3Apxk+bP8RcLX534N/cek7DRyafYgnllDspWDaFLt/s4fA==</SSIS:Property>
           <SSIS:Property SSIS:Name="FormatVersion">1</SSIS:Property>
         </SSIS:Properties>
         <SSIS:Packages />
@@ -40,13 +40,13 @@
   </DeploymentModelSpecificContent>
   <ControlFlowParts />
   <Miscellaneous>
-   <ProjectItem>
-      <Name>00_GetOutput.biml</Name>
-      <FullPath>00_GetOutput.biml</FullPath>
-    </ProjectItem>
     <ProjectItem>
       <Name>00_Configuration.biml</Name>
       <FullPath>00_Configuration.biml</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>00_GetOutput.biml</Name>
+      <FullPath>00_GetOutput.biml</FullPath>
     </ProjectItem>
     <ProjectItem>
       <Name>01_Connections-ADONET.biml</Name>
@@ -91,7 +91,7 @@
     <ProjectItem>
       <Name>06_Packages_ExtractFlatFiles.biml</Name>
       <FullPath>06_Packages_ExtractFlatFiles.biml</FullPath>
-    </ProjectItem>  
+    </ProjectItem>
     <ProjectItem>
       <Name>ConversionUtility.cs</Name>
       <FullPath>../Code/ConversionUtility.cs</FullPath>

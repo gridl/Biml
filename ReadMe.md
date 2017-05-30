@@ -9,3 +9,4 @@ There are now two projects for Interrogator. One is for BimlStudio, the other is
 [DataTypeConversion](http://toyboxcreations.net/datatype-conversion-utility-for-biml/) -- need to convert back and forth between Biml, SQL Server, and SSIS datatypes?  Get my utility in this repo!
 
 
+@[$Project::ExtractServer]

@@ -55,6 +55,24 @@
     <Live Include="addedBiml\Connections\ExcelOleDbConnection.biml">
       <RootFolderId>0</RootFolderId>
     </Live>
+    <Live Include="addedBiml\Connections\FF_Character-Quoted.biml">
+      <RootFolderId>0</RootFolderId>
+    </Live>
+    <Live Include="addedBiml\Connections\FF_Character.biml">
+      <RootFolderId>0</RootFolderId>
+    </Live>
+    <Live Include="addedBiml\Connections\FF_DateAndTime.biml">
+      <RootFolderId>0</RootFolderId>
+    </Live>
+    <Live Include="addedBiml\Connections\FF_DateOnly.biml">
+      <RootFolderId>0</RootFolderId>
+    </Live>
+    <Live Include="addedBiml\Connections\FF_Issue6.biml">
+      <RootFolderId>0</RootFolderId>
+    </Live>
+    <Live Include="addedBiml\Connections\FF_Numerics.biml">
+      <RootFolderId>0</RootFolderId>
+    </Live>
     <Live Include="addedBiml\Connections\OLEDB_Extract.biml">
       <RootFolderId>0</RootFolderId>
     </Live>
@@ -80,6 +98,24 @@
       <RootFolderId>0</RootFolderId>
     </Live>
     <Live Include="addedBiml\Packages\CreateObjects.biml">
+      <RootFolderId>0</RootFolderId>
+    </Live>
+    <Live Include="addedBiml\Packages\Extract_FF_Character-Quoted.biml">
+      <RootFolderId>0</RootFolderId>
+    </Live>
+    <Live Include="addedBiml\Packages\Extract_FF_Character.biml">
+      <RootFolderId>0</RootFolderId>
+    </Live>
+    <Live Include="addedBiml\Packages\Extract_FF_DateAndTime.biml">
+      <RootFolderId>0</RootFolderId>
+    </Live>
+    <Live Include="addedBiml\Packages\Extract_FF_DateOnly.biml">
+      <RootFolderId>0</RootFolderId>
+    </Live>
+    <Live Include="addedBiml\Packages\Extract_FF_Issue6.biml">
+      <RootFolderId>0</RootFolderId>
+    </Live>
+    <Live Include="addedBiml\Packages\Extract_FF_Numerics.biml">
       <RootFolderId>0</RootFolderId>
     </Live>
     <Live Include="addedBiml\Schemas\Extract.Extract.biml">
