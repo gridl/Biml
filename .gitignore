@@ -35,9 +35,12 @@ bld/
 **/addedBiml/Tables/
 **/documentation/
 
+
 # MSTest test Results
 [Tt]est[Rr]esult*/
 [Bb]uild[Ll]og.*
+
+# BimlExpress files we don't want to check in 
 /Interrogator/BimlExpress Project/BimlExpress/06_Packages_ExtractFlatFiles.biml
 /Interrogator/BimlExpress Project/BimlExpress/05_Packages_CreateObjects.biml
 /Interrogator/BimlExpress Project/BimlExpress/04_Tables_SQL-ALL.biml
@@ -51,3 +54,4 @@ bld/
 /Interrogator/BimlExpress Project/BimlExpress/01_Connections-ADONET.biml
 /Interrogator/BimlExpress Project/BimlExpress/00_Configuration.biml
 /Interrogator/BimlExpress Project/Code
+/Interrogator/BimlExpress Project/BimlExpress/*.dtsx

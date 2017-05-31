@@ -12,13 +12,11 @@ DevelopmentHelper h = new DevelopmentHelper(DestinationConnectionString);
 #>
 <Annotations>
     <Annotation>
-    <#
-		foreach (var table in RootNode.Tables.Where(t => t.GetTag("TableGroup") == "FlatFile")) { 
-	#>	
+    test
         
     </Annotation>
 </Annotations>
-	<Packages>
+<Packages>
 	<#
 		foreach (var table in RootNode.Tables.Where(t => t.GetTag("TableGroup") == "FlatFile")) { 
 	#>	
@@ -84,4 +82,5 @@ DevelopmentHelper h = new DevelopmentHelper(DestinationConnectionString);
 		}
 	#>
     </Packages>
+	
 </Biml>
