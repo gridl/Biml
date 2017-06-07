@@ -1,3 +1,7 @@
+<#@ template tier="100" #> 
+<#@ import namespace="Varigence.Biml.CoreLowerer.SchemaManagement"  #> 
+<#@ import namespace="System.Xml"  #>
+
 <Biml xmlns="http://schemas.varigence.com/biml.xsd">  
   <#  
       string xBiml = RootNode.GetBiml();  
@@ -9,6 +13,3 @@
    #> 
 </Biml>  
  
-<#@ template tier="100" #> 
-<#@ import namespace="Varigence.Biml.CoreLowerer.SchemaManagement"  #> 
-<#@ import namespace="System.Xml"  #>

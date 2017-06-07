@@ -1,5 +1,5 @@
-﻿<#@ include file="00_Configuration.biml"#>
-<#@ template tier="4" #>
+﻿<#@ template tier="4" #>
+<#@ include file="00_Configuration.biml"#>
 <#@ code file="..\Code\Interrogator.cs" #>
 <#@ code file="..\Code\ConversionUtility.cs" #>
 <#@ import namespace="System.IO" #>
@@ -16,7 +16,7 @@
 		foreach (var file in d.GetFiles())	{
 			if(acceptedFilePatterns.Contains(file.Extension)) {
 	#>
-		<Table SchemaName="Extract.Extract" Name="<#= file.Name.Replace(file.Extension,"") #>" CompressionType="Page">
+		<Table SchemaName="Extract" Name="<#= file.Name.Replace(file.Extension,"") #>" CompressionType="Page">
 			<Annotations>
 				<Annotation AnnotationType="CodeComment">
 					Page compression on by default.

@@ -121,6 +121,9 @@
     <Live Include="addedBiml\Schemas\Extract.Extract.biml">
       <RootFolderId>0</RootFolderId>
     </Live>
+    <Live Include="addedBiml\Tables\Extract.Extract.'P6000E-Individual Attributes by$'.biml">
+      <RootFolderId>0</RootFolderId>
+    </Live>
     <Live Include="addedBiml\Tables\Extract.Extract.Character-Quoted.biml">
       <RootFolderId>0</RootFolderId>
     </Live>

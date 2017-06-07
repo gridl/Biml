@@ -1,11 +1,32 @@
-﻿<#@ include file="00_Configuration.biml"#>
-<#@ template tier="2" #>
+﻿<#@ template tier="2" #>
+<#@ include file="00_Configuration.biml"#>
+
+<#@ code file="..\Code\Interrogator.cs" #>
+<#@ code file="..\Code\ConversionUtility.cs" #>
+<#@ import namespace="System.IO" #>
+
 <Biml xmlns="http://schemas.varigence.com/biml.xsd">
+<# 	
+	DirectoryInfo d = new DirectoryInfo(sourceFolder);
+	
+	//data type conversion utility
+	ConversionUtility cu = new ConversionUtility();
+#>
+    <Annotations>
+        <Annotation AnnotationType="CodeComment">Changing Flat File Connections to read files, like File Formats.</Annotation>
+    </Annotations>
 	<Connections>
 		<#
-			foreach (var FileFormat in RootNode.FileFormats) { 
-		#>
-			<FlatFileConnection Name="FF_<#= FileFormat.Name#>" FilePath="C:\Repositories\Biml\Interrogator\testdata\<#= FileFormat.Name#>.csv" FileFormat="<#= FileFormat.Name#>">
+    		string[] acceptedFilePatterns = new string[]{".csv",".txt"}; 
+    		foreach (var file in d.GetFiles())	{
+    			//changed the extension of the file to lower case so you don't have to include upper and lower variants in your list.
+    			if(acceptedFilePatterns.Contains(file.Extension.ToLower())) {
+    				Interrogator i = new Interrogator();
+    				//the column delimiter, rows to skip, and text qualifier should be parameterized when you call this method
+    				List<DestinationColumn> DestinationObject = i.ProcessFile(file.FullName, ',', true, 0, "\"");
+    				//those same parameters should get passed in below too
+    	#>
+			<FlatFileConnection Name="FF_<#= file.Name.Replace(file.Extension,"") #>" FilePath="C:\Repositories\Biml\Interrogator\testdata\<#= file.Name.Replace(file.Extension,"") #>.csv" FileFormat="<#= file.Name.Replace(file.Extension,"") #>">
 				<Expressions>
 					<Expression PropertyName="ConnectionString">
 						@[User::SourceFilePath]
@@ -13,6 +34,7 @@
 	            </Expressions>	
 			</FlatFileConnection>
 		<#
+		        }
 			}
 		#>
     </Connections>

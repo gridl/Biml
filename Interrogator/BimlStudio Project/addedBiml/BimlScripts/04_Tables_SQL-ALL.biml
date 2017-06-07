@@ -1,4 +1,5 @@
-﻿<Biml xmlns="http://schemas.varigence.com/biml.xsd">
+﻿<#@ template tier="4" #>
+<Biml xmlns="http://schemas.varigence.com/biml.xsd">
 	<Tables>
 	<!-- Get all Schemas, tables and views -->
 	<#

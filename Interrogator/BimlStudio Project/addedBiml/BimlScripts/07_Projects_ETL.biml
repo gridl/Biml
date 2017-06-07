@@ -1,5 +1,6 @@
-﻿<#@ include file="00_Configuration.biml"#>
-<#@ template tier="7" #>
+﻿<#@ template tier="7" #>
+<#@ include file="00_Configuration.biml"#>
+
 <Biml xmlns="http://schemas.varigence.com/biml.xsd">
 	<Projects>
 		<PackageProject Name="ETL Project">

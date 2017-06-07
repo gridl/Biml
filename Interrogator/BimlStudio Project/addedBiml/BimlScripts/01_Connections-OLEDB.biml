@@ -1,5 +1,6 @@
-﻿<#@ include file="00_Configuration.biml"#>
-<#@ template tier="1" #>
+﻿<#@ template tier="1" #>
+<#@ include file="00_Configuration.biml"#>
+
 <Biml xmlns="http://schemas.varigence.com/biml.xsd"> 
 	<Annotations>
 		<Annotation AnnotationType="CodeComment">
