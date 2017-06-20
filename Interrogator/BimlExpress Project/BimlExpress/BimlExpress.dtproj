@@ -26,7 +26,7 @@
           <SSIS:Property SSIS:Name="CreatorComputerName">SLOWDERALPHA</SSIS:Property>
           <SSIS:Property SSIS:Name="Description">
           </SSIS:Property>
-          <SSIS:Property SSIS:Name="PasswordVerifier" SSIS:Sensitive="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAiYqSUCZUe0yg+wXaV0eRDwAAAAACAAAAAAAQZgAAAAEAACAAAAAtPpTE5AtBXbHNhQt/y+OTp6rpZTw+UxnTEMZS4Wn01wAAAAAOgAAAAAIAACAAAACDQ9IyWDDkFC5AUr8jBuEIVtsqGQgYo7BokJyJMh3kMZAAAAD714uFPE+3EFBGqn2QvskY8htd8R6CMARQdrnSp0oeJNPct/XHpyOywK2fqEToO5XaABBScQITh7kGZvZUEnUXjbmWAhKyaJWK4VrKZ3mUlODNkPPT07lx6STKRA0UjgSdjea/43m441i6EJrTqVXzN5oyk1Pqpn/w4P1P3+T0trGR2wI5f2sF3NZ/SfKUhLJAAAAARkap2JtnWdSrOH+qfE6OAfwPJgDKR5+I167t01akishKOF/rfP26WsvPvrtBMiP8DrrLTaMZ6Ybt89ZdMcNzlQ==</SSIS:Property>
+          <SSIS:Property SSIS:Name="PasswordVerifier" SSIS:Sensitive="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAiYqSUCZUe0yg+wXaV0eRDwAAAAACAAAAAAAQZgAAAAEAACAAAABixlXBfqBi4K9vVXQGfBaoVr6+YSYeuiToUyMEjbC7gwAAAAAOgAAAAAIAACAAAADQYgKc8aoTiCZrH8XZv+sQ2KcsX9X7XADHI8cIfcIWTJAAAAB5A6efhXLvQuF1z3yCHM+8/eeehat9IQ9a4MWx7QkQ6BWeOhkm/lGZQgPUn4p8z2uOaQ64omnggPLSt2u4x3FeVDwEYFuY717N3ZxdjZ+n8EGFcmlDxKs6ZA3cs1HhL5+tLmKqpgZgVatQnBLOiZJ4KDcdoPmgBtdFxEVm4e0RkZjYzy125yvObmkHCV8rvztAAAAAA3Fo3Oznoqt1rDMq9Six+ti0oskZssRlcAFcb4qyZeGyegxn1pI2Hi0kqLrGlz9enn8oY+NFuNlmWdxjzow3MQ==</SSIS:Property>
           <SSIS:Property SSIS:Name="FormatVersion">1</SSIS:Property>
         </SSIS:Properties>
         <SSIS:Packages>
@@ -44,6 +44,21 @@
         </SSIS:ConnectionManagers>
         <SSIS:DeploymentInfo>
           <SSIS:ProjectConnectionParameters>
+            <SSIS:Parameter SSIS:Name="CM.ADONET_Extract.ConnectionString">
+              <SSIS:Properties>
+                <SSIS:Property SSIS:Name="ID">
+                </SSIS:Property>
+                <SSIS:Property SSIS:Name="CreationName">
+                </SSIS:Property>
+                <SSIS:Property SSIS:Name="Description">
+                </SSIS:Property>
+                <SSIS:Property SSIS:Name="IncludeInDebugDump">0</SSIS:Property>
+                <SSIS:Property SSIS:Name="Required">0</SSIS:Property>
+                <SSIS:Property SSIS:Name="Sensitive">0</SSIS:Property>
+                <SSIS:Property SSIS:Name="Value">Data Source=localhost;Initial Catalog=Interrogator;Integrated Security=true;</SSIS:Property>
+                <SSIS:Property SSIS:Name="DataType">18</SSIS:Property>
+              </SSIS:Properties>
+            </SSIS:Parameter>
             <SSIS:Parameter SSIS:Name="CM.ADONET_Extract.InitialCatalog">
               <SSIS:Properties>
                 <SSIS:Property SSIS:Name="ID">
@@ -114,6 +129,21 @@
                 <SSIS:Property SSIS:Name="IncludeInDebugDump">0</SSIS:Property>
                 <SSIS:Property SSIS:Name="Required">0</SSIS:Property>
                 <SSIS:Property SSIS:Name="Sensitive">0</SSIS:Property>
+                <SSIS:Property SSIS:Name="DataType">18</SSIS:Property>
+              </SSIS:Properties>
+            </SSIS:Parameter>
+            <SSIS:Parameter SSIS:Name="CM.OLEDB_Extract.ConnectionString">
+              <SSIS:Properties>
+                <SSIS:Property SSIS:Name="ID">
+                </SSIS:Property>
+                <SSIS:Property SSIS:Name="CreationName">
+                </SSIS:Property>
+                <SSIS:Property SSIS:Name="Description">
+                </SSIS:Property>
+                <SSIS:Property SSIS:Name="IncludeInDebugDump">0</SSIS:Property>
+                <SSIS:Property SSIS:Name="Required">0</SSIS:Property>
+                <SSIS:Property SSIS:Name="Sensitive">0</SSIS:Property>
+                <SSIS:Property SSIS:Name="Value">data source=localhost;initial catalog=Interrogator;provider=SQLNCLI11.1;integrated security=SSPI;</SSIS:Property>
                 <SSIS:Property SSIS:Name="DataType">18</SSIS:Property>
               </SSIS:Properties>
             </SSIS:Parameter>
@@ -194,14 +224,14 @@
           <SSIS:PackageInfo>
             <SSIS:PackageMetaData SSIS:Name="CreateObjects.dtsx">
               <SSIS:Properties>
-                <SSIS:Property SSIS:Name="ID">{D03085E4-AB48-4368-838F-E73B3EDFE393}</SSIS:Property>
+                <SSIS:Property SSIS:Name="ID">{EC2C22DA-130A-47BF-9CE5-4543E14C0591}</SSIS:Property>
                 <SSIS:Property SSIS:Name="Name">CreateObjects</SSIS:Property>
                 <SSIS:Property SSIS:Name="VersionMajor">0</SSIS:Property>
                 <SSIS:Property SSIS:Name="VersionMinor">0</SSIS:Property>
                 <SSIS:Property SSIS:Name="VersionBuild">0</SSIS:Property>
                 <SSIS:Property SSIS:Name="VersionComments">
                 </SSIS:Property>
-                <SSIS:Property SSIS:Name="VersionGUID">{511E2594-0CA3-443A-BDB9-EC7E065C9052}</SSIS:Property>
+                <SSIS:Property SSIS:Name="VersionGUID">{54905FEB-30F5-4868-978F-83EA50350EFB}</SSIS:Property>
                 <SSIS:Property SSIS:Name="PackageFormatVersion">8</SSIS:Property>
                 <SSIS:Property SSIS:Name="Description">
                 </SSIS:Property>
@@ -211,14 +241,14 @@
             </SSIS:PackageMetaData>
             <SSIS:PackageMetaData SSIS:Name="Extract_FF_Character.dtsx">
               <SSIS:Properties>
-                <SSIS:Property SSIS:Name="ID">{7AB182F6-EBE5-4194-847F-4EA2B9CA170E}</SSIS:Property>
+                <SSIS:Property SSIS:Name="ID">{EA1CDCDF-94BE-4376-B8CB-7CED23E228DE}</SSIS:Property>
                 <SSIS:Property SSIS:Name="Name">Extract_FF_Character</SSIS:Property>
                 <SSIS:Property SSIS:Name="VersionMajor">0</SSIS:Property>
                 <SSIS:Property SSIS:Name="VersionMinor">0</SSIS:Property>
                 <SSIS:Property SSIS:Name="VersionBuild">0</SSIS:Property>
                 <SSIS:Property SSIS:Name="VersionComments">
                 </SSIS:Property>
-                <SSIS:Property SSIS:Name="VersionGUID">{447D2A52-0554-49C8-8FF4-84833705A0EA}</SSIS:Property>
+                <SSIS:Property SSIS:Name="VersionGUID">{C5A57884-1DE9-4D82-BC9A-9D386854779A}</SSIS:Property>
                 <SSIS:Property SSIS:Name="PackageFormatVersion">8</SSIS:Property>
                 <SSIS:Property SSIS:Name="Description">
                 </SSIS:Property>
@@ -396,14 +426,14 @@
             </SSIS:PackageMetaData>
             <SSIS:PackageMetaData SSIS:Name="Extract_FF_Character-Quoted.dtsx">
               <SSIS:Properties>
-                <SSIS:Property SSIS:Name="ID">{6398DE91-4A9F-4FF3-9B20-39437C555C52}</SSIS:Property>
+                <SSIS:Property SSIS:Name="ID">{FACEE636-AD2A-40EB-81ED-2617060CA250}</SSIS:Property>
                 <SSIS:Property SSIS:Name="Name">Extract_FF_Character-Quoted</SSIS:Property>
                 <SSIS:Property SSIS:Name="VersionMajor">0</SSIS:Property>
                 <SSIS:Property SSIS:Name="VersionMinor">0</SSIS:Property>
                 <SSIS:Property SSIS:Name="VersionBuild">0</SSIS:Property>
                 <SSIS:Property SSIS:Name="VersionComments">
                 </SSIS:Property>
-                <SSIS:Property SSIS:Name="VersionGUID">{032C7EDF-11F2-482C-942D-131614A171F6}</SSIS:Property>
+                <SSIS:Property SSIS:Name="VersionGUID">{8556E460-D407-48CC-B4D5-E0AC07D60680}</SSIS:Property>
                 <SSIS:Property SSIS:Name="PackageFormatVersion">8</SSIS:Property>
                 <SSIS:Property SSIS:Name="Description">
                 </SSIS:Property>
@@ -581,14 +611,14 @@
             </SSIS:PackageMetaData>
             <SSIS:PackageMetaData SSIS:Name="Extract_FF_DateAndTime.dtsx">
               <SSIS:Properties>
-                <SSIS:Property SSIS:Name="ID">{130643BE-85F8-48F2-A61B-3F76025F00B7}</SSIS:Property>
+                <SSIS:Property SSIS:Name="ID">{8F6EEE61-DF44-4A8F-8830-E8B997808058}</SSIS:Property>
                 <SSIS:Property SSIS:Name="Name">Extract_FF_DateAndTime</SSIS:Property>
                 <SSIS:Property SSIS:Name="VersionMajor">0</SSIS:Property>
                 <SSIS:Property SSIS:Name="VersionMinor">0</SSIS:Property>
                 <SSIS:Property SSIS:Name="VersionBuild">0</SSIS:Property>
                 <SSIS:Property SSIS:Name="VersionComments">
                 </SSIS:Property>
-                <SSIS:Property SSIS:Name="VersionGUID">{ED338D3B-495D-4C29-958D-CB018A16AB0C}</SSIS:Property>
+                <SSIS:Property SSIS:Name="VersionGUID">{8207CC5D-4CB7-4085-A7C4-7040E3B6E2F6}</SSIS:Property>
                 <SSIS:Property SSIS:Name="PackageFormatVersion">8</SSIS:Property>
                 <SSIS:Property SSIS:Name="Description">
                 </SSIS:Property>
@@ -766,14 +796,14 @@
             </SSIS:PackageMetaData>
             <SSIS:PackageMetaData SSIS:Name="Extract_FF_DateOnly.dtsx">
               <SSIS:Properties>
-                <SSIS:Property SSIS:Name="ID">{BA62FF05-2869-490E-BBD5-9CB1FDCDD285}</SSIS:Property>
+                <SSIS:Property SSIS:Name="ID">{5415D6CE-61AF-41CE-81CB-CE5014E43695}</SSIS:Property>
                 <SSIS:Property SSIS:Name="Name">Extract_FF_DateOnly</SSIS:Property>
                 <SSIS:Property SSIS:Name="VersionMajor">0</SSIS:Property>
                 <SSIS:Property SSIS:Name="VersionMinor">0</SSIS:Property>
                 <SSIS:Property SSIS:Name="VersionBuild">0</SSIS:Property>
                 <SSIS:Property SSIS:Name="VersionComments">
                 </SSIS:Property>
-                <SSIS:Property SSIS:Name="VersionGUID">{1BDD6176-A7A6-4354-A06E-EC77C0774F49}</SSIS:Property>
+                <SSIS:Property SSIS:Name="VersionGUID">{0B80B4C7-0641-41CF-A2FF-B6F7A82395BA}</SSIS:Property>
                 <SSIS:Property SSIS:Name="PackageFormatVersion">8</SSIS:Property>
                 <SSIS:Property SSIS:Name="Description">
                 </SSIS:Property>
@@ -951,14 +981,14 @@
             </SSIS:PackageMetaData>
             <SSIS:PackageMetaData SSIS:Name="Extract_FF_Issue6.dtsx">
               <SSIS:Properties>
-                <SSIS:Property SSIS:Name="ID">{1C9EC742-242F-4B0D-AFAA-71E439AF3B4D}</SSIS:Property>
+                <SSIS:Property SSIS:Name="ID">{D8E33D11-A312-4653-A2AA-19A0D0F7A3AB}</SSIS:Property>
                 <SSIS:Property SSIS:Name="Name">Extract_FF_Issue6</SSIS:Property>
                 <SSIS:Property SSIS:Name="VersionMajor">0</SSIS:Property>
                 <SSIS:Property SSIS:Name="VersionMinor">0</SSIS:Property>
                 <SSIS:Property SSIS:Name="VersionBuild">0</SSIS:Property>
                 <SSIS:Property SSIS:Name="VersionComments">
                 </SSIS:Property>
-                <SSIS:Property SSIS:Name="VersionGUID">{7B91AF20-4493-4FEB-B3C7-A09C36C0833F}</SSIS:Property>
+                <SSIS:Property SSIS:Name="VersionGUID">{FCE56D0B-BB09-4161-BA3B-95B372A38315}</SSIS:Property>
                 <SSIS:Property SSIS:Name="PackageFormatVersion">8</SSIS:Property>
                 <SSIS:Property SSIS:Name="Description">
                 </SSIS:Property>
@@ -1136,14 +1166,14 @@
             </SSIS:PackageMetaData>
             <SSIS:PackageMetaData SSIS:Name="Extract_FF_Numerics.dtsx">
               <SSIS:Properties>
-                <SSIS:Property SSIS:Name="ID">{82F3B639-67BB-44ED-A62C-6821776F97E1}</SSIS:Property>
+                <SSIS:Property SSIS:Name="ID">{2AF7E11E-6752-4DCF-9E01-54EA67001274}</SSIS:Property>
                 <SSIS:Property SSIS:Name="Name">Extract_FF_Numerics</SSIS:Property>
                 <SSIS:Property SSIS:Name="VersionMajor">0</SSIS:Property>
                 <SSIS:Property SSIS:Name="VersionMinor">0</SSIS:Property>
                 <SSIS:Property SSIS:Name="VersionBuild">0</SSIS:Property>
                 <SSIS:Property SSIS:Name="VersionComments">
                 </SSIS:Property>
-                <SSIS:Property SSIS:Name="VersionGUID">{779B420A-52E6-4318-9778-98570641CB23}</SSIS:Property>
+                <SSIS:Property SSIS:Name="VersionGUID">{D1746F51-CA49-4BB6-8DF9-6F385810564F}</SSIS:Property>
                 <SSIS:Property SSIS:Name="PackageFormatVersion">8</SSIS:Property>
                 <SSIS:Property SSIS:Name="Description">
                 </SSIS:Property>
