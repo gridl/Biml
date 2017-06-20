@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ConnectionManager p1:ObjectName="ADONET_Extract" p1:DTSID="{6DD067F7-FA76-4731-BD16-AE8B4182DD88}" p1:refId="Package.ConnectionManagers[ADONET_Extract]" p1:CreationName="ADO.NET:System.Data.SqlClient.SqlConnection, System.Data, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" xmlns:p1="www.microsoft.com/SqlServer/Dts" xmlns="www.microsoft.com/SqlServer/Dts">
+<ConnectionManager p1:ObjectName="ADONET_Extract" p1:DTSID="{A17A6077-6745-42D0-BA6B-775B79D1BB43}" p1:refId="Package.ConnectionManagers[ADONET_Extract]" p1:CreationName="ADO.NET:System.Data.SqlClient.SqlConnection, System.Data, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" xmlns:p1="www.microsoft.com/SqlServer/Dts" xmlns="www.microsoft.com/SqlServer/Dts">
   <ObjectData>
     <DTS:ConnectionManager xmlns:DTS="www.microsoft.com/SqlServer/Dts" DTS:ConnectionString="Data Source=localhost;Initial Catalog=Interrogator;Integrated Security=true"></DTS:ConnectionManager>
   </ObjectData>
