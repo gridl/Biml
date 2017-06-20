@@ -4,12 +4,14 @@
 
 <Biml xmlns="http://schemas.varigence.com/biml.xsd">  
   <#  
+      
       string xBiml = RootNode.GetBiml();  
       XmlDocument xmlDoc = new XmlDocument();  
       xmlDoc.LoadXml(xBiml);  
       string sFile = @"C:\Repositories\Biml\Interrogator\BimlExpress Project\BimlExpress\output.biml";  
  
       xmlDoc.Save(sFile);  
+      
    #> 
 </Biml>  
  

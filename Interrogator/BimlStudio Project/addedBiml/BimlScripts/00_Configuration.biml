@@ -17,7 +17,7 @@
     }
 	
 	//where are the flat file demo files stored?
-	string sourceFolder = @"C:\Repositories\Biml\Interrogator\testdata";
+	string SourceFolder = @"C:\Repositories\Biml\Interrogator\testdata";
 	
 	/*
 		per http://billfellows.blogspot.com/2016/09/resolving-biml-project-level-connection.html

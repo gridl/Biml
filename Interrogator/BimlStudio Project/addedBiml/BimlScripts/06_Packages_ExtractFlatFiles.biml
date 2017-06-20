@@ -22,7 +22,7 @@ DevelopmentHelper h = new DevelopmentHelper(DestinationConnectionString);
 	<#
 		foreach (var table in RootNode.Tables.Where(t => t.GetTag("TableGroup") == "FlatFile")) { 
 	#>	
-		<Package Name="Extract_FF_<#= table.Name #>"  DelayValidation="true">
+		<Package Name="Extract_FF_<#= table.Name #>"  DelayValidation="true" ProtectionLevel="EncryptSensitiveWithUserKey">
 			<Annotations>
 				<Annotation AnnotationType="CodeComment">
 					All flat file extracts are truncate and load.
@@ -75,9 +75,9 @@ DevelopmentHelper h = new DevelopmentHelper(DestinationConnectionString);
 				<Connection ConnectionName="FF_<#= table.Name #>"/>
 			</Connections>
 			<Variables>
-				<Variable Namespace="User" Name="ExtractServer" DataType="String">localhost</Variable>
-				<Variable Namespace="User" Name="ExtractDatabase" DataType="String">Interrogator</Variable>
-				<Variable Name="SourceFilePath" DataType="String" Namespace="User">C:\Repositories\Biml\Interrogator\testdata\<#=table.Name#>.csv</Variable>
+				<Variable Namespace="User" Name="ExtractServer" DataType="String"><#=ExtractServer#></Variable>
+				<Variable Namespace="User" Name="ExtractDatabase" DataType="String"><#=ExtractDatabase#></Variable>
+				<Variable Name="SourceFilePath" DataType="String" Namespace="User"><#=SourceFolder#>\<#=table.Name#>.csv</Variable>
             </Variables>
         </Package>
 	<#

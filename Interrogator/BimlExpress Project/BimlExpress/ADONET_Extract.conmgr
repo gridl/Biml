@@ -1,9 +1,5 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<ConnectionManager p1:ObjectName="ADONET_Extract" p1:DTSID="{2BBBEECB-85B2-4DB2-99FA-AE1D94786FC3}" p1:refId="Package.ConnectionManagers[ADONET_Extract]" p1:CreationName="ADO.NET:System.Data.SqlClient.SqlConnection, System.Data, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" xmlns:p1="www.microsoft.com/SqlServer/Dts" xmlns="www.microsoft.com/SqlServer/Dts">
-  <ObjectData>
-    <DTS:ConnectionManager xmlns:DTS="www.microsoft.com/SqlServer/Dts" DTS:ConnectionString="Data Source=localhost;Initial Catalog=Interrogator;Integrated Security=true"></DTS:ConnectionManager>
-  </ObjectData>
-  <PropertyExpression p1:Name="ConnectionString">
+<ConnectionManager p1:ObjectName="ADONET_Extract" p1:DTSID="{C8CDA23B-40A6-49E4-913D-B76B016B2942}" p1:refId="Package.ConnectionManagers[ADONET_Extract]" p1:CreationName="ADO.NET:System.Data.SqlClient.SqlConnection, System.Data, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" xmlns:p1="www.microsoft.com/SqlServer/Dts" xmlns="www.microsoft.com/SqlServer/Dts">
+    <p1:ObjectData><DTS:ConnectionManager xmlns:DTS="www.microsoft.com/SqlServer/Dts" DTS:ConnectionString="Data Source=localhost;Initial Catalog=Interrogator;Integrated Security=true"></DTS:ConnectionManager></p1:ObjectData>
+<p1:PropertyExpression p1:Name="ConnectionString">
 					"Data Source=" + @[User::ExtractServer]+ ";Initial Catalog=" + @[User::ExtractDatabase] + ";Integrated Security=true"
-                </PropertyExpression>
-</ConnectionManager>
+                </p1:PropertyExpression></ConnectionManager>

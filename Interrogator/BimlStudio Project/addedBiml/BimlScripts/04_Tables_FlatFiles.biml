@@ -5,7 +5,7 @@
 <#@ import namespace="System.IO" #>
 <Biml xmlns="http://schemas.varigence.com/biml.xsd">
 <# 	
-	DirectoryInfo d = new DirectoryInfo(sourceFolder);
+	DirectoryInfo d = new DirectoryInfo(SourceFolder);
 	
 	//data type conversion utility
 	ConversionUtility cu = new ConversionUtility();

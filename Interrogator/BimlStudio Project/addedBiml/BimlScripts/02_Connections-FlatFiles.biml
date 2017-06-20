@@ -7,7 +7,7 @@
 
 <Biml xmlns="http://schemas.varigence.com/biml.xsd">
 <# 	
-	DirectoryInfo d = new DirectoryInfo(sourceFolder);
+	DirectoryInfo d = new DirectoryInfo(SourceFolder);
 	
 	//data type conversion utility
 	ConversionUtility cu = new ConversionUtility();
@@ -26,7 +26,7 @@
     				List<DestinationColumn> DestinationObject = i.ProcessFile(file.FullName, ',', true, 0, "\"");
     				//those same parameters should get passed in below too
     	#>
-			<FlatFileConnection Name="FF_<#= file.Name.Replace(file.Extension,"") #>" FilePath="C:\Repositories\Biml\Interrogator\testdata\<#= file.Name.Replace(file.Extension,"") #>.csv" FileFormat="<#= file.Name.Replace(file.Extension,"") #>">
+			<FlatFileConnection Name="FF_<#= file.Name.Replace(file.Extension,"") #>" FilePath="<#=SourceFolder#>\<#= file.Name.Replace(file.Extension,"") #>.csv" FileFormat="<#= file.Name.Replace(file.Extension,"") #>">
 				<Expressions>
 					<Expression PropertyName="ConnectionString">
 						@[User::SourceFilePath]

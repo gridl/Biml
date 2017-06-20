@@ -1,15 +1,16 @@
-﻿<#@ template tier="5" #>
+﻿<#@ include file="00_Configuration.biml"#>
+<#@ template tier="5" #>
 <Biml xmlns="http://schemas.varigence.com/biml.xsd">
 	<Packages>
-		<Package Name="CreateObjects" ConstraintMode="Linear">
+		<Package Name="CreateObjects" ConstraintMode="Linear" ProtectionLevel="EncryptSensitiveWithUserKey">
 			<Annotations>
 				<Annotation AnnotationType="CodeComment">
 					This package creates all the database objects needed by the other packages.
 				</Annotation>
             </Annotations>
             <Variables>
-				<Variable Namespace="User" Name="ExtractServer" DataType="String">localhost</Variable>
-				<Variable Namespace="User" Name="ExtractDatabase" DataType="String">Interrogator</Variable>
+				<Variable Namespace="User" Name="ExtractServer" DataType="String"><#=ExtractServer#></Variable>
+				<Variable Namespace="User" Name="ExtractDatabase" DataType="String"><#=ExtractDatabase#></Variable>
             </Variables>
 			<Tasks>
 				<Container Name="Create Schemas">

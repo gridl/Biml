@@ -16,8 +16,8 @@
             </Expressions>
         </OleDbConnection>
 		
-        <ExcelConnection Name="ExcelOleDbConnection" ConnectionString="Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Repositories\Biml\Interrogator\testdata\ExcelSource.xlsx;Extended Properties=&quot;Excel 12.0 Xml;HDR=YES&quot;;" />
+        <ExcelConnection Name="ExcelOleDbConnection" ConnectionString="Provider=Microsoft.ACE.OLEDB.12.0;Data Source=<#=SourceFolder#>\ExcelSource.xlsx;Extended Properties=&quot;Excel 12.0 Xml;HDR=YES&quot;;" />
 		
-		<ExcelConnection Name="ExcelOleDbConnection-IMEX" ConnectionString="Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Repositories\Biml\Interrogator\testdata\ExcelSource.xlsx;Extended Properties=&quot;Excel 12.0 Xml;HDR=YES;IMEX=1&quot;" />
+		<ExcelConnection Name="ExcelOleDbConnection-IMEX" ConnectionString="Provider=Microsoft.ACE.OLEDB.12.0;Data Source=<#=SourceFolder#>\ExcelSource.xlsx;Extended Properties=&quot;Excel 12.0 Xml;HDR=YES;IMEX=1&quot;" />
     </Connections>
 </Biml>
