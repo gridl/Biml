@@ -26,7 +26,7 @@
           <SSIS:Property SSIS:Name="CreatorComputerName">SLOWDERALPHA</SSIS:Property>
           <SSIS:Property SSIS:Name="Description">
           </SSIS:Property>
-          <SSIS:Property SSIS:Name="PasswordVerifier" SSIS:Sensitive="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAiYqSUCZUe0yg+wXaV0eRDwAAAAACAAAAAAAQZgAAAAEAACAAAADt7Cv/3mE1y4J5qs1WAYDDIQq5RkALScsz8gt7kRavTwAAAAAOgAAAAAIAACAAAABKKmevG/GU+20F8TjhSaLBqB/AHSdH4wdueSZ5V+vucpAAAACUUR8ij+ILbpDBG9sJtLn2buHaFbFLkcyYfL0c+jhhyZN+BmsLKklgmTTH457jtOMD2f/Wj0UUPCiWHO53c7bDaPv69x0zqOnGFu+4MAB2Ma146krCoYaiR1oCToqjvw99hAiAZBgrP7rZlVguSNm6Iul5jg+2hRnk3+LLu1XnOUXZTR2dIB1/azF2CyAAG45AAAAAiEjvVFZiF5Q5nj0v0YKgLgVSq+Vqf5VXUKbKZfG9vFTGBccaC3f8f33+sbNXbZuTpcEGfLvbDmP56q2NqNf8gg==</SSIS:Property>
+          <SSIS:Property SSIS:Name="PasswordVerifier" SSIS:Sensitive="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAiYqSUCZUe0yg+wXaV0eRDwAAAAACAAAAAAAQZgAAAAEAACAAAAAtPpTE5AtBXbHNhQt/y+OTp6rpZTw+UxnTEMZS4Wn01wAAAAAOgAAAAAIAACAAAACDQ9IyWDDkFC5AUr8jBuEIVtsqGQgYo7BokJyJMh3kMZAAAAD714uFPE+3EFBGqn2QvskY8htd8R6CMARQdrnSp0oeJNPct/XHpyOywK2fqEToO5XaABBScQITh7kGZvZUEnUXjbmWAhKyaJWK4VrKZ3mUlODNkPPT07lx6STKRA0UjgSdjea/43m441i6EJrTqVXzN5oyk1Pqpn/w4P1P3+T0trGR2wI5f2sF3NZ/SfKUhLJAAAAARkap2JtnWdSrOH+qfE6OAfwPJgDKR5+I167t01akishKOF/rfP26WsvPvrtBMiP8DrrLTaMZ6Ybt89ZdMcNzlQ==</SSIS:Property>
           <SSIS:Property SSIS:Name="FormatVersion">1</SSIS:Property>
         </SSIS:Properties>
         <SSIS:Packages>
@@ -194,35 +194,35 @@
           <SSIS:PackageInfo>
             <SSIS:PackageMetaData SSIS:Name="CreateObjects.dtsx">
               <SSIS:Properties>
-                <SSIS:Property SSIS:Name="ID">{B693B186-1A22-4D1D-98D2-E7CEADF0E55A}</SSIS:Property>
+                <SSIS:Property SSIS:Name="ID">{D03085E4-AB48-4368-838F-E73B3EDFE393}</SSIS:Property>
                 <SSIS:Property SSIS:Name="Name">CreateObjects</SSIS:Property>
                 <SSIS:Property SSIS:Name="VersionMajor">0</SSIS:Property>
                 <SSIS:Property SSIS:Name="VersionMinor">0</SSIS:Property>
                 <SSIS:Property SSIS:Name="VersionBuild">0</SSIS:Property>
                 <SSIS:Property SSIS:Name="VersionComments">
                 </SSIS:Property>
-                <SSIS:Property SSIS:Name="VersionGUID">{6A43A610-5FE9-4156-9C6B-D92C1C076E95}</SSIS:Property>
+                <SSIS:Property SSIS:Name="VersionGUID">{511E2594-0CA3-443A-BDB9-EC7E065C9052}</SSIS:Property>
                 <SSIS:Property SSIS:Name="PackageFormatVersion">8</SSIS:Property>
                 <SSIS:Property SSIS:Name="Description">
                 </SSIS:Property>
-                <SSIS:Property SSIS:Name="ProtectionLevel">0</SSIS:Property>
+                <SSIS:Property SSIS:Name="ProtectionLevel">1</SSIS:Property>
               </SSIS:Properties>
               <SSIS:Parameters />
             </SSIS:PackageMetaData>
             <SSIS:PackageMetaData SSIS:Name="Extract_FF_Character.dtsx">
               <SSIS:Properties>
-                <SSIS:Property SSIS:Name="ID">{C0498C57-EF44-454D-8E1F-A9E1EA867910}</SSIS:Property>
+                <SSIS:Property SSIS:Name="ID">{7AB182F6-EBE5-4194-847F-4EA2B9CA170E}</SSIS:Property>
                 <SSIS:Property SSIS:Name="Name">Extract_FF_Character</SSIS:Property>
                 <SSIS:Property SSIS:Name="VersionMajor">0</SSIS:Property>
                 <SSIS:Property SSIS:Name="VersionMinor">0</SSIS:Property>
-                <SSIS:Property SSIS:Name="VersionBuild">1</SSIS:Property>
+                <SSIS:Property SSIS:Name="VersionBuild">0</SSIS:Property>
                 <SSIS:Property SSIS:Name="VersionComments">
                 </SSIS:Property>
-                <SSIS:Property SSIS:Name="VersionGUID">{CA52AACB-9697-4C6D-AFDF-027DB61F55EE}</SSIS:Property>
+                <SSIS:Property SSIS:Name="VersionGUID">{447D2A52-0554-49C8-8FF4-84833705A0EA}</SSIS:Property>
                 <SSIS:Property SSIS:Name="PackageFormatVersion">8</SSIS:Property>
                 <SSIS:Property SSIS:Name="Description">
                 </SSIS:Property>
-                <SSIS:Property SSIS:Name="ProtectionLevel">0</SSIS:Property>
+                <SSIS:Property SSIS:Name="ProtectionLevel">1</SSIS:Property>
               </SSIS:Properties>
               <SSIS:Parameters>
                 <SSIS:Parameter SSIS:Name="CM.FF_Character.AlwaysCheckForRowDelimiters">
@@ -396,18 +396,18 @@
             </SSIS:PackageMetaData>
             <SSIS:PackageMetaData SSIS:Name="Extract_FF_Character-Quoted.dtsx">
               <SSIS:Properties>
-                <SSIS:Property SSIS:Name="ID">{75776348-A5D9-4D4E-8247-7D0289343AA4}</SSIS:Property>
+                <SSIS:Property SSIS:Name="ID">{6398DE91-4A9F-4FF3-9B20-39437C555C52}</SSIS:Property>
                 <SSIS:Property SSIS:Name="Name">Extract_FF_Character-Quoted</SSIS:Property>
                 <SSIS:Property SSIS:Name="VersionMajor">0</SSIS:Property>
                 <SSIS:Property SSIS:Name="VersionMinor">0</SSIS:Property>
                 <SSIS:Property SSIS:Name="VersionBuild">0</SSIS:Property>
                 <SSIS:Property SSIS:Name="VersionComments">
                 </SSIS:Property>
-                <SSIS:Property SSIS:Name="VersionGUID">{7359A962-0B84-4F8D-89F4-873FB708E144}</SSIS:Property>
+                <SSIS:Property SSIS:Name="VersionGUID">{032C7EDF-11F2-482C-942D-131614A171F6}</SSIS:Property>
                 <SSIS:Property SSIS:Name="PackageFormatVersion">8</SSIS:Property>
                 <SSIS:Property SSIS:Name="Description">
                 </SSIS:Property>
-                <SSIS:Property SSIS:Name="ProtectionLevel">0</SSIS:Property>
+                <SSIS:Property SSIS:Name="ProtectionLevel">1</SSIS:Property>
               </SSIS:Properties>
               <SSIS:Parameters>
                 <SSIS:Parameter SSIS:Name="CM.FF_Character-Quoted.AlwaysCheckForRowDelimiters">
@@ -581,18 +581,18 @@
             </SSIS:PackageMetaData>
             <SSIS:PackageMetaData SSIS:Name="Extract_FF_DateAndTime.dtsx">
               <SSIS:Properties>
-                <SSIS:Property SSIS:Name="ID">{594E5C66-BA85-4A4D-84C5-187C7C76301A}</SSIS:Property>
+                <SSIS:Property SSIS:Name="ID">{130643BE-85F8-48F2-A61B-3F76025F00B7}</SSIS:Property>
                 <SSIS:Property SSIS:Name="Name">Extract_FF_DateAndTime</SSIS:Property>
                 <SSIS:Property SSIS:Name="VersionMajor">0</SSIS:Property>
                 <SSIS:Property SSIS:Name="VersionMinor">0</SSIS:Property>
                 <SSIS:Property SSIS:Name="VersionBuild">0</SSIS:Property>
                 <SSIS:Property SSIS:Name="VersionComments">
                 </SSIS:Property>
-                <SSIS:Property SSIS:Name="VersionGUID">{05D2E7D5-826F-4BEA-A9F9-D92155AF93DC}</SSIS:Property>
+                <SSIS:Property SSIS:Name="VersionGUID">{ED338D3B-495D-4C29-958D-CB018A16AB0C}</SSIS:Property>
                 <SSIS:Property SSIS:Name="PackageFormatVersion">8</SSIS:Property>
                 <SSIS:Property SSIS:Name="Description">
                 </SSIS:Property>
-                <SSIS:Property SSIS:Name="ProtectionLevel">0</SSIS:Property>
+                <SSIS:Property SSIS:Name="ProtectionLevel">1</SSIS:Property>
               </SSIS:Properties>
               <SSIS:Parameters>
                 <SSIS:Parameter SSIS:Name="CM.FF_DateAndTime.AlwaysCheckForRowDelimiters">
@@ -766,18 +766,18 @@
             </SSIS:PackageMetaData>
             <SSIS:PackageMetaData SSIS:Name="Extract_FF_DateOnly.dtsx">
               <SSIS:Properties>
-                <SSIS:Property SSIS:Name="ID">{C9B46CCB-3FE3-4C60-9E44-5A640035D123}</SSIS:Property>
+                <SSIS:Property SSIS:Name="ID">{BA62FF05-2869-490E-BBD5-9CB1FDCDD285}</SSIS:Property>
                 <SSIS:Property SSIS:Name="Name">Extract_FF_DateOnly</SSIS:Property>
                 <SSIS:Property SSIS:Name="VersionMajor">0</SSIS:Property>
                 <SSIS:Property SSIS:Name="VersionMinor">0</SSIS:Property>
                 <SSIS:Property SSIS:Name="VersionBuild">0</SSIS:Property>
                 <SSIS:Property SSIS:Name="VersionComments">
                 </SSIS:Property>
-                <SSIS:Property SSIS:Name="VersionGUID">{9288132C-DEAB-4375-8ACF-9A4C6754F85A}</SSIS:Property>
+                <SSIS:Property SSIS:Name="VersionGUID">{1BDD6176-A7A6-4354-A06E-EC77C0774F49}</SSIS:Property>
                 <SSIS:Property SSIS:Name="PackageFormatVersion">8</SSIS:Property>
                 <SSIS:Property SSIS:Name="Description">
                 </SSIS:Property>
-                <SSIS:Property SSIS:Name="ProtectionLevel">0</SSIS:Property>
+                <SSIS:Property SSIS:Name="ProtectionLevel">1</SSIS:Property>
               </SSIS:Properties>
               <SSIS:Parameters>
                 <SSIS:Parameter SSIS:Name="CM.FF_DateOnly.AlwaysCheckForRowDelimiters">
@@ -951,18 +951,18 @@
             </SSIS:PackageMetaData>
             <SSIS:PackageMetaData SSIS:Name="Extract_FF_Issue6.dtsx">
               <SSIS:Properties>
-                <SSIS:Property SSIS:Name="ID">{6F50E330-70EA-4BD2-8A84-661AD3739D4D}</SSIS:Property>
+                <SSIS:Property SSIS:Name="ID">{1C9EC742-242F-4B0D-AFAA-71E439AF3B4D}</SSIS:Property>
                 <SSIS:Property SSIS:Name="Name">Extract_FF_Issue6</SSIS:Property>
                 <SSIS:Property SSIS:Name="VersionMajor">0</SSIS:Property>
                 <SSIS:Property SSIS:Name="VersionMinor">0</SSIS:Property>
                 <SSIS:Property SSIS:Name="VersionBuild">0</SSIS:Property>
                 <SSIS:Property SSIS:Name="VersionComments">
                 </SSIS:Property>
-                <SSIS:Property SSIS:Name="VersionGUID">{2CB4BB36-4857-4AD5-91A7-03DA9BFE248E}</SSIS:Property>
+                <SSIS:Property SSIS:Name="VersionGUID">{7B91AF20-4493-4FEB-B3C7-A09C36C0833F}</SSIS:Property>
                 <SSIS:Property SSIS:Name="PackageFormatVersion">8</SSIS:Property>
                 <SSIS:Property SSIS:Name="Description">
                 </SSIS:Property>
-                <SSIS:Property SSIS:Name="ProtectionLevel">0</SSIS:Property>
+                <SSIS:Property SSIS:Name="ProtectionLevel">1</SSIS:Property>
               </SSIS:Properties>
               <SSIS:Parameters>
                 <SSIS:Parameter SSIS:Name="CM.FF_Issue6.AlwaysCheckForRowDelimiters">
@@ -1136,18 +1136,18 @@
             </SSIS:PackageMetaData>
             <SSIS:PackageMetaData SSIS:Name="Extract_FF_Numerics.dtsx">
               <SSIS:Properties>
-                <SSIS:Property SSIS:Name="ID">{FDBFF996-5C55-4200-A852-DB15310598E5}</SSIS:Property>
+                <SSIS:Property SSIS:Name="ID">{82F3B639-67BB-44ED-A62C-6821776F97E1}</SSIS:Property>
                 <SSIS:Property SSIS:Name="Name">Extract_FF_Numerics</SSIS:Property>
                 <SSIS:Property SSIS:Name="VersionMajor">0</SSIS:Property>
                 <SSIS:Property SSIS:Name="VersionMinor">0</SSIS:Property>
                 <SSIS:Property SSIS:Name="VersionBuild">0</SSIS:Property>
                 <SSIS:Property SSIS:Name="VersionComments">
                 </SSIS:Property>
-                <SSIS:Property SSIS:Name="VersionGUID">{A9B51C5F-8BA3-4208-B3BC-8EADFFA85540}</SSIS:Property>
+                <SSIS:Property SSIS:Name="VersionGUID">{779B420A-52E6-4318-9778-98570641CB23}</SSIS:Property>
                 <SSIS:Property SSIS:Name="PackageFormatVersion">8</SSIS:Property>
                 <SSIS:Property SSIS:Name="Description">
                 </SSIS:Property>
-                <SSIS:Property SSIS:Name="ProtectionLevel">0</SSIS:Property>
+                <SSIS:Property SSIS:Name="ProtectionLevel">1</SSIS:Property>
               </SSIS:Properties>
               <SSIS:Parameters>
                 <SSIS:Parameter SSIS:Name="CM.FF_Numerics.AlwaysCheckForRowDelimiters">

@@ -9,11 +9,6 @@
     </Annotations>
 	<Connections>
 		<OleDbConnection Name="OLEDB_Extract" ConnectionString="Provider=SQLNCLI11.1;Data Source=<#=ExtractServer #>;Initial Catalog=<#= ExtractDatabase#>;Integrated Security=SSPI" CreateInProject="true" >
-			<Expressions>
-				<Expression PropertyName="ConnectionString">
-					"Provider=SQLNCLI11.1;Data Source=" + @[User::ExtractServer] + ";Initial Catalog=" + @[User::ExtractDatabase] + ";Integrated Security=SSPI"
-                </Expression>
-            </Expressions>
         </OleDbConnection>
 		
         <ExcelConnection Name="ExcelOleDbConnection" ConnectionString="Provider=Microsoft.ACE.OLEDB.12.0;Data Source=<#=SourceFolder#>\ExcelSource.xlsx;Extended Properties=&quot;Excel 12.0 Xml;HDR=YES&quot;;" />
