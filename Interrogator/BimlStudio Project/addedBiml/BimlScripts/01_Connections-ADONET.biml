@@ -4,8 +4,18 @@
 <Biml xmlns="http://schemas.varigence.com/biml.xsd"> 
 	<Connections>
 		<AdoNetConnection  Name="ADONET_Extract" ConnectionString="Data Source=<#=ExtractServer #>;Initial Catalog=<#= ExtractDatabase#>;Integrated Security=true" CreateInProject="true" Provider="System.Data.SqlClient.SqlConnection, System.Data, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+		    <Expressions>
+				<Expression PropertyName="ConnectionString">
+					"Data Source=" + @[$Project::ExtractServer]+ ";Initial Catalog=" + @[$Project::ExtractDatabase] + ";Integrated Security=true"
+                </Expression>
+            </Expressions>
         </AdoNetConnection>
 		<AdoNetConnection Name="ADONET_Adventureworks" ConnectionString="Data Source=<#=ExtractServer #>;Initial Catalog=Adventureworks2014;Integrated Security=true" CreateInProject="true" Provider="System.Data.SqlClient.SqlConnection, System.Data, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+		    <Expressions>
+				<Expression PropertyName="ConnectionString">
+					"Data Source=" + @[$Project::ExtractServer] + ";Initial Catalog=Adventureworks;Integrated Security=true"
+                </Expression>
+            </Expressions>
         </AdoNetConnection>
     </Connections>
 </Biml>

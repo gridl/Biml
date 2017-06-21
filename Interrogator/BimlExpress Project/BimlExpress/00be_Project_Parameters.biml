@@ -1,0 +1,22 @@
+<#@ template tier="0" #>
+<#@ include file="00_Configuration.biml" #>
+
+<Biml>
+  <Annotations>
+    <Annotation AnnotationType="CodeComment">
+            00be_Project_Paremeters.biml is only needed for the BimlExpress version.  You need to define the Parameters before you can
+            reference them in connections or packages.
+    </Annotation>
+  </Annotations>
+  <Projects>
+    <PackageProject Name="BimlExpress">
+        <Annotations>
+            <Annotation AnnotationType="Tag" Tag="ProjectParametersPath">C:\Repositories\Biml\Interrogator\BimlExpress Project\BimlExpress\Project.params</Annotation>        
+        </Annotations>
+      <Parameters>
+        <Parameter Name="ExtractServer" DataType="String"><#=ExtractServer#></Parameter>
+        <Parameter Name="ExtractDatabase" DataType="String"><#=ExtractDatabase#></Parameter>
+      </Parameters>
+    </PackageProject>
+  </Projects>
+</Biml>

@@ -118,6 +118,9 @@
     <Live Include="addedBiml\Packages\Extract_FF_Numerics.biml">
       <RootFolderId>0</RootFolderId>
     </Live>
+    <Live Include="addedBiml\Projects\ETL Project.biml">
+      <RootFolderId>0</RootFolderId>
+    </Live>
     <Live Include="addedBiml\Schemas\Extract.Extract.biml">
       <RootFolderId>0</RootFolderId>
     </Live>

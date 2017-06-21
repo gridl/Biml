@@ -22,7 +22,7 @@ DevelopmentHelper h = new DevelopmentHelper(DestinationConnectionString);
 	<#
 		foreach (var table in RootNode.Tables.Where(t => t.GetTag("TableGroup") == "FlatFile")) { 
 	#>	
-		<Package Name="Extract_FF_<#= table.Name #>"  DelayValidation="true" ProtectionLevel="EncryptSensitiveWithUserKey">
+		<Package Name="Extract_FF_<#= table.Name #>"  DelayValidation="true" ProtectionLevel="EncryptSensitiveWithUserKey" >
 			<Annotations>
 				<Annotation AnnotationType="CodeComment">
 					All flat file extracts are truncate and load.

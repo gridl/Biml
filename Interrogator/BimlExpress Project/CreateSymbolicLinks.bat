@@ -17,6 +17,7 @@ mklink BimlExpress\04_Tables_FlatFiles.biml "%1\BimlStudio Project\addedBiml\Bim
 mklink BimlExpress\04_Tables_SQL-ALL.biml "%1\BimlStudio Project\addedBiml\BimlScripts\04_Tables_SQL-ALL.biml"
 mklink BimlExpress\05_Packages_CreateObjects.biml "%1\BimlStudio Project\addedBiml\BimlScripts\05_Packages_CreateObjects.biml"
 mklink BimlExpress\06_Packages_ExtractFlatFiles.biml "%1\BimlStudio Project\addedBiml\BimlScripts\06_Packages_ExtractFlatFiles.biml" 
+mklink BimlExpress\07_Projects_ETL.biml "%1\BimlStudio Project\addedBiml\BimlScripts\07_Projects_ETL.biml" 
 mklink /d "Code\" "%1\BimlStudio Project\addedBiml\Code"
 
 GOTO End
