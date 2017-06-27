@@ -1,33 +1,29 @@
 <Biml>
   <Annotations>
     <Annotation AnnotationType="CodeComment">
-            00be_Project_Paremeters.biml is only needed for the BimlExpress version.  You need to define the Parameters before you can
-            reference them in connections or packages.
-    </Annotation>
-    <Annotation AnnotationType="CodeComment">
-            01be_WriteProjectParameters.biml writes the parameters to the current Project.params file, so 
-            connections and packages can reference them.
-        </Annotation>
-    <Annotation AnnotationType="CodeComment">
 			We need OLEDB connections for Flat file staging.  ADONET destinations in extract packages through mapping errors at build time.
         </Annotation>
     <Annotation AnnotationType="CodeComment">Changing Flat File Connections to read files, like File Formats.</Annotation>
+    <Annotation>
+    		Extract.Character-Quoted
+		
+    		Extract.Character
+		
+    		Extract.DateAndTime
+		
+    		Extract.DateOnly
+		
+    		Extract.Issue6
+		
+    		Extract.Numerics
+		
+    		Extract.Person
+		
+        </Annotation>
   </Annotations>
   <Connections>
-    <AdoNetConnection Name="ADONET_Extract" CreateInProject="true" ConnectionString="Data Source=localhost;Initial Catalog=Interrogator;Integrated Security=true" Provider="System.Data.SqlClient.SqlConnection, System.Data, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-      <Expressions>
-        <Expression PropertyName="ConnectionString">
-					"Data Source=" + @[$Project::ExtractServer]+ ";Initial Catalog=" + @[$Project::ExtractDatabase] + ";Integrated Security=true"
-                </Expression>
-      </Expressions>
-    </AdoNetConnection>
-    <AdoNetConnection Name="ADONET_Adventureworks" CreateInProject="true" ConnectionString="Data Source=localhost;Initial Catalog=Adventureworks2014;Integrated Security=true" Provider="System.Data.SqlClient.SqlConnection, System.Data, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-      <Expressions>
-        <Expression PropertyName="ConnectionString">
-					"Data Source=" + @[$Project::ExtractServer] + ";Initial Catalog=Adventureworks;Integrated Security=true"
-                </Expression>
-      </Expressions>
-    </AdoNetConnection>
+    <AdoNetConnection Name="ADONET_Extract" CreateInProject="true" ConnectionString="Data Source=localhost;Initial Catalog=Interrogator;Integrated Security=true" Provider="System.Data.SqlClient.SqlConnection, System.Data, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+    <AdoNetConnection Name="ADONET_Adventureworks" CreateInProject="true" ConnectionString="Data Source=localhost;Initial Catalog=Adventureworks2014;Integrated Security=true" Provider="System.Data.SqlClient.SqlConnection, System.Data, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
     <Connection Name="OLEDB_Extract" CreateInProject="true" ConnectionString="Provider=SQLNCLI11.1;Data Source=localhost;Initial Catalog=Interrogator;Integrated Security=SSPI" />
     <ExcelConnection Name="ExcelOleDbConnection" ConnectionString="Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Repositories\Biml\Interrogator\testdata\ExcelSource.xlsx;Extended Properties=&quot;Excel 12.0 Xml;HDR=YES&quot;;" />
     <ExcelConnection Name="ExcelOleDbConnection-IMEX" ConnectionString="Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Repositories\Biml\Interrogator\testdata\ExcelSource.xlsx;Extended Properties=&quot;Excel 12.0 Xml;HDR=YES;IMEX=1&quot;" />
@@ -67,6 +63,13 @@
       </Expressions>
     </FlatFileConnection>
     <FlatFileConnection Name="FF_Numerics" FilePath="C:\Repositories\Biml\Interrogator\testdata\Numerics.csv" FileFormat="Numerics">
+      <Expressions>
+        <Expression PropertyName="ConnectionString">
+						@[User::SourceFilePath]
+	                </Expression>
+      </Expressions>
+    </FlatFileConnection>
+    <FlatFileConnection Name="FF_Person" FilePath="C:\Repositories\Biml\Interrogator\testdata\Person.csv" FileFormat="Person">
       <Expressions>
         <Expression PropertyName="ConnectionString">
 						@[User::SourceFilePath]
@@ -180,1116 +183,602 @@
         <Column Name="InsertedDateTime" DataType="DateTime" />
       </Columns>
     </Table>
-    <Table Name="AWBuildVersion" SchemaName="Extract.Extract">
-      <Columns>
-        <Column Name="SystemInformationID" DataType="Byte" />
-        <Column Name="Database Version" DataType="String" Length="25" />
-        <Column Name="VersionDate" DataType="DateTime" />
-        <Column Name="ModifiedDate" DataType="DateTime" />
-      </Columns>
-    </Table>
-    <Table Name="DatabaseLog" SchemaName="Extract.Extract">
-      <Columns>
-        <Column Name="DatabaseLogID" />
-        <Column Name="PostTime" DataType="DateTime" />
-        <Column Name="DatabaseUser" DataType="String" Length="128" />
-        <Column Name="Event" DataType="String" Length="128" />
-        <Column Name="Schema" DataType="String" Length="128" />
-        <Column Name="Object" DataType="String" Length="128" />
-        <Column Name="TSQL" DataType="String" Length="-1" />
-        <Column Name="XmlEvent" DataType="Xml" />
-      </Columns>
-    </Table>
-    <Table Name="ErrorLog" SchemaName="Extract.Extract">
-      <Columns>
-        <Column Name="ErrorLogID" />
-        <Column Name="ErrorTime" DataType="DateTime" />
-        <Column Name="UserName" DataType="String" Length="128" />
-        <Column Name="ErrorNumber" />
-        <Column Name="ErrorSeverity" />
-        <Column Name="ErrorState" />
-        <Column Name="ErrorProcedure" DataType="String" Length="126" />
-        <Column Name="ErrorLine" />
-        <Column Name="ErrorMessage" DataType="String" Length="4000" />
-      </Columns>
-    </Table>
-    <Table Name="Department" SchemaName="Extract.Extract">
-      <Columns>
-        <Column Name="DepartmentID" DataType="Int16" />
-        <Column Name="Name" DataType="String" Length="50" />
-        <Column Name="GroupName" DataType="String" Length="50" />
-        <Column Name="ModifiedDate" DataType="DateTime" />
-      </Columns>
-    </Table>
-    <Table Name="Employee" SchemaName="Extract.Extract">
-      <Columns>
-        <Column Name="BusinessEntityID" />
-        <Column Name="NationalIDNumber" DataType="String" Length="15" />
-        <Column Name="LoginID" DataType="String" Length="256" />
-        <Column Name="OrganizationNode" DataType="Object" />
-        <Column Name="OrganizationLevel" DataType="Int16" />
-        <Column Name="JobTitle" DataType="String" Length="50" />
-        <Column Name="BirthDate" DataType="Date" />
-        <Column Name="MaritalStatus" DataType="StringFixedLength" Length="1" />
-        <Column Name="Gender" DataType="StringFixedLength" Length="1" />
-        <Column Name="HireDate" DataType="Date" />
-        <Column Name="SalariedFlag" DataType="Boolean" />
-        <Column Name="VacationHours" DataType="Int16" />
-        <Column Name="SickLeaveHours" DataType="Int16" />
-        <Column Name="CurrentFlag" DataType="Boolean" />
-        <Column Name="rowguid" DataType="Guid" />
-        <Column Name="ModifiedDate" DataType="DateTime" />
-      </Columns>
-    </Table>
-    <Table Name="EmployeeDepartmentHistory" SchemaName="Extract.Extract">
-      <Columns>
-        <Column Name="BusinessEntityID" />
-        <Column Name="DepartmentID" DataType="Int16" />
-        <Column Name="ShiftID" DataType="Byte" />
-        <Column Name="StartDate" DataType="Date" />
-        <Column Name="EndDate" DataType="Date" />
-        <Column Name="ModifiedDate" DataType="DateTime" />
-      </Columns>
-    </Table>
-    <Table Name="EmployeePayHistory" SchemaName="Extract.Extract">
-      <Columns>
-        <Column Name="BusinessEntityID" />
-        <Column Name="RateChangeDate" DataType="DateTime" />
-        <Column Name="Rate" DataType="Currency" />
-        <Column Name="PayFrequency" DataType="Byte" />
-        <Column Name="ModifiedDate" DataType="DateTime" />
-      </Columns>
-    </Table>
-    <Table Name="JobCandidate" SchemaName="Extract.Extract">
-      <Columns>
-        <Column Name="JobCandidateID" />
-        <Column Name="BusinessEntityID" />
-        <Column Name="Resume" DataType="Xml" />
-        <Column Name="ModifiedDate" DataType="DateTime" />
-      </Columns>
-    </Table>
-    <Table Name="Shift" SchemaName="Extract.Extract">
-      <Columns>
-        <Column Name="ShiftID" DataType="Byte" />
-        <Column Name="Name" DataType="String" Length="50" />
-        <Column Name="StartTime" DataType="Time" />
-        <Column Name="EndTime" DataType="Time" />
-        <Column Name="ModifiedDate" DataType="DateTime" />
-      </Columns>
-    </Table>
-    <Table Name="vEmployee" SchemaName="Extract.Extract">
-      <Columns>
-        <Column Name="BusinessEntityID" />
-        <Column Name="Title" DataType="String" Length="8" />
-        <Column Name="FirstName" DataType="String" Length="50" />
-        <Column Name="MiddleName" DataType="String" Length="50" />
-        <Column Name="LastName" DataType="String" Length="50" />
-        <Column Name="Suffix" DataType="String" Length="10" />
-        <Column Name="JobTitle" DataType="String" Length="50" />
-        <Column Name="PhoneNumber" DataType="String" Length="25" />
-        <Column Name="PhoneNumberType" DataType="String" Length="50" />
-        <Column Name="EmailAddress" DataType="String" Length="50" />
-        <Column Name="EmailPromotion" />
-        <Column Name="AddressLine1" DataType="String" Length="60" />
-        <Column Name="AddressLine2" DataType="String" Length="60" />
-        <Column Name="City" DataType="String" Length="30" />
-        <Column Name="StateProvinceName" DataType="String" Length="50" />
-        <Column Name="PostalCode" DataType="String" Length="15" />
-        <Column Name="CountryRegionName" DataType="String" Length="50" />
-        <Column Name="AdditionalContactInfo" DataType="Xml" />
-      </Columns>
-    </Table>
-    <Table Name="vEmployeeDepartment" SchemaName="Extract.Extract">
-      <Columns>
-        <Column Name="BusinessEntityID" />
-        <Column Name="Title" DataType="String" Length="8" />
-        <Column Name="FirstName" DataType="String" Length="50" />
-        <Column Name="MiddleName" DataType="String" Length="50" />
-        <Column Name="LastName" DataType="String" Length="50" />
-        <Column Name="Suffix" DataType="String" Length="10" />
-        <Column Name="JobTitle" DataType="String" Length="50" />
-        <Column Name="Department" DataType="String" Length="50" />
-        <Column Name="GroupName" DataType="String" Length="50" />
-        <Column Name="StartDate" DataType="Date" />
-      </Columns>
-    </Table>
-    <Table Name="vEmployeeDepartmentHistory" SchemaName="Extract.Extract">
-      <Columns>
-        <Column Name="BusinessEntityID" />
-        <Column Name="Title" DataType="String" Length="8" />
-        <Column Name="FirstName" DataType="String" Length="50" />
-        <Column Name="MiddleName" DataType="String" Length="50" />
-        <Column Name="LastName" DataType="String" Length="50" />
-        <Column Name="Suffix" DataType="String" Length="10" />
-        <Column Name="Shift" DataType="String" Length="50" />
-        <Column Name="Department" DataType="String" Length="50" />
-        <Column Name="GroupName" DataType="String" Length="50" />
-        <Column Name="StartDate" DataType="Date" />
-        <Column Name="EndDate" DataType="Date" />
-      </Columns>
-    </Table>
-    <Table Name="vJobCandidate" SchemaName="Extract.Extract">
-      <Columns>
-        <Column Name="JobCandidateID" />
-        <Column Name="BusinessEntityID" />
-        <Column Name="Name.Prefix" DataType="String" Length="30" />
-        <Column Name="Name.First" DataType="String" Length="30" />
-        <Column Name="Name.Middle" DataType="String" Length="30" />
-        <Column Name="Name.Last" DataType="String" Length="30" />
-        <Column Name="Name.Suffix" DataType="String" Length="30" />
-        <Column Name="Skills" DataType="String" Length="-1" />
-        <Column Name="Addr.Type" DataType="String" Length="30" />
-        <Column Name="Addr.Loc.CountryRegion" DataType="String" Length="100" />
-        <Column Name="Addr.Loc.State" DataType="String" Length="100" />
-        <Column Name="Addr.Loc.City" DataType="String" Length="100" />
-        <Column Name="Addr.PostalCode" DataType="String" Length="20" />
-        <Column Name="EMail" DataType="String" Length="-1" />
-        <Column Name="WebSite" DataType="String" Length="-1" />
-        <Column Name="ModifiedDate" DataType="DateTime" />
-      </Columns>
-    </Table>
-    <Table Name="vJobCandidateEducation" SchemaName="Extract.Extract">
-      <Columns>
-        <Column Name="JobCandidateID" />
-        <Column Name="Edu.Level" DataType="String" Length="-1" />
-        <Column Name="Edu.StartDate" DataType="DateTime" />
-        <Column Name="Edu.EndDate" DataType="DateTime" />
-        <Column Name="Edu.Degree" DataType="String" Length="50" />
-        <Column Name="Edu.Major" DataType="String" Length="50" />
-        <Column Name="Edu.Minor" DataType="String" Length="50" />
-        <Column Name="Edu.GPA" DataType="String" Length="5" />
-        <Column Name="Edu.GPAScale" DataType="String" Length="5" />
-        <Column Name="Edu.School" DataType="String" Length="100" />
-        <Column Name="Edu.Loc.CountryRegion" DataType="String" Length="100" />
-        <Column Name="Edu.Loc.State" DataType="String" Length="100" />
-        <Column Name="Edu.Loc.City" DataType="String" Length="100" />
-      </Columns>
-    </Table>
-    <Table Name="vJobCandidateEmployment" SchemaName="Extract.Extract">
-      <Columns>
-        <Column Name="JobCandidateID" />
-        <Column Name="Emp.StartDate" DataType="DateTime" />
-        <Column Name="Emp.EndDate" DataType="DateTime" />
-        <Column Name="Emp.OrgName" DataType="String" Length="100" />
-        <Column Name="Emp.JobTitle" DataType="String" Length="100" />
-        <Column Name="Emp.Responsibility" DataType="String" Length="-1" />
-        <Column Name="Emp.FunctionCategory" DataType="String" Length="-1" />
-        <Column Name="Emp.IndustryCategory" DataType="String" Length="-1" />
-        <Column Name="Emp.Loc.CountryRegion" DataType="String" Length="-1" />
-        <Column Name="Emp.Loc.State" DataType="String" Length="-1" />
-        <Column Name="Emp.Loc.City" DataType="String" Length="-1" />
-      </Columns>
-    </Table>
-    <Table Name="Address" SchemaName="Extract.Extract">
-      <Columns>
-        <Column Name="AddressID" />
-        <Column Name="AddressLine1" DataType="String" Length="60" />
-        <Column Name="AddressLine2" DataType="String" Length="60" />
-        <Column Name="City" DataType="String" Length="30" />
-        <Column Name="StateProvinceID" />
-        <Column Name="PostalCode" DataType="String" Length="15" />
-        <Column Name="SpatialLocation" DataType="Object" />
-        <Column Name="rowguid" DataType="Guid" />
-        <Column Name="ModifiedDate" DataType="DateTime" />
-      </Columns>
-    </Table>
-    <Table Name="AddressType" SchemaName="Extract.Extract">
-      <Columns>
-        <Column Name="AddressTypeID" />
-        <Column Name="Name" DataType="String" Length="50" />
-        <Column Name="rowguid" DataType="Guid" />
-        <Column Name="ModifiedDate" DataType="DateTime" />
-      </Columns>
-    </Table>
-    <Table Name="BusinessEntity" SchemaName="Extract.Extract">
-      <Columns>
-        <Column Name="BusinessEntityID" />
-        <Column Name="rowguid" DataType="Guid" />
-        <Column Name="ModifiedDate" DataType="DateTime" />
-      </Columns>
-    </Table>
-    <Table Name="BusinessEntityAddress" SchemaName="Extract.Extract">
-      <Columns>
-        <Column Name="BusinessEntityID" />
-        <Column Name="AddressID" />
-        <Column Name="AddressTypeID" />
-        <Column Name="rowguid" DataType="Guid" />
-        <Column Name="ModifiedDate" DataType="DateTime" />
-      </Columns>
-    </Table>
-    <Table Name="BusinessEntityContact" SchemaName="Extract.Extract">
-      <Columns>
-        <Column Name="BusinessEntityID" />
-        <Column Name="PersonID" />
-        <Column Name="ContactTypeID" />
-        <Column Name="rowguid" DataType="Guid" />
-        <Column Name="ModifiedDate" DataType="DateTime" />
-      </Columns>
-    </Table>
-    <Table Name="ContactType" SchemaName="Extract.Extract">
-      <Columns>
-        <Column Name="ContactTypeID" />
-        <Column Name="Name" DataType="String" Length="50" />
-        <Column Name="ModifiedDate" DataType="DateTime" />
-      </Columns>
-    </Table>
-    <Table Name="CountryRegion" SchemaName="Extract.Extract">
-      <Columns>
-        <Column Name="CountryRegionCode" DataType="String" Length="3" />
-        <Column Name="Name" DataType="String" Length="50" />
-        <Column Name="ModifiedDate" DataType="DateTime" />
-      </Columns>
-    </Table>
-    <Table Name="EmailAddress" SchemaName="Extract.Extract">
-      <Columns>
-        <Column Name="BusinessEntityID" />
-        <Column Name="EmailAddressID" />
-        <Column Name="EmailAddress" DataType="String" Length="50" />
-        <Column Name="rowguid" DataType="Guid" />
-        <Column Name="ModifiedDate" DataType="DateTime" />
-      </Columns>
-    </Table>
-    <Table Name="Password" SchemaName="Extract.Extract">
-      <Columns>
-        <Column Name="BusinessEntityID" />
-        <Column Name="PasswordHash" DataType="AnsiString" Length="128" />
-        <Column Name="PasswordSalt" DataType="AnsiString" Length="10" />
-        <Column Name="rowguid" DataType="Guid" />
-        <Column Name="ModifiedDate" DataType="DateTime" />
-      </Columns>
-    </Table>
-    <Table Name="Person" SchemaName="Extract.Extract">
-      <Columns>
-        <Column Name="BusinessEntityID" />
-        <Column Name="PersonType" DataType="StringFixedLength" Length="2" />
-        <Column Name="NameStyle" DataType="Boolean" />
-        <Column Name="Title" DataType="String" Length="8" />
-        <Column Name="FirstName" DataType="String" Length="50" />
-        <Column Name="MiddleName" DataType="String" Length="50" />
-        <Column Name="LastName" DataType="String" Length="50" />
-        <Column Name="Suffix" DataType="String" Length="10" />
-        <Column Name="EmailPromotion" />
-        <Column Name="AdditionalContactInfo" DataType="Xml" />
-        <Column Name="Demographics" DataType="Xml" />
-        <Column Name="rowguid" DataType="Guid" />
-        <Column Name="ModifiedDate" DataType="DateTime" />
-      </Columns>
-    </Table>
-    <Table Name="PersonPhone" SchemaName="Extract.Extract">
-      <Columns>
-        <Column Name="BusinessEntityID" />
-        <Column Name="PhoneNumber" DataType="String" Length="25" />
-        <Column Name="PhoneNumberTypeID" />
-        <Column Name="ModifiedDate" DataType="DateTime" />
-      </Columns>
-    </Table>
-    <Table Name="PhoneNumberType" SchemaName="Extract.Extract">
-      <Columns>
-        <Column Name="PhoneNumberTypeID" />
-        <Column Name="Name" DataType="String" Length="50" />
-        <Column Name="ModifiedDate" DataType="DateTime" />
-      </Columns>
-    </Table>
-    <Table Name="StateProvince" SchemaName="Extract.Extract">
-      <Columns>
-        <Column Name="StateProvinceID" />
-        <Column Name="StateProvinceCode" DataType="StringFixedLength" Length="3" />
-        <Column Name="CountryRegionCode" DataType="String" Length="3" />
-        <Column Name="IsOnlyStateProvinceFlag" DataType="Boolean" />
-        <Column Name="Name" DataType="String" Length="50" />
-        <Column Name="TerritoryID" />
-        <Column Name="rowguid" DataType="Guid" />
-        <Column Name="ModifiedDate" DataType="DateTime" />
-      </Columns>
-    </Table>
-    <Table Name="vAdditionalContactInfo" SchemaName="Extract.Extract">
-      <Columns>
-        <Column Name="BusinessEntityID" />
-        <Column Name="FirstName" DataType="String" Length="50" />
-        <Column Name="MiddleName" DataType="String" Length="50" />
-        <Column Name="LastName" DataType="String" Length="50" />
-        <Column Name="TelephoneNumber" DataType="String" Length="50" />
-        <Column Name="TelephoneSpecialInstructions" DataType="String" Length="-1" />
-        <Column Name="Street" DataType="String" Length="50" />
-        <Column Name="City" DataType="String" Length="50" />
-        <Column Name="StateProvince" DataType="String" Length="50" />
-        <Column Name="PostalCode" DataType="String" Length="50" />
-        <Column Name="CountryRegion" DataType="String" Length="50" />
-        <Column Name="HomeAddressSpecialInstructions" DataType="String" Length="-1" />
-        <Column Name="EMailAddress" DataType="String" Length="128" />
-        <Column Name="EMailSpecialInstructions" DataType="String" Length="-1" />
-        <Column Name="EMailTelephoneNumber" DataType="String" Length="50" />
-        <Column Name="rowguid" DataType="Guid" />
-        <Column Name="ModifiedDate" DataType="DateTime" />
-      </Columns>
-    </Table>
-    <Table Name="vStateProvinceCountryRegion" SchemaName="Extract.Extract">
-      <Columns>
-        <Column Name="StateProvinceID" />
-        <Column Name="StateProvinceCode" DataType="StringFixedLength" Length="3" />
-        <Column Name="IsOnlyStateProvinceFlag" DataType="Boolean" />
-        <Column Name="StateProvinceName" DataType="String" Length="50" />
-        <Column Name="TerritoryID" />
-        <Column Name="CountryRegionCode" DataType="String" Length="3" />
-        <Column Name="CountryRegionName" DataType="String" Length="50" />
-      </Columns>
-    </Table>
-    <Table Name="BillOfMaterials" SchemaName="Extract.Extract">
-      <Columns>
-        <Column Name="BillOfMaterialsID" />
-        <Column Name="ProductAssemblyID" />
-        <Column Name="ComponentID" />
-        <Column Name="StartDate" DataType="DateTime" />
-        <Column Name="EndDate" DataType="DateTime" />
-        <Column Name="UnitMeasureCode" DataType="StringFixedLength" Length="3" />
-        <Column Name="BOMLevel" DataType="Int16" />
-        <Column Name="PerAssemblyQty" DataType="Decimal" />
-        <Column Name="ModifiedDate" DataType="DateTime" />
-      </Columns>
-    </Table>
-    <Table Name="Culture" SchemaName="Extract.Extract">
-      <Columns>
-        <Column Name="CultureID" DataType="StringFixedLength" Length="6" />
-        <Column Name="Name" DataType="String" Length="50" />
-        <Column Name="ModifiedDate" DataType="DateTime" />
-      </Columns>
-    </Table>
-    <Table Name="Document" SchemaName="Extract.Extract">
-      <Columns>
-        <Column Name="DocumentNode" DataType="Object" />
-        <Column Name="DocumentLevel" DataType="Int16" />
-        <Column Name="Title" DataType="String" Length="50" />
-        <Column Name="Owner" />
-        <Column Name="FolderFlag" DataType="Boolean" />
-        <Column Name="FileName" DataType="String" Length="400" />
-        <Column Name="FileExtension" DataType="String" Length="8" />
-        <Column Name="Revision" DataType="StringFixedLength" Length="5" />
-        <Column Name="ChangeNumber" />
-        <Column Name="Status" DataType="Byte" />
-        <Column Name="DocumentSummary" DataType="String" Length="-1" />
-        <Column Name="Document" DataType="Binary" Length="-1" />
-        <Column Name="rowguid" DataType="Guid" />
-        <Column Name="ModifiedDate" DataType="DateTime" />
-      </Columns>
-    </Table>
-    <Table Name="Illustration" SchemaName="Extract.Extract">
-      <Columns>
-        <Column Name="IllustrationID" />
-        <Column Name="Diagram" DataType="Xml" />
-        <Column Name="ModifiedDate" DataType="DateTime" />
-      </Columns>
-    </Table>
-    <Table Name="Location" SchemaName="Extract.Extract">
-      <Columns>
-        <Column Name="LocationID" DataType="Int16" />
-        <Column Name="Name" DataType="String" Length="50" />
-        <Column Name="CostRate" DataType="Object" />
-        <Column Name="Availability" DataType="Decimal" />
-        <Column Name="ModifiedDate" DataType="DateTime" />
-      </Columns>
-    </Table>
-    <Table Name="Product" SchemaName="Extract.Extract">
-      <Columns>
-        <Column Name="ProductID" />
-        <Column Name="Name" DataType="String" Length="50" />
-        <Column Name="ProductNumber" DataType="String" Length="25" />
-        <Column Name="MakeFlag" DataType="Boolean" />
-        <Column Name="FinishedGoodsFlag" DataType="Boolean" />
-        <Column Name="Color" DataType="String" Length="15" />
-        <Column Name="SafetyStockLevel" DataType="Int16" />
-        <Column Name="ReorderPoint" DataType="Int16" />
-        <Column Name="StandardCost" DataType="Currency" />
-        <Column Name="ListPrice" DataType="Currency" />
-        <Column Name="Size" DataType="String" Length="5" />
-        <Column Name="SizeUnitMeasureCode" DataType="StringFixedLength" Length="3" />
-        <Column Name="WeightUnitMeasureCode" DataType="StringFixedLength" Length="3" />
-        <Column Name="Weight" DataType="Decimal" />
-        <Column Name="DaysToManufacture" />
-        <Column Name="ProductLine" DataType="StringFixedLength" Length="2" />
-        <Column Name="Class" DataType="StringFixedLength" Length="2" />
-        <Column Name="Style" DataType="StringFixedLength" Length="2" />
-        <Column Name="ProductSubcategoryID" />
-        <Column Name="ProductModelID" />
-        <Column Name="SellStartDate" DataType="DateTime" />
-        <Column Name="SellEndDate" DataType="DateTime" />
-        <Column Name="DiscontinuedDate" DataType="DateTime" />
-        <Column Name="rowguid" DataType="Guid" />
-        <Column Name="ModifiedDate" DataType="DateTime" />
-      </Columns>
-    </Table>
-    <Table Name="ProductCategory" SchemaName="Extract.Extract">
-      <Columns>
-        <Column Name="ProductCategoryID" />
-        <Column Name="Name" DataType="String" Length="50" />
-        <Column Name="rowguid" DataType="Guid" />
-        <Column Name="ModifiedDate" DataType="DateTime" />
-      </Columns>
-    </Table>
-    <Table Name="ProductCostHistory" SchemaName="Extract.Extract">
-      <Columns>
-        <Column Name="ProductID" />
-        <Column Name="StartDate" DataType="DateTime" />
-        <Column Name="EndDate" DataType="DateTime" />
-        <Column Name="StandardCost" DataType="Currency" />
-        <Column Name="ModifiedDate" DataType="DateTime" />
-      </Columns>
-    </Table>
-    <Table Name="ProductDescription" SchemaName="Extract.Extract">
-      <Columns>
-        <Column Name="ProductDescriptionID" />
-        <Column Name="Description" DataType="String" Length="400" />
-        <Column Name="rowguid" DataType="Guid" />
-        <Column Name="ModifiedDate" DataType="DateTime" />
-      </Columns>
-    </Table>
-    <Table Name="ProductDocument" SchemaName="Extract.Extract">
-      <Columns>
-        <Column Name="ProductID" />
-        <Column Name="DocumentNode" DataType="Object" />
-        <Column Name="ModifiedDate" DataType="DateTime" />
-      </Columns>
-    </Table>
-    <Table Name="ProductInventory" SchemaName="Extract.Extract">
-      <Columns>
-        <Column Name="ProductID" />
-        <Column Name="LocationID" DataType="Int16" />
-        <Column Name="Shelf" DataType="String" Length="10" />
-        <Column Name="Bin" DataType="Byte" />
-        <Column Name="Quantity" DataType="Int16" />
-        <Column Name="rowguid" DataType="Guid" />
-        <Column Name="ModifiedDate" DataType="DateTime" />
-      </Columns>
-    </Table>
-    <Table Name="ProductListPriceHistory" SchemaName="Extract.Extract">
-      <Columns>
-        <Column Name="ProductID" />
-        <Column Name="StartDate" DataType="DateTime" />
-        <Column Name="EndDate" DataType="DateTime" />
-        <Column Name="ListPrice" DataType="Currency" />
-        <Column Name="ModifiedDate" DataType="DateTime" />
-      </Columns>
-    </Table>
-    <Table Name="ProductModel" SchemaName="Extract.Extract">
-      <Columns>
-        <Column Name="ProductModelID" />
-        <Column Name="Name" DataType="String" Length="50" />
-        <Column Name="CatalogDescription" DataType="Xml" />
-        <Column Name="Instructions" DataType="Xml" />
-        <Column Name="rowguid" DataType="Guid" />
-        <Column Name="ModifiedDate" DataType="DateTime" />
-      </Columns>
-    </Table>
-    <Table Name="ProductModelIllustration" SchemaName="Extract.Extract">
-      <Columns>
-        <Column Name="ProductModelID" />
-        <Column Name="IllustrationID" />
-        <Column Name="ModifiedDate" DataType="DateTime" />
-      </Columns>
-    </Table>
-    <Table Name="ProductModelProductDescriptionCulture" SchemaName="Extract.Extract">
-      <Columns>
-        <Column Name="ProductModelID" />
-        <Column Name="ProductDescriptionID" />
-        <Column Name="CultureID" DataType="StringFixedLength" Length="6" />
-        <Column Name="ModifiedDate" DataType="DateTime" />
-      </Columns>
-    </Table>
-    <Table Name="ProductPhoto" SchemaName="Extract.Extract">
-      <Columns>
-        <Column Name="ProductPhotoID" />
-        <Column Name="ThumbNailPhoto" DataType="Binary" Length="-1" />
-        <Column Name="ThumbnailPhotoFileName" DataType="String" Length="50" />
-        <Column Name="LargePhoto" DataType="Binary" Length="-1" />
-        <Column Name="LargePhotoFileName" DataType="String" Length="50" />
-        <Column Name="ModifiedDate" DataType="DateTime" />
-      </Columns>
-    </Table>
-    <Table Name="ProductProductPhoto" SchemaName="Extract.Extract">
-      <Columns>
-        <Column Name="ProductID" />
-        <Column Name="ProductPhotoID" />
-        <Column Name="Primary" DataType="Boolean" />
-        <Column Name="ModifiedDate" DataType="DateTime" />
-      </Columns>
-    </Table>
-    <Table Name="ProductReview" SchemaName="Extract.Extract">
-      <Columns>
-        <Column Name="ProductReviewID" />
-        <Column Name="ProductID" />
-        <Column Name="ReviewerName" DataType="String" Length="50" />
-        <Column Name="ReviewDate" DataType="DateTime" />
-        <Column Name="EmailAddress" DataType="String" Length="50" />
-        <Column Name="Rating" />
-        <Column Name="Comments" DataType="String" Length="3850" />
-        <Column Name="ModifiedDate" DataType="DateTime" />
-      </Columns>
-    </Table>
-    <Table Name="ProductSubcategory" SchemaName="Extract.Extract">
-      <Columns>
-        <Column Name="ProductSubcategoryID" />
-        <Column Name="ProductCategoryID" />
-        <Column Name="Name" DataType="String" Length="50" />
-        <Column Name="rowguid" DataType="Guid" />
-        <Column Name="ModifiedDate" DataType="DateTime" />
-      </Columns>
-    </Table>
-    <Table Name="ScrapReason" SchemaName="Extract.Extract">
-      <Columns>
-        <Column Name="ScrapReasonID" DataType="Int16" />
-        <Column Name="Name" DataType="String" Length="50" />
-        <Column Name="ModifiedDate" DataType="DateTime" />
-      </Columns>
-    </Table>
-    <Table Name="TransactionHistory" SchemaName="Extract.Extract">
-      <Columns>
-        <Column Name="TransactionID" />
-        <Column Name="ProductID" />
-        <Column Name="ReferenceOrderID" />
-        <Column Name="ReferenceOrderLineID" />
-        <Column Name="TransactionDate" DataType="DateTime" />
-        <Column Name="TransactionType" DataType="StringFixedLength" Length="1" />
-        <Column Name="Quantity" />
-        <Column Name="ActualCost" DataType="Currency" />
-        <Column Name="ModifiedDate" DataType="DateTime" />
-      </Columns>
-    </Table>
-    <Table Name="TransactionHistoryArchive" SchemaName="Extract.Extract">
-      <Columns>
-        <Column Name="TransactionID" />
-        <Column Name="ProductID" />
-        <Column Name="ReferenceOrderID" />
-        <Column Name="ReferenceOrderLineID" />
-        <Column Name="TransactionDate" DataType="DateTime" />
-        <Column Name="TransactionType" DataType="StringFixedLength" Length="1" />
-        <Column Name="Quantity" />
-        <Column Name="ActualCost" DataType="Currency" />
-        <Column Name="ModifiedDate" DataType="DateTime" />
-      </Columns>
-    </Table>
-    <Table Name="UnitMeasure" SchemaName="Extract.Extract">
-      <Columns>
-        <Column Name="UnitMeasureCode" DataType="StringFixedLength" Length="3" />
-        <Column Name="Name" DataType="String" Length="50" />
-        <Column Name="ModifiedDate" DataType="DateTime" />
-      </Columns>
-    </Table>
-    <Table Name="vProductAndDescription" SchemaName="Extract.Extract">
-      <Columns>
-        <Column Name="ProductID" />
-        <Column Name="Name" DataType="String" Length="50" />
-        <Column Name="ProductModel" DataType="String" Length="50" />
-        <Column Name="CultureID" DataType="StringFixedLength" Length="6" />
-        <Column Name="Description" DataType="String" Length="400" />
-      </Columns>
-    </Table>
-    <Table Name="vProductModelCatalogDescription" SchemaName="Extract.Extract">
-      <Columns>
-        <Column Name="ProductModelID" />
-        <Column Name="Name" DataType="String" Length="50" />
-        <Column Name="Summary" DataType="String" Length="-1" />
-        <Column Name="Manufacturer" DataType="String" Length="-1" />
-        <Column Name="Copyright" DataType="String" Length="30" />
-        <Column Name="ProductURL" DataType="String" Length="256" />
-        <Column Name="WarrantyPeriod" DataType="String" Length="256" />
-        <Column Name="WarrantyDescription" DataType="String" Length="256" />
-        <Column Name="NoOfYears" DataType="String" Length="256" />
-        <Column Name="MaintenanceDescription" DataType="String" Length="256" />
-        <Column Name="Wheel" DataType="String" Length="256" />
-        <Column Name="Saddle" DataType="String" Length="256" />
-        <Column Name="Pedal" DataType="String" Length="256" />
-        <Column Name="BikeFrame" DataType="String" Length="-1" />
-        <Column Name="Crankset" DataType="String" Length="256" />
-        <Column Name="PictureAngle" DataType="String" Length="256" />
-        <Column Name="PictureSize" DataType="String" Length="256" />
-        <Column Name="ProductPhotoID" DataType="String" Length="256" />
-        <Column Name="Material" DataType="String" Length="256" />
-        <Column Name="Color" DataType="String" Length="256" />
-        <Column Name="ProductLine" DataType="String" Length="256" />
-        <Column Name="Style" DataType="String" Length="256" />
-        <Column Name="RiderExperience" DataType="String" Length="1024" />
-        <Column Name="rowguid" DataType="Guid" />
-        <Column Name="ModifiedDate" DataType="DateTime" />
-      </Columns>
-    </Table>
-    <Table Name="vProductModelInstructions" SchemaName="Extract.Extract">
-      <Columns>
-        <Column Name="ProductModelID" />
-        <Column Name="Name" DataType="String" Length="50" />
-        <Column Name="Instructions" DataType="String" Length="-1" />
-        <Column Name="LocationID" />
-        <Column Name="SetupHours" DataType="Decimal" />
-        <Column Name="MachineHours" DataType="Decimal" />
-        <Column Name="LaborHours" DataType="Decimal" />
-        <Column Name="LotSize" />
-        <Column Name="Step" DataType="String" Length="1024" />
-        <Column Name="rowguid" DataType="Guid" />
-        <Column Name="ModifiedDate" DataType="DateTime" />
-      </Columns>
-    </Table>
-    <Table Name="WorkOrder" SchemaName="Extract.Extract">
-      <Columns>
-        <Column Name="WorkOrderID" />
-        <Column Name="ProductID" />
-        <Column Name="OrderQty" />
-        <Column Name="StockedQty" />
-        <Column Name="ScrappedQty" DataType="Int16" />
-        <Column Name="StartDate" DataType="DateTime" />
-        <Column Name="EndDate" DataType="DateTime" />
-        <Column Name="DueDate" DataType="DateTime" />
-        <Column Name="ScrapReasonID" DataType="Int16" />
-        <Column Name="ModifiedDate" DataType="DateTime" />
-      </Columns>
-    </Table>
-    <Table Name="WorkOrderRouting" SchemaName="Extract.Extract">
-      <Columns>
-        <Column Name="WorkOrderID" />
-        <Column Name="ProductID" />
-        <Column Name="OperationSequence" DataType="Int16" />
-        <Column Name="LocationID" DataType="Int16" />
-        <Column Name="ScheduledStartDate" DataType="DateTime" />
-        <Column Name="ScheduledEndDate" DataType="DateTime" />
-        <Column Name="ActualStartDate" DataType="DateTime" />
-        <Column Name="ActualEndDate" DataType="DateTime" />
-        <Column Name="ActualResourceHrs" DataType="Decimal" />
-        <Column Name="PlannedCost" DataType="Currency" />
-        <Column Name="ActualCost" DataType="Currency" />
-        <Column Name="ModifiedDate" DataType="DateTime" />
-      </Columns>
-    </Table>
-    <Table Name="ProductVendor" SchemaName="Extract.Extract">
-      <Columns>
-        <Column Name="ProductID" />
-        <Column Name="BusinessEntityID" />
-        <Column Name="AverageLeadTime" />
-        <Column Name="StandardPrice" DataType="Currency" />
-        <Column Name="LastReceiptCost" DataType="Currency" />
-        <Column Name="LastReceiptDate" DataType="DateTime" />
-        <Column Name="MinOrderQty" />
-        <Column Name="MaxOrderQty" />
-        <Column Name="OnOrderQty" />
-        <Column Name="UnitMeasureCode" DataType="StringFixedLength" Length="3" />
-        <Column Name="ModifiedDate" DataType="DateTime" />
-      </Columns>
-    </Table>
-    <Table Name="PurchaseOrderDetail" SchemaName="Extract.Extract">
-      <Columns>
-        <Column Name="PurchaseOrderID" />
-        <Column Name="PurchaseOrderDetailID" />
-        <Column Name="DueDate" DataType="DateTime" />
-        <Column Name="OrderQty" DataType="Int16" />
-        <Column Name="ProductID" />
-        <Column Name="UnitPrice" DataType="Currency" />
-        <Column Name="LineTotal" DataType="Currency" />
-        <Column Name="ReceivedQty" DataType="Decimal" />
-        <Column Name="RejectedQty" DataType="Decimal" />
-        <Column Name="StockedQty" DataType="Decimal" />
-        <Column Name="ModifiedDate" DataType="DateTime" />
-      </Columns>
-    </Table>
-    <Table Name="PurchaseOrderHeader" SchemaName="Extract.Extract">
-      <Columns>
-        <Column Name="PurchaseOrderID" />
-        <Column Name="RevisionNumber" DataType="Byte" />
-        <Column Name="Status" DataType="Byte" />
-        <Column Name="EmployeeID" />
-        <Column Name="VendorID" />
-        <Column Name="ShipMethodID" />
-        <Column Name="OrderDate" DataType="DateTime" />
-        <Column Name="ShipDate" DataType="DateTime" />
-        <Column Name="SubTotal" DataType="Currency" />
-        <Column Name="TaxAmt" DataType="Currency" />
-        <Column Name="Freight" DataType="Currency" />
-        <Column Name="TotalDue" DataType="Currency" />
-        <Column Name="ModifiedDate" DataType="DateTime" />
-      </Columns>
-    </Table>
-    <Table Name="ShipMethod" SchemaName="Extract.Extract">
-      <Columns>
-        <Column Name="ShipMethodID" />
-        <Column Name="Name" DataType="String" Length="50" />
-        <Column Name="ShipBase" DataType="Currency" />
-        <Column Name="ShipRate" DataType="Currency" />
-        <Column Name="rowguid" DataType="Guid" />
-        <Column Name="ModifiedDate" DataType="DateTime" />
-      </Columns>
-    </Table>
-    <Table Name="Vendor" SchemaName="Extract.Extract">
-      <Columns>
-        <Column Name="BusinessEntityID" />
-        <Column Name="AccountNumber" DataType="String" Length="15" />
-        <Column Name="Name" DataType="String" Length="50" />
-        <Column Name="CreditRating" DataType="Byte" />
-        <Column Name="PreferredVendorStatus" DataType="Boolean" />
-        <Column Name="ActiveFlag" DataType="Boolean" />
-        <Column Name="PurchasingWebServiceURL" DataType="String" Length="1024" />
-        <Column Name="ModifiedDate" DataType="DateTime" />
-      </Columns>
-    </Table>
-    <Table Name="vVendorWithAddresses" SchemaName="Extract.Extract">
-      <Columns>
-        <Column Name="BusinessEntityID" />
-        <Column Name="Name" DataType="String" Length="50" />
-        <Column Name="AddressType" DataType="String" Length="50" />
-        <Column Name="AddressLine1" DataType="String" Length="60" />
-        <Column Name="AddressLine2" DataType="String" Length="60" />
-        <Column Name="City" DataType="String" Length="30" />
-        <Column Name="StateProvinceName" DataType="String" Length="50" />
-        <Column Name="PostalCode" DataType="String" Length="15" />
-        <Column Name="CountryRegionName" DataType="String" Length="50" />
-      </Columns>
-    </Table>
-    <Table Name="vVendorWithContacts" SchemaName="Extract.Extract">
-      <Columns>
-        <Column Name="BusinessEntityID" />
-        <Column Name="Name" DataType="String" Length="50" />
-        <Column Name="ContactType" DataType="String" Length="50" />
-        <Column Name="Title" DataType="String" Length="8" />
-        <Column Name="FirstName" DataType="String" Length="50" />
-        <Column Name="MiddleName" DataType="String" Length="50" />
-        <Column Name="LastName" DataType="String" Length="50" />
-        <Column Name="Suffix" DataType="String" Length="10" />
-        <Column Name="PhoneNumber" DataType="String" Length="25" />
-        <Column Name="PhoneNumberType" DataType="String" Length="50" />
-        <Column Name="EmailAddress" DataType="String" Length="50" />
-        <Column Name="EmailPromotion" />
-      </Columns>
-    </Table>
-    <Table Name="CountryRegionCurrency" SchemaName="Extract.Extract">
-      <Columns>
-        <Column Name="CountryRegionCode" DataType="String" Length="3" />
-        <Column Name="CurrencyCode" DataType="StringFixedLength" Length="3" />
-        <Column Name="ModifiedDate" DataType="DateTime" />
-      </Columns>
-    </Table>
-    <Table Name="CreditCard" SchemaName="Extract.Extract">
-      <Columns>
-        <Column Name="CreditCardID" />
-        <Column Name="CardType" DataType="String" Length="50" />
-        <Column Name="CardNumber" DataType="String" Length="25" />
-        <Column Name="ExpMonth" DataType="Byte" />
-        <Column Name="ExpYear" DataType="Int16" />
-        <Column Name="ModifiedDate" DataType="DateTime" />
-      </Columns>
-    </Table>
-    <Table Name="Currency" SchemaName="Extract.Extract">
-      <Columns>
-        <Column Name="CurrencyCode" DataType="StringFixedLength" Length="3" />
-        <Column Name="Name" DataType="String" Length="50" />
-        <Column Name="ModifiedDate" DataType="DateTime" />
-      </Columns>
-    </Table>
-    <Table Name="CurrencyRate" SchemaName="Extract.Extract">
-      <Columns>
-        <Column Name="CurrencyRateID" />
-        <Column Name="CurrencyRateDate" DataType="DateTime" />
-        <Column Name="FromCurrencyCode" DataType="StringFixedLength" Length="3" />
-        <Column Name="ToCurrencyCode" DataType="StringFixedLength" Length="3" />
-        <Column Name="AverageRate" DataType="Currency" />
-        <Column Name="EndOfDayRate" DataType="Currency" />
-        <Column Name="ModifiedDate" DataType="DateTime" />
-      </Columns>
-    </Table>
-    <Table Name="Customer" SchemaName="Extract.Extract">
-      <Columns>
-        <Column Name="CustomerID" />
-        <Column Name="PersonID" />
-        <Column Name="StoreID" />
-        <Column Name="TerritoryID" />
-        <Column Name="AccountNumber" DataType="AnsiString" Length="10" />
-        <Column Name="rowguid" DataType="Guid" />
-        <Column Name="ModifiedDate" DataType="DateTime" />
-      </Columns>
-    </Table>
-    <Table Name="PersonCreditCard" SchemaName="Extract.Extract">
-      <Columns>
-        <Column Name="BusinessEntityID" />
-        <Column Name="CreditCardID" />
-        <Column Name="ModifiedDate" DataType="DateTime" />
-      </Columns>
-    </Table>
-    <Table Name="SalesOrderDetail" SchemaName="Extract.Extract">
-      <Columns>
-        <Column Name="SalesOrderID" />
-        <Column Name="SalesOrderDetailID" />
-        <Column Name="CarrierTrackingNumber" DataType="String" Length="25" />
-        <Column Name="OrderQty" DataType="Int16" />
-        <Column Name="ProductID" />
-        <Column Name="SpecialOfferID" />
-        <Column Name="UnitPrice" DataType="Currency" />
-        <Column Name="UnitPriceDiscount" DataType="Currency" />
-        <Column Name="LineTotal" DataType="Decimal" />
-        <Column Name="rowguid" DataType="Guid" />
-        <Column Name="ModifiedDate" DataType="DateTime" />
-      </Columns>
-    </Table>
-    <Table Name="SalesOrderHeader" SchemaName="Extract.Extract">
-      <Columns>
-        <Column Name="SalesOrderID" />
-        <Column Name="RevisionNumber" DataType="Byte" />
-        <Column Name="OrderDate" DataType="DateTime" />
-        <Column Name="DueDate" DataType="DateTime" />
-        <Column Name="ShipDate" DataType="DateTime" />
-        <Column Name="Status" DataType="Byte" />
-        <Column Name="OnlineOrderFlag" DataType="Boolean" />
-        <Column Name="SalesOrderNumber" DataType="String" Length="25" />
-        <Column Name="PurchaseOrderNumber" DataType="String" Length="25" />
-        <Column Name="AccountNumber" DataType="String" Length="15" />
-        <Column Name="CustomerID" />
-        <Column Name="SalesPersonID" />
-        <Column Name="TerritoryID" />
-        <Column Name="BillToAddressID" />
-        <Column Name="ShipToAddressID" />
-        <Column Name="ShipMethodID" />
-        <Column Name="CreditCardID" />
-        <Column Name="CreditCardApprovalCode" DataType="AnsiString" Length="15" />
-        <Column Name="CurrencyRateID" />
-        <Column Name="SubTotal" DataType="Currency" />
-        <Column Name="TaxAmt" DataType="Currency" />
-        <Column Name="Freight" DataType="Currency" />
-        <Column Name="TotalDue" DataType="Currency" />
-        <Column Name="Comment" DataType="String" Length="128" />
-        <Column Name="rowguid" DataType="Guid" />
-        <Column Name="ModifiedDate" DataType="DateTime" />
-      </Columns>
-    </Table>
-    <Table Name="SalesOrderHeaderSalesReason" SchemaName="Extract.Extract">
-      <Columns>
-        <Column Name="SalesOrderID" />
-        <Column Name="SalesReasonID" />
-        <Column Name="ModifiedDate" DataType="DateTime" />
-      </Columns>
-    </Table>
-    <Table Name="SalesPerson" SchemaName="Extract.Extract">
-      <Columns>
-        <Column Name="BusinessEntityID" />
-        <Column Name="TerritoryID" />
-        <Column Name="SalesQuota" DataType="Currency" />
-        <Column Name="Bonus" DataType="Currency" />
-        <Column Name="CommissionPct" DataType="Object" />
-        <Column Name="SalesYTD" DataType="Currency" />
-        <Column Name="SalesLastYear" DataType="Currency" />
-        <Column Name="rowguid" DataType="Guid" />
-        <Column Name="ModifiedDate" DataType="DateTime" />
-      </Columns>
-    </Table>
-    <Table Name="SalesPersonQuotaHistory" SchemaName="Extract.Extract">
-      <Columns>
-        <Column Name="BusinessEntityID" />
-        <Column Name="QuotaDate" DataType="DateTime" />
-        <Column Name="SalesQuota" DataType="Currency" />
-        <Column Name="rowguid" DataType="Guid" />
-        <Column Name="ModifiedDate" DataType="DateTime" />
-      </Columns>
-    </Table>
-    <Table Name="SalesReason" SchemaName="Extract.Extract">
-      <Columns>
-        <Column Name="SalesReasonID" />
-        <Column Name="Name" DataType="String" Length="50" />
-        <Column Name="ReasonType" DataType="String" Length="50" />
-        <Column Name="ModifiedDate" DataType="DateTime" />
-      </Columns>
-    </Table>
-    <Table Name="SalesTaxRate" SchemaName="Extract.Extract">
-      <Columns>
-        <Column Name="SalesTaxRateID" />
-        <Column Name="StateProvinceID" />
-        <Column Name="TaxType" DataType="Byte" />
-        <Column Name="TaxRate" DataType="Object" />
-        <Column Name="Name" DataType="String" Length="50" />
-        <Column Name="rowguid" DataType="Guid" />
-        <Column Name="ModifiedDate" DataType="DateTime" />
-      </Columns>
-    </Table>
-    <Table Name="SalesTerritory" SchemaName="Extract.Extract">
-      <Columns>
-        <Column Name="TerritoryID" />
-        <Column Name="Name" DataType="String" Length="50" />
-        <Column Name="CountryRegionCode" DataType="String" Length="3" />
-        <Column Name="Group" DataType="String" Length="50" />
-        <Column Name="SalesYTD" DataType="Currency" />
-        <Column Name="SalesLastYear" DataType="Currency" />
-        <Column Name="CostYTD" DataType="Currency" />
-        <Column Name="CostLastYear" DataType="Currency" />
-        <Column Name="rowguid" DataType="Guid" />
-        <Column Name="ModifiedDate" DataType="DateTime" />
-      </Columns>
-    </Table>
-    <Table Name="SalesTerritoryHistory" SchemaName="Extract.Extract">
-      <Columns>
-        <Column Name="BusinessEntityID" />
-        <Column Name="TerritoryID" />
-        <Column Name="StartDate" DataType="DateTime" />
-        <Column Name="EndDate" DataType="DateTime" />
-        <Column Name="rowguid" DataType="Guid" />
-        <Column Name="ModifiedDate" DataType="DateTime" />
-      </Columns>
-    </Table>
-    <Table Name="ShoppingCartItem" SchemaName="Extract.Extract">
-      <Columns>
-        <Column Name="ShoppingCartItemID" />
-        <Column Name="ShoppingCartID" DataType="String" Length="50" />
-        <Column Name="Quantity" />
-        <Column Name="ProductID" />
-        <Column Name="DateCreated" DataType="DateTime" />
-        <Column Name="ModifiedDate" DataType="DateTime" />
-      </Columns>
-    </Table>
-    <Table Name="SpecialOffer" SchemaName="Extract.Extract">
-      <Columns>
-        <Column Name="SpecialOfferID" />
-        <Column Name="Description" DataType="String" Length="255" />
-        <Column Name="DiscountPct" DataType="Object" />
-        <Column Name="Type" DataType="String" Length="50" />
-        <Column Name="Category" DataType="String" Length="50" />
-        <Column Name="StartDate" DataType="DateTime" />
-        <Column Name="EndDate" DataType="DateTime" />
-        <Column Name="MinQty" />
-        <Column Name="MaxQty" />
-        <Column Name="rowguid" DataType="Guid" />
-        <Column Name="ModifiedDate" DataType="DateTime" />
-      </Columns>
-    </Table>
-    <Table Name="SpecialOfferProduct" SchemaName="Extract.Extract">
-      <Columns>
-        <Column Name="SpecialOfferID" />
-        <Column Name="ProductID" />
-        <Column Name="rowguid" DataType="Guid" />
-        <Column Name="ModifiedDate" DataType="DateTime" />
-      </Columns>
-    </Table>
-    <Table Name="Store" SchemaName="Extract.Extract">
-      <Columns>
-        <Column Name="BusinessEntityID" />
-        <Column Name="Name" DataType="String" Length="50" />
-        <Column Name="SalesPersonID" />
-        <Column Name="Demographics" DataType="Xml" />
-        <Column Name="rowguid" DataType="Guid" />
-        <Column Name="ModifiedDate" DataType="DateTime" />
-      </Columns>
-    </Table>
-    <Table Name="vIndividualCustomer" SchemaName="Extract.Extract">
-      <Columns>
-        <Column Name="BusinessEntityID" />
-        <Column Name="Title" DataType="String" Length="8" />
-        <Column Name="FirstName" DataType="String" Length="50" />
-        <Column Name="MiddleName" DataType="String" Length="50" />
-        <Column Name="LastName" DataType="String" Length="50" />
-        <Column Name="Suffix" DataType="String" Length="10" />
-        <Column Name="PhoneNumber" DataType="String" Length="25" />
-        <Column Name="PhoneNumberType" DataType="String" Length="50" />
-        <Column Name="EmailAddress" DataType="String" Length="50" />
-        <Column Name="EmailPromotion" />
-        <Column Name="AddressType" DataType="String" Length="50" />
-        <Column Name="AddressLine1" DataType="String" Length="60" />
-        <Column Name="AddressLine2" DataType="String" Length="60" />
-        <Column Name="City" DataType="String" Length="30" />
-        <Column Name="StateProvinceName" DataType="String" Length="50" />
-        <Column Name="PostalCode" DataType="String" Length="15" />
-        <Column Name="CountryRegionName" DataType="String" Length="50" />
-        <Column Name="Demographics" DataType="Xml" />
-      </Columns>
-    </Table>
-    <Table Name="vPersonDemographics" SchemaName="Extract.Extract">
-      <Columns>
-        <Column Name="BusinessEntityID" />
-        <Column Name="TotalPurchaseYTD" DataType="Currency" />
-        <Column Name="DateFirstPurchase" DataType="DateTime" />
-        <Column Name="BirthDate" DataType="DateTime" />
-        <Column Name="MaritalStatus" DataType="String" Length="1" />
-        <Column Name="YearlyIncome" DataType="String" Length="30" />
-        <Column Name="Gender" DataType="String" Length="1" />
-        <Column Name="TotalChildren" />
-        <Column Name="NumberChildrenAtHome" />
-        <Column Name="Education" DataType="String" Length="30" />
-        <Column Name="Occupation" DataType="String" Length="30" />
-        <Column Name="HomeOwnerFlag" DataType="Boolean" />
-        <Column Name="NumberCarsOwned" />
-      </Columns>
-    </Table>
-    <Table Name="vSalesPerson" SchemaName="Extract.Extract">
-      <Columns>
-        <Column Name="BusinessEntityID" />
-        <Column Name="Title" DataType="String" Length="8" />
-        <Column Name="FirstName" DataType="String" Length="50" />
-        <Column Name="MiddleName" DataType="String" Length="50" />
-        <Column Name="LastName" DataType="String" Length="50" />
-        <Column Name="Suffix" DataType="String" Length="10" />
-        <Column Name="JobTitle" DataType="String" Length="50" />
-        <Column Name="PhoneNumber" DataType="String" Length="25" />
-        <Column Name="PhoneNumberType" DataType="String" Length="50" />
-        <Column Name="EmailAddress" DataType="String" Length="50" />
-        <Column Name="EmailPromotion" />
-        <Column Name="AddressLine1" DataType="String" Length="60" />
-        <Column Name="AddressLine2" DataType="String" Length="60" />
-        <Column Name="City" DataType="String" Length="30" />
-        <Column Name="StateProvinceName" DataType="String" Length="50" />
-        <Column Name="PostalCode" DataType="String" Length="15" />
-        <Column Name="CountryRegionName" DataType="String" Length="50" />
-        <Column Name="TerritoryName" DataType="String" Length="50" />
-        <Column Name="TerritoryGroup" DataType="String" Length="50" />
-        <Column Name="SalesQuota" DataType="Currency" />
-        <Column Name="SalesYTD" DataType="Currency" />
-        <Column Name="SalesLastYear" DataType="Currency" />
-      </Columns>
-    </Table>
-    <Table Name="vSalesPersonSalesByFiscalYears" SchemaName="Extract.Extract">
-      <Columns>
-        <Column Name="SalesPersonID" />
-        <Column Name="FullName" DataType="String" Length="152" />
-        <Column Name="JobTitle" DataType="String" Length="50" />
-        <Column Name="SalesTerritory" DataType="String" Length="50" />
-        <Column Name="2002" DataType="Currency" />
-        <Column Name="2003" DataType="Currency" />
-        <Column Name="2004" DataType="Currency" />
-      </Columns>
-    </Table>
-    <Table Name="vStoreWithAddresses" SchemaName="Extract.Extract">
-      <Columns>
-        <Column Name="BusinessEntityID" />
-        <Column Name="Name" DataType="String" Length="50" />
-        <Column Name="AddressType" DataType="String" Length="50" />
-        <Column Name="AddressLine1" DataType="String" Length="60" />
-        <Column Name="AddressLine2" DataType="String" Length="60" />
-        <Column Name="City" DataType="String" Length="30" />
-        <Column Name="StateProvinceName" DataType="String" Length="50" />
-        <Column Name="PostalCode" DataType="String" Length="15" />
-        <Column Name="CountryRegionName" DataType="String" Length="50" />
-      </Columns>
-    </Table>
-    <Table Name="vStoreWithContacts" SchemaName="Extract.Extract">
-      <Columns>
-        <Column Name="BusinessEntityID" />
-        <Column Name="Name" DataType="String" Length="50" />
-        <Column Name="ContactType" DataType="String" Length="50" />
-        <Column Name="Title" DataType="String" Length="8" />
-        <Column Name="FirstName" DataType="String" Length="50" />
-        <Column Name="MiddleName" DataType="String" Length="50" />
-        <Column Name="LastName" DataType="String" Length="50" />
-        <Column Name="Suffix" DataType="String" Length="10" />
-        <Column Name="PhoneNumber" DataType="String" Length="25" />
-        <Column Name="PhoneNumberType" DataType="String" Length="50" />
-        <Column Name="EmailAddress" DataType="String" Length="50" />
-        <Column Name="EmailPromotion" />
-      </Columns>
-    </Table>
-    <Table Name="vStoreWithDemographics" SchemaName="Extract.Extract">
-      <Columns>
-        <Column Name="BusinessEntityID" />
-        <Column Name="Name" DataType="String" Length="50" />
-        <Column Name="AnnualSales" DataType="Currency" />
-        <Column Name="AnnualRevenue" DataType="Currency" />
-        <Column Name="BankName" DataType="String" Length="50" />
-        <Column Name="BusinessType" DataType="String" Length="5" />
-        <Column Name="YearOpened" />
-        <Column Name="Specialty" DataType="String" Length="50" />
-        <Column Name="SquareFeet" />
-        <Column Name="Brands" DataType="String" Length="30" />
-        <Column Name="Internet" DataType="String" Length="30" />
-        <Column Name="NumberEmployees" />
+    <Table Name="Person" SchemaName="Extract.Extract" CompressionType="Page">
+      <Annotations>
+        <Annotation AnnotationType="CodeComment">
+					Page compression on by default.
+					ExecutionID and InsertedDateTime are auditcolumns.
+					ExecutionID is the GUID for the package execution.
+                </Annotation>
+        <Annotation Tag="TableGroup">FlatFile</Annotation>
+      </Annotations>
+      <Columns>
+        <Column Name="BusinessEntityID" DataType="Int16" />
+        <Column Name="EmailPromotion" DataType="Byte" />
+        <Column Name="rowguid" DataType="String" Length="38" />
+        <Column Name="ModifiedDate" DataType="DateTime" Precision="27" Scale="7" />
+        <Column Name="strPersonType" DataType="String" Length="2" />
+        <Column Name="strTitle" DataType="String" Length="3" IsNullable="true" />
+        <Column Name="strFirstName" DataType="String" Length="7" />
+        <Column Name="strMiddleName" DataType="String" Length="1" IsNullable="true" />
+        <Column Name="strLastName" DataType="String" Length="2" />
+        <Column Name="strSuffix" DataType="String" Length="3" IsNullable="true" />
+        <Column Name="ExecutionID" DataType="Guid" />
+        <Column Name="InsertedDateTime" DataType="DateTime" />
       </Columns>
     </Table>
   </Tables>
   <Packages>
+    <Package Name="Extract_FF_Character-Quoted" DelayValidation="true" ProtectionLevel="EncryptSensitiveWithUserKey">
+      <Annotations>
+        <Annotation AnnotationType="CodeComment">
+					All flat file extracts are truncate and load.
+					Destination Connection String: Server=localhost;Database=Interrogator;Trusted_Connection=True;
+					
+					SET ANSI_NULLS ON
+SET QUOTED_IDENTIFIER ON
+GO
+
+-------------------------------------------------------------------
+IF EXISTS (SELECT * from sys.objects WHERE object_id = OBJECT_ID(N'[Extract].[Character-Quoted]') AND type IN (N'U'))
+DROP TABLE [Extract].[Character-Quoted]
+GO
+
+CREATE TABLE [Extract].[Character-Quoted]
+(
+-- Columns Definition
+	[1_varchar] nvarchar(6) NOT NULL 
+,	[2_nvarchar] nvarchar(2) NOT NULL 
+,	[ExecutionID] uniqueidentifier NOT NULL 
+,	[InsertedDateTime] datetime NOT NULL 
+
+-- Constraints
+
+)
+ON "default"
+WITH (DATA_COMPRESSION = PAGE)
+GO
+
+-------------------------------------------------------------------
+
+
+
+
+
+					
+					Character-Quoted Deployed: true
+				</Annotation>
+      </Annotations>
+      <Variables>
+        <Variable Name="ExtractServer" DataType="String">localhost</Variable>
+        <Variable Name="ExtractDatabase" DataType="String">Interrogator</Variable>
+        <Variable Name="SourceFilePath" DataType="String">C:\Repositories\Biml\Interrogator\testdata\Character-Quoted.csv</Variable>
+      </Variables>
+      <Tasks>
+        <ExecuteSQL Name="SQL-Truncate ExtractCharacter-Quoted" ConnectionName="ADONET_Extract">
+          <DirectInput>TRUNCATE TABLE [Extract].[Character-Quoted];</DirectInput>
+        </ExecuteSQL>
+        <Dataflow Name="DFT-Load ExtractCharacter-Quoted">
+          <PrecedenceConstraints>
+            <Inputs>
+              <Input OutputPathName="SQL-Truncate ExtractCharacter-Quoted.Output" />
+            </Inputs>
+          </PrecedenceConstraints>
+          <Transformations>
+            <FlatFileSource Name="FF_SRC-Character-Quoted" ValidateExternalMetadata="false" RetainNulls="true" ConnectionName="FF_Character-Quoted" />
+            <DerivedColumns Name="DER-Audit Columns">
+              <InputPath OutputPathName="FF_SRC-Character-Quoted.Output" />
+              <Columns>
+                <Column Name="ExecutionID" DataType="AnsiString" Length="50">
+									@[System::ExecutionInstanceGUID]
+                                </Column>
+                <Column Name="InsertedDateTime" DataType="DateTime">
+									GETDATE()
+                                </Column>
+              </Columns>
+            </DerivedColumns>
+            <OleDbDestination Name="OLE_DEST-ExtractCharacter-Quoted" ValidateExternalMetadata="false" ConnectionName="OLEDB_Extract">
+              <InputPath OutputPathName="DER-Audit Columns.Output" />
+              <ExternalTableOutput Table="[Extract].[Character-Quoted]" />
+            </OleDbDestination>
+          </Transformations>
+        </Dataflow>
+      </Tasks>
+      <Connections>
+        <Connection ConnectionName="FF_Character-Quoted" />
+      </Connections>
+    </Package>
+    <Package Name="Extract_FF_Character" DelayValidation="true" ProtectionLevel="EncryptSensitiveWithUserKey">
+      <Annotations>
+        <Annotation AnnotationType="CodeComment">
+					All flat file extracts are truncate and load.
+					Destination Connection String: Server=localhost;Database=Interrogator;Trusted_Connection=True;
+					
+					SET ANSI_NULLS ON
+SET QUOTED_IDENTIFIER ON
+GO
+
+-------------------------------------------------------------------
+IF EXISTS (SELECT * from sys.objects WHERE object_id = OBJECT_ID(N'[Extract].[Character]') AND type IN (N'U'))
+DROP TABLE [Extract].[Character]
+GO
+
+CREATE TABLE [Extract].[Character]
+(
+-- Columns Definition
+	[1_varchar] nvarchar(6) NOT NULL 
+,	[2_nvarchar] nvarchar(2) NOT NULL 
+,	[ExecutionID] uniqueidentifier NOT NULL 
+,	[InsertedDateTime] datetime NOT NULL 
+
+-- Constraints
+
+)
+ON "default"
+WITH (DATA_COMPRESSION = PAGE)
+GO
+
+-------------------------------------------------------------------
+
+
+
+
+
+					
+					Character Deployed: true
+				</Annotation>
+      </Annotations>
+      <Variables>
+        <Variable Name="ExtractServer" DataType="String">localhost</Variable>
+        <Variable Name="ExtractDatabase" DataType="String">Interrogator</Variable>
+        <Variable Name="SourceFilePath" DataType="String">C:\Repositories\Biml\Interrogator\testdata\Character.csv</Variable>
+      </Variables>
+      <Tasks>
+        <ExecuteSQL Name="SQL-Truncate ExtractCharacter" ConnectionName="ADONET_Extract">
+          <DirectInput>TRUNCATE TABLE [Extract].[Character];</DirectInput>
+        </ExecuteSQL>
+        <Dataflow Name="DFT-Load ExtractCharacter">
+          <PrecedenceConstraints>
+            <Inputs>
+              <Input OutputPathName="SQL-Truncate ExtractCharacter.Output" />
+            </Inputs>
+          </PrecedenceConstraints>
+          <Transformations>
+            <FlatFileSource Name="FF_SRC-Character" ValidateExternalMetadata="false" RetainNulls="true" ConnectionName="FF_Character" />
+            <DerivedColumns Name="DER-Audit Columns">
+              <InputPath OutputPathName="FF_SRC-Character.Output" />
+              <Columns>
+                <Column Name="ExecutionID" DataType="AnsiString" Length="50">
+									@[System::ExecutionInstanceGUID]
+                                </Column>
+                <Column Name="InsertedDateTime" DataType="DateTime">
+									GETDATE()
+                                </Column>
+              </Columns>
+            </DerivedColumns>
+            <OleDbDestination Name="OLE_DEST-ExtractCharacter" ValidateExternalMetadata="false" ConnectionName="OLEDB_Extract">
+              <InputPath OutputPathName="DER-Audit Columns.Output" />
+              <ExternalTableOutput Table="[Extract].[Character]" />
+            </OleDbDestination>
+          </Transformations>
+        </Dataflow>
+      </Tasks>
+      <Connections>
+        <Connection ConnectionName="FF_Character" />
+      </Connections>
+    </Package>
+    <Package Name="Extract_FF_DateAndTime" DelayValidation="true" ProtectionLevel="EncryptSensitiveWithUserKey">
+      <Annotations>
+        <Annotation AnnotationType="CodeComment">
+					All flat file extracts are truncate and load.
+					Destination Connection String: Server=localhost;Database=Interrogator;Trusted_Connection=True;
+					
+					SET ANSI_NULLS ON
+SET QUOTED_IDENTIFIER ON
+GO
+
+-------------------------------------------------------------------
+IF EXISTS (SELECT * from sys.objects WHERE object_id = OBJECT_ID(N'[Extract].[DateAndTime]') AND type IN (N'U'))
+DROP TABLE [Extract].[DateAndTime]
+GO
+
+CREATE TABLE [Extract].[DateAndTime]
+(
+-- Columns Definition
+	[1_SmallDateTime] datetime 
+,	[2_date] date 
+,	[3_Time] time(7) NOT NULL 
+,	[4_DateTimeOffset] datetime 
+,	[5_DateTime2] datetime 
+,	[6_DateTime] datetime 
+,	[ExecutionID] uniqueidentifier NOT NULL 
+,	[InsertedDateTime] datetime NOT NULL 
+
+-- Constraints
+
+)
+ON "default"
+WITH (DATA_COMPRESSION = PAGE)
+GO
+
+-------------------------------------------------------------------
+
+
+
+
+
+					
+					DateAndTime Deployed: true
+				</Annotation>
+      </Annotations>
+      <Variables>
+        <Variable Name="ExtractServer" DataType="String">localhost</Variable>
+        <Variable Name="ExtractDatabase" DataType="String">Interrogator</Variable>
+        <Variable Name="SourceFilePath" DataType="String">C:\Repositories\Biml\Interrogator\testdata\DateAndTime.csv</Variable>
+      </Variables>
+      <Tasks>
+        <ExecuteSQL Name="SQL-Truncate ExtractDateAndTime" ConnectionName="ADONET_Extract">
+          <DirectInput>TRUNCATE TABLE [Extract].[DateAndTime];</DirectInput>
+        </ExecuteSQL>
+        <Dataflow Name="DFT-Load ExtractDateAndTime">
+          <PrecedenceConstraints>
+            <Inputs>
+              <Input OutputPathName="SQL-Truncate ExtractDateAndTime.Output" />
+            </Inputs>
+          </PrecedenceConstraints>
+          <Transformations>
+            <FlatFileSource Name="FF_SRC-DateAndTime" ValidateExternalMetadata="false" RetainNulls="true" ConnectionName="FF_DateAndTime" />
+            <DerivedColumns Name="DER-Audit Columns">
+              <InputPath OutputPathName="FF_SRC-DateAndTime.Output" />
+              <Columns>
+                <Column Name="ExecutionID" DataType="AnsiString" Length="50">
+									@[System::ExecutionInstanceGUID]
+                                </Column>
+                <Column Name="InsertedDateTime" DataType="DateTime">
+									GETDATE()
+                                </Column>
+              </Columns>
+            </DerivedColumns>
+            <OleDbDestination Name="OLE_DEST-ExtractDateAndTime" ValidateExternalMetadata="false" ConnectionName="OLEDB_Extract">
+              <InputPath OutputPathName="DER-Audit Columns.Output" />
+              <ExternalTableOutput Table="[Extract].[DateAndTime]" />
+            </OleDbDestination>
+          </Transformations>
+        </Dataflow>
+      </Tasks>
+      <Connections>
+        <Connection ConnectionName="FF_DateAndTime" />
+      </Connections>
+    </Package>
+    <Package Name="Extract_FF_DateOnly" DelayValidation="true" ProtectionLevel="EncryptSensitiveWithUserKey">
+      <Annotations>
+        <Annotation AnnotationType="CodeComment">
+					All flat file extracts are truncate and load.
+					Destination Connection String: Server=localhost;Database=Interrogator;Trusted_Connection=True;
+					
+					SET ANSI_NULLS ON
+SET QUOTED_IDENTIFIER ON
+GO
+
+-------------------------------------------------------------------
+IF EXISTS (SELECT * from sys.objects WHERE object_id = OBJECT_ID(N'[Extract].[DateOnly]') AND type IN (N'U'))
+DROP TABLE [Extract].[DateOnly]
+GO
+
+CREATE TABLE [Extract].[DateOnly]
+(
+-- Columns Definition
+	[2_date] date 
+,	[Column1] varbinary(max) 
+,	[ExecutionID] uniqueidentifier NOT NULL 
+,	[InsertedDateTime] datetime NOT NULL 
+
+-- Constraints
+
+)
+ON "default"
+WITH (DATA_COMPRESSION = PAGE)
+GO
+
+-------------------------------------------------------------------
+
+
+
+
+
+					
+					DateOnly Deployed: true
+				</Annotation>
+      </Annotations>
+      <Variables>
+        <Variable Name="ExtractServer" DataType="String">localhost</Variable>
+        <Variable Name="ExtractDatabase" DataType="String">Interrogator</Variable>
+        <Variable Name="SourceFilePath" DataType="String">C:\Repositories\Biml\Interrogator\testdata\DateOnly.csv</Variable>
+      </Variables>
+      <Tasks>
+        <ExecuteSQL Name="SQL-Truncate ExtractDateOnly" ConnectionName="ADONET_Extract">
+          <DirectInput>TRUNCATE TABLE [Extract].[DateOnly];</DirectInput>
+        </ExecuteSQL>
+        <Dataflow Name="DFT-Load ExtractDateOnly">
+          <PrecedenceConstraints>
+            <Inputs>
+              <Input OutputPathName="SQL-Truncate ExtractDateOnly.Output" />
+            </Inputs>
+          </PrecedenceConstraints>
+          <Transformations>
+            <FlatFileSource Name="FF_SRC-DateOnly" ValidateExternalMetadata="false" RetainNulls="true" ConnectionName="FF_DateOnly" />
+            <DerivedColumns Name="DER-Audit Columns">
+              <InputPath OutputPathName="FF_SRC-DateOnly.Output" />
+              <Columns>
+                <Column Name="ExecutionID" DataType="AnsiString" Length="50">
+									@[System::ExecutionInstanceGUID]
+                                </Column>
+                <Column Name="InsertedDateTime" DataType="DateTime">
+									GETDATE()
+                                </Column>
+              </Columns>
+            </DerivedColumns>
+            <OleDbDestination Name="OLE_DEST-ExtractDateOnly" ValidateExternalMetadata="false" ConnectionName="OLEDB_Extract">
+              <InputPath OutputPathName="DER-Audit Columns.Output" />
+              <ExternalTableOutput Table="[Extract].[DateOnly]" />
+            </OleDbDestination>
+          </Transformations>
+        </Dataflow>
+      </Tasks>
+      <Connections>
+        <Connection ConnectionName="FF_DateOnly" />
+      </Connections>
+    </Package>
+    <Package Name="Extract_FF_Issue6" DelayValidation="true" ProtectionLevel="EncryptSensitiveWithUserKey">
+      <Annotations>
+        <Annotation AnnotationType="CodeComment">
+					All flat file extracts are truncate and load.
+					Destination Connection String: Server=localhost;Database=Interrogator;Trusted_Connection=True;
+					
+					SET ANSI_NULLS ON
+SET QUOTED_IDENTIFIER ON
+GO
+
+-------------------------------------------------------------------
+IF EXISTS (SELECT * from sys.objects WHERE object_id = OBJECT_ID(N'[Extract].[Issue6]') AND type IN (N'U'))
+DROP TABLE [Extract].[Issue6]
+GO
+
+CREATE TABLE [Extract].[Issue6]
+(
+-- Columns Definition
+	[Column1] varchar(22) NOT NULL 
+,	[Column2] varchar(22) NOT NULL 
+,	[ExecutionID] uniqueidentifier NOT NULL 
+,	[InsertedDateTime] datetime NOT NULL 
+
+-- Constraints
+
+)
+ON "default"
+WITH (DATA_COMPRESSION = PAGE)
+GO
+
+-------------------------------------------------------------------
+
+
+
+
+
+					
+					Issue6 Deployed: true
+				</Annotation>
+      </Annotations>
+      <Variables>
+        <Variable Name="ExtractServer" DataType="String">localhost</Variable>
+        <Variable Name="ExtractDatabase" DataType="String">Interrogator</Variable>
+        <Variable Name="SourceFilePath" DataType="String">C:\Repositories\Biml\Interrogator\testdata\Issue6.csv</Variable>
+      </Variables>
+      <Tasks>
+        <ExecuteSQL Name="SQL-Truncate ExtractIssue6" ConnectionName="ADONET_Extract">
+          <DirectInput>TRUNCATE TABLE [Extract].[Issue6];</DirectInput>
+        </ExecuteSQL>
+        <Dataflow Name="DFT-Load ExtractIssue6">
+          <PrecedenceConstraints>
+            <Inputs>
+              <Input OutputPathName="SQL-Truncate ExtractIssue6.Output" />
+            </Inputs>
+          </PrecedenceConstraints>
+          <Transformations>
+            <FlatFileSource Name="FF_SRC-Issue6" ValidateExternalMetadata="false" RetainNulls="true" ConnectionName="FF_Issue6" />
+            <DerivedColumns Name="DER-Audit Columns">
+              <InputPath OutputPathName="FF_SRC-Issue6.Output" />
+              <Columns>
+                <Column Name="ExecutionID" DataType="AnsiString" Length="50">
+									@[System::ExecutionInstanceGUID]
+                                </Column>
+                <Column Name="InsertedDateTime" DataType="DateTime">
+									GETDATE()
+                                </Column>
+              </Columns>
+            </DerivedColumns>
+            <OleDbDestination Name="OLE_DEST-ExtractIssue6" ValidateExternalMetadata="false" ConnectionName="OLEDB_Extract">
+              <InputPath OutputPathName="DER-Audit Columns.Output" />
+              <ExternalTableOutput Table="[Extract].[Issue6]" />
+            </OleDbDestination>
+          </Transformations>
+        </Dataflow>
+      </Tasks>
+      <Connections>
+        <Connection ConnectionName="FF_Issue6" />
+      </Connections>
+    </Package>
+    <Package Name="Extract_FF_Numerics" DelayValidation="true" ProtectionLevel="EncryptSensitiveWithUserKey">
+      <Annotations>
+        <Annotation AnnotationType="CodeComment">
+					All flat file extracts are truncate and load.
+					Destination Connection String: Server=localhost;Database=Interrogator;Trusted_Connection=True;
+					
+					SET ANSI_NULLS ON
+SET QUOTED_IDENTIFIER ON
+GO
+
+-------------------------------------------------------------------
+IF EXISTS (SELECT * from sys.objects WHERE object_id = OBJECT_ID(N'[Extract].[Numerics]') AND type IN (N'U'))
+DROP TABLE [Extract].[Numerics]
+GO
+
+CREATE TABLE [Extract].[Numerics]
+(
+-- Columns Definition
+	[1_Bit] bit 
+,	[2_TinyInt] tinyint 
+,	[3_SmallInt] smallint 
+,	[4_Int] int 
+,	[5_Bigint] bigint 
+,	[6_Decimal] decimal(38,38) 
+,	[7_Float] float(20) 
+,	[ExecutionID] uniqueidentifier NOT NULL 
+,	[InsertedDateTime] datetime NOT NULL 
+
+-- Constraints
+
+)
+ON "default"
+WITH (DATA_COMPRESSION = PAGE)
+GO
+
+-------------------------------------------------------------------
+
+
+
+
+
+					
+					Numerics Deployed: true
+				</Annotation>
+      </Annotations>
+      <Variables>
+        <Variable Name="ExtractServer" DataType="String">localhost</Variable>
+        <Variable Name="ExtractDatabase" DataType="String">Interrogator</Variable>
+        <Variable Name="SourceFilePath" DataType="String">C:\Repositories\Biml\Interrogator\testdata\Numerics.csv</Variable>
+      </Variables>
+      <Tasks>
+        <ExecuteSQL Name="SQL-Truncate ExtractNumerics" ConnectionName="ADONET_Extract">
+          <DirectInput>TRUNCATE TABLE [Extract].[Numerics];</DirectInput>
+        </ExecuteSQL>
+        <Dataflow Name="DFT-Load ExtractNumerics">
+          <PrecedenceConstraints>
+            <Inputs>
+              <Input OutputPathName="SQL-Truncate ExtractNumerics.Output" />
+            </Inputs>
+          </PrecedenceConstraints>
+          <Transformations>
+            <FlatFileSource Name="FF_SRC-Numerics" ValidateExternalMetadata="false" RetainNulls="true" ConnectionName="FF_Numerics" />
+            <DerivedColumns Name="DER-Audit Columns">
+              <InputPath OutputPathName="FF_SRC-Numerics.Output" />
+              <Columns>
+                <Column Name="ExecutionID" DataType="AnsiString" Length="50">
+									@[System::ExecutionInstanceGUID]
+                                </Column>
+                <Column Name="InsertedDateTime" DataType="DateTime">
+									GETDATE()
+                                </Column>
+              </Columns>
+            </DerivedColumns>
+            <OleDbDestination Name="OLE_DEST-ExtractNumerics" ValidateExternalMetadata="false" ConnectionName="OLEDB_Extract">
+              <InputPath OutputPathName="DER-Audit Columns.Output" />
+              <ExternalTableOutput Table="[Extract].[Numerics]" />
+            </OleDbDestination>
+          </Transformations>
+        </Dataflow>
+      </Tasks>
+      <Connections>
+        <Connection ConnectionName="FF_Numerics" />
+      </Connections>
+    </Package>
+    <Package Name="Extract_FF_Person" DelayValidation="true" ProtectionLevel="EncryptSensitiveWithUserKey">
+      <Annotations>
+        <Annotation AnnotationType="CodeComment">
+					All flat file extracts are truncate and load.
+					Destination Connection String: Server=localhost;Database=Interrogator;Trusted_Connection=True;
+					
+					SET ANSI_NULLS ON
+SET QUOTED_IDENTIFIER ON
+GO
+
+-------------------------------------------------------------------
+IF EXISTS (SELECT * from sys.objects WHERE object_id = OBJECT_ID(N'[Extract].[Person]') AND type IN (N'U'))
+DROP TABLE [Extract].[Person]
+GO
+
+CREATE TABLE [Extract].[Person]
+(
+-- Columns Definition
+	[BusinessEntityID] smallint NOT NULL 
+,	[EmailPromotion] tinyint NOT NULL 
+,	[rowguid] nvarchar(38) NOT NULL 
+,	[ModifiedDate] datetime NOT NULL 
+,	[strPersonType] nvarchar(2) NOT NULL 
+,	[strTitle] nvarchar(3) 
+,	[strFirstName] nvarchar(7) NOT NULL 
+,	[strMiddleName] nvarchar(1) 
+,	[strLastName] nvarchar(2) NOT NULL 
+,	[strSuffix] nvarchar(3) 
+,	[ExecutionID] uniqueidentifier NOT NULL 
+,	[InsertedDateTime] datetime NOT NULL 
+
+-- Constraints
+
+)
+ON "default"
+WITH (DATA_COMPRESSION = PAGE)
+GO
+
+-------------------------------------------------------------------
+
+
+
+
+
+					
+					Person Deployed: true
+				</Annotation>
+      </Annotations>
+      <Variables>
+        <Variable Name="ExtractServer" DataType="String">localhost</Variable>
+        <Variable Name="ExtractDatabase" DataType="String">Interrogator</Variable>
+        <Variable Name="SourceFilePath" DataType="String">C:\Repositories\Biml\Interrogator\testdata\Person.csv</Variable>
+      </Variables>
+      <Tasks>
+        <ExecuteSQL Name="SQL-Truncate ExtractPerson" ConnectionName="ADONET_Extract">
+          <DirectInput>TRUNCATE TABLE [Extract].[Person];</DirectInput>
+        </ExecuteSQL>
+        <Dataflow Name="DFT-Load ExtractPerson">
+          <PrecedenceConstraints>
+            <Inputs>
+              <Input OutputPathName="SQL-Truncate ExtractPerson.Output" />
+            </Inputs>
+          </PrecedenceConstraints>
+          <Transformations>
+            <FlatFileSource Name="FF_SRC-Person" ValidateExternalMetadata="false" RetainNulls="true" ConnectionName="FF_Person" />
+            <DerivedColumns Name="DER-Audit Columns">
+              <InputPath OutputPathName="FF_SRC-Person.Output" />
+              <Columns>
+                <Column Name="ExecutionID" DataType="AnsiString" Length="50">
+									@[System::ExecutionInstanceGUID]
+                                </Column>
+                <Column Name="InsertedDateTime" DataType="DateTime">
+									GETDATE()
+                                </Column>
+              </Columns>
+            </DerivedColumns>
+            <OleDbDestination Name="OLE_DEST-ExtractPerson" ValidateExternalMetadata="false" ConnectionName="OLEDB_Extract">
+              <InputPath OutputPathName="DER-Audit Columns.Output" />
+              <ExternalTableOutput Table="[Extract].[Person]" />
+            </OleDbDestination>
+          </Transformations>
+        </Dataflow>
+      </Tasks>
+      <Connections>
+        <Connection ConnectionName="FF_Person" />
+      </Connections>
+    </Package>
     <Package Name="CreateObjects" ConstraintMode="Linear" ProtectionLevel="EncryptSensitiveWithUserKey">
       <Annotations>
         <Annotation AnnotationType="CodeComment">
@@ -1499,6 +988,46 @@ CREATE TABLE [Extract].[Numerics]
 ,	[5_Bigint] bigint 
 ,	[6_Decimal] decimal(38,38) 
 ,	[7_Float] float(20) 
+,	[ExecutionID] uniqueidentifier NOT NULL 
+,	[InsertedDateTime] datetime NOT NULL 
+
+-- Constraints
+
+)
+ON "default"
+WITH (DATA_COMPRESSION = PAGE)
+GO
+
+-------------------------------------------------------------------
+
+
+
+
+</DirectInput>
+            </ExecuteSQL>
+            <ExecuteSQL Name="SQL-Create Table Person" ConnectionName="ADONET_Extract">
+              <DirectInput>SET ANSI_NULLS ON
+SET QUOTED_IDENTIFIER ON
+GO
+
+-------------------------------------------------------------------
+IF EXISTS (SELECT * from sys.objects WHERE object_id = OBJECT_ID(N'[Extract].[Person]') AND type IN (N'U'))
+DROP TABLE [Extract].[Person]
+GO
+
+CREATE TABLE [Extract].[Person]
+(
+-- Columns Definition
+	[BusinessEntityID] smallint NOT NULL 
+,	[EmailPromotion] tinyint NOT NULL 
+,	[rowguid] nvarchar(38) NOT NULL 
+,	[ModifiedDate] datetime NOT NULL 
+,	[strPersonType] nvarchar(2) NOT NULL 
+,	[strTitle] nvarchar(3) 
+,	[strFirstName] nvarchar(7) NOT NULL 
+,	[strMiddleName] nvarchar(1) 
+,	[strLastName] nvarchar(2) NOT NULL 
+,	[strSuffix] nvarchar(3) 
 ,	[ExecutionID] uniqueidentifier NOT NULL 
 ,	[InsertedDateTime] datetime NOT NULL 
 
@@ -1759,19 +1288,112 @@ GO
         </Column>
       </Columns>
     </FlatFileFormat>
+    <FlatFileFormat Name="Person" CodePage="65001" TextQualifer="&quot;" ColumnNamesInFirstDataRow="true" RowDelimiter="CRLF" IsUnicode="false">
+      <Columns>
+        <Column Name="BusinessEntityID" DataType="Int16" Delimiter=",">
+          <Annotations>
+            <Annotation>
+						SQL DataType: SmallInt
+						MaxLength: 
+						Precision: 
+						Scale: 
+                    </Annotation>
+          </Annotations>
+        </Column>
+        <Column Name="EmailPromotion" DataType="Byte" Delimiter=",">
+          <Annotations>
+            <Annotation>
+						SQL DataType: TinyInt
+						MaxLength: 
+						Precision: 
+						Scale: 
+                    </Annotation>
+          </Annotations>
+        </Column>
+        <Column Name="rowguid" Length="38" DataType="String" Delimiter=",">
+          <Annotations>
+            <Annotation>
+						SQL DataType: NVarChar
+						MaxLength: 38
+						Precision: 
+						Scale: 
+                    </Annotation>
+          </Annotations>
+        </Column>
+        <Column Name="ModifiedDate" Precision="27" Scale="7" DataType="DateTime" Delimiter=",">
+          <Annotations>
+            <Annotation>
+						SQL DataType: DateTime2
+						MaxLength: 
+						Precision: 27
+						Scale: 7
+                    </Annotation>
+          </Annotations>
+        </Column>
+        <Column Name="strPersonType" Length="2" DataType="String" Delimiter=",">
+          <Annotations>
+            <Annotation>
+						SQL DataType: NVarChar
+						MaxLength: 2
+						Precision: 
+						Scale: 
+                    </Annotation>
+          </Annotations>
+        </Column>
+        <Column Name="strTitle" Length="3" DataType="String" Delimiter=",">
+          <Annotations>
+            <Annotation>
+						SQL DataType: NVarChar
+						MaxLength: 3
+						Precision: 
+						Scale: 
+                    </Annotation>
+          </Annotations>
+        </Column>
+        <Column Name="strFirstName" Length="7" DataType="String" Delimiter=",">
+          <Annotations>
+            <Annotation>
+						SQL DataType: NVarChar
+						MaxLength: 7
+						Precision: 
+						Scale: 
+                    </Annotation>
+          </Annotations>
+        </Column>
+        <Column Name="strMiddleName" Length="1" DataType="String" Delimiter=",">
+          <Annotations>
+            <Annotation>
+						SQL DataType: NVarChar
+						MaxLength: 1
+						Precision: 
+						Scale: 
+                    </Annotation>
+          </Annotations>
+        </Column>
+        <Column Name="strLastName" Length="2" DataType="String" Delimiter=",">
+          <Annotations>
+            <Annotation>
+						SQL DataType: NVarChar
+						MaxLength: 2
+						Precision: 
+						Scale: 
+                    </Annotation>
+          </Annotations>
+        </Column>
+        <Column Name="strSuffix" Length="3" DataType="String" Delimiter="CRLF">
+          <Annotations>
+            <Annotation>
+						SQL DataType: NVarChar
+						MaxLength: 3
+						Precision: 
+						Scale: 
+                    </Annotation>
+          </Annotations>
+        </Column>
+      </Columns>
+    </FlatFileFormat>
   </FileFormats>
   <Databases>
     <Database Name="Extract" ConnectionName="ADONET_Extract" />
   </Databases>
-  <Projects>
-    <PackageProject Name="BimlExpress">
-      <Annotations>
-        <Annotation Tag="ProjectParametersPath">C:\Repositories\Biml\Interrogator\BimlExpress Project\BimlExpress\Project.params</Annotation>
-      </Annotations>
-      <Parameters>
-        <Parameter Name="ExtractServer" DataType="String">localhost</Parameter>
-        <Parameter Name="ExtractDatabase" DataType="String">Interrogator</Parameter>
-      </Parameters>
-    </PackageProject>
-  </Projects>
 </Biml>

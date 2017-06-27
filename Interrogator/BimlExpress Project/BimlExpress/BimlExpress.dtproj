@@ -31,8 +31,6 @@
         </SSIS:Properties>
         <SSIS:Packages />
         <SSIS:ConnectionManagers>
-          <SSIS:ConnectionManager SSIS:Name="ADONET_Adventureworks.conmgr" />
-          <SSIS:ConnectionManager SSIS:Name="ADONET_Extract.conmgr" />
         </SSIS:ConnectionManagers>
         <SSIS:DeploymentInfo>
           <SSIS:ProjectConnectionParameters>
