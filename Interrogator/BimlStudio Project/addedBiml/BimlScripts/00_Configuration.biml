@@ -19,6 +19,9 @@
 	//where are the flat file demo files stored?
 	string SourceFolder = @"C:\Repositories\Biml\Interrogator\testdata";
 	
+	//What is the full file path to output.biml in the solution?
+	string OutputBimlFilePath = @"C:\Repositories\Biml\Interrogator\BimlExpress Project\BimlExpress\output.biml";
+	
 	/*
 		per http://billfellows.blogspot.com/2016/09/resolving-biml-project-level-connection.html
 		there is an issue with matching up ids between the connections collection and Project.

@@ -1,4 +1,5 @@
 <#@ template tier="100" #> 
+<#@ include file="00_Configuration.biml" #>
 <#@ import namespace="Varigence.Biml.CoreLowerer.SchemaManagement"  #> 
 <#@ import namespace="System.Xml"  #>
 
@@ -8,9 +9,9 @@
       string xBiml = RootNode.GetBiml();  
       XmlDocument xmlDoc = new XmlDocument();  
       xmlDoc.LoadXml(xBiml);  
-      string sFile = @"C:\Repositories\Biml\Interrogator\BimlExpress Project\BimlExpress\output.biml";  
+      
  
-      xmlDoc.Save(sFile);  
+      xmlDoc.Save(OutputBimlFilePath);  
       
    #> 
 </Biml>  
