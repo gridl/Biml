@@ -5,7 +5,7 @@
 	string ExtractServer = "localhost";
 	
 	//define the database name
-	string ExtractDatabase = "2046DataBIML";
+	string ExtractDatabase = "Interrogator";
 	
 	//verify the environment is ready to go:
 	string CreateDatabaseDDL = @"IF NOT EXISTS(SELECT database_id FROM sys.databases WHERE Name = '" + ExtractDatabase + @"')
