@@ -1,0 +1,12 @@
+<#@ template tier="0" #>
+
+<#
+	//define the database server
+	string ExtractServer = "localhost";
+	
+	//define the database name
+	string ExtractDatabase = "Bootcamp";
+	
+	
+	string OutputBimlFilePath = @"C:\Repositories\Biml\BimlBootcamp\Framework\Framework\output.biml";
+#>

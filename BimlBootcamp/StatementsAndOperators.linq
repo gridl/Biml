@@ -1,8 +1,6 @@
 <Query Kind="Program">
   <Reference>&lt;RuntimeDirectory&gt;\System.Net.dll</Reference>
   <Reference>&lt;RuntimeDirectory&gt;\System.Web.dll</Reference>
-  <NuGetReference>HtmlAgilityPack</NuGetReference>
-  <Namespace>HtmlAgilityPack</Namespace>
   <Namespace>System.Net</Namespace>
 </Query>
 

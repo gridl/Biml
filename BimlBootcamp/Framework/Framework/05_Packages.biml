@@ -1,0 +1,10 @@
+<#@ template tier="5" #>
+<Biml xmlns="http://schemas.varigence.com/biml.xsd">
+    <Packages>
+        <#foreach(var table in RootNode.Tables.Where(t => t.Schema.Name == "Extract")) {#>
+           <Package Name="Extract_<#=table.Name#>">
+               
+           </Package>
+        <#}#>
+    </Packages>
+</Biml>

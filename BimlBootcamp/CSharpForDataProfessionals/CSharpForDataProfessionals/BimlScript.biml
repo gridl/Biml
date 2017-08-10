@@ -1,0 +1,15 @@
+<#@ import namespace="System.IO" #>
+
+<Biml xmlns="http://schemas.varigence.com/biml.xsd">
+    <Annotations>
+        <Annotation AnnotationType="CodeComment">
+            <#
+                string test = "aasdf";
+            #>
+            <#=test#>
+       
+            <#=test.Substring(2, 3)#>
+                
+        </Annotation>
+    </Annotations>
+</Biml>

@@ -1,0 +1,26 @@
+<#@ template tier="4" #>
+<Biml xmlns="http://schemas.varigence.com/biml.xsd">
+    <# var SourceSchema = RootNode.Connections["ADONET_Source"].GetDatabaseSchema();#>
+     <Tables>
+        <# foreach (var table in SourceSchema.TableNodes) {#>
+           <Table Name="<#=table.Name#>" SchemaName="Source.<#=table.Schema.Name#>">
+                <Columns>
+                <#foreach (var column in table.Columns) {#> 
+                    <Column Name="<#=column.Name#>" DataType="<#=column.DataType#>" Length="<#=column.Length#>" /> 
+                <#}#>
+                    
+                </Columns>
+            </Table>
+        <#}#>
+        <# foreach (var table in SourceSchema.TableNodes) { #>
+            <Table Name="<#=table.Name#>" SchemaName="Extract.Extract">
+                <Columns>
+                <#foreach (var column in table.Columns) {#> 
+                    <Column Name="<#=column.Name#>" DataType="<#=column.DataType#>" Length="<#=column.Length#>" /> 
+                <#}#>
+                    
+                </Columns>
+            </Table>
+        <#}#>
+    </Tables>
+</Biml>

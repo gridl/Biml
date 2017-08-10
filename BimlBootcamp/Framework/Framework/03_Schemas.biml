@@ -1,0 +1,12 @@
+<#@ template tier="3" #>
+<Biml xmlns="http://schemas.varigence.com/biml.xsd">
+    <#
+        var SourceSchema = RootNode.Connections["ADONET_Source"].GetDatabaseSchema();
+    #>
+    <Schemas>
+        <Schema Name="Extract" DatabaseName="Extract" />
+        <# foreach (var schema in SourceSchema.SchemaNodes) {#>
+           <Schema Name= "<#=schema.Name#>" DatabaseName="Source" />  
+        <#}#>
+    </Schemas>
+</Biml>

@@ -1,14 +1,15 @@
 <Query Kind="Program">
+  <Reference>&lt;RuntimeDirectory&gt;\System.Data.dll</Reference>
   <Reference>&lt;RuntimeDirectory&gt;\System.Net.dll</Reference>
   <Reference>&lt;RuntimeDirectory&gt;\System.Web.dll</Reference>
-  <NuGetReference>HtmlAgilityPack</NuGetReference>
-  <Namespace>HtmlAgilityPack</Namespace>
   <Namespace>System.Net</Namespace>
 </Query>
 
 void Main()
 {
-	
+	/*
+	System.Int16 test = new Int16();
+
 	int a = 1;
 	
 	a++;
@@ -19,8 +20,9 @@ void Main()
 		Console.WriteLine("a is not one");
 	}
 	
+	*/
+	int b = 100; 
 	/*
-	int b = 1; 
 	switch(b) {
 		case 1:
 			Console.WriteLine("case 1");
@@ -32,8 +34,16 @@ void Main()
 		default:
 			Console.WriteLine("default case");
 			break;	
+	}*/
+	
+	do {
+		b+=1;
+		Console.WriteLine(b);
 	}
-	*/
+	while (b <200);
+	
+		
+	//} while (true);
 	/*
 	for(int i = 1; i <= 10; i++) {
 		Console.WriteLine ("Guess how we will make package " + i.ToString());

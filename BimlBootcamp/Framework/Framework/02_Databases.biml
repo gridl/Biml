@@ -1,0 +1,7 @@
+<#@ template tier="2" #>
+<Biml xmlns="http://schemas.varigence.com/biml.xsd">
+	<Databases>
+	    <Database Name="Source" ConnectionName="ADONET_Source" />
+		<Database Name="Extract" ConnectionName="ADONET_Extract" />
+    </Databases>
+</Biml>
