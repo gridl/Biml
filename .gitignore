@@ -41,7 +41,7 @@ bld/
 [Bb]uild[Ll]og.*
 
 # BimlExpress files we don't want to check in 
- Interrogator/BimlExpress Project/BimlExpress/07_Projects_ETL.biml
+/Interrogator/BimlExpress Project/BimlExpress/07_Projects_ETL.biml
 /Interrogator/BimlExpress Project/BimlExpress/06_Packages_ExtractFlatFiles.biml
 /Interrogator/BimlExpress Project/BimlExpress/05_Packages_CreateObjects.biml
 /Interrogator/BimlExpress Project/BimlExpress/04_Tables_SQL-ALL.biml
