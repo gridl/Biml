@@ -1,6 +1,1 @@
-<Biml>
-  <Connections>
-    <AdoNetConnection Name="ADONET_Extract" CreateInProject="true" ConnectionString="Data Source=localhost;Initial Catalog=Interrogator;Integrated Security=true" Provider="System.Data.SqlClient.SqlConnection, System.Data, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-    <AdoNetConnection Name="ADONET_Adventureworks" CreateInProject="true" ConnectionString="Data Source=localhost;Initial Catalog=Adventureworks2014;Integrated Security=true" Provider="System.Data.SqlClient.SqlConnection, System.Data, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  </Connections>
-</Biml>
+<Biml xmlns="http://schemas.varigence.com/biml.xsd" />
