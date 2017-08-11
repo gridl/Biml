@@ -1,14 +1,15 @@
 <#@ template tier="1" #>
 <#@ include file="00_Configuration.biml" #>
 <Biml xmlns="http://schemas.varigence.com/biml.xsd"> 
-	<Connections>
-		<AdoNetConnection Name="ADONET_Source" 
-		    ConnectionString="Data Source=<#=SourceServer #>;Initial Catalog=<#=SourceDatabase#>;Integrated Security=true" 
-		    CreateInProject="true" 
-		    Provider="System.Data.SqlClient.SqlConnection, System.Data, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-		<AdoNetConnection Name="ADONET_Extract" 
+ <Connections>
+  <AdoNetConnection Name="ADONET_Source" 
+                     Data Source=localhost;Initial Catalog=AdventureWorks2014;Integrated Security=True;
+   ConnectionString="Data Source=<#=SourceServer #>;Initial Catalog=<#=SourceDatabase#>;Integrated Security=true" 
+   CreateInProject="true" 
+   Provider="System.Data.SqlClient.SqlConnection, System.Data, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+ <AdoNetConnection Name="ADONET_Extract" 
 		    ConnectionString="Data Source=<#=ExtractServer #>;Initial Catalog=<#= ExtractDatabase#>;Integrated Security=true" 
 		    CreateInProject="true"
 		    Provider="System.Data.SqlClient.SqlConnection, System.Data, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-    </Connections>
+</Connections>
 </Biml>
