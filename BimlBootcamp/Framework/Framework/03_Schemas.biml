@@ -1,7 +1,12 @@
 <#@ template tier="3" #>
 <Biml xmlns="http://schemas.varigence.com/biml.xsd">
+    
     <#
-        var SourceSchema = RootNode.Connections["ADONET_Source"].GetDatabaseSchema();
+    //Lars Code:
+    var sourceConnection  = new AstOleDbConnectionNode(null) { ConnectionString = "Data Source=localhost;Initial Catalog=AdventureWorks2014;Integrated Security=true;"  }; 
+    var SourceSchema = sourceConnection.GetDatabaseSchema();
+    //my busted code:
+    //var SourceSchema = RootNode.Connections["OLEDB_Source"].GetDatabaseSchema();
     #>
     <Schemas>
         <Schema Name="Extract" DatabaseName="Extract" />
