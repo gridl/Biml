@@ -1,9 +1,57 @@
+<#@ include file="00_Configuration.biml"#>
+<#@ code file="DevelopmentHelper.cs"#>
 <#@ template tier="5" #>
+<# DevelopmentHelper h = new DevelopmentHelper(RootNode.Connections["ADONET_Extract"].RenderedConnectionString); #>
 <Biml xmlns="http://schemas.varigence.com/biml.xsd">
+    <Annotations>
+        <Annotation>
+            You're going to need the Extract Schema
+            <#
+                string DeploySchemaSQL = @"IF NOT EXISTS (SELECT * from sys.schemas WHERE name = 'Extract')
+            	EXEC sp_executesql  N'CREATE SCHEMA Extract';";
+            	
+                h.deployDBObject(DeploySchemaSQL);
+            #>
+            And you're going to need the Extract tables too.
+            <#foreach(var table in RootNode.Tables) {#>
+               <#=table.Name#> Deployed: <#=h.deployDBObject(table.GetTableSql())#>
+            <#}#>
+        </Annotation>
+    </Annotations>
     <Packages>
-        <#foreach(var table in RootNode.Tables.Where(t => t.Schema.Name == "Extract")) {#>
+        <#foreach(var table in RootNode.Tables.Where(t => t.Schema.Name != "Extract")) {#>
            <Package Name="Extract_<#=table.Name#>">
-               
+              
+               <Tasks>
+                   <ExecuteSQL Name="SQL-Truncate Extract<#=table.Name#>" ConnectionName="ADONET_Extract">
+    					<DirectInput>TRUNCATE TABLE [Extract].[<#=table.Name#>];</DirectInput>
+    				</ExecuteSQL>
+    			    <Dataflow Name="DFT-Load <#= table.Schema #><#=table.Name#>">
+    			        <PrecedenceConstraints>
+    						<Inputs>
+    							<Input OutputPathName="SQL-Truncate Extract<#=table.Name#>.Output" />
+                            </Inputs>
+                        </PrecedenceConstraints>
+    			        <Transformations>
+					    <AdoNetSource Name="ADONET_SRC-<#= table.Schema #><#=table.Name#>" ConnectionName="ADONET_Source">
+					        <ExternalTableInput Table="[<#=table.Schema#>].[<#=table.Name#>]" />
+					    </AdoNetSource>
+					   <AdoNetDestination Name="ADONET_DEST-Extract<#=table.Name#>" ConnectionName="ADONET_Extract">
+					       <InputPath OutputPathName="ADONET_SRC-<#= table.Schema #><#=table.Name#>.Output" />
+					       <ExternalTableOutput  Table="[Extract].[<#=table.Name#>]" />
+					   </AdoNetDestination>
+					   </Transformations>
+    			    </Dataflow>
+            </Tasks>
+			<Connections>
+			<#
+			    foreach(var connection in RootNode.Connections) {
+			#>
+				<Connection ConnectionName="<#= connection.Name #>" Id="<#= connection.Guid #>" />
+			<#
+			    }
+			#>
+			</Connections>
            </Package>
         <#}#>
     </Packages>
