@@ -11,4 +11,3 @@
 	//ignore line 13 at first..this is for a later demo
 	string OutputBimlFilePath = @"C:\Repositories\Biml\BimlBootcamp\Framework\Framework\output.biml";
 #>
-<Biml xmlns="http://schemas.varigence.com/biml.xsd"></Biml>
