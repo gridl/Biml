@@ -5,6 +5,7 @@
 *.sln.docstates
 *.jfm
 *.muo
+*.dtsx
 
 #outputs
 **/[Bb]in/
