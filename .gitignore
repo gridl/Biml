@@ -6,6 +6,7 @@
 *.jfm
 *.muo
 *.dtsx
+*.conmgr
 
 #outputs
 **/[Bb]in/
