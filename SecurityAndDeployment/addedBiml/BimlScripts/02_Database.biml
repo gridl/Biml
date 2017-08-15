@@ -1,0 +1,7 @@
+﻿<#@ template tier="2" #>
+<Biml xmlns="http://schemas.varigence.com/biml.xsd">
+	<Databases>
+        <Database Name="AdventureWorks2014" ConnectionName="OLEDB_AdventureWorks2014" />
+		<Database Name="BimlExtract" ConnectionName="OLEDB_BimlExtract" />
+    </Databases>
+</Biml>

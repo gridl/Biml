@@ -1,0 +1,24 @@
+﻿<#@ template tier="5" #>
+<#@ code file="..\Code\DevelopmentHelper.cs"#>
+
+<Biml xmlns="http://schemas.varigence.com/biml.xsd">
+	<Annotations> 
+        <Annotation>
+			<#=RootNode.Connections["OLEDB_BimlExtract"].RenderedConnectionString #>
+            You're going to need the Extract Schema
+            <#
+				//connection to the extract database, so we can write out the destination tables first.
+				DevelopmentHelper h = new DevelopmentHelper(RootNode.Connections["OLEDB_BimlExtract"].RenderedConnectionString);
+                string DeploySchemaSQL = @"IF NOT EXISTS (SELECT * from sys.schemas WHERE name = 'Extract')
+            	EXEC sp_executesql  N'CREATE SCHEMA Extract';";
+            #>	
+              Deployed: <#=h.deployDBObject(DeploySchemaSQL) #>  
+            
+			<#=DeploySchemaSQL #>
+            And you're going to need the Extract tables too.
+            <#foreach(var table in RootNode.Tables.Where(t=> t.Schema.Name == "Extract")) {#>
+               <#=table.Schema.Name #>.<#=table.Name#> Deployed: <#=h.deployDBObject(table.GetTableSql())#>
+            <#}#>
+        </Annotation>
+    </Annotations>
+</Biml>

@@ -1,0 +1,63 @@
+﻿<#@ code file="..\Code\DevelopmentHelper.cs"#>
+<Biml xmlns="http://schemas.varigence.com/biml.xsd">
+	<Connections>
+		<OleDbConnection Name="OLEDB_AdventureWorks2014" 
+				ConnectionString="Provider=SQLNCLI11;Data Source=localhost;Initial Catalog=AdventureWorks2014;User ID=Biml;Password=Password101!" 
+				CreateInProject="true" />
+						
+		<OleDbConnection Name="OLEDB_BimlExtract" 
+			ConnectionString="Provider=SQLNCLI11;Data Source=localhost;Initial Catalog=BimlExtract;User ID=Biml;Password=Password101!"
+			CreateInProject="true" />
+	</Connections>
+	<Databases>
+        <Database Name="AdventureWorks2014" ConnectionName="OLEDB_AdventureWorks2014" />
+		<Database Name="BimlExtract" ConnectionName="OLEDB_BimlExtract" />
+    </Databases>
+	<Schemas>
+		<Schema Name="Extract" DatabaseName="BimlExtract" />
+	<# var SourceSchema = RootNode.Connections["OLEDB_AdventureWorks2014"].GetDatabaseSchema(); 
+       foreach (var schema in SourceSchema.SchemaNodes) { #>
+       <Schema Name= "<#=schema.Name#>" DatabaseName="AdventureWorks2014" />  
+    <#}#>
+    </Schemas>
+	<Tables>
+    <# foreach (var table in SourceSchema.TableNodes) {#>
+       <Table Name="<#=table.Name#>" SchemaName="AdventureWorks2014.<#=table.Schema.Name#>">
+            <Columns>
+            <#foreach (var column in table.Columns) {#> 
+                <Column Name="<#=column.Name#>" DataType="<#=column.DataType#>" Length="<#=column.Length#>" /> 
+            <#}#>
+            </Columns>
+        </Table>
+    <#}#>
+	<# foreach (var table in SourceSchema.TableNodes) { #>
+	    <Table Name="<#=table.Name#>" SchemaName="BimlExtract.Extract">
+	        <Columns>
+	        <#foreach (var column in table.Columns) {#> 
+	            <Column Name="<#=column.Name#>" DataType="<#=column.DataType#>" Length="<#=column.Length#>" /> 
+	        <#}#>
+	            
+	        </Columns>
+	    </Table>
+    <#}#>
+	</Tables>
+	<Annotations> 
+        <Annotation>
+			<#=RootNode.Connections["OLEDB_BimlExtract"].RenderedConnectionString #>
+            You're going to need the Extract Schema
+            <#
+				//connection to the extract database, so we can write out the destination tables first.
+				DevelopmentHelper h = new DevelopmentHelper(RootNode.Connections["OLEDB_BimlExtract"].RenderedConnectionString);
+                string DeploySchemaSQL = @"IF NOT EXISTS (SELECT * from sys.schemas WHERE name = 'Extract')
+            	EXEC sp_executesql  N'CREATE SCHEMA Extract';";
+            #>	
+              Deployed: <#=h.deployDBObject(DeploySchemaSQL) #>  
+            
+			<#=DeploySchemaSQL #>
+            And you're going to need the Extract tables too.
+            <#foreach(var table in RootNode.Tables.Where(t=> t.Schema.Name == "Extract")) {#>
+               <#=table.Schema.Name #>.<#=table.Name#> Deployed: <#=h.deployDBObject(table.GetTableSql())#>
+            <#}#>
+        </Annotation>
+    </Annotations>
+</Biml>

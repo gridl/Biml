@@ -1,0 +1,24 @@
+﻿<Biml xmlns="http://schemas.varigence.com/biml.xsd">
+	<Tables>
+        <# var SourceSchema = RootNode.Connections["OLEDB_AdventureWorks2014"].GetDatabaseSchema(); 
+		   foreach (var table in SourceSchema.TableNodes) {#>
+           <Table Name="<#=table.Name#>" SchemaName="AdventureWorks2014.<#=table.Schema.Name#>">
+                <Columns>
+                <#foreach (var column in table.Columns) {#> 
+                    <Column Name="<#=column.Name#>" DataType="<#=column.DataType#>" Length="<#=column.Length#>" /> 
+                <#}#>
+                </Columns>
+            </Table>
+        <#}#>
+		<# foreach (var table in SourceSchema.TableNodes) { #>
+        <Table Name="<#=table.Name#>" SchemaName="BimlExtract.Extract">
+            <Columns>
+            <#foreach (var column in table.Columns) {#> 
+                <Column Name="<#=column.Name#>" DataType="<#=column.DataType#>" Length="<#=column.Length#>" /> 
+            <#}#>
+                
+            </Columns>
+        </Table>
+        <#}#>
+	</Tables>
+</Biml>

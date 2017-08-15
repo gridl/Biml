@@ -1,0 +1,10 @@
+﻿<#@ template tier="3" #>
+<Biml xmlns="http://schemas.varigence.com/biml.xsd">
+	<Schemas>
+		<Schema Name="Extract" DatabaseName="BimlExtract" />
+	<# var SourceSchema = RootNode.Connections["OLEDB_AdventureWorks2014"].GetDatabaseSchema(); 
+       foreach (var schema in SourceSchema.SchemaNodes) { #>
+       <Schema Name= "<#=schema.Name#>" DatabaseName="AdventureWorks2014" />  
+    <#}#>
+    </Schemas>
+</Biml>

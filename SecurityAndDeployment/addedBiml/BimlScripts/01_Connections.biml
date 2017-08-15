@@ -1,0 +1,12 @@
+﻿<#@ template tier="1" #>
+<Biml xmlns="http://schemas.varigence.com/biml.xsd">
+	<Connections>
+        <OleDbConnection Name="OLEDB_AdventureWorks2014" 
+			ConnectionString="Provider=SQLNCLI11;Data Source=localhost;Initial Catalog=AdventureWorks2014;User ID=Biml;Password=Password101!" 
+			CreateInProject="true" />
+					
+		<OleDbConnection Name="OLEDB_BimlExtract" 
+			ConnectionString="Provider=SQLNCLI11;Data Source=localhost;Initial Catalog=BimlExtract;User ID=Biml;Password=Password101!"
+			CreateInProject="true" />
+    </Connections>
+</Biml>
