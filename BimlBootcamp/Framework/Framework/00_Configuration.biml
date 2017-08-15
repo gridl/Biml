@@ -1,10 +1,10 @@
 <#@ template tier="0" #>
 <#
-    //Define the Source Server/Database
+    //Define the Source Server/Database: make sure this points to a valid database
     string SourceServer = "localhost";
-    string SourceDatabase = "AdventureWorks2014";
+    string SourceDatabase = "AdventureWorks2016CTP3";
 
-	//define the Extract server/Database
+	//define the Extract server/Database: make sure this also points to a valid datab
 	string ExtractServer = "localhost";
 	string ExtractDatabase = "Bootcamp";
 	
