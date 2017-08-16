@@ -1,0 +1,91 @@
+<Biml xmlns="http://schemas.varigence.com/biml.xsd">
+        <Connections>
+            <AdoNetConnection Name="ADONET_AdventureWorks_Package" 
+    		    ConnectionString="Server=localhost;Integrated Security=true;Database=AdventureWorks2014" 
+    		    Provider="System.Data.SqlClient" />
+    		<AdoNetConnection Name="ADONET_AdventureWorks_Project" 
+    		    ConnectionString="Server=localhost;Integrated Security=true;Database=AdventureWorks2014" 
+    		    Provider="System.Data.SqlClient" 
+    		    CreateInProject="true" />	
+            <OleDbConnection Name="OLEDB_AdventureWorks_Package" 
+                ConnectionString="Provider=SQLNCLI11;Data Source=localhost;Integrated Security=SSPI;Initial Catalog=AdventureWorks2014" />
+            <OleDbConnection Name="OLEDB_AdventureWorks_Project" 
+                ConnectionString="Provider=SQLNCLI11;Data Source=localhost;Integrated Security=SSPI;Initial Catalog=AdventureWorks2014"
+                CreateInProject="true" />
+        </Connections>
+        <Databases>
+            <Database Name="AdventureWorks2014" ConnectionName="OLEDB_AdventureWorks_Project" />
+        </Databases>    
+        <Schemas>
+            <Schema Name="Person" DatabaseName="AdventureWorks2014" />
+        </Schemas>
+        <Tables>
+            <Table Name="Address" SchemaName="AdventureWorks2014.Person">
+                <Columns>
+                    <Column Name="AddressID" />
+                    <Column Name="AddressLine1" DataType="String" Length="60" />
+                    <Column Name="AddressLine2" DataType="String" Length="60" />
+                    <Column Name="City" DataType="String" Length="30" />
+                    <Column Name="StateProvinceID" />
+                    <Column Name="PostalCode" DataType="String" Length="15" />
+                    <Column Name="SpatialLocation" DataType="Object" />
+                    <Column Name="rowguid" DataType="Guid" />
+                    <Column Name="ModifiedDate" DataType="DateTime" />
+                </Columns>
+            </Table>
+        </Tables>
+		<Packages>
+			<Package Name="TestPackage" >
+				<Annotations>
+					<Annotation>
+						parameters tested:
+							AdventureWorks2014 -- success
+							@[$Project::DatabaseName] --
+                    </Annotation>
+                </Annotations>
+				<Connections>
+					<Connection ConnectionName="ADONET_AdventureWorks_Package"> 
+						<Expressions>
+							<Expression ExternalProperty="InitialCatalog">@[$Project::DatabaseName]</Expression>
+                        </Expressions>
+                    </Connection>
+					<Connection ConnectionName="ADONET_AdventureWorks_Project"> 
+						<Expressions>
+							<Expression ExternalProperty="InitialCatalog">@[$Project::DatabaseName]</Expression>
+                        </Expressions>
+                    </Connection>
+					<Connection ConnectionName="OLEDB_AdventureWorks_Package"> 
+						<Expressions>
+							<Expression ExternalProperty="InitialCatalog">@[$Project::DatabaseName]</Expression>
+                        </Expressions>
+                    </Connection>
+					<Connection ConnectionName="OLEDB_AdventureWorks_Project"> 
+						<Expressions>
+							<Expression ExternalProperty="InitialCatalog">@[$Project::DatabaseName]</Expression>
+                        </Expressions>
+                    </Connection>
+                </Connections>
+				<Tasks>
+					<ExecuteSQL Name="SQL-Get Version" ConnectionName="ADONET_AdventureWorks_Project" >
+						<DirectInput>SELECT @@VERSION</DirectInput>
+                    </ExecuteSQL>
+                </Tasks>
+            </Package>
+        </Packages>
+        <Projects>
+            <PackageProject Name="ParametersAndConnections_BE" >
+                <Parameters>
+                    <Parameter Name="ADONET_ConnectionString" DataType="String">Server=localhost;Integrated Security=true;Database=AdventureWorks2014</Parameter>
+                    <Parameter Name="OLEDB_ConnectionString" DataType="String">Provider=SQLNCLI11;Data Source=localhost;Integrated Security=SSPI;Initial Catalog=AdventureWorks2014</Parameter>
+					<Parameter Name="DatabaseName" DataType="String">AdventureWorks2014</Parameter>
+                </Parameters>
+				<Packages>
+					<Package PackageName="TestPackage" />
+                </Packages>
+				<Connections>
+					<Connection ConnectionName="ADONET_AdventureWorks_Project" />
+					<Connection ConnectionName="OLEDB_AdventureWorks_Project" />
+                </Connections>
+            </PackageProject>
+        </Projects>    
+</Biml>

@@ -1,0 +1,77 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <IsPackageEditorCompactDisplayModeEnabled>False</IsPackageEditorCompactDisplayModeEnabled>
+    <IsTemplateAutoUpdatePreviewEnabled>True</IsTemplateAutoUpdatePreviewEnabled>
+    <IsTemplateCheckBimlSyntaxEnabled>True</IsTemplateCheckBimlSyntaxEnabled>
+    <IsTemplateAutoFormatXmlEnabled>True</IsTemplateAutoFormatXmlEnabled>
+    <IsBuildDocumentationEnabled>False</IsBuildDocumentationEnabled>
+    <DebugBundles />
+    <AddedXmlFilesPath>addedBiml</AddedXmlFilesPath>
+    <CompilationOutputPath>output</CompilationOutputPath>
+    <DocumentationOutputPath>documentation</DocumentationOutputPath>
+    <IsWarnAsErrorEnabled>False</IsWarnAsErrorEnabled>
+    <WarningLevel>4</WarningLevel>
+    <IsCleanOutputFolderEnabled>False</IsCleanOutputFolderEnabled>
+    <IsCleanDocumentationFolderEnabled>False</IsCleanDocumentationFolderEnabled>
+    <SqlVersion>SqlServer2014</SqlVersion>
+    <SsasVersion>Ssas2014</SsasVersion>
+    <SsasTabularVersion>SsasTabular2016</SsasTabularVersion>
+    <SsisVersion>Ssis2014</SsisVersion>
+    <UseProjectDeploymentModel>True</UseProjectDeploymentModel>
+    <ExtraCommandLineOptions />
+    <IsAutoUpdateDocumentationPreviewEnabled>True</IsAutoUpdateDocumentationPreviewEnabled>
+    <EmitDocumentationAnnotations>True</EmitDocumentationAnnotations>
+    <EmitCodeCommentAnnotations>False</EmitCodeCommentAnnotations>
+    <EmitTagAnnotations>False</EmitTagAnnotations>
+    <EmitEmittableAssets>True</EmitEmittableAssets>
+    <EmitIncludeAssets>True</EmitIncludeAssets>
+    <DefaultConnectionName />
+    <LoweringTemplateConfigurationPath />
+    <SelectedConfigurationFilePath />
+    <SelectedFrameworkFilePath />
+    <SelectedBimlDocSettingsFilePath />
+    <SelectedBimlDocTemplateFilePath />
+    <BimlStudioVersion>5.0.61918.0</BimlStudioVersion>
+  </PropertyGroup>
+  <ItemGroup>
+    <RootFolder Include=" ">
+      <RootFolderId>0</RootFolderId>
+    </RootFolder>
+  </ItemGroup>
+  <ItemGroup>
+    <Live Include="addedBiml\Connections\ADONET_AdventureWorks_Package.biml">
+      <RootFolderId>0</RootFolderId>
+    </Live>
+    <Live Include="addedBiml\Connections\ADONET_AdventureWorks_Project.biml">
+      <RootFolderId>0</RootFolderId>
+    </Live>
+    <Live Include="addedBiml\Connections\OLEDB_AdventureWorks_Package.biml">
+      <RootFolderId>0</RootFolderId>
+    </Live>
+    <Live Include="addedBiml\Connections\OLEDB_AdventureWorks_Project.biml">
+      <RootFolderId>0</RootFolderId>
+    </Live>
+    <Live Include="addedBiml\Databases\AdventureWorks2014.biml">
+      <RootFolderId>0</RootFolderId>
+    </Live>
+    <Live Include="addedBiml\Packages\TestPackage.biml">
+      <RootFolderId>0</RootFolderId>
+    </Live>
+    <Live Include="addedBiml\Projects\ParametersAndConnections_BS.biml">
+      <RootFolderId>0</RootFolderId>
+    </Live>
+    <Live Include="addedBiml\Schemas\AdventureWorks2014.Person.biml">
+      <RootFolderId>0</RootFolderId>
+    </Live>
+    <Live Include="addedBiml\Tables\AdventureWorks2014.Person.Address.biml">
+      <RootFolderId>0</RootFolderId>
+    </Live>
+    <None Include="ParametersAndConnections_BS.bimlproj">
+      <RootFolderId>0</RootFolderId>
+    </None>
+    <Reference Include="addedBiml\BimlScripts\BimlFile1.biml">
+      <RootFolderId>0</RootFolderId>
+    </Reference>
+  </ItemGroup>
+</Project>
