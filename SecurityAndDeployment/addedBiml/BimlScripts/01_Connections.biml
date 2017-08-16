@@ -4,9 +4,17 @@
         <OleDbConnection Name="OLEDB_AdventureWorks2014" 
 			ConnectionString="Provider=SQLNCLI11;Data Source=localhost;Initial Catalog=AdventureWorks2014;User ID=Biml;Password=Password101!" 
 			CreateInProject="true" />
-					
 		<OleDbConnection Name="OLEDB_BimlExtract" 
 			ConnectionString="Provider=SQLNCLI11;Data Source=localhost;Initial Catalog=BimlExtract;User ID=Biml;Password=Password101!"
 			CreateInProject="true" />
+		<!-- Notice the source used in the package will point to the extract database to pass the query-->
+		<AdoNetConnection Name="ADONET_PackageSource" 
+			ConnectionString="Server=localhost;Uid=Biml;Pwd=Password101!;Database=BimlExtract" 
+			Provider="System.Data.SqlClient"
+			CreateInProject="true"/>	
+		<AdoNetConnection Name="ADONET_BimlExtract" 
+			ConnectionString="Server=localhost;Uid=Biml;Pwd=Password101!;Database=BimlExtract" 
+			Provider="System.Data.SqlClient" 
+			CreateInProject="true"/>
     </Connections>
 </Biml>

@@ -1,3 +1,14 @@
+Extract_Address	Extract_Address.SQL-Truncate ExtractAddress	59	5	300	100
+Extract_Address	Extract_Address.DFT-Load PersonAddress	5	155	408	405
+Extract_Address	Extract_Address.DFT-Load PersonAddress.ADONET_SRC-PersonAddress	48	5	300	100
+Extract_Address	Extract_Address.DFT-Load PersonAddress.ADONET_DEST-ExtractAddress	48	155	300	100
 **********Compact Node Bounds
 **********Source Anchors
+Extract_Address	Extract_Address.SQL-Truncate ExtractAddress	Extract_Address.SQL-Truncate ExtractAddress.Output
+Extract_Address	Extract_Address.DFT-Load PersonAddress	Extract_Address.DFT-Load PersonAddress.Output
+Extract_Address	Extract_Address.DFT-Load PersonAddress.ADONET_SRC-PersonAddress	Extract_Address.DFT-Load PersonAddress.ADONET_SRC-PersonAddress.Output
+Extract_Address	Extract_Address.DFT-Load PersonAddress.ADONET_SRC-PersonAddress	Extract_Address.DFT-Load PersonAddress.ADONET_SRC-PersonAddress.Error
+Extract_Address	Extract_Address.DFT-Load PersonAddress.ADONET_DEST-ExtractAddress	Extract_Address.DFT-Load PersonAddress.ADONET_DEST-ExtractAddress.Error
 **********Sink Anchors
+Extract_Address	Extract_Address.DFT-Load PersonAddress	Extract_Address.SQL-Truncate ExtractAddress.Output
+Extract_Address	Extract_Address.DFT-Load PersonAddress.ADONET_DEST-ExtractAddress	Extract_Address.DFT-Load PersonAddress.ADONET_SRC-PersonAddress.Output

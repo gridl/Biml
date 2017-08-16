@@ -2,7 +2,7 @@
 <#
     //Define the Source Server/Database: make sure this points to a valid database
     string SourceServer = "localhost";
-    string SourceDatabase = "AdventureWorks2016CTP3";
+    string SourceDatabase = "AdventureWorks2014";
 
 	//define the Extract server/Database: make sure this also points to a valid datab
 	string ExtractServer = "localhost";

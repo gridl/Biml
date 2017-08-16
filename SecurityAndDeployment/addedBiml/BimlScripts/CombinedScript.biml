@@ -2,12 +2,18 @@
 <Biml xmlns="http://schemas.varigence.com/biml.xsd">
 	<Connections>
 		<OleDbConnection Name="OLEDB_AdventureWorks2014" 
-				ConnectionString="Provider=SQLNCLI11;Data Source=localhost;Initial Catalog=AdventureWorks2014;User ID=Biml;Password=Password101!" 
-				CreateInProject="true" />
-						
+				ConnectionString="Provider=SQLNCLI11;Data Source=localhost;Initial Catalog=AdventureWorks2014;User ID=Biml;Password=Password101!" />
 		<OleDbConnection Name="OLEDB_BimlExtract" 
-			ConnectionString="Provider=SQLNCLI11;Data Source=localhost;Initial Catalog=BimlExtract;User ID=Biml;Password=Password101!"
-			CreateInProject="true" />
+			ConnectionString="Provider=SQLNCLI11;Data Source=localhost;Initial Catalog=BimlExtract;User ID=Biml;Password=Password101!" />
+		<!-- Notice the source used in the package will point to the extract database to pass the query-->
+		<AdoNetConnection Name="ADONET_PackageSource" 
+			ConnectionString="Server=localhost;Uid=Biml;Pwd=Password101!;Database=BimlExtract" 
+			Provider="System.Data.SqlClient"
+			CreateInProject="true"/>	
+		<AdoNetConnection Name="ADONET_BimlExtract" 
+			ConnectionString="Server=localhost;Uid=Biml;Pwd=Password101!;Database=BimlExtract" 
+			Provider="System.Data.SqlClient" 
+			CreateInProject="true"/>				
 	</Connections>
 	<Databases>
         <Database Name="AdventureWorks2014" ConnectionName="OLEDB_AdventureWorks2014" />
@@ -15,49 +21,105 @@
     </Databases>
 	<Schemas>
 		<Schema Name="Extract" DatabaseName="BimlExtract" />
-	<# var SourceSchema = RootNode.Connections["OLEDB_AdventureWorks2014"].GetDatabaseSchema(); 
-       foreach (var schema in SourceSchema.SchemaNodes) { #>
+	<# 
+		var SourceSchema = RootNode.Connections["OLEDB_AdventureWorks2014"].GetDatabaseSchema(); 
+		foreach (var schema in SourceSchema.SchemaNodes) { 
+	#>
        <Schema Name= "<#=schema.Name#>" DatabaseName="AdventureWorks2014" />  
     <#}#>
     </Schemas>
 	<Tables>
-    <# foreach (var table in SourceSchema.TableNodes) {#>
-       <Table Name="<#=table.Name#>" SchemaName="AdventureWorks2014.<#=table.Schema.Name#>">
+        <# 
+		   foreach (var table in SourceSchema.TableNodes) {#>
+           <Table Name="<#=table.Name#>" SchemaName="AdventureWorks2014.<#=table.Schema.Name#>">
+                <Columns>
+                <#foreach (var column in table.Columns) {#> 
+                    <Column Name="<#=column.Name#>" DataType="<#=column.DataType#>" Length="<#=column.Length#>" /> 
+                <#}#>
+                </Columns>
+            </Table>
+        <#}#>
+		<# foreach (var table in SourceSchema.TableNodes) { #>
+        <Table Name="<#=table.Name#>" SchemaName="BimlExtract.Extract">
             <Columns>
             <#foreach (var column in table.Columns) {#> 
                 <Column Name="<#=column.Name#>" DataType="<#=column.DataType#>" Length="<#=column.Length#>" /> 
             <#}#>
+                
             </Columns>
         </Table>
-    <#}#>
-	<# foreach (var table in SourceSchema.TableNodes) { #>
-	    <Table Name="<#=table.Name#>" SchemaName="BimlExtract.Extract">
-	        <Columns>
-	        <#foreach (var column in table.Columns) {#> 
-	            <Column Name="<#=column.Name#>" DataType="<#=column.DataType#>" Length="<#=column.Length#>" /> 
-	        <#}#>
-	            
-	        </Columns>
-	    </Table>
-    <#}#>
+        <#}#>
 	</Tables>
 	<Annotations> 
         <Annotation>
-			<#=RootNode.Connections["OLEDB_BimlExtract"].RenderedConnectionString #>
-            You're going to need the Extract Schema
+            You need to deploy all the schemas in your solution to the Extract Database, so SSIS
+			can verify the metadata
+			
             <#
 				//connection to the extract database, so we can write out the destination tables first.
-				DevelopmentHelper h = new DevelopmentHelper(RootNode.Connections["OLEDB_BimlExtract"].RenderedConnectionString);
-                string DeploySchemaSQL = @"IF NOT EXISTS (SELECT * from sys.schemas WHERE name = 'Extract')
-            	EXEC sp_executesql  N'CREATE SCHEMA Extract';";
+				DevelopmentHelper h = new DevelopmentHelper(RootNode.Connections["ADONET_BimlExtract"].RenderedConnectionString);
+				//don't try and recreate dbo!
+				foreach( var schema in RootNode.Schemas.Where(s => s.Name != "dbo")) { 
+					string DeploySchemaSQL = @"IF NOT EXISTS (SELECT * from sys.schemas WHERE name = '{0}')
+            			EXEC sp_executesql  N'CREATE SCHEMA [{0}]';";
             #>	
-              Deployed: <#=h.deployDBObject(DeploySchemaSQL) #>  
-            
-			<#=DeploySchemaSQL #>
-            And you're going to need the Extract tables too.
-            <#foreach(var table in RootNode.Tables.Where(t=> t.Schema.Name == "Extract")) {#>
+			Deployed <#=schema.Name#> : <#=h.deployDBObject(string.Format(DeploySchemaSQL, schema.Name)) #>  
+            <#}#>
+			
+			And you're going to need the all the tables too, since we're getting around the select permission on source
+            <#foreach(var table in RootNode.Tables) {#>
                <#=table.Schema.Name #>.<#=table.Name#> Deployed: <#=h.deployDBObject(table.GetTableSql())#>
             <#}#>
+
         </Annotation>
     </Annotations>
+	<Packages>
+    <#foreach(var table in RootNode.Tables.Where(t => t.Schema.Name != "Extract")) {#>
+        <Package Name="Extract_<#=table.Name#>" DelayValidation="true"  >
+           <Tasks>
+               <ExecuteSQL Name="SQL-Truncate Extract<#=table.Name#>" ConnectionName="ADONET_BimlExtract" >
+					<DirectInput>TRUNCATE TABLE [Extract].[<#=table.Name#>];</DirectInput>
+				</ExecuteSQL>
+			    <Dataflow Name="DFT-Load <#= table.Schema #><#=table.Name#>">
+			        <PrecedenceConstraints>
+						<Inputs>
+							<Input OutputPathName="SQL-Truncate Extract<#=table.Name#>.Output" />
+                        </Inputs>
+                    </PrecedenceConstraints>
+			        <Transformations>
+				    <AdoNetSource Name="ADONET_SRC-<#= table.Schema #><#=table.Name#>" ConnectionName="ADONET_PackageSource" ValidateExternalMetadata="false"  >
+				        <ExternalTableInput Table="[<#=table.Schema#>].[<#=table.Name#>]" >
+							
+                        </ExternalTableInput>
+				    </AdoNetSource>
+				   <AdoNetDestination Name="ADONET_DEST-Extract<#=table.Name#>" ConnectionName="ADONET_BimlExtract" ValidateExternalMetadata="false" >
+				       <InputPath OutputPathName="ADONET_SRC-<#= table.Schema #><#=table.Name#>.Output" />
+				       <ExternalTableOutput  Table="[Extract].[<#=table.Name#>]" />
+				       <Annotations>
+				           <Annotation>
+                                Since we use an ADONET Destination, we also need the columns list.
+                                That way the source -> destination column mapping is built in the package.
+				           </Annotation>
+				       </Annotations>
+				       <Columns>
+				       <#foreach( var column in table.Columns) {#>
+				        <Column SourceColumn="<#=column.Name#>" TargetColumn="<#=column.Name#>" />
+				       <#}#>
+				       </Columns>
+				   </AdoNetDestination>
+				   </Transformations>
+			    </Dataflow>
+        </Tasks>
+		<Connections>
+			<Connection ConnectionName="ADONET_BimlExtract" Id="<#=Guid.NewGuid()#>" />
+			<Connection ConnectionName="ADONET_PackageSource" Id="<#=Guid.NewGuid() #>">
+				<Expressions>
+					<!-- you'll overwrite the database at run time-->
+					<Expression ExternalProperty="InitialCatalog">"BimlExtract"</Expression>
+                </Expressions>
+			</Connection>	
+		</Connections>
+       </Package>
+    <#}#>
+    </Packages>
 </Biml>

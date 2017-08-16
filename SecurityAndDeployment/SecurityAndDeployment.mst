@@ -40,15 +40,594 @@
     </RootFolder>
   </ItemGroup>
   <ItemGroup>
-    <Live Include="addedBiml\Connections\OLEDB_BimlUser.biml">
+    <Live Include="addedBiml\Connections\ADONET_BimlExtract.biml">
       <RootFolderId>0</RootFolderId>
     </Live>
-    <Live Include="addedBiml\Connections\OLEDB_WinAuth.biml">
+    <Live Include="addedBiml\Connections\ADONET_PackageSource.biml">
+      <RootFolderId>0</RootFolderId>
+    </Live>
+    <Live Include="addedBiml\Connections\OLEDB_AdventureWorks2014.biml">
+      <RootFolderId>0</RootFolderId>
+    </Live>
+    <Live Include="addedBiml\Connections\OLEDB_BimlExtract.biml">
       <RootFolderId>0</RootFolderId>
     </Live>
     <Live Include="addedBiml\Databases\AdventureWorks2014.biml">
       <RootFolderId>0</RootFolderId>
     </Live>
+    <Live Include="addedBiml\Databases\BimlExtract.biml">
+      <RootFolderId>0</RootFolderId>
+    </Live>
+    <Live Include="addedBiml\Schemas\AdventureWorks2014.dbo.biml">
+      <RootFolderId>0</RootFolderId>
+    </Live>
+    <Live Include="addedBiml\Schemas\AdventureWorks2014.HumanResources.biml">
+      <RootFolderId>0</RootFolderId>
+    </Live>
+    <Live Include="addedBiml\Schemas\AdventureWorks2014.Person.biml">
+      <RootFolderId>0</RootFolderId>
+    </Live>
+    <Live Include="addedBiml\Schemas\AdventureWorks2014.Production.biml">
+      <RootFolderId>0</RootFolderId>
+    </Live>
+    <Live Include="addedBiml\Schemas\AdventureWorks2014.Purchasing.biml">
+      <RootFolderId>0</RootFolderId>
+    </Live>
+    <Live Include="addedBiml\Schemas\AdventureWorks2014.Sales.biml">
+      <RootFolderId>0</RootFolderId>
+    </Live>
+    <Live Include="addedBiml\Schemas\BimlExtract.Extract.biml">
+      <RootFolderId>0</RootFolderId>
+    </Live>
+    <Live Include="addedBiml\Tables\AdventureWorks2014.dbo.AWBuildVersion.biml">
+      <RootFolderId>0</RootFolderId>
+    </Live>
+    <Live Include="addedBiml\Tables\AdventureWorks2014.dbo.DatabaseLog.biml">
+      <RootFolderId>0</RootFolderId>
+    </Live>
+    <Live Include="addedBiml\Tables\AdventureWorks2014.dbo.ErrorLog.biml">
+      <RootFolderId>0</RootFolderId>
+    </Live>
+    <Live Include="addedBiml\Tables\AdventureWorks2014.HumanResources.Department.biml">
+      <RootFolderId>0</RootFolderId>
+    </Live>
+    <Live Include="addedBiml\Tables\AdventureWorks2014.HumanResources.Employee.biml">
+      <RootFolderId>0</RootFolderId>
+    </Live>
+    <Live Include="addedBiml\Tables\AdventureWorks2014.HumanResources.EmployeeDepartmentHistory.biml">
+      <RootFolderId>0</RootFolderId>
+    </Live>
+    <Live Include="addedBiml\Tables\AdventureWorks2014.HumanResources.EmployeePayHistory.biml">
+      <RootFolderId>0</RootFolderId>
+    </Live>
+    <Live Include="addedBiml\Tables\AdventureWorks2014.HumanResources.JobCandidate.biml">
+      <RootFolderId>0</RootFolderId>
+    </Live>
+    <Live Include="addedBiml\Tables\AdventureWorks2014.HumanResources.Shift.biml">
+      <RootFolderId>0</RootFolderId>
+    </Live>
+    <Live Include="addedBiml\Tables\AdventureWorks2014.HumanResources.vEmployee.biml">
+      <RootFolderId>0</RootFolderId>
+    </Live>
+    <Live Include="addedBiml\Tables\AdventureWorks2014.HumanResources.vEmployeeDepartment.biml">
+      <RootFolderId>0</RootFolderId>
+    </Live>
+    <Live Include="addedBiml\Tables\AdventureWorks2014.HumanResources.vEmployeeDepartmentHistory.biml">
+      <RootFolderId>0</RootFolderId>
+    </Live>
+    <Live Include="addedBiml\Tables\AdventureWorks2014.HumanResources.vJobCandidate.biml">
+      <RootFolderId>0</RootFolderId>
+    </Live>
+    <Live Include="addedBiml\Tables\AdventureWorks2014.HumanResources.vJobCandidateEducation.biml">
+      <RootFolderId>0</RootFolderId>
+    </Live>
+    <Live Include="addedBiml\Tables\AdventureWorks2014.HumanResources.vJobCandidateEmployment.biml">
+      <RootFolderId>0</RootFolderId>
+    </Live>
+    <Live Include="addedBiml\Tables\AdventureWorks2014.Person.Address.biml">
+      <RootFolderId>0</RootFolderId>
+    </Live>
+    <Live Include="addedBiml\Tables\AdventureWorks2014.Person.AddressType.biml">
+      <RootFolderId>0</RootFolderId>
+    </Live>
+    <Live Include="addedBiml\Tables\AdventureWorks2014.Person.BusinessEntity.biml">
+      <RootFolderId>0</RootFolderId>
+    </Live>
+    <Live Include="addedBiml\Tables\AdventureWorks2014.Person.BusinessEntityAddress.biml">
+      <RootFolderId>0</RootFolderId>
+    </Live>
+    <Live Include="addedBiml\Tables\AdventureWorks2014.Person.BusinessEntityContact.biml">
+      <RootFolderId>0</RootFolderId>
+    </Live>
+    <Live Include="addedBiml\Tables\AdventureWorks2014.Person.ContactType.biml">
+      <RootFolderId>0</RootFolderId>
+    </Live>
+    <Live Include="addedBiml\Tables\AdventureWorks2014.Person.CountryRegion.biml">
+      <RootFolderId>0</RootFolderId>
+    </Live>
+    <Live Include="addedBiml\Tables\AdventureWorks2014.Person.EmailAddress.biml">
+      <RootFolderId>0</RootFolderId>
+    </Live>
+    <Live Include="addedBiml\Tables\AdventureWorks2014.Person.Password.biml">
+      <RootFolderId>0</RootFolderId>
+    </Live>
+    <Live Include="addedBiml\Tables\AdventureWorks2014.Person.Person.biml">
+      <RootFolderId>0</RootFolderId>
+    </Live>
+    <Live Include="addedBiml\Tables\AdventureWorks2014.Person.PersonPhone.biml">
+      <RootFolderId>0</RootFolderId>
+    </Live>
+    <Live Include="addedBiml\Tables\AdventureWorks2014.Person.PhoneNumberType.biml">
+      <RootFolderId>0</RootFolderId>
+    </Live>
+    <Live Include="addedBiml\Tables\AdventureWorks2014.Person.StateProvince.biml">
+      <RootFolderId>0</RootFolderId>
+    </Live>
+    <Live Include="addedBiml\Tables\AdventureWorks2014.Person.vAdditionalContactInfo.biml">
+      <RootFolderId>0</RootFolderId>
+    </Live>
+    <Live Include="addedBiml\Tables\AdventureWorks2014.Person.vStateProvinceCountryRegion.biml">
+      <RootFolderId>0</RootFolderId>
+    </Live>
+    <Live Include="addedBiml\Tables\AdventureWorks2014.Production.BillOfMaterials.biml">
+      <RootFolderId>0</RootFolderId>
+    </Live>
+    <Live Include="addedBiml\Tables\AdventureWorks2014.Production.Culture.biml">
+      <RootFolderId>0</RootFolderId>
+    </Live>
+    <Live Include="addedBiml\Tables\AdventureWorks2014.Production.Document.biml">
+      <RootFolderId>0</RootFolderId>
+    </Live>
+    <Live Include="addedBiml\Tables\AdventureWorks2014.Production.Illustration.biml">
+      <RootFolderId>0</RootFolderId>
+    </Live>
+    <Live Include="addedBiml\Tables\AdventureWorks2014.Production.Location.biml">
+      <RootFolderId>0</RootFolderId>
+    </Live>
+    <Live Include="addedBiml\Tables\AdventureWorks2014.Production.Product.biml">
+      <RootFolderId>0</RootFolderId>
+    </Live>
+    <Live Include="addedBiml\Tables\AdventureWorks2014.Production.ProductCategory.biml">
+      <RootFolderId>0</RootFolderId>
+    </Live>
+    <Live Include="addedBiml\Tables\AdventureWorks2014.Production.ProductCostHistory.biml">
+      <RootFolderId>0</RootFolderId>
+    </Live>
+    <Live Include="addedBiml\Tables\AdventureWorks2014.Production.ProductDescription.biml">
+      <RootFolderId>0</RootFolderId>
+    </Live>
+    <Live Include="addedBiml\Tables\AdventureWorks2014.Production.ProductDocument.biml">
+      <RootFolderId>0</RootFolderId>
+    </Live>
+    <Live Include="addedBiml\Tables\AdventureWorks2014.Production.ProductInventory.biml">
+      <RootFolderId>0</RootFolderId>
+    </Live>
+    <Live Include="addedBiml\Tables\AdventureWorks2014.Production.ProductListPriceHistory.biml">
+      <RootFolderId>0</RootFolderId>
+    </Live>
+    <Live Include="addedBiml\Tables\AdventureWorks2014.Production.ProductModel.biml">
+      <RootFolderId>0</RootFolderId>
+    </Live>
+    <Live Include="addedBiml\Tables\AdventureWorks2014.Production.ProductModelIllustration.biml">
+      <RootFolderId>0</RootFolderId>
+    </Live>
+    <Live Include="addedBiml\Tables\AdventureWorks2014.Production.ProductModelProductDescriptionCulture.biml">
+      <RootFolderId>0</RootFolderId>
+    </Live>
+    <Live Include="addedBiml\Tables\AdventureWorks2014.Production.ProductPhoto.biml">
+      <RootFolderId>0</RootFolderId>
+    </Live>
+    <Live Include="addedBiml\Tables\AdventureWorks2014.Production.ProductProductPhoto.biml">
+      <RootFolderId>0</RootFolderId>
+    </Live>
+    <Live Include="addedBiml\Tables\AdventureWorks2014.Production.ProductReview.biml">
+      <RootFolderId>0</RootFolderId>
+    </Live>
+    <Live Include="addedBiml\Tables\AdventureWorks2014.Production.ProductSubcategory.biml">
+      <RootFolderId>0</RootFolderId>
+    </Live>
+    <Live Include="addedBiml\Tables\AdventureWorks2014.Production.ScrapReason.biml">
+      <RootFolderId>0</RootFolderId>
+    </Live>
+    <Live Include="addedBiml\Tables\AdventureWorks2014.Production.TransactionHistory.biml">
+      <RootFolderId>0</RootFolderId>
+    </Live>
+    <Live Include="addedBiml\Tables\AdventureWorks2014.Production.TransactionHistoryArchive.biml">
+      <RootFolderId>0</RootFolderId>
+    </Live>
+    <Live Include="addedBiml\Tables\AdventureWorks2014.Production.UnitMeasure.biml">
+      <RootFolderId>0</RootFolderId>
+    </Live>
+    <Live Include="addedBiml\Tables\AdventureWorks2014.Production.vProductAndDescription.biml">
+      <RootFolderId>0</RootFolderId>
+    </Live>
+    <Live Include="addedBiml\Tables\AdventureWorks2014.Production.vProductModelCatalogDescription.biml">
+      <RootFolderId>0</RootFolderId>
+    </Live>
+    <Live Include="addedBiml\Tables\AdventureWorks2014.Production.vProductModelInstructions.biml">
+      <RootFolderId>0</RootFolderId>
+    </Live>
+    <Live Include="addedBiml\Tables\AdventureWorks2014.Production.WorkOrder.biml">
+      <RootFolderId>0</RootFolderId>
+    </Live>
+    <Live Include="addedBiml\Tables\AdventureWorks2014.Production.WorkOrderRouting.biml">
+      <RootFolderId>0</RootFolderId>
+    </Live>
+    <Live Include="addedBiml\Tables\AdventureWorks2014.Purchasing.ProductVendor.biml">
+      <RootFolderId>0</RootFolderId>
+    </Live>
+    <Live Include="addedBiml\Tables\AdventureWorks2014.Purchasing.PurchaseOrderDetail.biml">
+      <RootFolderId>0</RootFolderId>
+    </Live>
+    <Live Include="addedBiml\Tables\AdventureWorks2014.Purchasing.PurchaseOrderHeader.biml">
+      <RootFolderId>0</RootFolderId>
+    </Live>
+    <Live Include="addedBiml\Tables\AdventureWorks2014.Purchasing.ShipMethod.biml">
+      <RootFolderId>0</RootFolderId>
+    </Live>
+    <Live Include="addedBiml\Tables\AdventureWorks2014.Purchasing.Vendor.biml">
+      <RootFolderId>0</RootFolderId>
+    </Live>
+    <Live Include="addedBiml\Tables\AdventureWorks2014.Purchasing.vVendorWithAddresses.biml">
+      <RootFolderId>0</RootFolderId>
+    </Live>
+    <Live Include="addedBiml\Tables\AdventureWorks2014.Purchasing.vVendorWithContacts.biml">
+      <RootFolderId>0</RootFolderId>
+    </Live>
+    <Live Include="addedBiml\Tables\AdventureWorks2014.Sales.CountryRegionCurrency.biml">
+      <RootFolderId>0</RootFolderId>
+    </Live>
+    <Live Include="addedBiml\Tables\AdventureWorks2014.Sales.CreditCard.biml">
+      <RootFolderId>0</RootFolderId>
+    </Live>
+    <Live Include="addedBiml\Tables\AdventureWorks2014.Sales.Currency.biml">
+      <RootFolderId>0</RootFolderId>
+    </Live>
+    <Live Include="addedBiml\Tables\AdventureWorks2014.Sales.CurrencyRate.biml">
+      <RootFolderId>0</RootFolderId>
+    </Live>
+    <Live Include="addedBiml\Tables\AdventureWorks2014.Sales.Customer.biml">
+      <RootFolderId>0</RootFolderId>
+    </Live>
+    <Live Include="addedBiml\Tables\AdventureWorks2014.Sales.PersonCreditCard.biml">
+      <RootFolderId>0</RootFolderId>
+    </Live>
+    <Live Include="addedBiml\Tables\AdventureWorks2014.Sales.SalesOrderDetail.biml">
+      <RootFolderId>0</RootFolderId>
+    </Live>
+    <Live Include="addedBiml\Tables\AdventureWorks2014.Sales.SalesOrderHeader.biml">
+      <RootFolderId>0</RootFolderId>
+    </Live>
+    <Live Include="addedBiml\Tables\AdventureWorks2014.Sales.SalesOrderHeaderSalesReason.biml">
+      <RootFolderId>0</RootFolderId>
+    </Live>
+    <Live Include="addedBiml\Tables\AdventureWorks2014.Sales.SalesPerson.biml">
+      <RootFolderId>0</RootFolderId>
+    </Live>
+    <Live Include="addedBiml\Tables\AdventureWorks2014.Sales.SalesPersonQuotaHistory.biml">
+      <RootFolderId>0</RootFolderId>
+    </Live>
+    <Live Include="addedBiml\Tables\AdventureWorks2014.Sales.SalesReason.biml">
+      <RootFolderId>0</RootFolderId>
+    </Live>
+    <Live Include="addedBiml\Tables\AdventureWorks2014.Sales.SalesTaxRate.biml">
+      <RootFolderId>0</RootFolderId>
+    </Live>
+    <Live Include="addedBiml\Tables\AdventureWorks2014.Sales.SalesTerritory.biml">
+      <RootFolderId>0</RootFolderId>
+    </Live>
+    <Live Include="addedBiml\Tables\AdventureWorks2014.Sales.SalesTerritoryHistory.biml">
+      <RootFolderId>0</RootFolderId>
+    </Live>
+    <Live Include="addedBiml\Tables\AdventureWorks2014.Sales.ShoppingCartItem.biml">
+      <RootFolderId>0</RootFolderId>
+    </Live>
+    <Live Include="addedBiml\Tables\AdventureWorks2014.Sales.SpecialOffer.biml">
+      <RootFolderId>0</RootFolderId>
+    </Live>
+    <Live Include="addedBiml\Tables\AdventureWorks2014.Sales.SpecialOfferProduct.biml">
+      <RootFolderId>0</RootFolderId>
+    </Live>
+    <Live Include="addedBiml\Tables\AdventureWorks2014.Sales.Store.biml">
+      <RootFolderId>0</RootFolderId>
+    </Live>
+    <Live Include="addedBiml\Tables\AdventureWorks2014.Sales.vIndividualCustomer.biml">
+      <RootFolderId>0</RootFolderId>
+    </Live>
+    <Live Include="addedBiml\Tables\AdventureWorks2014.Sales.vPersonDemographics.biml">
+      <RootFolderId>0</RootFolderId>
+    </Live>
+    <Live Include="addedBiml\Tables\AdventureWorks2014.Sales.vSalesPerson.biml">
+      <RootFolderId>0</RootFolderId>
+    </Live>
+    <Live Include="addedBiml\Tables\AdventureWorks2014.Sales.vSalesPersonSalesByFiscalYears.biml">
+      <RootFolderId>0</RootFolderId>
+    </Live>
+    <Live Include="addedBiml\Tables\AdventureWorks2014.Sales.vStoreWithAddresses.biml">
+      <RootFolderId>0</RootFolderId>
+    </Live>
+    <Live Include="addedBiml\Tables\AdventureWorks2014.Sales.vStoreWithContacts.biml">
+      <RootFolderId>0</RootFolderId>
+    </Live>
+    <Live Include="addedBiml\Tables\AdventureWorks2014.Sales.vStoreWithDemographics.biml">
+      <RootFolderId>0</RootFolderId>
+    </Live>
+    <Live Include="addedBiml\Tables\BimlExtract.Extract.Address.biml">
+      <RootFolderId>0</RootFolderId>
+    </Live>
+    <Live Include="addedBiml\Tables\BimlExtract.Extract.AddressType.biml">
+      <RootFolderId>0</RootFolderId>
+    </Live>
+    <Live Include="addedBiml\Tables\BimlExtract.Extract.AWBuildVersion.biml">
+      <RootFolderId>0</RootFolderId>
+    </Live>
+    <Live Include="addedBiml\Tables\BimlExtract.Extract.BillOfMaterials.biml">
+      <RootFolderId>0</RootFolderId>
+    </Live>
+    <Live Include="addedBiml\Tables\BimlExtract.Extract.BusinessEntity.biml">
+      <RootFolderId>0</RootFolderId>
+    </Live>
+    <Live Include="addedBiml\Tables\BimlExtract.Extract.BusinessEntityAddress.biml">
+      <RootFolderId>0</RootFolderId>
+    </Live>
+    <Live Include="addedBiml\Tables\BimlExtract.Extract.BusinessEntityContact.biml">
+      <RootFolderId>0</RootFolderId>
+    </Live>
+    <Live Include="addedBiml\Tables\BimlExtract.Extract.ContactType.biml">
+      <RootFolderId>0</RootFolderId>
+    </Live>
+    <Live Include="addedBiml\Tables\BimlExtract.Extract.CountryRegion.biml">
+      <RootFolderId>0</RootFolderId>
+    </Live>
+    <Live Include="addedBiml\Tables\BimlExtract.Extract.CountryRegionCurrency.biml">
+      <RootFolderId>0</RootFolderId>
+    </Live>
+    <Live Include="addedBiml\Tables\BimlExtract.Extract.CreditCard.biml">
+      <RootFolderId>0</RootFolderId>
+    </Live>
+    <Live Include="addedBiml\Tables\BimlExtract.Extract.Culture.biml">
+      <RootFolderId>0</RootFolderId>
+    </Live>
+    <Live Include="addedBiml\Tables\BimlExtract.Extract.Currency.biml">
+      <RootFolderId>0</RootFolderId>
+    </Live>
+    <Live Include="addedBiml\Tables\BimlExtract.Extract.CurrencyRate.biml">
+      <RootFolderId>0</RootFolderId>
+    </Live>
+    <Live Include="addedBiml\Tables\BimlExtract.Extract.Customer.biml">
+      <RootFolderId>0</RootFolderId>
+    </Live>
+    <Live Include="addedBiml\Tables\BimlExtract.Extract.DatabaseLog.biml">
+      <RootFolderId>0</RootFolderId>
+    </Live>
+    <Live Include="addedBiml\Tables\BimlExtract.Extract.Department.biml">
+      <RootFolderId>0</RootFolderId>
+    </Live>
+    <Live Include="addedBiml\Tables\BimlExtract.Extract.Document.biml">
+      <RootFolderId>0</RootFolderId>
+    </Live>
+    <Live Include="addedBiml\Tables\BimlExtract.Extract.EmailAddress.biml">
+      <RootFolderId>0</RootFolderId>
+    </Live>
+    <Live Include="addedBiml\Tables\BimlExtract.Extract.Employee.biml">
+      <RootFolderId>0</RootFolderId>
+    </Live>
+    <Live Include="addedBiml\Tables\BimlExtract.Extract.EmployeeDepartmentHistory.biml">
+      <RootFolderId>0</RootFolderId>
+    </Live>
+    <Live Include="addedBiml\Tables\BimlExtract.Extract.EmployeePayHistory.biml">
+      <RootFolderId>0</RootFolderId>
+    </Live>
+    <Live Include="addedBiml\Tables\BimlExtract.Extract.ErrorLog.biml">
+      <RootFolderId>0</RootFolderId>
+    </Live>
+    <Live Include="addedBiml\Tables\BimlExtract.Extract.Illustration.biml">
+      <RootFolderId>0</RootFolderId>
+    </Live>
+    <Live Include="addedBiml\Tables\BimlExtract.Extract.JobCandidate.biml">
+      <RootFolderId>0</RootFolderId>
+    </Live>
+    <Live Include="addedBiml\Tables\BimlExtract.Extract.Location.biml">
+      <RootFolderId>0</RootFolderId>
+    </Live>
+    <Live Include="addedBiml\Tables\BimlExtract.Extract.Password.biml">
+      <RootFolderId>0</RootFolderId>
+    </Live>
+    <Live Include="addedBiml\Tables\BimlExtract.Extract.Person.biml">
+      <RootFolderId>0</RootFolderId>
+    </Live>
+    <Live Include="addedBiml\Tables\BimlExtract.Extract.PersonCreditCard.biml">
+      <RootFolderId>0</RootFolderId>
+    </Live>
+    <Live Include="addedBiml\Tables\BimlExtract.Extract.PersonPhone.biml">
+      <RootFolderId>0</RootFolderId>
+    </Live>
+    <Live Include="addedBiml\Tables\BimlExtract.Extract.PhoneNumberType.biml">
+      <RootFolderId>0</RootFolderId>
+    </Live>
+    <Live Include="addedBiml\Tables\BimlExtract.Extract.Product.biml">
+      <RootFolderId>0</RootFolderId>
+    </Live>
+    <Live Include="addedBiml\Tables\BimlExtract.Extract.ProductCategory.biml">
+      <RootFolderId>0</RootFolderId>
+    </Live>
+    <Live Include="addedBiml\Tables\BimlExtract.Extract.ProductCostHistory.biml">
+      <RootFolderId>0</RootFolderId>
+    </Live>
+    <Live Include="addedBiml\Tables\BimlExtract.Extract.ProductDescription.biml">
+      <RootFolderId>0</RootFolderId>
+    </Live>
+    <Live Include="addedBiml\Tables\BimlExtract.Extract.ProductDocument.biml">
+      <RootFolderId>0</RootFolderId>
+    </Live>
+    <Live Include="addedBiml\Tables\BimlExtract.Extract.ProductInventory.biml">
+      <RootFolderId>0</RootFolderId>
+    </Live>
+    <Live Include="addedBiml\Tables\BimlExtract.Extract.ProductListPriceHistory.biml">
+      <RootFolderId>0</RootFolderId>
+    </Live>
+    <Live Include="addedBiml\Tables\BimlExtract.Extract.ProductModel.biml">
+      <RootFolderId>0</RootFolderId>
+    </Live>
+    <Live Include="addedBiml\Tables\BimlExtract.Extract.ProductModelIllustration.biml">
+      <RootFolderId>0</RootFolderId>
+    </Live>
+    <Live Include="addedBiml\Tables\BimlExtract.Extract.ProductModelProductDescriptionCulture.biml">
+      <RootFolderId>0</RootFolderId>
+    </Live>
+    <Live Include="addedBiml\Tables\BimlExtract.Extract.ProductPhoto.biml">
+      <RootFolderId>0</RootFolderId>
+    </Live>
+    <Live Include="addedBiml\Tables\BimlExtract.Extract.ProductProductPhoto.biml">
+      <RootFolderId>0</RootFolderId>
+    </Live>
+    <Live Include="addedBiml\Tables\BimlExtract.Extract.ProductReview.biml">
+      <RootFolderId>0</RootFolderId>
+    </Live>
+    <Live Include="addedBiml\Tables\BimlExtract.Extract.ProductSubcategory.biml">
+      <RootFolderId>0</RootFolderId>
+    </Live>
+    <Live Include="addedBiml\Tables\BimlExtract.Extract.ProductVendor.biml">
+      <RootFolderId>0</RootFolderId>
+    </Live>
+    <Live Include="addedBiml\Tables\BimlExtract.Extract.PurchaseOrderDetail.biml">
+      <RootFolderId>0</RootFolderId>
+    </Live>
+    <Live Include="addedBiml\Tables\BimlExtract.Extract.PurchaseOrderHeader.biml">
+      <RootFolderId>0</RootFolderId>
+    </Live>
+    <Live Include="addedBiml\Tables\BimlExtract.Extract.SalesOrderDetail.biml">
+      <RootFolderId>0</RootFolderId>
+    </Live>
+    <Live Include="addedBiml\Tables\BimlExtract.Extract.SalesOrderHeader.biml">
+      <RootFolderId>0</RootFolderId>
+    </Live>
+    <Live Include="addedBiml\Tables\BimlExtract.Extract.SalesOrderHeaderSalesReason.biml">
+      <RootFolderId>0</RootFolderId>
+    </Live>
+    <Live Include="addedBiml\Tables\BimlExtract.Extract.SalesPerson.biml">
+      <RootFolderId>0</RootFolderId>
+    </Live>
+    <Live Include="addedBiml\Tables\BimlExtract.Extract.SalesPersonQuotaHistory.biml">
+      <RootFolderId>0</RootFolderId>
+    </Live>
+    <Live Include="addedBiml\Tables\BimlExtract.Extract.SalesReason.biml">
+      <RootFolderId>0</RootFolderId>
+    </Live>
+    <Live Include="addedBiml\Tables\BimlExtract.Extract.SalesTaxRate.biml">
+      <RootFolderId>0</RootFolderId>
+    </Live>
+    <Live Include="addedBiml\Tables\BimlExtract.Extract.SalesTerritory.biml">
+      <RootFolderId>0</RootFolderId>
+    </Live>
+    <Live Include="addedBiml\Tables\BimlExtract.Extract.SalesTerritoryHistory.biml">
+      <RootFolderId>0</RootFolderId>
+    </Live>
+    <Live Include="addedBiml\Tables\BimlExtract.Extract.ScrapReason.biml">
+      <RootFolderId>0</RootFolderId>
+    </Live>
+    <Live Include="addedBiml\Tables\BimlExtract.Extract.Shift.biml">
+      <RootFolderId>0</RootFolderId>
+    </Live>
+    <Live Include="addedBiml\Tables\BimlExtract.Extract.ShipMethod.biml">
+      <RootFolderId>0</RootFolderId>
+    </Live>
+    <Live Include="addedBiml\Tables\BimlExtract.Extract.ShoppingCartItem.biml">
+      <RootFolderId>0</RootFolderId>
+    </Live>
+    <Live Include="addedBiml\Tables\BimlExtract.Extract.SpecialOffer.biml">
+      <RootFolderId>0</RootFolderId>
+    </Live>
+    <Live Include="addedBiml\Tables\BimlExtract.Extract.SpecialOfferProduct.biml">
+      <RootFolderId>0</RootFolderId>
+    </Live>
+    <Live Include="addedBiml\Tables\BimlExtract.Extract.StateProvince.biml">
+      <RootFolderId>0</RootFolderId>
+    </Live>
+    <Live Include="addedBiml\Tables\BimlExtract.Extract.Store.biml">
+      <RootFolderId>0</RootFolderId>
+    </Live>
+    <Live Include="addedBiml\Tables\BimlExtract.Extract.TransactionHistory.biml">
+      <RootFolderId>0</RootFolderId>
+    </Live>
+    <Live Include="addedBiml\Tables\BimlExtract.Extract.TransactionHistoryArchive.biml">
+      <RootFolderId>0</RootFolderId>
+    </Live>
+    <Live Include="addedBiml\Tables\BimlExtract.Extract.UnitMeasure.biml">
+      <RootFolderId>0</RootFolderId>
+    </Live>
+    <Live Include="addedBiml\Tables\BimlExtract.Extract.vAdditionalContactInfo.biml">
+      <RootFolderId>0</RootFolderId>
+    </Live>
+    <Live Include="addedBiml\Tables\BimlExtract.Extract.vEmployee.biml">
+      <RootFolderId>0</RootFolderId>
+    </Live>
+    <Live Include="addedBiml\Tables\BimlExtract.Extract.vEmployeeDepartment.biml">
+      <RootFolderId>0</RootFolderId>
+    </Live>
+    <Live Include="addedBiml\Tables\BimlExtract.Extract.vEmployeeDepartmentHistory.biml">
+      <RootFolderId>0</RootFolderId>
+    </Live>
+    <Live Include="addedBiml\Tables\BimlExtract.Extract.Vendor.biml">
+      <RootFolderId>0</RootFolderId>
+    </Live>
+    <Live Include="addedBiml\Tables\BimlExtract.Extract.vIndividualCustomer.biml">
+      <RootFolderId>0</RootFolderId>
+    </Live>
+    <Live Include="addedBiml\Tables\BimlExtract.Extract.vJobCandidate.biml">
+      <RootFolderId>0</RootFolderId>
+    </Live>
+    <Live Include="addedBiml\Tables\BimlExtract.Extract.vJobCandidateEducation.biml">
+      <RootFolderId>0</RootFolderId>
+    </Live>
+    <Live Include="addedBiml\Tables\BimlExtract.Extract.vJobCandidateEmployment.biml">
+      <RootFolderId>0</RootFolderId>
+    </Live>
+    <Live Include="addedBiml\Tables\BimlExtract.Extract.vPersonDemographics.biml">
+      <RootFolderId>0</RootFolderId>
+    </Live>
+    <Live Include="addedBiml\Tables\BimlExtract.Extract.vProductAndDescription.biml">
+      <RootFolderId>0</RootFolderId>
+    </Live>
+    <Live Include="addedBiml\Tables\BimlExtract.Extract.vProductModelCatalogDescription.biml">
+      <RootFolderId>0</RootFolderId>
+    </Live>
+    <Live Include="addedBiml\Tables\BimlExtract.Extract.vProductModelInstructions.biml">
+      <RootFolderId>0</RootFolderId>
+    </Live>
+    <Live Include="addedBiml\Tables\BimlExtract.Extract.vSalesPerson.biml">
+      <RootFolderId>0</RootFolderId>
+    </Live>
+    <Live Include="addedBiml\Tables\BimlExtract.Extract.vSalesPersonSalesByFiscalYears.biml">
+      <RootFolderId>0</RootFolderId>
+    </Live>
+    <Live Include="addedBiml\Tables\BimlExtract.Extract.vStateProvinceCountryRegion.biml">
+      <RootFolderId>0</RootFolderId>
+    </Live>
+    <Live Include="addedBiml\Tables\BimlExtract.Extract.vStoreWithAddresses.biml">
+      <RootFolderId>0</RootFolderId>
+    </Live>
+    <Live Include="addedBiml\Tables\BimlExtract.Extract.vStoreWithContacts.biml">
+      <RootFolderId>0</RootFolderId>
+    </Live>
+    <Live Include="addedBiml\Tables\BimlExtract.Extract.vStoreWithDemographics.biml">
+      <RootFolderId>0</RootFolderId>
+    </Live>
+    <Live Include="addedBiml\Tables\BimlExtract.Extract.vVendorWithAddresses.biml">
+      <RootFolderId>0</RootFolderId>
+    </Live>
+    <Live Include="addedBiml\Tables\BimlExtract.Extract.vVendorWithContacts.biml">
+      <RootFolderId>0</RootFolderId>
+    </Live>
+    <Live Include="addedBiml\Tables\BimlExtract.Extract.WorkOrder.biml">
+      <RootFolderId>0</RootFolderId>
+    </Live>
+    <Live Include="addedBiml\Tables\BimlExtract.Extract.WorkOrderRouting.biml">
+      <RootFolderId>0</RootFolderId>
+    </Live>
+    <None Include="addedBiml\Code\DevelopmentHelper.cs">
+      <RootFolderId>0</RootFolderId>
+    </None>
     <None Include="SecurityAndDeployment.bimlproj">
       <RootFolderId>0</RootFolderId>
     </None>
