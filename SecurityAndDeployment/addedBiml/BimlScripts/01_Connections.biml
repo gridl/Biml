@@ -7,7 +7,7 @@
 		<OleDbConnection Name="OLEDB_BimlExtract" 
 			ConnectionString="Provider=SQLNCLI11;Data Source=localhost;Initial Catalog=BimlExtract;User ID=Biml;Password=Password101!"
 			CreateInProject="true" />
-		<!-- Notice the source used in the package will point to the extract database to pass the query-->
+		
 		<AdoNetConnection Name="ADONET_PackageSource" 
 			ConnectionString="Server=localhost;Uid=Biml;Pwd=Password101!;Database=BimlExtract" 
 			Provider="System.Data.SqlClient"

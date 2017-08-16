@@ -1,9 +1,8 @@
 ﻿<#@ template tier="5" #>
 <#@ code file="..\Code\DevelopmentHelper.cs"#>
 <Biml xmlns="http://schemas.varigence.com/biml.xsd">
-	<Annotations> 
-        <Annotation>
-            You need to deploy all the schemas in your solution to the Extract Database, so SSIS
+    <Annotations>
+        <Annotation>You need to deploy all the schemas in your solution to the Extract Database, so SSIS
 			can verify the metadata
 			
             <#
@@ -14,63 +13,63 @@
 					string DeploySchemaSQL = @"IF NOT EXISTS (SELECT * from sys.schemas WHERE name = '{0}')
             			EXEC sp_executesql  N'CREATE SCHEMA [{0}]';";
             #>	
-			Deployed <#=schema.Name#> : <#=h.deployDBObject(string.Format(DeploySchemaSQL, schema.Name)) #>  
+			Deployed <#=schema.Name#> : <#=h.deployDBObject(string.Format(DeploySchemaSQL, schema.Name)) #>
             <#}#>
 			
 			And you're going to need the all the tables too, since we're getting around the select permission on source
             <#foreach(var table in RootNode.Tables) {#>
-               <#=table.Schema.Name #>.<#=table.Name#> Deployed: <#=h.deployDBObject(table.GetTableSql())#>
+            <#=table.Schema.Name #>.<#=table.Name#> Deployed: <#=h.deployDBObject(table.GetTableSql())#>
             <#}#>
-
         </Annotation>
     </Annotations>
-	<Packages>
-    <#foreach(var table in RootNode.Tables.Where(t => t.Schema.Name != "Extract")) {#>
+    <Packages>
+        <#foreach(var table in RootNode.Tables.Where(t => t.Schema.Name != "Extract")) {#>
         <Package Name="Extract_<#=table.Name#>" DelayValidation="true"  >
-           <Tasks>
-               <ExecuteSQL Name="SQL-Truncate Extract<#=table.Name#>" ConnectionName="ADONET_BimlExtract" >
-					<DirectInput>TRUNCATE TABLE [Extract].[<#=table.Name#>];</DirectInput>
-				</ExecuteSQL>
-			    <Dataflow Name="DFT-Load <#= table.Schema #><#=table.Name#>">
-			        <PrecedenceConstraints>
-						<Inputs>
-							<Input OutputPathName="SQL-Truncate Extract<#=table.Name#>.Output" />
+            <Tasks>
+                <ExecuteSQL Name="SQL-Truncate Extract<#=table.Name#>" ConnectionName="ADONET_BimlExtract" >
+                    <DirectInput>TRUNCATE TABLE [Extract].[<#=table.Name#>];</DirectInput>
+                </ExecuteSQL>
+                <Dataflow Name="DFT-Load <#= table.Schema #>
+                    <#=table.Name#>">
+                    <PrecedenceConstraints>
+                        <Inputs>
+                            <Input OutputPathName="SQL-Truncate Extract<#=table.Name#>.Output" />
                         </Inputs>
                     </PrecedenceConstraints>
-			        <Transformations>
-				    <AdoNetSource Name="ADONET_SRC-<#= table.Schema #><#=table.Name#>" ConnectionName="ADONET_PackageSource" ValidateExternalMetadata="false"  >
-				        <ExternalTableInput Table="[<#=table.Schema#>].[<#=table.Name#>]" >
-							
-                        </ExternalTableInput>
-				    </AdoNetSource>
-				   <AdoNetDestination Name="ADONET_DEST-Extract<#=table.Name#>" ConnectionName="ADONET_BimlExtract" ValidateExternalMetadata="false" >
-				       <InputPath OutputPathName="ADONET_SRC-<#= table.Schema #><#=table.Name#>.Output" />
-				       <ExternalTableOutput  Table="[Extract].[<#=table.Name#>]" />
-				       <Annotations>
-				           <Annotation>
-                                Since we use an ADONET Destination, we also need the columns list.
+                    <Transformations>
+                        <AdoNetSource Name="ADONET_SRC-<#= table.Schema #>
+                            <#=table.Name#>" ConnectionName="ADONET_PackageSource" ValidateExternalMetadata="false"  >
+                            <ExternalTableInput Table="[<#=table.Schema#>].[<#=table.Name#>]" >
+                            </ExternalTableInput>
+                        </AdoNetSource>
+                        <AdoNetDestination Name="ADONET_DEST-Extract<#=table.Name#>" ConnectionName="ADONET_BimlExtract" ValidateExternalMetadata="false" >
+                            <InputPath OutputPathName="ADONET_SRC-<#= table.Schema #>
+                                <#=table.Name#>.Output" />
+                            <ExternalTableOutput  Table="[Extract].[<#=table.Name#>]" />
+                            <Annotations>
+                                <Annotation>Since we use an ADONET Destination, we also need the columns list.
                                 That way the source -> destination column mapping is built in the package.
 				           </Annotation>
-				       </Annotations>
-				       <Columns>
-				       <#foreach( var column in table.Columns) {#>
-				        <Column SourceColumn="<#=column.Name#>" TargetColumn="<#=column.Name#>" />
-				       <#}#>
-				       </Columns>
-				   </AdoNetDestination>
-				   </Transformations>
-			    </Dataflow>
-        </Tasks>
-		<Connections>
-			<Connection ConnectionName="ADONET_BimlExtract" Id="<#=Guid.NewGuid()#>" />
-			<Connection ConnectionName="ADONET_PackageSource" Id="<#=Guid.NewGuid() #>">
-				<Expressions>
-					<!-- you'll overwrite the database at run time-->
-					<Expression ExternalProperty="InitialCatalog">"BimlExtract"</Expression>
-                </Expressions>
-			</Connection>	
-		</Connections>
-       </Package>
-    <#}#>
+                            </Annotations>
+                            <Columns>
+                                <#foreach( var column in table.Columns) {#>
+                                <Column SourceColumn="<#=column.Name#>" TargetColumn="<#=column.Name#>" />
+                                <#}#>
+                            </Columns>
+                        </AdoNetDestination>
+                    </Transformations>
+                </Dataflow>
+            </Tasks>
+            <Connections>
+                <Connection ConnectionName="ADONET_BimlExtract" Id="<#=Guid.NewGuid()#>" />
+                <Connection ConnectionName="ADONET_PackageSource" Id="<#=Guid.NewGuid() #>">
+                    <Expressions>
+                        <!-- you'll overwrite the database at run time-->
+                        <Expression ExternalProperty="InitialCatalog">"BimlExtract"</Expression>
+                    </Expressions>
+                </Connection>
+            </Connections>
+        </Package>
+        <#}#>
     </Packages>
 </Biml>
