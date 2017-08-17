@@ -1,7 +1,8 @@
 ﻿<Biml xmlns="http://schemas.varigence.com/biml.xsd">
         <Connections>
+			<!--ConnectionString="Server=localhost;Integrated Security=true;Database=AdventureWorks2014" -->
             <AdoNetConnection Name="ADONET_AdventureWorks_Package" 
-    		    ConnectionString="Server=localhost;Integrated Security=true;Database=AdventureWorks2014" 
+				ConnectionString="server=localhost;Uid=Biml;database=AdventureWorks2014;Pwd=Password101!" 
     		    Provider="System.Data.SqlClient" />
     		<AdoNetConnection Name="ADONET_AdventureWorks_Project" 
     		    ConnectionString="Server=localhost;Integrated Security=true;Database=AdventureWorks2014" 
@@ -13,55 +14,45 @@
                 ConnectionString="Provider=SQLNCLI11;Data Source=localhost;Integrated Security=SSPI;Initial Catalog=AdventureWorks2014"
                 CreateInProject="true" />
         </Connections>
-        <Databases>
-            <Database Name="AdventureWorks2014" ConnectionName="OLEDB_AdventureWorks_Project" />
-        </Databases>    
-        <Schemas>
-            <Schema Name="Person" DatabaseName="AdventureWorks2014" />
-        </Schemas>
-        <Tables>
-            <Table Name="Address" SchemaName="AdventureWorks2014.Person">
-                <Columns>
-                    <Column Name="AddressID" />
-                    <Column Name="AddressLine1" DataType="String" Length="60" />
-                    <Column Name="AddressLine2" DataType="String" Length="60" />
-                    <Column Name="City" DataType="String" Length="30" />
-                    <Column Name="StateProvinceID" />
-                    <Column Name="PostalCode" DataType="String" Length="15" />
-                    <Column Name="SpatialLocation" DataType="Object" />
-                    <Column Name="rowguid" DataType="Guid" />
-                    <Column Name="ModifiedDate" DataType="DateTime" />
-                </Columns>
-            </Table>
-        </Tables>
 		<Packages>
-			<Package Name="TestPackage" >
+			<Package Name="TestPackage" ProtectionLevel="EncryptSensitiveWithUserKey" >
 				<Annotations>
 					<Annotation>
 						parameters tested:
-							AdventureWorks2014 -- success
-							@[$Project::DatabaseName] --
+							AdventureWorks2014 -- success with package connections
+							@[$Project::DatabaseName] -- success with package connections
+							@[$Project::ADONET_ConnectionString] 
+							and 
+							@[$Project::OLEDB_ConnectionString] -- both work with package connections
+							@[$Project::UserName] -- success with pacakge
+							@[$Project::Password] -- doesn't save!?
                     </Annotation>
                 </Annotations>
 				<Connections>
 					<Connection ConnectionName="ADONET_AdventureWorks_Package"> 
 						<Expressions>
-							<Expression ExternalProperty="InitialCatalog">@[$Project::DatabaseName]</Expression>
+							<!--Expression ExternalProperty="InitialCatalog">"AdventureWorks2014"</Expression-->
+							<!--<Expression ExternalProperty="ConnectionString">@[$Project::ADONET_ConnectionString]</Expression>-->
+							<Expression ExternalProperty="UserName">@[$Project::UserName]</Expression>
+							<Expression ExternalProperty="Password">@[$Project::Password]</Expression>
                         </Expressions>
                     </Connection>
 					<Connection ConnectionName="ADONET_AdventureWorks_Project"> 
 						<Expressions>
-							<Expression ExternalProperty="InitialCatalog">@[$Project::DatabaseName]</Expression>
+							<!--Expression ExternalProperty="InitialCatalog">"AdventureWorks2014"</Expression-->
+							<Expression ExternalProperty="ConnectionString">@[$Project::ADONET_ConnectionString]</Expression>
                         </Expressions>
                     </Connection>
 					<Connection ConnectionName="OLEDB_AdventureWorks_Package"> 
 						<Expressions>
-							<Expression ExternalProperty="InitialCatalog">@[$Project::DatabaseName]</Expression>
+							<!--Expression ExternalProperty="InitialCatalog">"AdventureWorks2014"</Expression-->
+							<Expression ExternalProperty="ConnectionString">@[$Project::OLEDB_ConnectionString] </Expression>
                         </Expressions>
                     </Connection>
 					<Connection ConnectionName="OLEDB_AdventureWorks_Project"> 
 						<Expressions>
-							<Expression ExternalProperty="InitialCatalog">@[$Project::DatabaseName]</Expression>
+							<!--Expression ExternalProperty="InitialCatalog">"AdventureWorks2014"</Expression-->
+							<Expression ExternalProperty="ConnectionString">@[$Project::OLEDB_ConnectionString] </Expression>
                         </Expressions>
                     </Connection>
                 </Connections>
@@ -73,11 +64,13 @@
             </Package>
         </Packages>
         <Projects>
-            <PackageProject Name="ParametersAndConnections_BS" >
+            <PackageProject Name="ParametersAndConnections_BS" ProtectionLevel="EncryptSensitiveWithUserKey" >
                 <Parameters>
                     <Parameter Name="ADONET_ConnectionString" DataType="String">Server=localhost;Integrated Security=true;Database=AdventureWorks2014</Parameter>
                     <Parameter Name="OLEDB_ConnectionString" DataType="String">Provider=SQLNCLI11;Data Source=localhost;Integrated Security=SSPI;Initial Catalog=AdventureWorks2014</Parameter>
 					<Parameter Name="DatabaseName" DataType="String">AdventureWorks2014</Parameter>
+					<Parameter Name="UserName" DataType="String">Biml</Parameter>
+					<Parameter Name="Password" DataType="String">Password101!</Parameter>
                 </Parameters>
 				<Packages>
 					<Package PackageName="TestPackage" />

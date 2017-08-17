@@ -52,19 +52,10 @@
     <Live Include="addedBiml\Connections\OLEDB_AdventureWorks_Project.biml">
       <RootFolderId>0</RootFolderId>
     </Live>
-    <Live Include="addedBiml\Databases\AdventureWorks2014.biml">
-      <RootFolderId>0</RootFolderId>
-    </Live>
     <Live Include="addedBiml\Packages\TestPackage.biml">
       <RootFolderId>0</RootFolderId>
     </Live>
     <Live Include="addedBiml\Projects\ParametersAndConnections_BS.biml">
-      <RootFolderId>0</RootFolderId>
-    </Live>
-    <Live Include="addedBiml\Schemas\AdventureWorks2014.Person.biml">
-      <RootFolderId>0</RootFolderId>
-    </Live>
-    <Live Include="addedBiml\Tables\AdventureWorks2014.Person.Address.biml">
       <RootFolderId>0</RootFolderId>
     </Live>
     <None Include="ParametersAndConnections_BS.bimlproj">
