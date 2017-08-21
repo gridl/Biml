@@ -46,6 +46,9 @@
     <Live Include="addedBiml\Connections\ADONET_AdventureWorks_Project.biml">
       <RootFolderId>0</RootFolderId>
     </Live>
+    <Live Include="addedBiml\Connections\OdbcConnection1.biml">
+      <RootFolderId>0</RootFolderId>
+    </Live>
     <Live Include="addedBiml\Connections\OLEDB_AdventureWorks_Package.biml">
       <RootFolderId>0</RootFolderId>
     </Live>
@@ -55,7 +58,13 @@
     <Live Include="addedBiml\Packages\TestPackage.biml">
       <RootFolderId>0</RootFolderId>
     </Live>
+    <Live Include="addedBiml\Packages\TestPackage_1.biml">
+      <RootFolderId>0</RootFolderId>
+    </Live>
     <Live Include="addedBiml\Projects\ParametersAndConnections_BS.biml">
+      <RootFolderId>0</RootFolderId>
+    </Live>
+    <Live Include="addedBiml\Projects\ParametersAndConnections_BS_1.biml">
       <RootFolderId>0</RootFolderId>
     </Live>
     <None Include="ParametersAndConnections_BS.bimlproj">

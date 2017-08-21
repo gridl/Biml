@@ -3,15 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{159641D6-6404-4A2A-AE62-294DE0FE8301}") = "ParametersAndConnections_BE", "ParametersAndConnections_BE.dtproj", "{2BD12F05-4E70-4EBD-AA6A-347049C33CFB}"
+Project("{159641D6-6404-4A2A-AE62-294DE0FE8301}") = "ParametersAndConnections_BE", "ParametersAndConnections_BE.dtproj", "{33FF4D2B-4731-4948-824F-C6215FC01A47}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Development|Default = Development|Default
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{2BD12F05-4E70-4EBD-AA6A-347049C33CFB}.Development|Default.ActiveCfg = Development
-		{2BD12F05-4E70-4EBD-AA6A-347049C33CFB}.Development|Default.Build.0 = Development
+		{33FF4D2B-4731-4948-824F-C6215FC01A47}.Development|Default.ActiveCfg = Development
+		{33FF4D2B-4731-4948-824F-C6215FC01A47}.Development|Default.Build.0 = Development
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -14,23 +14,22 @@
     <Manifest>
       <SSIS:Project SSIS:ProtectionLevel="EncryptSensitiveWithUserKey" xmlns:SSIS="www.microsoft.com/SqlServer/SSIS">
         <SSIS:Properties>
-          <SSIS:Property SSIS:Name="ID">{1d29f337-22ee-4666-895f-d759d097e37b}</SSIS:Property>
+          <SSIS:Property SSIS:Name="ID">{946e1c4b-7975-4a23-94ca-c76c339d4371}</SSIS:Property>
           <SSIS:Property SSIS:Name="Name">ParametersAndConnections_BE</SSIS:Property>
           <SSIS:Property SSIS:Name="VersionMajor">1</SSIS:Property>
           <SSIS:Property SSIS:Name="VersionMinor">0</SSIS:Property>
           <SSIS:Property SSIS:Name="VersionBuild">0</SSIS:Property>
           <SSIS:Property SSIS:Name="VersionComments">
           </SSIS:Property>
-          <SSIS:Property SSIS:Name="CreationDate">2017-08-16T15:03:12.138866-04:00</SSIS:Property>
+          <SSIS:Property SSIS:Name="CreationDate">2017-08-21T15:24:43.0556543-04:00</SSIS:Property>
           <SSIS:Property SSIS:Name="CreatorName">SLOWDERALPHA\slowd</SSIS:Property>
           <SSIS:Property SSIS:Name="CreatorComputerName">SLOWDERALPHA</SSIS:Property>
           <SSIS:Property SSIS:Name="Description">
           </SSIS:Property>
-          <SSIS:Property SSIS:Name="PasswordVerifier" SSIS:Sensitive="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAiYqSUCZUe0yg+wXaV0eRDwAAAAACAAAAAAAQZgAAAAEAACAAAACn6JO9PKZRgAgkXNTXczAT6h/jLNGxIxw0HstdAb8BvQAAAAAOgAAAAAIAACAAAABSH+682j6TacQ8DZ1BmaFg7KNOLd4Nf5xIvoMoNJHAZJAAAAB/VjED2pkIxL7mJUY7WvlaKHKrtAbEb+WmhdtYOtItwAGOqbz90Fx8wpNnBmG06utZiieoDhy2E7a3wOtLQ3HrLmmqLzdAak42DW0wXc5UWtzGa/dhpVxcaXEOGvRIWzmceDSaY+E8NN98Xwv3Xx3fXInh85bRdHVsTTq2QFgqm4XfmmTwjqTEjsEMkBBTAutAAAAAfbzu7XGHcjSMUC3kXQSvPCWjpRDY0oDB8pjR0hDF9BjcTQ+HrVG4j77vhW6Lbe02MGvsN6ZWSRg1Eo6t9kDJFw==</SSIS:Property>
+          <SSIS:Property SSIS:Name="PasswordVerifier" SSIS:Sensitive="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAiYqSUCZUe0yg+wXaV0eRDwAAAAACAAAAAAAQZgAAAAEAACAAAAADWiBhzb7+evMiYRVD/faG3kmxQhIAt97n9EB+Qq+zAAAAAAAOgAAAAAIAACAAAACZ1+Bwp9GdQ9k4HpoqrXTiyJN88fci5aKnejojNjCOP5AAAAC2EhLZj8A7L7GnVEaBb2ZSybPlXc71oy86R58mabpQrvP9ceW7JCZqoaGdW0tk7suMVMN2w5dSRHOnhVdXS/gqaFOj7AcMl12ry7JD4xQL8i62R2CKlLFHN8L9B/fTpJFw3dY8/ejfnNaSu1niTgTikwW04vFriEkavRH0FkEO1pWq8nelxjLw8pYTusnGHalAAAAAiBjXEvXROKR1Rpc4N0ALX7IQ+AyMvKo5ArVf8MQWlbyRPr03u12qjI488V1ectZnYrGdh8UY37Sj96VjJGQO6Q==</SSIS:Property>
           <SSIS:Property SSIS:Name="FormatVersion">1</SSIS:Property>
         </SSIS:Properties>
         <SSIS:Packages>
-          <SSIS:Package SSIS:Name="Package.dtsx" SSIS:EntryPoint="1" />
           <SSIS:Package SSIS:Name="TestPackage.dtsx" SSIS:EntryPoint="1" />
         </SSIS:Packages>
         <SSIS:ConnectionManagers>
@@ -216,37 +215,20 @@
             </SSIS:Parameter>
           </SSIS:ProjectConnectionParameters>
           <SSIS:PackageInfo>
-            <SSIS:PackageMetaData SSIS:Name="Package.dtsx">
-              <SSIS:Properties>
-                <SSIS:Property SSIS:Name="ID">{7DF09444-9355-4880-9901-4DC3AED83B73}</SSIS:Property>
-                <SSIS:Property SSIS:Name="Name">Package</SSIS:Property>
-                <SSIS:Property SSIS:Name="VersionMajor">1</SSIS:Property>
-                <SSIS:Property SSIS:Name="VersionMinor">0</SSIS:Property>
-                <SSIS:Property SSIS:Name="VersionBuild">0</SSIS:Property>
-                <SSIS:Property SSIS:Name="VersionComments">
-                </SSIS:Property>
-                <SSIS:Property SSIS:Name="VersionGUID">{632A4667-90B0-4F21-B860-711AD1D743C4}</SSIS:Property>
-                <SSIS:Property SSIS:Name="PackageFormatVersion">8</SSIS:Property>
-                <SSIS:Property SSIS:Name="Description">
-                </SSIS:Property>
-                <SSIS:Property SSIS:Name="ProtectionLevel">1</SSIS:Property>
-              </SSIS:Properties>
-              <SSIS:Parameters />
-            </SSIS:PackageMetaData>
             <SSIS:PackageMetaData SSIS:Name="TestPackage.dtsx">
               <SSIS:Properties>
-                <SSIS:Property SSIS:Name="ID">{8C021634-7C1F-4F45-B188-D074EBE302DE}</SSIS:Property>
+                <SSIS:Property SSIS:Name="ID">{30A2B4DC-3D72-4053-93FE-9D2737033A20}</SSIS:Property>
                 <SSIS:Property SSIS:Name="Name">TestPackage</SSIS:Property>
                 <SSIS:Property SSIS:Name="VersionMajor">0</SSIS:Property>
                 <SSIS:Property SSIS:Name="VersionMinor">0</SSIS:Property>
                 <SSIS:Property SSIS:Name="VersionBuild">1</SSIS:Property>
                 <SSIS:Property SSIS:Name="VersionComments">
                 </SSIS:Property>
-                <SSIS:Property SSIS:Name="VersionGUID">{DFD0AB23-4543-431B-9496-DA724FC070E0}</SSIS:Property>
+                <SSIS:Property SSIS:Name="VersionGUID">{0385D883-393B-4A3C-8FFA-F4280F31AA1C}</SSIS:Property>
                 <SSIS:Property SSIS:Name="PackageFormatVersion">8</SSIS:Property>
                 <SSIS:Property SSIS:Name="Description">
                 </SSIS:Property>
-                <SSIS:Property SSIS:Name="ProtectionLevel">0</SSIS:Property>
+                <SSIS:Property SSIS:Name="ProtectionLevel">1</SSIS:Property>
               </SSIS:Properties>
               <SSIS:Parameters>
                 <SSIS:Parameter SSIS:Name="CM.ADONET_AdventureWorks_Package.ConnectionString">
@@ -260,11 +242,11 @@
                     <SSIS:Property SSIS:Name="IncludeInDebugDump">0</SSIS:Property>
                     <SSIS:Property SSIS:Name="Required">0</SSIS:Property>
                     <SSIS:Property SSIS:Name="Sensitive">0</SSIS:Property>
-                    <SSIS:Property SSIS:Name="Value">Server=localhost;Initial Catalog=BimlExtract;Integrated Security=true;Database=AdventureWorks2014;</SSIS:Property>
+                    <SSIS:Property SSIS:Name="Value">server=localhost;Uid=Biml;database=AdventureWorks2014;</SSIS:Property>
                     <SSIS:Property SSIS:Name="DataType">18</SSIS:Property>
                   </SSIS:Properties>
                 </SSIS:Parameter>
-                <SSIS:Parameter SSIS:Name="CM.ADONET_AdventureWorks_Package.Password">
+                <SSIS:Parameter SSIS:Name="CM.ADONET_AdventureWorks_Package.InitialCatalog">
                   <SSIS:Properties>
                     <SSIS:Property SSIS:Name="ID">
                     </SSIS:Property>
@@ -274,7 +256,7 @@
                     </SSIS:Property>
                     <SSIS:Property SSIS:Name="IncludeInDebugDump">0</SSIS:Property>
                     <SSIS:Property SSIS:Name="Required">0</SSIS:Property>
-                    <SSIS:Property SSIS:Name="Sensitive">1</SSIS:Property>
+                    <SSIS:Property SSIS:Name="Sensitive">0</SSIS:Property>
                     <SSIS:Property SSIS:Name="DataType">18</SSIS:Property>
                   </SSIS:Properties>
                 </SSIS:Parameter>
@@ -308,7 +290,7 @@
                     <SSIS:Property SSIS:Name="DataType">18</SSIS:Property>
                   </SSIS:Properties>
                 </SSIS:Parameter>
-                <SSIS:Parameter SSIS:Name="CM.ADONET_AdventureWorks_Package.UserName">
+                <SSIS:Parameter SSIS:Name="CM.OLEDB_AdventureWorks_Package.InitialCatalog">
                   <SSIS:Properties>
                     <SSIS:Property SSIS:Name="ID">
                     </SSIS:Property>
@@ -319,21 +301,7 @@
                     <SSIS:Property SSIS:Name="IncludeInDebugDump">0</SSIS:Property>
                     <SSIS:Property SSIS:Name="Required">0</SSIS:Property>
                     <SSIS:Property SSIS:Name="Sensitive">0</SSIS:Property>
-                    <SSIS:Property SSIS:Name="DataType">18</SSIS:Property>
-                  </SSIS:Properties>
-                </SSIS:Parameter>
-                <SSIS:Parameter SSIS:Name="CM.OLEDB_AdventureWorks_Package.ConnectionString">
-                  <SSIS:Properties>
-                    <SSIS:Property SSIS:Name="ID">
-                    </SSIS:Property>
-                    <SSIS:Property SSIS:Name="CreationName">
-                    </SSIS:Property>
-                    <SSIS:Property SSIS:Name="Description">
-                    </SSIS:Property>
-                    <SSIS:Property SSIS:Name="IncludeInDebugDump">0</SSIS:Property>
-                    <SSIS:Property SSIS:Name="Required">0</SSIS:Property>
-                    <SSIS:Property SSIS:Name="Sensitive">0</SSIS:Property>
-                    <SSIS:Property SSIS:Name="Value">Data Source=localhost;Initial Catalog=BimlExtract;Provider=SQLNCLI11.1;Integrated Security=SSPI;</SSIS:Property>
+                    <SSIS:Property SSIS:Name="Value">AdventureWorks2014</SSIS:Property>
                     <SSIS:Property SSIS:Name="DataType">18</SSIS:Property>
                   </SSIS:Properties>
                 </SSIS:Parameter>
@@ -419,7 +387,13 @@
         <ConnectionSecurityMappings />
         <DatabaseStorageLocations />
         <TargetServerVersion>SQLServer2017</TargetServerVersion>
-        <ParameterConfigurationValues />
+        <ParameterConfigurationValues>
+          <ConfigurationSetting>
+            <Id>LastModifiedTime</Id>
+            <Name>LastModifiedTime</Name>
+            <Value xsi:type="xsd:dateTime">2017-08-21T19:40:46.7031267Z</Value>
+          </ConfigurationSetting>
+        </ParameterConfigurationValues>
       </Options>
     </Configuration>
   </Configurations>
