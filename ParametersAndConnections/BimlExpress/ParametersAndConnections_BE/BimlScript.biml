@@ -33,6 +33,7 @@
 						<Expressions>
 							<!--Expression ExternalProperty="InitialCatalog">"AdventureWorks2014"</Expression-->
 							<!--<Expression ExternalProperty="ConnectionString">@[$Project::ADONET_ConnectionString]</Expression>-->
+							<Expression ExternalProperty="InitialCatalog">@[$Project::DatabaseName]</Expression>
 							<Expression ExternalProperty="UserName">@[$Project::UserName]</Expression>
 							<Expression ExternalProperty="Password">@[$Project::Password]</Expression>
                         </Expressions>
