@@ -1,0 +1,31 @@
+<Biml xmlns="http://schemas.varigence.com/biml.xsd">
+  <Connections>
+    <AdoNetConnection Name="slowderalpha.BimlExtract.sa" 
+        ConnectionString="Data Source=slowderalpha;User ID=sa;Initial Catalog=BimlExtract;Password=C4lr1ss14n" 
+        Provider="System.Data.SqlClient.SqlConnection, System.Data, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+    <AdoNetConnection Name="slowderalpha.system" 
+        ConnectionString="Data Source=slowderalpha;User ID=system;Persist Security Info=True;Unicode=True;Password=C4lr1ss14n" 
+        Provider="System.Data.OracleClient.OracleConnection, System.Data.OracleClient, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  </Connections>
+  <Packages>
+    <Package Name="Automatic" Language="None" ProtectionLevel="EncryptSensitiveWithUserKey" SsisPackageType="5"  >
+      <Tasks>
+        <Dataflow Name="Data Flow Task">
+          <Transformations>
+            <AdoNetDestination Name="ADO NET Destination" ConnectionName="slowderalpha.BimlExtract.sa">
+              <InputPath OutputPathName="ADO NET Source.Output" />
+              <ExternalTableOutput Table="&quot;ADO NET Destination&quot;" />
+            </AdoNetDestination>
+            <AdoNetSource Name="ADO NET Source" ConnectionName="slowderalpha.system">
+              <ExternalTableInput Table="&quot;HR&quot;.&quot;REGIONS&quot;" />
+            </AdoNetSource>
+          </Transformations>
+        </Dataflow>
+      </Tasks>
+      <Connections>
+        <Connection ConnectionName="slowderalpha.BimlExtract.sa" />
+        <Connection ConnectionName="slowderalpha.system" />
+      </Connections>
+    </Package>
+  </Packages>
+</Biml>
