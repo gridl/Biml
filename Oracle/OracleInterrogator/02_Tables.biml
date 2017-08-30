@@ -1,21 +1,28 @@
 <#@template tier="2"#>
 
 <Biml xmlns="http://schemas.varigence.com/biml.xsd">
-    <Annotations>
+   <Annotations>
         <Annotation>
-            <!--#=RootNode.GetBiml()#-->
+        
+        <!--#=RootNode.GetBiml()#-->
         <#
-            //var OracleConnection = RootNode.AdoNetConnections["slowderalpha_Oracle"];
-    
-            //var OracleSchema = OracleConnection.ImportDB();
-            //var OracleSchema = OracleConnection.GetDatabaseSchema();
+            var sourceConnection = RootNode.DbConnections["slowderalpha_Oracle"];
+            
+            var includedSchemas = new List<string>{"HR"};
+            var includedTables = new List<string>{"Regions","Territories"}; 
+            
+            //var importResult = sourceConnection.GetDatabaseSchema(includedSchemas, includedTables, ImportOptions.ExcludeViews);
+            var importResult = sourceConnection.GetDatabaseSchema();
         #>
-        <!--#=OracleSchema.TableNodes.Count()# -->
+        <#=importResult.TableNodes.Count()#>
         </Annotation>
     </Annotations>
-    
+    <Schemas>
+        <Schema Name="Extract" DatabaseName="slowderalpha_SQL" />
+    </Schemas>
     <Tables>
-    <!-- # //foreach(var table in OracleSchema.TableNodes) {#>         <Table name="<#=table.Name#>" />     <#}# -->
+    <# foreach (var table in importResult.TableNodes) {#>   
+        <Table Name="<#=table.Name#>" SchemaName="<#=table.Schema.Name#>" />
+    <#}#>
     </Tables>
-
 </Biml>

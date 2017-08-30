@@ -1,7 +1,7 @@
 <#@template tier="100"#>
 <Biml xmlns="http://schemas.varigence.com/biml.xsd">
   <Connections>
-    <AdoNetConnection Name="slowderalpha.BimlExtract.sa" 
+    <AdoNetConnection Name="slowderalpha_SQL" 
         ConnectionString="Data Source=slowderalpha;User ID=sa;Initial Catalog=BimlExtract;Password=C4lr1ss14n" 
         Provider="System.Data.SqlClient.SqlConnection, System.Data, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
         
@@ -19,19 +19,19 @@
       <Tasks>
         <Dataflow Name="Data Flow Task">
           <Transformations>
-            <AdoNetDestination Name="ADO NET Destination" ConnectionName="slowderalpha.BimlExtract.sa">
-              <InputPath OutputPathName="ADO NET Source.Output" />
-              <ExternalTableOutput Table="&quot;ADO NET Destination&quot;" />
-            </AdoNetDestination>
-            <AdoNetSource Name="ADO NET Source" ConnectionName="slowderalpha.system">
+            <AdoNetSource Name="ADO NET Source" ConnectionName="slowderalpha_Oracle">
               <ExternalTableInput Table="&quot;HR&quot;.&quot;REGIONS&quot;" />
             </AdoNetSource>
+            <AdoNetDestination Name="ADO NET Destination" ConnectionName="slowderalpha_SQL">
+              <InputPath OutputPathName="ADO NET Source.Output" />
+              <ExternalTableOutput Table="Extract.Regions" />
+            </AdoNetDestination>
           </Transformations>
         </Dataflow>
       </Tasks>
       <Connections>
-        <Connection ConnectionName="slowderalpha.BimlExtract.sa" />
-        <Connection ConnectionName="slowderalpha.system" />
+        <Connection ConnectionName="slowderalpha_SQL" />
+        <Connection ConnectionName="slowderalpha_Oracle" />
       </Connections>
     </Package>
   </Packages>
