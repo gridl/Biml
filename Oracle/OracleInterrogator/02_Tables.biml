@@ -1,0 +1,21 @@
+<#@template tier="2"#>
+
+<Biml xmlns="http://schemas.varigence.com/biml.xsd">
+    <Annotations>
+        <Annotation>
+            <!--#=RootNode.GetBiml()#-->
+        <#
+            //var OracleConnection = RootNode.AdoNetConnections["slowderalpha_Oracle"];
+    
+            //var OracleSchema = OracleConnection.ImportDB();
+            //var OracleSchema = OracleConnection.GetDatabaseSchema();
+        #>
+        <!--#=OracleSchema.TableNodes.Count()# -->
+        </Annotation>
+    </Annotations>
+    
+    <Tables>
+    <!-- # //foreach(var table in OracleSchema.TableNodes) {#>         <Table name="<#=table.Name#>" />     <#}# -->
+    </Tables>
+
+</Biml>

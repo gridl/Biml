@@ -26,7 +26,7 @@
           <SSIS:Property SSIS:Name="CreatorComputerName">SLOWDERALPHA</SSIS:Property>
           <SSIS:Property SSIS:Name="Description">
           </SSIS:Property>
-          <SSIS:Property SSIS:Name="PasswordVerifier" SSIS:Sensitive="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAuaWbzPPhM0iKS8o4FTlKzAAAAAACAAAAAAADZgAAwAAAABAAAABQUZOOKDwjnooIFrtf7RbrAAAAAASAAACgAAAAEAAAAEBgNocSfv1vaqXQcIjBR3aIAAAAaP4wW8gSNQktgvj/xeRUHPMPgVW56mVyYpuMmiYtpe9vxUHQ8RrAxKZcSMB53v5n+Rv3GOh7vrrzPeHzjYaAjAQq93mQt7G9JrS9ajlEBDAP7HYsMc7K/c9rkcmtfbMvfd3lxOJcOp9qqU34K8j46ehRfKiJKa0J9sIiehYsBld8rMwaIgMkcBQAAACITpC/m0BFLiilxJ1Nxi2q/7Ft/g==</SSIS:Property>
+          <SSIS:Property SSIS:Name="PasswordVerifier" SSIS:Sensitive="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAuaWbzPPhM0iKS8o4FTlKzAAAAAACAAAAAAADZgAAwAAAABAAAAB54IKiALgzZqRac2Vik0pWAAAAAASAAACgAAAAEAAAAJYOqKL7gjeIvh5Mx+TRh/OIAAAA71zVVVxxISf7qH693XUAuJLpwncXZ8MnleGuK1KurT7i0EacxnsX4ga0m+i55ZaDiNfEqGGbjtdhrM4NBYLNcEkgqXoHBWDgAjpPkpWHZxFOSvtDKmTAVNVhBvdKk+acvPUnWUkYQlucUI3PetKnPTFgq8GrF6UB++pfRQ3165j1obstGopc9BQAAAAq+nodII0iEG0CQY5SIH3mJE7F8Q==</SSIS:Property>
           <SSIS:Property SSIS:Name="FormatVersion">1</SSIS:Property>
         </SSIS:Properties>
         <SSIS:Packages>
@@ -238,10 +238,10 @@
                 <SSIS:Property SSIS:Name="Name">Automatic</SSIS:Property>
                 <SSIS:Property SSIS:Name="VersionMajor">0</SSIS:Property>
                 <SSIS:Property SSIS:Name="VersionMinor">0</SSIS:Property>
-                <SSIS:Property SSIS:Name="VersionBuild">0</SSIS:Property>
+                <SSIS:Property SSIS:Name="VersionBuild">1</SSIS:Property>
                 <SSIS:Property SSIS:Name="VersionComments">
                 </SSIS:Property>
-                <SSIS:Property SSIS:Name="VersionGUID">{9083492B-1B60-4293-944F-F3427308D6CB}</SSIS:Property>
+                <SSIS:Property SSIS:Name="VersionGUID">{40A0E326-A60F-462C-8D39-8E46634C54D5}</SSIS:Property>
                 <SSIS:Property SSIS:Name="PackageFormatVersion">8</SSIS:Property>
                 <SSIS:Property SSIS:Name="Description">
                 </SSIS:Property>
@@ -435,8 +435,16 @@
   <ControlFlowParts />
   <Miscellaneous>
     <ProjectItem>
+      <Name>01_Connections.biml</Name>
+      <FullPath>01_Connections.biml</FullPath>
+    </ProjectItem>
+    <ProjectItem>
       <Name>BimlScript.biml</Name>
       <FullPath>BimlScript.biml</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>02_Tables.biml</Name>
+      <FullPath>02_Tables.biml</FullPath>
     </ProjectItem>
   </Miscellaneous>
   <Configurations>

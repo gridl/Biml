@@ -1,0 +1,10 @@
+<#@template tier="1"#>
+<Biml xmlns="http://schemas.varigence.com/biml.xsd">
+    <Connections>
+        <AdoNetConnection Name="slowderalpha_Oracle" 
+        ConnectionString="Data Source=slowderalpha;User ID=system;Persist Security Info=True;Unicode=True;Password=C4lr1ss14n" 
+        Provider="System.Data.OracleClient.OracleConnection, System.Data.OracleClient, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+        
+    </Connections>
+
+</Biml>
