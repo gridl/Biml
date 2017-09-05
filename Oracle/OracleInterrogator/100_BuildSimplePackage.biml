@@ -2,15 +2,11 @@
 <Biml xmlns="http://schemas.varigence.com/biml.xsd">
   <Connections>
     <AdoNetConnection Name="slowderalpha_SQL" 
-        ConnectionString="Data Source=slowderalpha;User ID=sa;Initial Catalog=BimlExtract;Password=C4lr1ss14n" 
+        ConnectionString="Data Source=slowderalpha;User ID=sa;Initial Catalog=BimlExtract;Password=MyPassword" 
         Provider="System.Data.SqlClient.SqlConnection, System.Data, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
         
-    <AdoNetConnection Name="BensTest"
-        ConnectionString="Server=MyServerAddress;Initial Catalog=master;User Id=MyUsername;Password=MyPassword"
-        Provider="System.Data.OracleClient" /> 
-        
     <AdoNetConnection Name="slowderalpha_Oracle" 
-        ConnectionString="Data Source=slowderalpha;User ID=system;Persist Security Info=True;Unicode=True;Password=C4lr1ss14n" 
+        ConnectionString="Data Source=slowderalpha;User ID=system;Persist Security Info=True;Unicode=True;Password=MyPassword" 
         Provider="System.Data.OracleClient.OracleConnection, System.Data.OracleClient, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
         
   </Connections>

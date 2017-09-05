@@ -6,13 +6,19 @@
         
         <!--#=RootNode.GetBiml()#-->
         <#
-            var sourceConnection = RootNode.DbConnections["slowderalpha_Oracle"];
+            var sourceConnection = RootNode.AdoNetConnections["slowderalpha_Oracle"];
             
             var includedSchemas = new List<string>{"HR"};
-            var includedTables = new List<string>{"Regions","Territories"}; 
+            var includedTables = new List<string>{"COUNTRIES","DEPARTMENTS"}; 
             
-            //var importResult = sourceConnection.GetDatabaseSchema(includedSchemas, includedTables, ImportOptions.ExcludeViews);
-            var importResult = sourceConnection.GetDatabaseSchema();
+            //get it all WORKS!
+            //var importResult = sourceConnection.GetDatabaseSchema();
+            //get only included schemas WORKS! (NOTE schema and table names are case sensitive in oracle!)
+            //var importResult = sourceConnection.GetDatabaseSchema(includedSchemas, null, ImportOptions.None);
+            //get selected Schemas and tables WORKS!
+            var importResult = sourceConnection.GetDatabaseSchema(includedSchemas, includedTables, ImportOptions.None);
+            
+            
         #>
         <#=importResult.TableNodes.Count()#>
         </Annotation>
