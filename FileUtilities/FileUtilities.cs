@@ -1,41 +1,7 @@
-﻿using System;
+﻿using ShannonLowder.Biml;
 using System.Collections.Generic;
-using System.Data;
-using System.Data.SqlTypes;
 using System.IO;
-using System.Linq;
-using System.Net;
-
-using System.Text;
-using System.Threading.Tasks;
-using Varigence.DynamicObjects;
-using Varigence.Biml.CoreLowerer.SchemaManagement;
-using Varigence.Biml.Extensions;
-using Varigence.Biml.Extensions.SchemaManagement;
-using Varigence.Flow.FlowFramework;
-using Varigence.Flow.FlowFramework.Utility;
-using Varigence.Languages.Biml;
-using Varigence.Languages.Biml.Connection;
-using Varigence.Languages.Biml.Cube;
-using Varigence.Languages.Biml.Cube.Action;
-using Varigence.Languages.Biml.Cube.Aggregation;
-using Varigence.Languages.Biml.Cube.Calculation;
-using Varigence.Languages.Biml.Cube.Partition;
-using Varigence.Languages.Biml.Dimension;
-using Varigence.Languages.Biml.Fact;
-using Varigence.Languages.Biml.FileFormat;
-using Varigence.Languages.Biml.LogProvider;
-using Varigence.Languages.Biml.Measure;
-using Varigence.Languages.Biml.MeasureGroup;
-using Varigence.Languages.Biml.Metadata;
-using Varigence.Languages.Biml.Project;
-using Varigence.Languages.Biml.Platform;
-using Varigence.Languages.Biml.Principal;
-using Varigence.Languages.Biml.Script;
 using Varigence.Languages.Biml.Table;
-using Varigence.Languages.Biml.Task;
-using Varigence.Languages.Biml.Transformation;
-using Varigence.Languages.Biml.Transformation.Destination;
 
 namespace ShannonLowder.Biml.FileUtilities
 {
@@ -45,17 +11,10 @@ namespace ShannonLowder.Biml.FileUtilities
         public string FilePath { get; set; }
         public bool FirstRowHeader { get; set; }
         public int HeaderRowsToSkip { get; set; }
-        public ImportResults ImportResults
-        {
-            get
-            {
-                return new ImportResults(this.TableNodes, this.SchemaNodes, this.SchemaErrors);
-            }
-        }
+
         public string Name { get; set; }
-        public IList<ImportError> SchemaErrors { get; set; }
-        public HashSet<AstSchemaNode> SchemaNodes { get; set; }
-        public HashSet<AstTableNode> TableNodes { get; set; }
+
+        public AstTableNode TableNode { get; set; }
         public string TextQualifier { get; set; }
         
         //minimally you need a file path and delimiter
@@ -67,25 +26,23 @@ namespace ShannonLowder.Biml.FileUtilities
             Name = Path.GetFileNameWithoutExtension(filePath);
             TextQualifier = null;
         } 
-        public ImportResults GetFileSchema() {
-            List<AstSchemaNode> schemaNodes = new List<AstSchemaNode>();
-            List<AstTableNode> tableNodes = new List<AstTableNode>();
-
+        public AstTableNode GetFileSchema() {
+            //default the schema to "File"
             AstSchemaNode astSchemaNode = new AstSchemaNode(null)
             {
                 Name = "File",
                 ForceDisableIncrementalChangeTracking = true
             };
-
-            schemaNodes.Add(astSchemaNode);
-
+            
             AstTableNode astTableNode = new AstTableNode(null)
             {
                 Name = this.Name,
                 Schema = astSchemaNode,
                 ForceDisableIncrementalChangeTracking = true
             };
-            tableNodes.Add(astTableNode);
+            this.TableNode = astTableNode;
+
+
 
             Interrogator i = new Interrogator();
             List<DestinationColumn> DestinationObject = i.ProcessFile(
@@ -95,9 +52,27 @@ namespace ShannonLowder.Biml.FileUtilities
                     this.HeaderRowsToSkip,
                     this.TextQualifier);
 
-            foreach (var col in DestinationObject) {
+            foreach (DestinationColumn col in DestinationObject) {
+                AstTableColumnNode currentColumn = new AstTableColumnNode(astTableNode)
+                {
+                    ForceDisableIncrementalChangeTracking = true
+                };
+                //set up the column
+                currentColumn.Name = col.Name;
+                if(col.MaxLength != null)
+                    currentColumn.Length = int.Parse(col.MaxLength.ToString());
+                if(col.Precision != null)
+                    currentColumn.Precision = int.Parse(col.Precision.ToString());
+                //I need my data type converter
+                ConversionUtility cu = new ConversionUtility()
+
+                currentColumn.DataType =  (System.Data.DbType)enum.Parse(System.Data.DbType, cu.Convert(SourceSystem.SqlServer, SourceSystem.Biml, col.DataType);
+
                 
-                //    astTableNode.Columns.Add(tableColumn);
+
+                currentColumn.IsNullable = col.Nullable;
+                //add the column to the table
+                this.TableNode.Columns.Add(currentColumn);
             }
 
 
@@ -105,7 +80,7 @@ namespace ShannonLowder.Biml.FileUtilities
 
 
 
-            return new ImportResults(tableNodes, schemaNodes, this.SchemaErrors);
+            return this.TableNode;
         }
                
     }

@@ -6,16 +6,15 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 
-using Varigence.Languages.Biml.Table;
+
 
 namespace ShannonLowder.Biml.FileUtilities
 {
     public class DestinationColumn
     {
         public string Name { get; set; }
-        public string DataType { get; set; }
+        public SqlDbType DataType { get; set; }
         public int? MaxLength { get; set; }
         public int? Precision { get; set; }
         public int? Scale { get; set; }
@@ -72,7 +71,7 @@ namespace ShannonLowder.Biml.FileUtilities
 
         //function to guess which character type the input is
         //This function can handle changes to data type too.
-        public SqlDbType CharGuess(string input, string currentDatatype)
+        public SqlDbType CharGuess(string input, SqlDbType currentDatatype)
         {
             //if any character is "after" the 255th character it's in the unicode space
             if (input.Any(c => c > 255))
@@ -90,68 +89,68 @@ namespace ShannonLowder.Biml.FileUtilities
 
         //"main" guess function -- this one calls the guess functions in order
         // 1. DateTime, 2. Numerics, 3. Character, if none of the above, then VarBinary
-        public string DataTypeGuess(string input, string currentDatatype)
+        public SqlDbType DataTypeGuess(string input, SqlDbType currentDatatype)
         {
-            string output;
+            SqlDbType output;
 
-            //exclude blanks
+            //exclude blanks (returning variant, since there is no null in SqlDbType
             if (input.Length < 1)
-                return "";
+                return SqlDbType.Variant;
 
             //first try datetimes
             //CurrentDataType must be compatible
-            string[] DateTimeCompatibleDataTypes = { null, "Date", "Time", "DateTimeOffset", "DateTime2", "DateTime" };
+            SqlDbType[] DateTimeCompatibleDataTypes = { SqlDbType.Variant, SqlDbType.Date, SqlDbType.Time, SqlDbType.DateTimeOffset, SqlDbType.DateTime2, SqlDbType.DateTime };
             if (DateTimeCompatibleDataTypes.Contains(currentDatatype))
             {
 
-                output = DateTimeGuess(input, currentDatatype).ToString();
+                output = DateTimeGuess(input, currentDatatype);
 
                 //if you have a mixed column and the new value isn't null only DateTime2 can hold all
-                if (currentDatatype != null && currentDatatype != output && output != "VarBinary")
+                if (currentDatatype != SqlDbType.Variant && currentDatatype != output && output != SqlDbType.VarBinary)
                 {
-                    output = "DateTime2";
+                    output = SqlDbType.DateTime2;
                 }
-                if (output != "VarBinary")
+                if (output != SqlDbType.VarBinary)
                     return output;
             }
 
             //then numerics
-            string[] NumericCompatibleDateTypes = { null, "Bit", "TinyInt", "SmallInt", "Int", "BigInt", "Decimal", "Float" };
+            SqlDbType[] NumericCompatibleDateTypes = { SqlDbType.Variant, SqlDbType.Bit, SqlDbType.TinyInt, SqlDbType.SmallInt, SqlDbType.Int, SqlDbType.BigInt, SqlDbType.Decimal, SqlDbType.Float };
             if (NumericCompatibleDateTypes.Contains(currentDatatype))
             {
-                output = NumericGuess(input, currentDatatype).ToString();
+                output = NumericGuess(input, currentDatatype);
 
                 //if changed
                 if (currentDatatype != output)
                 {
                     switch (currentDatatype)
                     {
-                        case "TinyInt":
+                        case SqlDbType.TinyInt:
                             //if it was a TinyInt, it cannot be an bit
-                            if (output == "Bit")
+                            if (output == SqlDbType.Bit)
                                 output = currentDatatype;
                             break;
-                        case "SmallInt":
+                        case SqlDbType.SmallInt:
                             //SmallInt can't get smaller
-                            if (output == "Bit" || output == "TinyInt")
+                            if (output == SqlDbType.Bit || output == SqlDbType.TinyInt)
                                 output = currentDatatype;
                             break;
-                        case "Int":
+                        case SqlDbType.Int:
                             //Int can't get smaller
-                            if (output == "Bit" || output == "TinyInt" || output == "SmallInt")
+                            if (output == SqlDbType.Bit || output == SqlDbType.TinyInt || output == SqlDbType.SmallInt)
                                 output = currentDatatype;
                             break;
-                        case "BigInt":
+                        case SqlDbType.BigInt:
                             //BitInt can't get smaller
-                            if (output == "Bit" || output == "TinyInt" || output == "SmallInt" || output == "Int")
+                            if (output == SqlDbType.Bit || output == SqlDbType.TinyInt || output == SqlDbType.SmallInt || output == SqlDbType.Int)
                                 output = currentDatatype;
                             break;
-                        case "Decimal":
+                        case SqlDbType.Decimal:
                             //Decimal can't convert to int, precision would be lost
-                            if (output == "Bit" || output == "TinyInt" || output == "SmallInt" || output == "Int" || output == "BigInt")
+                            if (output == SqlDbType.Bit || output == SqlDbType.TinyInt || output == SqlDbType.SmallInt || output == SqlDbType.Int || output == SqlDbType.BigInt)
                                 output = currentDatatype;
                             break;
-                        case "Float":
+                        case SqlDbType.Float:
                             //float's stay floats
                             output = currentDatatype;
                             break;
@@ -162,22 +161,22 @@ namespace ShannonLowder.Biml.FileUtilities
                     }
                 }
 
-                if (output != "VarBinary")
+                if (output != SqlDbType.VarBinary)
                     return output;
             }
             //then character strings, the only compatibility check is ! Binary
-            if (currentDatatype != "VarBinary")
+            if (currentDatatype != SqlDbType.VarBinary)
             {
-                output = CharGuess(input, currentDatatype).ToString();
+                output = CharGuess(input, currentDatatype);
                 return output;
             }
             //if all else fails, then resort to binary
-            return "VarBinary";
+            return SqlDbType.VarBinary;
         }
 
         //function to guess what kind of datetime we're dealing with:
         //Date, Time, Datetimeoffset, Datetime2
-        SqlDbType DateTimeGuess(string input, string currentDatatype)
+        public SqlDbType DateTimeGuess(string input, SqlDbType currentDatatype)
         {
 
             DateTime givenDateTime = new DateTime();
@@ -245,7 +244,7 @@ namespace ShannonLowder.Biml.FileUtilities
 
         //function to guess what kind of numeric we're dealing with:
         //TinyInt, SmallInt, Int, BigInt, Decimal, Float
-        public SqlDbType NumericGuess(string input, string currentDatatype)
+        public SqlDbType NumericGuess(string input, SqlDbType currentDatatype)
         {
             Boolean givenBoolean;
             Byte givenByte;
@@ -368,7 +367,7 @@ namespace ShannonLowder.Biml.FileUtilities
                                         output[i].DataType = DataTypeGuess(fields[i].Trim(), output[i].DataType);
 
                                         //did we just get a unicode column?
-                                        if (output[i].DataType == "NVarChar")
+                                        if (output[i].DataType == SqlDbType.NVarChar)
                                             treatWholeFileAsUnicode = true;
 
                                         //get the Maxlength
@@ -382,10 +381,10 @@ namespace ShannonLowder.Biml.FileUtilities
                                         switch (output[i].DataType)
                                         {
                                             //do nothing cases
-                                            case "VarChar":
-                                            case "NVarChar":
-                                            case "Char":
-                                            case "NChar":
+                                            case SqlDbType.VarChar:
+                                            case SqlDbType.NVarChar:
+                                            case SqlDbType.Char:
+                                            case SqlDbType.NChar:
                                                 break;
                                             //the rest need null for length	
                                             default:
@@ -397,30 +396,30 @@ namespace ShannonLowder.Biml.FileUtilities
                                         //get precision
                                         switch (output[i].DataType)
                                         {
-                                            case "Bit":
-                                            case "Boolean":
-                                            case "Byte":
-                                            case "Date":
-                                            case "DateTime":
-                                            case "BigInt":
-                                            case "Int":
-                                            case "SmallInt":
-                                            case "TinyInt":
+                                            case SqlDbType.Bit:
+                                            case SqlDbType.Boolean:
+                                            case SqlDbType.Byte:
+                                            case SqlDbType.Date:
+                                            case SqlDbType.DateTime:
+                                            case SqlDbType.BigInt:
+                                            case SqlDbType.Int:
+                                            case SqlDbType.SmallInt:
+                                            case SqlDbType.TinyInt:
                                                 output[i].Precision = null;
                                                 break;
-                                            case "DateTime2":
+                                            case SqlDbType.DateTime2:
                                                 output[i].Precision = 27;
                                                 break;
-                                            case "DateTimeOffset":
+                                            case SqlDbType.DateTimeOffset:
                                                 output[i].Precision = 34;
                                                 break;
-                                            case "Decimal": //could max at 38
-                                            case "Float":
+                                            case SqlDbType.Decimal: //could max at 38
+                                            case SqlDbType.Float:
                                                 if (fields[i].Replace(".", "").Length > (output[i].Precision ?? 0))
                                                     output[i].Precision = fields[i].Replace(".", "").Length;
                                                 break;
 
-                                            case "Time":
+                                            case SqlDbType.Time:
                                                 output[i].Precision = 7;
                                                 break;
                                         }
@@ -428,17 +427,17 @@ namespace ShannonLowder.Biml.FileUtilities
                                         //get scale
                                         switch (output[i].DataType)
                                         {
-                                            case "Date":
-                                            case "DateTime":
+                                            case SqlDbType.Date:
+                                            case SqlDbType.DateTime:
                                                 output[i].Scale = null;
                                                 break;
-                                            case "DateTime2":
-                                            case "DateTimeOffset":
-                                            case "Time":
+                                            case SqlDbType.DateTime2:
+                                            case SqlDbType.DateTimeOffset:
+                                            case SqlDbType.Time:
                                                 output[i].Scale = 7;
                                                 break;
-                                            case "Decimal":
-                                            case "Float":
+                                            case SqlDbType.Decimal:
+                                            case SqlDbType.Float:
                                                 //remember Indexof will "leave the "." in it's length (+1 to ignore the .)
                                                 int Scale = fields[i].Substring(fields[i].IndexOf(".") + 1).Length;
                                                 if (Scale > (output[i].Scale ?? 0))
@@ -463,17 +462,17 @@ namespace ShannonLowder.Biml.FileUtilities
                     {
                         foreach (DestinationColumn col in output)
                         {
-                            if (col.DataType == "VarChar")
-                                col.DataType = "NVarChar";
+                            if (col.DataType == SqlDbType.VarChar)
+                                col.DataType = SqlDbType.NVarChar;
                         }
                     }
                 }
                 //if we don't have a datatype at all, default to varbinary
                 foreach (DestinationColumn col in output)
                 {
-                    if (col.DataType == null)
+                    if (col.DataType == SqlDbType.Variant)
                     {
-                        col.DataType = "VarBinary";
+                        col.DataType = SqlDbType.VarBinary;
                         col.MaxLength = -1; //"MAX"
                     }
                 }
