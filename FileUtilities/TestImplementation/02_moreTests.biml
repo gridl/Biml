@@ -1,0 +1,6 @@
+<#@ template tier="2" #>
+<Biml xmlns="http://schemas.varigence.com/biml.xsd">
+    <Tables>
+        <#=RootNode.Tables["test"].GetBiml()#>
+    </Tables>
+</Biml>

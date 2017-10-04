@@ -1,0 +1,18 @@
+<#@ template tier="0" #>
+<Biml xmlns="http://schemas.varigence.com/biml.xsd">
+    <Connections>
+        <FileConnection Name="FF_Character" FilePath="C:\Repositories\Biml\FileUtilities\TestData\Character.csv" FileUsageType="ExistingFile" />
+        <FlatFileConnection Name="FFC_Character" FilePath="C:\Repositories\Biml\FileUtilities\TestData\Character.csv" HasMultipleFiles="false" />
+        <OleDbConnection Name="OLEDB_Adventureworks2014" 
+            ConnectionString="Data Source=localhost;Initial Catalog=AdventureWorks2014;Provider=SQLNCLI11.1;Integrated Security=SSPI;" />
+    </Connections>
+    <Databases>
+        <Database Name="null" ConnectionName="null" />
+    </Databases>
+    <Schemas>
+        <Schema Name="null" DatabaseName="null" />
+    </Schemas>
+    <Tables>
+        <Table Name="null" />
+    </Tables>
+</Biml>

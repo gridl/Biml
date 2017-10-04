@@ -1,0 +1,68 @@
+<#@ template tier="1" #>
+<#@ code file="Interrogator.cs" #>
+
+
+<Biml xmlns="http://schemas.varigence.com/biml.xsd">
+    <Annotations>
+        <Annotation>
+        <#
+            //Interrogator i = new Interrogator();
+            //List<DestinationColumn> DestinationObject = i.ProcessFile(@"C:\Repositories\Biml\FileUtilities\TestData\Character.csv", ',', true, 0, "\"");
+             var conn = RootNode.OleDbConnections["OLEDB_Adventureworks2014"]; 
+             var db = conn.GetDatabaseSchema(); 
+             #>
+             <#=db.TableNodes.Take(1).Single().GetBiml() #>
+             
+             <#
+             
+            
+            List<AstTableNode> list2 = new List<AstTableNode>();
+            
+            AstDatabaseNode astDatabaseNode = new AstDatabaseNode(null) {
+            Name = "test"
+              
+          };
+          
+           AstSchemaNode astSchemaNode = new AstSchemaNode(null)
+			{
+				Name = "test",
+				//Database = astDatabaseNode,
+				ForceDisableIncrementalChangeTracking = true
+			};
+           
+            AstTableNode testTable = new AstTableNode(null){
+                Name = "test",
+                Schema = astSchemaNode,
+                ForceDisableIncrementalChangeTracking = true
+                
+            };
+            
+            list2.Add(testTable);
+            
+            //AstTableColumnBaseNode testColumn = null;
+            
+            //if (testColumn == null)
+        	//{
+        		AstTableColumnNode testColumn = new AstTableColumnNode(testTable)
+        		{
+        			ForceDisableIncrementalChangeTracking = true
+        		};
+        	//}
+        	
+            
+                testColumn.Name="test";
+                testColumn.DataType= System.Data.DbType.Int16;
+                testColumn.Length=8;
+                testColumn.IsNullable=true;
+            #>
+               
+            <#
+            testTable.Columns.Add(testColumn);
+            #>
+               
+              <#=testTable.GetBiml()#>
+            
+        </Annotation>
+    </Annotations>
+        
+</Biml>
