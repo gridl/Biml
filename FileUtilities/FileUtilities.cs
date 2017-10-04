@@ -66,7 +66,9 @@ namespace ShannonLowder.Biml.FileUtilities
                 //I need my data type converter
                 ConversionUtility cu = new ConversionUtility()
 
-                currentColumn.DataType =  (System.Data.DbType)enum.Parse(System.Data.DbType, cu.Convert(SourceSystem.SqlServer, SourceSystem.Biml, col.DataType);
+                currentColumn.DataType =  
+                    //System.Data.DbType
+                    //cu.Convert(SourceSystem.SqlServer, SourceSystem.Biml, col.DataType);
 
                 
 
