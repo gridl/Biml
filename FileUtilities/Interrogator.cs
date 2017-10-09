@@ -1,13 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Data.SqlTypes;
 using System.IO;
 using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
-
-
 
 namespace ShannonLowder.Biml.FileUtilities
 {
@@ -24,14 +20,14 @@ namespace ShannonLowder.Biml.FileUtilities
         public DestinationColumn(string name)
         {
             Name = name;
-            DataType = null;
+            DataType = SqlDbType.Variant;
             MaxLength = null;
             Precision = null;
             Scale = null;
             Nullable = false;
         }
         //full init
-        public DestinationColumn(string name, string datatype, int maxlength, int precision, int scale, bool nullable)
+        public DestinationColumn(string name, SqlDbType datatype, int maxlength, int precision, int scale, bool nullable)
         {
             Name = name;
             DataType = datatype;
@@ -79,7 +75,7 @@ namespace ShannonLowder.Biml.FileUtilities
             else
             {
                 //if the current data type is NVarChar, we can't go back to VarChar
-                if (currentDatatype != "NVarChar")
+                if (currentDatatype != SqlDbType.NVarChar)
                     return SqlDbType.VarChar;
                 else
                     return SqlDbType.NVarChar;
@@ -397,8 +393,6 @@ namespace ShannonLowder.Biml.FileUtilities
                                         switch (output[i].DataType)
                                         {
                                             case SqlDbType.Bit:
-                                            case SqlDbType.Boolean:
-                                            case SqlDbType.Byte:
                                             case SqlDbType.Date:
                                             case SqlDbType.DateTime:
                                             case SqlDbType.BigInt:

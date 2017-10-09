@@ -8,6 +8,10 @@
 *.dtsx
 *.conmgr
 
+#key files
+*.snk
+gac.txt
+
 #outputs
 **/[Bb]in/
 **/[Oo]bj/

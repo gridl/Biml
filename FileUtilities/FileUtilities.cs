@@ -1,5 +1,4 @@
-﻿using ShannonLowder.Biml;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.IO;
 using Varigence.Languages.Biml.Table;
 
@@ -25,7 +24,8 @@ namespace ShannonLowder.Biml.FileUtilities
             HeaderRowsToSkip = 0;
             Name = Path.GetFileNameWithoutExtension(filePath);
             TextQualifier = null;
-        } 
+        }
+
         public AstTableNode GetFileSchema() {
             //default the schema to "File"
             AstSchemaNode astSchemaNode = new AstSchemaNode(null)
@@ -41,8 +41,6 @@ namespace ShannonLowder.Biml.FileUtilities
                 ForceDisableIncrementalChangeTracking = true
             };
             this.TableNode = astTableNode;
-
-
 
             Interrogator i = new Interrogator();
             List<DestinationColumn> DestinationObject = i.ProcessFile(
@@ -63,24 +61,11 @@ namespace ShannonLowder.Biml.FileUtilities
                     currentColumn.Length = int.Parse(col.MaxLength.ToString());
                 if(col.Precision != null)
                     currentColumn.Precision = int.Parse(col.Precision.ToString());
-                //I need my data type converter
-                ConversionUtility cu = new ConversionUtility()
-
-                currentColumn.DataType =  
-                    //System.Data.DbType
-                    //cu.Convert(SourceSystem.SqlServer, SourceSystem.Biml, col.DataType);
-
-                
 
                 currentColumn.IsNullable = col.Nullable;
                 //add the column to the table
                 this.TableNode.Columns.Add(currentColumn);
             }
-
-
-
-
-
 
             return this.TableNode;
         }

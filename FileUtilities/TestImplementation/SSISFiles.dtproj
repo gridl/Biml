@@ -26,7 +26,7 @@
           <SSIS:Property SSIS:Name="CreatorComputerName">SLOWDERALPHA</SSIS:Property>
           <SSIS:Property SSIS:Name="Description">
           </SSIS:Property>
-          <SSIS:Property SSIS:Name="PasswordVerifier" SSIS:Sensitive="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAALaaKUsxybEq/mBWtaxCDDAAAAAACAAAAAAAQZgAAAAEAACAAAACskNmK13ufCNH3b0/AMpX46t2csR3hWuQFhKroM9Nz6wAAAAAOgAAAAAIAACAAAADGy4fU7uQJEAb74PeaFWnc9gDhqw9LJ7GbBugFn4z0j5AAAADpK04//KwUzN1aZPhxo3wUjG9YxXrElP4KGwgn2JVgmn1Z/kGbAE2vaXkHmf5m9RNr6gYqCLFQTQ439leyGM/qc6EKyo+V6UPab/DVOX5IimDNk/bvB30DUgIwEnvT8dlU+VePtkgSCdZiDzy8xR8/tXkp2THnn0AXOR9/jy4lD7ZnG/r6O8kfqCRUSSqfzwRAAAAAT39YlL0/oSzgLOv2tXkRtQ1+vsA3FeAtvnGg+AMekUm8VO1kuhdlqSMGHstAyWdp+KllNWLqxulSV7Vo+Gy2IA==</SSIS:Property>
+          <SSIS:Property SSIS:Name="PasswordVerifier" SSIS:Sensitive="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAALaaKUsxybEq/mBWtaxCDDAAAAAACAAAAAAAQZgAAAAEAACAAAAAygW73UC4sPCZ2ZZlHu9khdmGD4EvzHqPdQJxIleL+PwAAAAAOgAAAAAIAACAAAADbEBc60HewnW/fua0G+lMm8zGZGoUApnFCkShIU2/MdJAAAADlh72xJNRNt9+tK4F2mgevkdjCfjyh3hBU8MsXk0R91WKFXFkR2P/z1+OSwysq6oWr3l3PHmBtLIXRMWPMGf2mA+gDve97kbl/MBPgcUyKjBU6LKOgUs5MS6KLD1YY5iApvFf4m9jM4qZGrdPW61KRxwuavC9/q2UdQmXuC0+FkCmUZBIaRmzN6g/EKzSO7N9AAAAAqpOLaWRK/c3v7axcS1DfA3SapbGiXiUdp/o04yitEjzg+S3qlNSDrXTMDkvo0xdGPFmM1NW/obfMFs5iykuzsg==</SSIS:Property>
           <SSIS:Property SSIS:Name="FormatVersion">1</SSIS:Property>
         </SSIS:Properties>
         <SSIS:Packages>
@@ -67,6 +67,14 @@
     <ProjectItem>
       <Name>01_Tests.biml</Name>
       <FullPath>01_Tests.biml</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>03_NewFileUtilities 1.biml</Name>
+      <FullPath>03_NewFileUtilities 1.biml</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>02_OriginalInterrogator.biml</Name>
+      <FullPath>02_OriginalInterrogator.biml</FullPath>
     </ProjectItem>
     <ProjectItem>
       <Name>ConversionUtility.cs</Name>
