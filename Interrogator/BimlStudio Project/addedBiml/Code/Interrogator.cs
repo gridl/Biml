@@ -55,16 +55,20 @@ public class DestinationColumn {
 		MaxLength = null;
 		Precision = null;
 		Scale = null;
-		Nullable = false;
+		Nullable = true;
 	}
 	//full init
-	public DestinationColumn (string name, string datatype, int maxlength, int precision, int scale, bool nullable){
+	public DestinationColumn (string name, string datatype, int? maxlength, int? precision, int? scale, bool? nullable){
 		Name = name;
 		DataType = datatype;
 		MaxLength = maxlength;
 		Precision = precision;
 		Scale = scale;
-		Nullable = nullable;
+		if(nullable.ToString().Length > 0) 
+			Nullable = (bool)nullable;
+		else
+			Nullable = true;
+		
 	}
 }
 
