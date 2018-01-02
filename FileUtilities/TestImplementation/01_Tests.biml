@@ -6,8 +6,6 @@
     <Annotations>
         <Annotation>
         <#
-            //Interrogator i = new Interrogator();
-            //List<DestinationColumn> DestinationObject = i.ProcessFile(@"C:\Repositories\Biml\FileUtilities\TestData\Character.csv", ',', true, 0, "\"");
              var conn = RootNode.OleDbConnections["OLEDB_Adventureworks2014"]; 
              var db = conn.GetDatabaseSchema(); 
              #>

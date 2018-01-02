@@ -1,0 +1,14 @@
+<#@ template tier="2" #>
+<!-- seriously, I have to fully reference my own assemblies!? -->
+<#@ import namespace="C:\Repositories\Biml\FileUtilities\bin\Debug\FileUtilities.dll" #>
+
+<Biml xmlns="http://schemas.varigence.com/biml.xsd">
+    <Annotations>
+        <Annotation>
+            Error: The type or namespace name 'ShannonLowder' could not be found
+            (are you missing a using directive or an assembly reference?) (46, 11) in 
+            C:\Users\slowd\AppData\Local\Temp\Varigence\12756\kiupkv24.0.cs
+        </Annotation>
+    </Annotations>
+
+</Biml>+

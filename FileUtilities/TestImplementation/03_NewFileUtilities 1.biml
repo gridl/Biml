@@ -1,0 +1,44 @@
+<#@ template tier="2" #>
+<#@ code file="Interrogator.cs" #>
+<#@ code file="ConversionUtility.cs" #>
+<Biml xmlns="http://schemas.varigence.com/biml.xsd">
+    
+    <#
+        Interrogator i = new Interrogator();
+        ConversionUtility cu = new ConversionUtility();
+        List<DestinationColumn> DestinationObject = i.ProcessFile(@"C:\Repositories\Biml\FileUtilities\TestData\Character.csv", ',', true, 0, "\"");
+    #>      
+    <FlatFileFormat Name="Character" RowDelimiter="CRLF" 
+			ColumnNamesInFirstDataRow="true" FlatFileType="Delimited"  
+			<#= DestinationObject.Any(col => col.DataType == "NVarChar") ? "CodePage=\"65001\"" : "" #> IsUnicode="false"
+			TextQualifer="&quot;">
+			<Columns>
+			<#
+				int columnOrdinal = 1;
+				foreach(DestinationColumn col in DestinationObject) {
+			#>
+
+				<Column Name="<#= col.Name #>" 
+					DataType="<#= cu.Convert(SourceSystem.SqlServer, SourceSystem.Biml, col.DataType) #>" 				
+					Delimiter="<#= (columnOrdinal ==  DestinationObject.Count()) ? "CRLF" : ","  #>" 
+					<# if(col.MaxLength != null) { #>Length="<#=col.MaxLength #>" <# } #>
+					<# if(col.Precision != null) { #>Precision="<#=col.Precision #>" <# } #>
+					<# if(col.Scale != null) { #>Scale="<#=col.Scale #>" <# } #> >
+				<Annotations>
+					<Annotation>
+						SQL DataType: <#=col.DataType #>
+						MaxLength: <#=col.MaxLength #>
+						Precision: <#=col.Precision #>
+						Scale: <#=col.Scale #>
+                    </Annotation>
+                </Annotations>						
+				</Column>
+			<#
+					columnOrdinal++;
+				}
+			#>		
+			</Columns>
+		</FlatFileFormat>
+		    
+    
+</Biml>
