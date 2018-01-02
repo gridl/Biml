@@ -17,8 +17,5 @@ This is where you can find the code from any of my current presentations. Feel f
 [SecurityAndDeployment] (https://github.com/shannonlowder/Biml/tree/master/SecurityAndDeployment) -- 
 after you can create your Extract packages automatically, wouldn't it be nice if you could automate the deployment of these packages?  This is how to do that with BimlStudio.  Yeah, you have to have the paid version (BimlStudio) for this feature.
 
-There are now two projects for Interrogator. One is for BimlStudio, the other is for BimlExpress.  The BimlExpress version uses links to files in the BimlStudio project.  That way, we have a single codebase for both solutions.
-
-[DataTypeConversion](http://toyboxcreations.net/datatype-conversion-utility-for-biml/) -- need to convert back and forth between Biml, SQL Server, and SSIS datatypes?  Get my utility in this repo!
 
 

@@ -28,7 +28,7 @@
 			<Columns>
 			<#
 				Interrogator i = new Interrogator();
-				List<DestinationColumn> DestinationObject = i.ProcessFile(file.FullName, ',', true, 0, "\"");
+				List<DestinationColumn> DestinationObject = i.ProcessFile(file.FullName, '\t', true, 0, "\"");
 					
 				foreach(DestinationColumn col in DestinationObject) {
 			#>

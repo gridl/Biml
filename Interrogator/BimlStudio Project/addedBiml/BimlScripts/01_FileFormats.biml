@@ -19,7 +19,7 @@
 			if(acceptedFilePatterns.Contains(file.Extension.ToLower())) {
 				Interrogator i = new Interrogator();
 				//the column delimiter, rows to skip, and text qualifier should be parameterized when you call this method
-				List<DestinationColumn> DestinationObject = i.ProcessFile(file.FullName, ',', true, 0, "\"");
+				List<DestinationColumn> DestinationObject = i.ProcessFile(file.FullName, '\t', true, 0, "\"");
 				//those same parameters should get passed in below too
 	#>
 		<FlatFileFormat Name="<#= file.Name.Replace(file.Extension,"") #>" RowDelimiter="CRLF" 
