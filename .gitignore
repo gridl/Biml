@@ -47,22 +47,8 @@ bld/
 [Bb]uild[Ll]og.*
 
 # BimlExpress files we don't want to check in 
-/Interrogator/BimlExpress Project/BimlExpress/07_Projects_ETL.biml
-/Interrogator/BimlExpress Project/BimlExpress/06_Packages_ExtractFlatFiles.biml
-/Interrogator/BimlExpress Project/BimlExpress/05_Packages_CreateObjects.biml
-/Interrogator/BimlExpress Project/BimlExpress/04_Tables_SQL-ALL.biml
-/Interrogator/BimlExpress Project/BimlExpress/04_Tables_FlatFiles.biml
-/Interrogator/BimlExpress Project/BimlExpress/04_Tables_Excel.biml
-/Interrogator/BimlExpress Project/BimlExpress/03_Schemas.biml
-/Interrogator/BimlExpress Project/BimlExpress/02_Databases.biml
-/Interrogator/BimlExpress Project/BimlExpress/02_Connections-FlatFiles.biml
-/Interrogator/BimlExpress Project/BimlExpress/01_FileFormats.biml
-/Interrogator/BimlExpress Project/BimlExpress/01_Connections-OLEDB.biml
-/Interrogator/BimlExpress Project/BimlExpress/01_Connections-ADONET.biml
-/Interrogator/BimlExpress Project/BimlExpress/00_Configuration.biml
-/Interrogator/BimlExpress Project/Code
 /Interrogator/BimlExpress Project/BimlExpress/*.dtsx
 /Interrogator/BimlExpress Project/BimlExpress/*.conmgr
 
-Interrogator/BimlStudio Project/test/
+/Interrogator/BimlStudio Project/test/
 
