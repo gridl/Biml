@@ -1,0 +1,45 @@
+﻿<#@ template tier="4" #>
+<#@ import namespace="Varigence.Biml.Extensions" #>
+<Biml xmlns="http://schemas.varigence.com/biml.xsd">
+	<#
+	//var SourceConnection = RootNode.OleDbConnections["ExcelOleDbConnection"];
+	//What about the IMEX=1 solution?
+	//this line works in BimlStudio, but not in BimlExpress:
+	//var SourceConnection = RootNode.OleDbConnections["ExcelOleDbConnection-IMEX"];
+	//trying to figure out what it will take to make it work in both Studio and Express
+	//(AstDbConnectionNode)
+	var SourceConnection =  RootNode.DbConnections["ExcelOleDbConnection-IMEX"];
+	var SourceSchema = SourceConnection.GetDatabaseSchema();
+	#>
+	<Annotations>
+		<Annotation>
+			<#
+			foreach( var SourceTable in SourceSchema.TableNodes) {        
+			#>
+			<#=SourceTable #>
+			<#
+			}
+			#>
+        </Annotation>
+    </Annotations>
+	<Tables>
+	<#
+	foreach( var SourceTable in SourceSchema.TableNodes) {        
+	#>
+		<Table Name="<#=SourceTable.Name #>" SchemaName="Extract.Extract">
+		<Columns>
+			<#
+			foreach(var SourceColumn in SourceTable.Columns) {
+			#>
+				<Column Name="<#=SourceColumn.Name #>" DataType="<#=SourceColumn.DataType #>" Length="<#=SourceColumn.Length #>"/>
+			<#
+			}
+			#>
+			</Columns>
+        </Table>
+	<#
+	}
+	#>
+    </Tables>
+</Biml> 
+

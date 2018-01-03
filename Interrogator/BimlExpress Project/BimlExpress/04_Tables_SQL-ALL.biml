@@ -1,0 +1,60 @@
+﻿<#@ template tier="4" #>
+<Biml xmlns="http://schemas.varigence.com/biml.xsd">
+	<Tables>
+	<!-- Get all Schemas, tables and views -->
+	<#
+	
+	/*
+		--https://www.cathrinewilhelmsen.net/2015/07/12/biml-extension-methods-getdatabaseschema/
+		Parameter	Description	Data Type							Examples
+	ImportOptions	Objects to exclude from import	ImportOptions	ImportOptions.None
+																	ImportOptions.ExcludeCheckConstraint
+																	ImportOptions.ExcludeColumnDefault
+																	ImportOptions.ExcludeForeignKey
+																	ImportOptions.ExcludeIdentity
+																	ImportOptions.ExcludeIndex
+																	ImportOptions.ExcludePrimaryKey
+																	ImportOptions.ExcludeUniqueKey
+																	ImportOptions.ExcludeViews
+	
+	IncludedSchemas	Schema(s) to import	IEnumerable<string>			null
+																	new List<string>()
+																	new List<string>{"Production"}
+	
+	IncludedTables	Table(s) to import	IEnumerable<string>			null
+																	new List<string>()
+																	new List<string>{"Product","ProductCategory","ProductSubcategory"}
+	
+	*/
+	//all
+	var SourceConnection = RootNode.AdoNetConnections["ADONET_Adventureworks"];
+	var SourceSchema = SourceConnection.GetDatabaseSchema();
+	
+	//some
+	List<string> IncludedSchemas = new List<string>{"Person","HumanResources"};
+	//var SourceSchema = SourceConnection.GetDatabaseSchema(IncludedSchemas, null, ImportOptions.None );
+	
+	List<string> IncludedTables = new List<string>{"Address", "Department"};
+	//var SourceSchema = SourceConnection.GetDatabaseSchema(IncludedSchemas, IncludedTables, ImportOptions.None);
+	
+	//var SourceSchema = SourceConnection.GetDatabaseSchema(null, null, ImportOptions.ExcludeViews );
+	
+	foreach( var SourceTable in SourceSchema.TableNodes) {        
+	#>
+		<Table Name="<#=SourceTable.Name #>" SchemaName="Extract.Extract">
+		<Columns>
+			<#
+			foreach(var SourceColumn in SourceTable.Columns) {
+			#>
+				<Column Name="<#=SourceColumn.Name #>" DataType="<#=SourceColumn.DataType #>" Length="<#=SourceColumn.Length #>"/>
+			<#
+			}
+			#>
+			</Columns>
+        </Table>
+	<#
+	}
+	#>
+    </Tables>
+</Biml>
+

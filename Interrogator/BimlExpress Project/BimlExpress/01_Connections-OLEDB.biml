@@ -1,0 +1,19 @@
+﻿<#@ template tier="1" #>
+<#@ include file="00_Configuration.biml"#>
+
+<Biml xmlns="http://schemas.varigence.com/biml.xsd"> 
+	<Annotations>
+		<Annotation AnnotationType="CodeComment">
+			We need OLEDB connections for Flat file staging.  ADONET destinations in extract packages through mapping errors at build time.
+        </Annotation>
+    </Annotations>
+	<Connections>
+		<OleDbConnection Name="OLEDB_Extract" ConnectionString="Provider=SQLNCLI11.1;Data Source=<#=ExtractServer #>;Initial Catalog=<#= ExtractDatabase#>;Integrated Security=SSPI" CreateInProject="true" >
+		    
+        </OleDbConnection>
+		
+        <!--ExcelConnection Name="ExcelOleDbConnection" ConnectionString="Provider=Microsoft.ACE.OLEDB.12.0;Data Source=<#=SourceFolder#>\ExcelSource.xlsx;Extended Properties=&quot;Excel 12.0 Xml;HDR=YES&quot;;" />
+		
+		<ExcelConnection Name="ExcelOleDbConnection-IMEX" ConnectionString="Provider=Microsoft.ACE.OLEDB.12.0;Data Source=<#=SourceFolder#>\ExcelSource.xlsx;Extended Properties=&quot;Excel 12.0 Xml;HDR=YES;IMEX=1&quot;" /-->
+    </Connections>
+</Biml>

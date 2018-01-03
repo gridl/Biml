@@ -40,15 +40,14 @@ bld/
 **/addedBiml/ScriptProjects/
 **/addedBiml/Tables/
 **/documentation/
-
+/Interrogator/BimlExpress Project/BimlExpress/*.dtsx
+/Interrogator/BimlExpress Project/BimlExpress/*.conmgr
+/Interrogator/BimlStudio Project/test/
 
 # MSTest test Results
 [Tt]est[Rr]esult*/
 [Bb]uild[Ll]og.*
 
-# BimlExpress files we don't want to check in 
-/Interrogator/BimlExpress Project/BimlExpress/*.dtsx
-/Interrogator/BimlExpress Project/BimlExpress/*.conmgr
 
-/Interrogator/BimlStudio Project/test/
+
 

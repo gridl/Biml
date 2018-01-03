@@ -1,0 +1,54 @@
+﻿<#@ template tier="0" designerbimlpath="Biml" #>
+<#@ import namespace="System.Data.SqlClient" #>
+<#
+	//define the database server
+	string ExtractServer = "localhost";
+	
+	//define the database name
+	string ExtractDatabase = "Interrogator";
+	
+	//verify the environment is ready to go:
+	string CreateDatabaseDDL = @"IF NOT EXISTS(SELECT database_id FROM sys.databases WHERE Name = '" + ExtractDatabase + @"')
+		CREATE DATABASE [" + ExtractDatabase + "]";
+		
+	string ConnectionString = "Server=" + ExtractServer + ";Database=master;Trusted_Connection=True";
+	if (!ExecuteDDL(CreateDatabaseDDL, ConnectionString) ) {
+		ValidationReporter.Report(Severity.Error, "Extract Database " + ExtractDatabase + " could not be created. This demo will not function without it!");
+    }
+	
+	//where are the flat file demo files stored?
+	string SourceFolder = @"C:\Repositories\Biml\Interrogator\testdata";
+	
+	//What is the full file path to output.biml in the solution?
+	string OutputBimlFilePath = @"C:\Repositories\Biml\Interrogator\BimlExpress Project\BimlExpress\output.biml";
+	
+	/*
+		per http://billfellows.blogspot.com/2016/09/resolving-biml-project-level-connection.html
+		there is an issue with matching up ids between the connections collection and Project.
+	
+		here's the work around:
+	*/
+	List<Guid> connectionGuids = new List<Guid>();
+	
+	//in a later version we'll have to set up a parameter for file encodings (Unicode and UTF-8)
+	//basically we can NOT guess at encoding.
+	//we can assume 1252, but as soon as we hit something outside of that, we will need to prompt the user for 
+	//the encoding
+#>
+<#+
+	//helper function ExecuteDDL -- runs DDL script against ConnectionString
+	//assume no response back other than success or fail
+	 bool ExecuteDDL(string DDLStatement, string ConnectionString) {
+		try {	
+			using ( SqlConnection Connection = new SqlConnection(ConnectionString) )	{
+				SqlCommand DeveloperCmd = new SqlCommand(DDLStatement, Connection);
+				Connection.Open();
+				DeveloperCmd.ExecuteNonQuery();
+				Connection.Close();
+			}
+			return true;
+		} catch {
+			return false;
+        }
+    }
+ #>	

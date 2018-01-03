@@ -1,8 +1,8 @@
 ﻿<#@ template tier="2" #>
 <#@ include file="00_Configuration.biml"#>
 
-<#@ code file="..\Code\Interrogator.cs" #>
-<#@ code file="..\Code\ConversionUtility.cs" #>
+<#@ code file="Interrogator.cs" #>
+<#@ code file="ConversionUtility.cs" #>
 <#@ import namespace="System.IO" #>
 
 <Biml xmlns="http://schemas.varigence.com/biml.xsd">

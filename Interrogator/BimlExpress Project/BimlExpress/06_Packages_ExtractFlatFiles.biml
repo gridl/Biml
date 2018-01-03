@@ -1,0 +1,91 @@
+﻿<#@ include file="00_Configuration.biml"#>
+<#@ template tier="6" #>
+<#@ code file="DevelopmentHelper.cs"#>
+<Biml xmlns="http://schemas.varigence.com/biml.xsd">
+<#
+//the destination tables must exist before you can create the packages
+//using my helper, I'll deploy each of these tables while building the package Biml
+string DestinationConnectionString = "Server=" + ExtractServer + ";Database=" + ExtractDatabase + ";Trusted_Connection=True;";
+      //string DevConnectionString = "Server=" + DevServer + ";Database=" + DevDatabase + ";Trusted_Connection=True;";
+DevelopmentHelper h = new DevelopmentHelper(DestinationConnectionString);
+
+#>
+
+
+<Annotations>
+    <Annotation>
+    <# foreach (var table in RootNode.Tables.Where(t => t.GetTag("TableGroup") == "FlatFile")) {  #>
+		<#=table.Schema.Name #>.<#=table.Name #>
+		
+    <#} #>    
+    </Annotation>
+</Annotations>
+	
+<Packages>
+	<#
+		foreach (var table in RootNode.Tables.Where(t => t.GetTag("TableGroup") == "FlatFile")) { 
+	#>	
+		<Package Name="Extract_FF_<#= table.Name #>"  DelayValidation="true" ProtectionLevel="EncryptSensitiveWithUserKey" >
+			<Annotations>
+				<Annotation AnnotationType="CodeComment">
+					All flat file extracts are truncate and load.
+					Destination Connection String: <#=DestinationConnectionString #>
+					
+					<#=table.GetTableSql() #>
+					
+					<#=table.Name#> Deployed: <#=h.deployDBObject(table.GetTableSql())#>
+				</Annotation>
+            </Annotations>
+			<Tasks>
+				<ExecuteSQL Name="SQL-Truncate <#= table.Schema #><#=table.Name#>" ConnectionName="ADONET_Extract">
+					<DirectInput>TRUNCATE TABLE [<#= table.Schema #>].[<#=table.Name#>];</DirectInput>
+				</ExecuteSQL>
+				<Dataflow Name="DFT-Load <#= table.Schema #><#=table.Name#>">
+					<PrecedenceConstraints>
+						<Inputs>
+							<Input OutputPathName="SQL-Truncate <#= table.Schema #><#=table.Name#>.Output" />
+                        </Inputs>
+                    </PrecedenceConstraints>
+					<Transformations>
+						<FlatFileSource Name="FF_SRC-<#=table.Name#>" ConnectionName="FF_<#=table.Name#>" ValidateExternalMetadata="false" RetainNulls="true"/>
+						<DerivedColumns Name="DER-Audit Columns" >
+							<InputPath OutputPathName="FF_SRC-<#=table.Name#>.Output" />
+							<Columns>
+								<Column Name="ExecutionID" DataType="AnsiString" Length="50">
+									@[System::ExecutionInstanceGUID]
+                                </Column>
+								<Column Name="InsertedDateTime" DataType="DateTime">
+									GETDATE()
+                                </Column>
+                            </Columns>
+                        </DerivedColumns>
+						<OleDbDestination Name="OLE_DEST-<#= table.Schema #><#=table.Name#>" ConnectionName="OLEDB_Extract" UseFastLoadIfAvailable="true" ValidateExternalMetadata="false">
+							<InputPath OutputPathName="DER-Audit Columns.Output" />
+							<ExternalTableOutput Table="[<#= table.Schema #>].[<#=table.Name#>]" />
+							
+                        </OleDbDestination>
+                    </Transformations>
+                </Dataflow>
+            </Tasks>
+			<Connections>
+			<#
+			    foreach(var connection in RootNode.Projects.SelectMany(x => x.AllDefinedSuccessors()).OfType<AstConnectionReferenceBaseNode>()) {
+			#>
+				<Connection ConnectionName="<#= connection.Connection #>" Id="<#= connection.Id #>" />
+			<#
+			    }
+			#>
+				<Connection ConnectionName="FF_<#= table.Name #>"/>
+			</Connections>
+			<Variables>
+				<Variable Namespace="User" Name="ExtractServer" DataType="String"><#=ExtractServer#></Variable>
+				<Variable Namespace="User" Name="ExtractDatabase" DataType="String"><#=ExtractDatabase#></Variable>
+				<Variable Name="SourceFilePath" DataType="String" Namespace="User"><#=SourceFolder#>\<#=table.Name#>.csv</Variable>
+            </Variables>
+        </Package>
+	<#
+		}
+	#>
+    </Packages>
+	
+</Biml>
