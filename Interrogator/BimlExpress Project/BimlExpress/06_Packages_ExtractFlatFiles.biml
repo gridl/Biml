@@ -1,5 +1,6 @@
-﻿<#@ include file="00_Configuration.biml"#>
-<#@ template tier="6" #>
+﻿<#@ template tier="6" #>						
+<#@ include file="00_Configuration.biml"#>
+
 <#@ code file="DevelopmentHelper.cs"#>
 <Biml xmlns="http://schemas.varigence.com/biml.xsd">
 <#
@@ -10,8 +11,6 @@ string DestinationConnectionString = "Server=" + ExtractServer + ";Database=" + 
 DevelopmentHelper h = new DevelopmentHelper(DestinationConnectionString);
 
 #>
-
-
 <Annotations>
     <Annotation>
     <# foreach (var table in RootNode.Tables.Where(t => t.GetTag("TableGroup") == "FlatFile")) {  #>
@@ -20,7 +19,6 @@ DevelopmentHelper h = new DevelopmentHelper(DestinationConnectionString);
     <#} #>    
     </Annotation>
 </Annotations>
-	
 <Packages>
 	<#
 		foreach (var table in RootNode.Tables.Where(t => t.GetTag("TableGroup") == "FlatFile")) { 
