@@ -72,25 +72,24 @@ public class Interrogator {
 	
 	//based on http://stackoverflow.com/questions/3776458/split-a-comma-separated-string-with-both-quoted-and-unquoted-strings
 	public string[] RegexSplit(string input, string textDelimiter, string columnDelimiter) {
-	//build out this expression so we can get any variation of text and column delimiter
-	string RegexExpression = "(?:^|" + columnDelimiter + ")(" + textDelimiter + "(?:[^" + textDelimiter + "]+|" + textDelimiter + textDelimiter + ")*" + textDelimiter + "|[^" + columnDelimiter + "]*)";
-	//set up the C# regex
-	Regex csvSplit = new Regex(RegexExpression, RegexOptions.Compiled);
-	//set up the output	
-	List<string> list = new List<string>();
-	string curr = null;
-	foreach (Match match in csvSplit.Matches(input))
-	{        
-	curr = match.Value;
-	if (0 == curr.Length)
-	{
-	  list.Add("");
-	}
+	    //build out this expression so we can get any variation of text and column delimiter
+	    string RegexExpression = "(?:^|" + columnDelimiter + ")(" + textDelimiter + "(?:[^" + textDelimiter + "]+|" + textDelimiter + textDelimiter + ")*" + textDelimiter + "|[^" + columnDelimiter + "]*)";
+	    //set up the C# regex
+	    Regex csvSplit = new Regex(RegexExpression, RegexOptions.Compiled);
+	    //set up the output	
+	    List<string> list = new List<string>();
+	    string curr = null;
+	    foreach (Match match in csvSplit.Matches(input)) {
+	        curr = match.Value;
+            //handle blank columns (NULL)
+	        if (0 == curr.Length) 	{
+	            list.Add("");
+	        }
+            //get rid of the delimiter from the start of the string
+	        list.Add(curr.TrimStart(char.Parse(columnDelimiter)));
+	    }
 
-	list.Add(curr.TrimStart(','));
-	}
-
-	return list.ToArray<string>();
+	    return list.ToArray<string>();
 	}
 	
 	//function to guess which character type the input is
@@ -207,18 +206,18 @@ public class Interrogator {
 	//since we now know we have some kind of date time the rest of the tests are safe
 	//is it just a time?
 	try{
-			//this pattern should match time and not datetime
-			string pattern = @"^([0-9]{1,2}:[0-9]{1,2})$|^([0-9]{1,2}:[0-9]{1,2}:[0-9]{1,2})$|^([0-9]{1,2}:[0-9]{1,2}:[0-9]{1,2}\.[0-9]{0,7})$";
-			//^([0-9]{1,2}:[0-9]{1,2}.{0,1}[0-9]{0,7})
-			Regex r = new Regex(pattern);
+		//this pattern should match time and not datetime
+		string pattern = @"^([0-9]{1,2}:[0-9]{1,2})$|^([0-9]{1,2}:[0-9]{1,2}:[0-9]{1,2})$|^([0-9]{1,2}:[0-9]{1,2}:[0-9]{1,2}\.[0-9]{0,7})$";
+		//^([0-9]{1,2}:[0-9]{1,2}.{0,1}[0-9]{0,7})
+		Regex r = new Regex(pattern);
 				
-			if (r.IsMatch(input)) {
-				//return early, you found a time!
-				return SqlDbType.Time;
-			}
-		} catch  {
-			//do nothing
+		if (r.IsMatch(input)) {
+			//return early, you found a time!
+			return SqlDbType.Time;
 		}
+	} catch  {
+		//do nothing
+	}
 	
 	//is it just a date?	
 	try {	
@@ -349,7 +348,8 @@ public class Interrogator {
 									
 									//get the Maxlength
 									//init maxlength to 0
-									output[i].MaxLength = 0;
+                                    if(output[i].MaxLength == null)
+									    output[i].MaxLength = 0;
 									//then, if you have a greater length, update
 									if(fields[i].Length > output[i].MaxLength )
 										output[i].MaxLength = fields[i].Length;

@@ -11,9 +11,14 @@
 	
 	//data type conversion utility
 	ConversionUtility cu = new ConversionUtility();
+	string test = "test {0}, {1}";
 #>
     <Annotations>
-        <Annotation AnnotationType="CodeComment">Changing Flat File Connections to read files, like File Formats.</Annotation>
+        <Annotation AnnotationType="CodeComment">Changing Flat File Connections to read files, like File Formats.
+            <#=String.Format(test, 1, 2)#>
+            
+            
+        </Annotation>
     </Annotations>
 	<Connections>
 		<#
