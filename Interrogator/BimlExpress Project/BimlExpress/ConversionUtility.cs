@@ -94,6 +94,8 @@ public class ConversionUtility {
 	output.Add( new Conversion("smallint","DT_I2","Int16") );
 	output.Add( new Conversion("smallmoney","DT_CY","Currency") );
 	output.Add( new Conversion("sql_variant","DT_WSTR","Object") );
+    //added sysname
+    output.Add( new Conversion("sysname","DT_WSTR","String") );
 	output.Add( new Conversion("text","DT_TEXT","AnsiString") );
 	output.Add( new Conversion("time","DT_DBTIME2","Time") );
 	output.Add( new Conversion("timestamp","DT_BYTES","Binary") );
